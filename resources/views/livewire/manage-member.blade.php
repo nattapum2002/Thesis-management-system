@@ -3,7 +3,6 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">จัดการบัญชีสมาชิก</h3>
-            {{-- <div class="btn btn-success btn-sm" href="#">เพิ่มบัญชี</div> --}}
             <div class="card-tools">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search">
@@ -46,10 +45,8 @@
 
     {{-- รายละเอียดบัญชี --}}
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">รายละเอียดบัญชีสมาชิก</h3>
-        </div>
         <div class="card-body">
+            <h3 class="card-title">รายละเอียดบัญชีสมาชิก</h3>
             <div class="details">
                 <table class="table">
                     <thead>

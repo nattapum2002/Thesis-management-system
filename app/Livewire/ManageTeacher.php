@@ -13,4 +13,8 @@ class ManageTeacher extends Component
     {
         return view('livewire.manage-teacher');
     }
+    public function add()
+    {
+        return dd(555555);
+    }
 }

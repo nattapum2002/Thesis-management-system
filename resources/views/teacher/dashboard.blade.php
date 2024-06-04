@@ -1,6 +1,6 @@
-@extends('layout.admin')
+@extends('layout.teacher')
 @section('title')
-Admin
+teacher
 @endsection
 @section('content')
 

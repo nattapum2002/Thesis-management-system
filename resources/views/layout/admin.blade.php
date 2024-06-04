@@ -13,6 +13,7 @@
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 {{--
 <link href="{{Asset('Asset/main/css/sidebar.css')}}" rel="stylesheet"> --}}
+<link href="{{Asset('Asset/main/css/body.css')}}" rel="stylesheet">
 
 <body>
     <div class="row">
@@ -38,7 +39,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/admin/admin_project">จัดการโปรเจค</a></li>
-                            <li><a href="/admin/admin.approve_documents">อนุมัติเอกสาร</a></li>
+                            <li><a href="/admin/approve_documents">อนุมัติเอกสาร</a></li>
                         </ul>
                     </div>
                     <div class="dropdown dropend">
@@ -78,7 +79,8 @@
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a href="/menu_thesis" class="nav-link">บทความปริญญานิพนธ์</a></li>
                     <li class="nav-item"><a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">เกียวกับสาขา</a></li>
+                    <li class="nav-item"><a href="https://computer.surin.rmuti.ac.th/computer/"
+                            class="nav-link">เกียวกับสาขา</a></li>
                     <li class="btn btn-danger">ออกจากระบบ</li>
                 </ul>
             </div>
@@ -92,6 +94,75 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script>
+        // เลือก element ของช่องรับเหตุผล
+        const document_reasonField = document.getElementById("document-reason-field");
+
+        // เลือก radio buttons สำหรับการอนุมัติและไม่อนุมัติเอกสาร
+        const document_approveRadio = document.getElementById("document-approval");
+        const document_rejectRadio = document.getElementById("document-reject");
+
+        // เมื่อมีการเปลี่ยนแปลงในการเลือก radio buttons
+        document_approveRadio.addEventListener("change", function() {
+            // ถ้าเลือก "อนุมัติเอกสาร"
+            if (this.checked) {
+                // ซ่อนช่องรับเหตุผล
+                document_reasonField.style.display = "none";
+            }
+        });
+
+        document_rejectRadio.addEventListener("change", function() {
+            // ถ้าเลือก "ไม่อนุมัติเอกสาร"
+            if (this.checked) {
+                // แสดงช่องรับเหตุผล
+                document_reasonField.style.display = "block";
+            }
+        });
+
+        // เรียกใช้งานเงื่อนไขเมื่อหน้าเว็บโหลดเสร็จ
+        window.addEventListener("load", function() {
+            // ถ้าไม่มี radio button ใดถูกเลือกในตอนเริ่มต้น
+            if (!document_approveRadio.checked && !document_rejectRadio.checked) {
+                // ซ่อนช่องรับเหตุผล
+                document_reasonField.style.display = "none";
+            }
+        });
+
+        //---------------------------------------------------------------------
+
+        // เลือก element ของช่องรับเหตุผล
+        const advisor_reasonField = document.getElementById("reject-field");
+
+        // เลือก radio buttons สำหรับการอนุมัติและไม่อนุมัติเอกสาร
+        const advisor_approveRadio = document.getElementById("advisor-approval");
+        const advisor_rejectRadio = document.getElementById("advisor-reject");
+
+        // เมื่อมีการเปลี่ยนแปลงในการเลือก radio buttons
+        advisor_approveRadio.addEventListener("change", function() {
+            // ถ้าเลือก "อนุมัติเอกสาร"
+            if (this.checked) {
+                // ซ่อนช่องรับเหตุผล
+                advisor_reasonField.style.display = "none";
+            }
+        });
+
+        advisor_rejectRadio.addEventListener("change", function() {
+            // ถ้าเลือก "ไม่อนุมัติเอกสาร"
+            if (this.checked) {
+                // แสดงช่องรับเหตุผล
+                advisor_reasonField.style.display = "block";
+            }
+        });
+
+        // เรียกใช้งานเงื่อนไขเมื่อหน้าเว็บโหลดเสร็จ
+        window.addEventListener("load", function() {
+            // ถ้าไม่มี radio button ใดถูกเลือกในตอนเริ่มต้น
+            if (!advisor_approveRadio.checked && !advisor_rejectRadio.checked) {
+                // ซ่อนช่องรับเหตุผล
+                advisor_reasonField.style.display = "none";
+            }
+        });
     </script>
 </body>
 

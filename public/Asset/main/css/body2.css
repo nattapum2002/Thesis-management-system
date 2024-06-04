@@ -1,0 +1,113 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.card {
+    max-width: 98%;
+    margin: 30px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    background-color: #007bff;
+    color: #fff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+h3 {
+    margin: 0;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    text-align: left;
+}
+
+/* ซ่อนฟิลด์แก้ไขและปุ่มบันทึก/ยกเลิกเริ่มต้น */
+.input-field {
+    display: none;
+    margin-top: 10px;
+    flex-direction: column; /* จัดเรียงในแนวตั้งโดยเริ่มต้น */
+}
+
+/* ซ่อนปุ่มบันทึกและยกเลิกเริ่มต้น */
+.save-button, .cancel-button {
+    display: none;
+    margin-top: 10px;
+}
+
+/* ปรับแต่งปุ่ม */
+button.edit-button, button.save-button, button.cancel-button {
+    margin-right: 5px;
+}
+
+button.edit-button {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+button.save-button {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+button.cancel-button {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+/* ปรับแต่งการแสดงฟิลด์ข้อมูล */
+.form-input, .form-select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* ปรับแต่งข้อความแสดงข้อผิดพลาด */
+.text-danger {
+    color: #dc3545;
+    font-size: 0.875rem;
+}
+
+/* จัดปุ่มบันทึกและยกเลิกให้อยู่ในแนวนอนเดียวกัน */
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}

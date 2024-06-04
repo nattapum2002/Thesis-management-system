@@ -1,5 +1,5 @@
 <div>
-    {{-- <div class="d-flex align-items-center py-4" data-new-gr-c-s-check-loaded="14.1066.0" data-gr-ext-installed>
+    <div class="d-flex align-items-center py-4" data-new-gr-c-s-check-loaded="14.1066.0" data-gr-ext-installed>
         <main class="form-signin w-auto m-auto">
             <form>
 
@@ -8,7 +8,7 @@
                 <div class="form-floating">
                     <input type="email" class="form-control" id="floatingInput" placeholder="Username">
                     <label for="floatingInput">Username</label>
-                    <label>{{$login->name}}</label>
+                    {{-- <label>{{$login->name}}</label> --}}
                 </div>
                 <div class="form-floating">
                     <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
@@ -25,7 +25,7 @@
                 <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
             </form>
         </main>
-    </div> --}}
+    </div>
 
     <div class="slideshow">
         <div class="slide-container">

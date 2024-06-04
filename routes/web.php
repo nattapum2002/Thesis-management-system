@@ -70,8 +70,62 @@ Route::get('/admin/manage_document_schedule', function () {
     return view('admin.manage_document_schedule');
 });
 
-Route::get('/admin/admin.approve_documents', function () {
+Route::get('/admin/approve_documents', function () {
     return view('admin.approve_documents');
+});
+
+// branch-head
+
+Route::get('/branch-head', function () {
+    return view('branch-head.dashboard');
+});
+
+Route::get('/branch-head/edit_branch_head', function () {
+    return view('branch-head.edit_branch_head');
+});
+
+Route::get('/branch-head/manage_news_branch_head', function () {
+    return view('branch-head.manage_news_branch_head');
+});
+
+Route::get('/branch-head/approve_documents_branch_head', function () {
+    return view('branch-head.approve_documents_branch_head');
+});
+
+// teacher
+
+Route::get('/teacher', function () {
+    return view('teacher.dashboard');
+});
+
+Route::get('/teacher/edit_teacher', function () {
+    return view('teacher.edit_teacher');
+});
+
+Route::get('/teacher/manage_news_teacher', function () {
+    return view('teacher.manage_news_teacher');
+});
+
+Route::get('/teacher/approve_documents_teacher', function () {
+    return view('teacher.approve_documents_teacher');
+});
+
+// member
+
+Route::get('/member', function () {
+    return view('member.dashboard');
+});
+
+Route::get('/member/submit_project_documents', function () {
+    return view('member.submit_project_documents');
+});
+
+Route::get('/member/edit_member', function () {
+    return view('member.edit_member');
+});
+
+Route::get('/member/manage_thesis_member', function () {
+    return view('member.manage_thesis_member');
 });
 
 
