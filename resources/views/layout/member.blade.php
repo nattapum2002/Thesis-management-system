@@ -27,7 +27,8 @@
 
                     <div class="title-name">
                         <i class='bx bx-user'></i>
-                        <span>Member</span>
+                        <span>{{Auth::guard('members')->user()->name}}
+                            {{Auth::guard('members')->user()->surname}}</span>
                     </div>
                 </div>
                 <ul style="list-style-type: none">
@@ -53,20 +54,12 @@
                     <li class="nav-item"><a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a></li>
                     <li class="nav-item"><a href="https://computer.surin.rmuti.ac.th/computer/"
                             class="nav-link">เกียวกับสาขา</a></li>
-                    @auth
-                    <li class="btn btn-danger" href="/logout" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">ออกจากระบบ</li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    @else
-                    <a href="{{ route('login') }}">เข้าสู่ระบบ</a>
-                    @endauth
+                    <li class="btn btn-danger">ออกจากระบบ</li>
                 </ul>
             </div>
 
             {{-- Content --}}
-            <div class="content-wrapper">
+            <div class=" content-wrapper">
                 @yield('content')
             </div>
         </div>
