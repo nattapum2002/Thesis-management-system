@@ -64,7 +64,7 @@ Route::get('/logout', function () {
 
 Route::get('/admin', function () {
     return view('admin.dashboard');
-});
+})->name('admin');
 
 Route::get('/admin/add_teacher', function () {
     return view('admin.add_teacher');
@@ -110,7 +110,7 @@ Route::get('/admin/approve_documents', function () {
 
 Route::get('/branch-head', function () {
     return view('branch-head.dashboard');
-});
+})->name('brand-head');
 
 Route::get('/branch-head/edit_branch_head', function () {
     return view('branch-head.edit_branch_head');
@@ -128,7 +128,7 @@ Route::get('/branch-head/approve_documents_branch_head', function () {
 
 Route::get('/teacher', function () {
     return view('teacher.dashboard');
-});
+})->name('teacher');
 
 Route::get('/teacher/edit_teacher', function () {
     return view('teacher.edit_teacher');
