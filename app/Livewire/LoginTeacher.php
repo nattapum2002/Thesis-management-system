@@ -31,7 +31,6 @@ class LoginTeacher extends Component
             elseif(Auth::guard('teachers')->user()->user_type == 'Brand head'){
                 return redirect()->route('brand-head');
             }
-            session()->regenerate();
         }
 
         $this->addError('username', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
