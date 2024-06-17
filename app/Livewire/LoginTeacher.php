@@ -32,7 +32,6 @@ class LoginTeacher extends Component
                 return redirect()->route('brand-head');
             }
             session()->regenerate();
-            return redirect()->intended('/teacher'); //dashboard
         }
 
         $this->addError('username', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
