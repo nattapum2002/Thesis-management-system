@@ -54,7 +54,7 @@ Route::get('/logout', function () {
         Auth::guard('members')->logout();
         session()->invalidate();
         session()->regenerateToken();
-        return redirect('/login');
+        return redirect('/login_member');
     }
 })->name('logout');
 
