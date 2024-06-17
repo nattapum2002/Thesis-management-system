@@ -22,8 +22,16 @@ class LoginTeacher extends Component
         $this->validate();
 
         if (Auth::guard('teachers')->attempt(['username' => $this->username, 'password' => $this->password], $this->remember)) {
+            if(Auth::guard('teachers')->user()->user_type == 'Teacher'){
+                return redirect()->route('teacher');
+            }
+            elseif(Auth::guard('teachers')->user()->user_type == 'Admin'){
+                return redirect()->route('admin');
+            }
+            elseif(Auth::guard('teachers')->user()->user_type == 'Brand head'){
+                return redirect()->route('brand-head');
+            }
             session()->regenerate();
-            return redirect()->intended('/teacher'); //dashboard
         }
 
         $this->addError('username', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
