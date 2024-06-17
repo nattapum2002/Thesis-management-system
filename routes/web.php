@@ -55,6 +55,11 @@ Route::get('/logout', function () {
         session()->invalidate();
         session()->regenerateToken();
         return redirect('/login_member');
+    } else if (Auth::guard('teachers')->check()) {
+        Auth::guard('teachers')->logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect('/login_teacher');
     }
 })->name('logout');
 
