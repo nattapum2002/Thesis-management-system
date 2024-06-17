@@ -72,15 +72,15 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'teacher' => [
+        'teachers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Teacher::class,
         ],
         'members' => [
             'driver' => 'eloquent',
             'model' => App\Models\Member::class,
-        ] 
-        
+        ]
+
 
         // 'users' => [
         //     'driver' => 'database',

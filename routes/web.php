@@ -49,12 +49,12 @@ Route::get('/login_teacher', function () {
     return view('login_teacher');
 })->name('login_teacher');
 
-Route::post('/logout', function () {
+Route::get('/logout', function () {
     if (Auth::guard('members')->check()) {
         Auth::guard('members')->logout();
         session()->invalidate();
         session()->regenerateToken();
-        return redirect('/login');
+        return redirect('/login_member');
     }
 })->name('logout');
 
