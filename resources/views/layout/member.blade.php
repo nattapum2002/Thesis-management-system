@@ -53,7 +53,15 @@
                     <li class="nav-item"><a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a></li>
                     <li class="nav-item"><a href="https://computer.surin.rmuti.ac.th/computer/"
                             class="nav-link">เกียวกับสาขา</a></li>
-                    <li class="btn btn-danger">ออกจากระบบ</li>
+                    @auth
+                    <li class="btn btn-danger" href="/logout" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">ออกจากระบบ</li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    @else
+                    <a href="{{ route('login') }}">เข้าสู่ระบบ</a>
+                    @endauth
                 </ul>
             </div>
 

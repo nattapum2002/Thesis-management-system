@@ -3,5 +3,4 @@
 member
 @endsection
 @section('content')
-
 @endsection

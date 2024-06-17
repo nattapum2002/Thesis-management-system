@@ -33,6 +33,7 @@ class Member extends Model
         'id_course',
         'username',
         'password',
+        'account_status',
         'created_by',
         'created_at',
         'updated_by',

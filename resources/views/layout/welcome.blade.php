@@ -105,12 +105,12 @@
                             เข้าสู่ระบบ
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">นักศึกษา</a></li>
-                            <li><a class="dropdown-item" href="#">อาจารย์</a></li>
+                            <li><a class="dropdown-item" href="/login_member">นักศึกษา</a></li>
+                            <li><a class="dropdown-item" href="/login_teacher">อาจารย์</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary" href="#">สมัครสมาชิก</a>
+                        <a class="nav-link btn btn-primary" href="/register">สมัครสมาชิก</a>
                     </li>
                 </ul>
             </div>

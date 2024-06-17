@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,25 @@ Route::get('/menu_news', function () {
 Route::get('/news_detail/{newsId}', function ($newsId) {
     return view('news_detail', compact('newsId'));
 });
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+Route::get('/login_member', function () {
+    return view('login_member');
+})->name('login_member');
+
+Route::get('/login_teacher', function () {
+    return view('login_teacher');
+})->name('login_teacher');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');
+
+
 
 //Admin
 
