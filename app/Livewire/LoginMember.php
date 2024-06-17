@@ -21,8 +21,8 @@ class LoginMember extends Component
     {
         $this->validate();
 
-        if (Auth::attempt(['username' => $this->username, 'password' => $this->password], $this->remember)) {
-            session()->regenerate();
+        if (Auth::guard('members')->attempt(['username' => $this->username, 'password' => $this->password], $this->remember)) {
+            
             return redirect()->intended('/member'); //dashboard
         }
 

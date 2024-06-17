@@ -3,14 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Member extends Model
+class Member extends Model implements Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -19,6 +20,7 @@ class Member extends Model
      *
      * @var array<int, string>
      */
+    protected $primaryKey = 'id_student';
     protected $fillable = [
         'id_student',
         'prefix',
@@ -60,4 +62,19 @@ class Member extends Model
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getAuthIdentifierName(){
+        return 'id_student';
+    }
+    public function getAuthIdentifier(){
+        return $this->getKey();
+    }
+    public function getAuthPassword(){
+        return $this->password;
+    }
+    public function getRememberToken(){
+        return null ;
+    }
+    public function setRememberToken($value){}
+    public function getRememberTokenName(){}
 }
