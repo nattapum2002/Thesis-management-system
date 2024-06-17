@@ -16,11 +16,13 @@ return new class extends Migration
             $table->string('title');
             $table->text('details');
             $table->text('news_image')->nullable();
+            $table->string('type'); // 'general' หรือ 'topic'
             $table->boolean('status')->default(false);
             $table->foreignId('id_teacher')->constrained(table: 'teachers', column: 'id_teacher');
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -24,8 +24,16 @@ Route::get('/menu_thesis', function () {
     return view('menu_thesis');
 });
 
+Route::get('/thesis_detail/{thesisId}', function ($thesisId) {
+    return view('thesis_detail', compact('thesisId'));
+});
+
 Route::get('/menu_news', function () {
     return view('menu_news');
+});
+
+Route::get('/news_detail/{newsId}', function ($newsId) {
+    return view('news_detail', compact('newsId'));
 });
 
 //Admin

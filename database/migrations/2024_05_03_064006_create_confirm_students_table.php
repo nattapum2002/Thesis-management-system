@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('id_student')->references('id_student')->on('members');
             $table->foreignId('id_document')->constrained(table: 'documents', column: 'id_document');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

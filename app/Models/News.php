@@ -20,15 +20,24 @@ class News extends Model
      *
      * @var array<int, string>
      */
+
+    protected $primaryKey = 'id_news';
+
     protected $fillable = [
-        'id_news',
         'title',
         'details',
+        'news_image',
+        'type',
         'id_teacher',
         'created_by',
         'created_at',
         'updated_by',
         'updated_at',
-
     ];
+
+    // Assuming the foreign key is id_teacher in the news table
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'id_teacher');
+    }
 }

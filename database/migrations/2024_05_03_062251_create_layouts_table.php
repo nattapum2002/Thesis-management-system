@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

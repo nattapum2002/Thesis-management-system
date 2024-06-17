@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('id_student');
             $table->foreign('id_student')->references('id_student')->on('members');
             $table->foreignId('id_project')->constrained(table: 'projects', column: 'id_project');
+            $table->softDeletes();
         });
     }
 

@@ -19,8 +19,9 @@ class Teacher extends Model
      *
      * @var array<int, string>
      */
+    protected $primaryKey = 'id_teacher'; // Assuming the primary key is id_teacher
+
     protected $fillable = [
-        'id_teacher',
         'prefix',
         'name',
         'surname',

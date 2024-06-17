@@ -19,10 +19,13 @@ class Dissertation_article extends Model
      *
      * @var array<int, string>
      */
+
+    protected $primaryKey = 'id_dissertation_article';
+
     protected $fillable = [
-        'id_dissertation_article',
         'title',
         'details',
+        'thesis_image',
         'file_dissertation',
         'year_published',
         'id_project',

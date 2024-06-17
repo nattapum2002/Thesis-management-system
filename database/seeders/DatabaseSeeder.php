@@ -22,9 +22,25 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LevelSeeder::class,
             CourseSeeder::class,
-            Comment_listSeeder::class,
+            MembersSeeder::class,
+            TeachersSeeder::class,
+            ProjectsSeeder::class,
+            PositionSeeder::class,
+            StudentProjectsSeeder::class,
+            StudentsSeeder::class,
+            NewsSeeder::class,
+            LayoutsSeeder::class,
             DocumentSeeder::class,
-            PositionSeeder::class
+            DissertationArticlesSeeder::class,
+            Comment_listSeeder::class,
+            AdvisersSeeder::class,
+            CommentsSeeder::class,
+            ConfirmStudentsSeeder::class,
+            ConfirmTeachersSeeder::class,
+            DirectorsSeeder::class,
+            DocumentSubmissionSchedulesSeeder::class,
+            ExamSchedulesSeeder::class,
+            ScoresSeeder::class
         ]);
     }
 }
