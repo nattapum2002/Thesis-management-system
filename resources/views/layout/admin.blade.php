@@ -81,7 +81,7 @@
                     <li class="nav-item"><a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a></li>
                     <li class="nav-item"><a href="https://computer.surin.rmuti.ac.th/computer/"
                             class="nav-link">เกียวกับสาขา</a></li>
-                    <li class="btn btn-danger">ออกจากระบบ</li>
+                    <li class="nav item"><a class="btn btn-danger" href="{{route('logout')}}">ออกจากระบบ</a></li>
                 </ul>
             </div>
 
