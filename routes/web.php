@@ -50,8 +50,12 @@ Route::get('/login_teacher', function () {
 })->name('login_teacher');
 
 Route::post('/logout', function () {
-    Auth::logout();
-    return redirect('/login');
+    if (Auth::guard('members')->check()) {
+        Auth::guard('members')->logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect('/login');
+    }
 })->name('logout');
 
 
