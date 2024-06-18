@@ -153,8 +153,8 @@ Route::get('/member', function () {
     return view('member.dashboard');
 });
 
-Route::get('/member/submit_project_documents', function () {
-    return view('member.submit_project_documents');
+Route::get('/member/submit_project_documents/{groupLeaderId}', function ($groupLeaderId) {
+    return view('member.submit_project_documents', compact('groupLeaderId'));
 });
 
 Route::get('/member/edit_member', function () {
@@ -164,6 +164,14 @@ Route::get('/member/edit_member', function () {
 Route::get('/member/manage_thesis_member', function () {
     return view('member.manage_thesis_member');
 });
+
+Route::get('/group-management', function () {
+    return view('group-management');
+})->name('group-management');
+
+// Route::get('/group-management/{groupLeaderId}', function ($groupLeaderId) {
+//     return view('group-management', compact('groupLeaderId'));
+// })->name('group-management');
 
 
 //Route::get('show', [AdminController::class, 'show']);

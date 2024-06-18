@@ -20,14 +20,13 @@ class Level extends Model
      *
      * @var array<int, string>
      */
+    protected $primaryKey = 'id_level';
     protected $fillable = [
-        'id_level',
         'level',
         'sector',
         'created_by',
         'created_at',
         'updated_by',
         'updated_at',
-
     ];
 }
