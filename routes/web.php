@@ -165,13 +165,6 @@ Route::get('/member/manage_thesis_member', function () {
     return view('member.manage_thesis_member');
 });
 
-Route::get('/group-management', function () {
-    return view('group-management');
-})->name('group-management');
-
-// Route::get('/group-management/{groupLeaderId}', function ($groupLeaderId) {
-//     return view('group-management', compact('groupLeaderId'));
-// })->name('group-management');
 
 
 //Route::get('show', [AdminController::class, 'show']);

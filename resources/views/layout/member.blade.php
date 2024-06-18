@@ -34,6 +34,7 @@
                 <ul style="list-style-type: none">
                     <li><a href="/member/submit_project_documents"><i class='bx bx-file'></i>ยื่นเอกสารโปรเจค</a>
                     </li>
+                    <li><a href="/member/manage_document"><i class='bx bx-user'></i>จัดการเอกสาร</a></li>
                     <li><a href="/member/edit_member"><i class='bx bx-user'></i>จัดการบัญชีผู้ใช้</a></li>
                     <li><a href="/member/manage_thesis_member"><i class='bx bx-book'></i>จัดการบทความปริญญานิพนธ์</a>
                     </li>
