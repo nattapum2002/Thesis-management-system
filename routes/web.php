@@ -169,4 +169,8 @@ Route::get('/member/manage_document', function () {
     return view('member.manage_document');
 });
 
+Route::get('/member/create_document', function () {
+    return view('member.create_document');
+});
+
 //Route::get('show', [AdminController::class, 'show']);
