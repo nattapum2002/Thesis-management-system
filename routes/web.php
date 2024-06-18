@@ -165,4 +165,8 @@ Route::get('/member/manage_thesis_member', function () {
 
 
 
+Route::get('/member/create_document', function () {
+    return view('member.create_document');
+});
+
 //Route::get('show', [AdminController::class, 'show']);
