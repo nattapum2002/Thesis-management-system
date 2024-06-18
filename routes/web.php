@@ -165,5 +165,8 @@ Route::get('/member/manage_thesis_member', function () {
     return view('member.manage_thesis_member');
 });
 
+Route::get('/member/manage_document', function () {
+    return view('member.manage_document');
+});
 
 //Route::get('show', [AdminController::class, 'show']);
