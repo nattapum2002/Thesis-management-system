@@ -26,12 +26,7 @@ class LoginTeacher extends Component
                 return redirect()->route('teacher');
             } else if (Auth::guard('teachers')->user()->user_type == 'Admin') {
                 return redirect()->route('admin');
-<<<<<<< HEAD
-            } else if (Auth::guard('teachers')->user()->user_type == 'Brand head') {
-=======
-            }
-            elseif(Auth::guard('teachers')->user()->user_type == 'Branch head'){
->>>>>>> 56c744368811bca230650e816ec2acedaf719cad
+            } elseif (Auth::guard('teachers')->user()->user_type == 'Branch head') {
                 return redirect()->route('brand-head');
             }
         }

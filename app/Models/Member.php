@@ -75,6 +75,11 @@ class Member extends Model implements Authenticatable
         return $this->belongsTo(Course::class, 'id_course', 'id_course');
     }
 
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'student_projects', 'id_student', 'id_project');
+    }
+
     public function getAuthIdentifierName()
     {
         return 'id_student';

@@ -23,6 +23,7 @@ class Confirm_student extends Model
         'id_confirm_student',
         'id_student',
         'id_document',
+        'confirm_status',
         'created_at',
         'updated_at',
     ];
