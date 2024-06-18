@@ -3,7 +3,110 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">จัดการข่าวประชาสัมพันธ์</h3>
-            <div class="btn btn-success btn-sm" href="#">เพิ่มข่าว</div>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                data-bs-target="#add-news">เพิ่มข่าวสาร</button>
+            <div class="modal fade" id="add-news" wire:ignore.self tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="color: black;">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">เพิ่มข่าวประชาสัมพันธ์</h1>
+                        </div>
+                        <div class="modal-body">
+                            <form wire:submit="addNews" action="#">
+                                <div class="news">
+                                    <div class="fields">
+                                        <div class="row">
+                                            <div class="input-field">
+                                                <div class="col-sm-3">
+                                                    <label class="form-label">หัวข้อข่าว</label>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <input class="form-input" type="text" wire:model='title'
+                                                        placeholder="กรุณากรอกหัวข้อข่าว" required>
+                                                </div>
+                                                @error('#')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field">
+                                                <div class="col-sm-3">
+                                                    <label class="form-label">รายละเอียด</label>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <input class="form-input" type="text" wire:model='detail'
+                                                        placeholder="กรุณากรอกรายละเอียด" required>
+                                                </div>
+                                                @error('#')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field">
+                                                <div class="col-sm-3">
+                                                    <label class="form-label">รูปภาพ</label>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <input class="form-input" type="file" wire:model='#'>
+                                                </div>
+                                                @error('#')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field">
+                                                <div class="col-sm-3">
+                                                    <label class="form-label">รูปแบบ</label>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <select class="form-select" wire:model='type' required>
+                                                        <option selected>กรุณาเลือก</option>
+                                                        <option value="1">ข่าวทั่วไป</option>
+                                                        <option value="0">ข่าวประชาสัมพันธ์</option>
+                                                    </select>
+                                                </div>
+                                                @error('#')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field">
+                                                <div class="col-sm-3">
+                                                    <label class="form-label">สถานะ</label>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <select class="form-select" wire:model='status' required>
+                                                        <option selected>กรุณาเลือกสถานะ</option>
+                                                        <option value="1">เผยแพร</option>
+                                                        <option value="0">ซ่อน</option>
+                                                    </select>
+                                                </div>
+                                                @error('#')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div>
+                                        <button type="submit" class="btn btn-success">บันทึก</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card-tools">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search">
@@ -111,7 +214,7 @@
     </div>
 
     {{-- เพิ่มข่าว --}}
-    <div class="card">
+    {{-- <div class="card">
         <div class="card-header">
             <h3 class="card-title">เพิ่มข่าวประชาสัมพันธ์</h3>
         </div>
@@ -124,7 +227,7 @@
                             <input class="form-input" type="text" wire:model='#' placeholder="กรุณากรอกหัวข้อข่าว"
                                 required>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-field">
@@ -132,14 +235,14 @@
                             <input class="form-input" type="text" wire:model='#' placeholder="กรุณากรอกรายละเอียด"
                                 required>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-field">
                             <label class="form-label">รูปภาพ</label>
                             <input class="form-input" type="file" wire:model='#'>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-field">
@@ -150,7 +253,7 @@
                                 <option value="0">ซ่อน</option>
                             </select>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -161,5 +264,5 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
 </div>
