@@ -19,8 +19,8 @@ class Course extends Model
      *
      * @var array<int, string>
      */
+    protected $primaryKey = 'id_course';
     protected $fillable = [
-        'id_course',
         'course',
         'branch',
         'created_by',

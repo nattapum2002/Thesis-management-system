@@ -21,6 +21,8 @@ class Member extends Model implements Authenticatable
      * @var array<int, string>
      */
     protected $primaryKey = 'id_student';
+    protected $keyType = 'string';
+    public $incrementing = false;
     protected $fillable = [
         'id_student',
         'prefix',
@@ -63,18 +65,36 @@ class Member extends Model implements Authenticatable
         'password' => 'hashed',
     ];
 
-    public function getAuthIdentifierName(){
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'id_level', 'id_level');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'id_course', 'id_course');
+    }
+
+    public function getAuthIdentifierName()
+    {
         return 'id_student';
     }
-    public function getAuthIdentifier(){
+    public function getAuthIdentifier()
+    {
         return $this->getKey();
     }
-    public function getAuthPassword(){
+    public function getAuthPassword()
+    {
         return $this->password;
     }
-    public function getRememberToken(){
-        return null ;
+    public function getRememberToken()
+    {
+        return null;
     }
-    public function setRememberToken($value){}
-    public function getRememberTokenName(){}
+    public function setRememberToken($value)
+    {
+    }
+    public function getRememberTokenName()
+    {
+    }
 }
