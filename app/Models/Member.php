@@ -64,7 +64,9 @@ class Member extends Model implements Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
+    public function project(){
+        return $this->belongsToMany(Project::class , 'student_projects', 'id_project', 'id_student');
+    }
     public function level()
     {
         return $this->belongsTo(Level::class, 'id_level', 'id_level');

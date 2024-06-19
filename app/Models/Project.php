@@ -31,4 +31,7 @@ class Project extends Model
         'updated_at',
 
     ];
+    public function members(){
+        return $this->belongsToMany(Member::class, 'student_projects', 'id_project', 'id_student');
+    }
 }
