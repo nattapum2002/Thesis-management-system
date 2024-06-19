@@ -5,47 +5,33 @@
             <h3>ขออนุมัติชื่อเรื่องและแต่งตั้งที่ปรึกษา</h3>
         </div>
         <div class="card-body">
-            <form action="#">
+            <form wire:submit="create_document" action="#">
                 <div class="member">
                     <span class="title text-primary">สมาชิกกลุ่มปริญานิพนธ์</span>
                     <div class="fields">
                         <div class="input-fields">
                             <label class="form-label">นักศึกษาลำดับที่ 1</label>
-                            <label class="form-label">64222110108-4</label>
-                            <label class="form-label">นาย ณัฐภูมิ ขำศรี</label>
+                            <input class="form-input" type="text" wire:model="id_members.0" disabled>
                         </div>
-                        <div class="input-fields">
-                            <label class="form-label">นักศึกษาลำดับที่ 2</label>
-                            <input class="form-input" type="text" wire:model="member1" placeholder="กรุณากรอกรหัสนักศึกษา">
+                        <div x-data="{ memberCount: 0 }">
+                            <template x-for="i in memberCount" :key="i">
+                                <div class="input-fields">
+                                    <label class="form-label">นักศึกษาลำดับที่ <span x-text="i + 1"></span></label>
+                                    <input class="form-input" type="text" :name="'id_members[' + i + ']'"
+                                        x-model="$wire.id_members[i]" placeholder="กรุณากรอกรหัสนักศึกษา">
+                                </div>
+                            </template>
+                            <button class="btn btn-success" type="button"
+                                @click="if(memberCount < 4) memberCount++">เพิ่มนักศึกษา</button>
+                            <div x-show = "memberCount > 0">
+                                <button class="btn btn-danger" type="button"
+                                    @click="if(memberCount > 0) memberCount--">ลบนักศึกษา</button>
+                            </div>
+
                         </div>
-                        <div class="input-fields">
-                            <label class="form-label">นักศึกษาลำดับที่ 3</label>
-                            <input class="form-input" type="text" wire:model="member2" placeholder="กรุณากรอกรหัสนักศึกษา">
-                        </div>
-                        <div class="input-fields">
-                            <label class="form-label">นักศึกษาลำดับที่ 4</label>
-                            <input class="form-input" type="text" wire:model="member3" placeholder="กรุณากรอกรหัสนักศึกษา">
-                        </div>
-                        <div class="input-fields">
-                            <label class="form-label">นักศึกษาลำดับที่ 5</label>
-                            <input class="form-input" type="text" wire:model="member4" placeholder="กรุณากรอกรหัสนักศึกษา">
-                        </div>
-                        <div class="btn">
-                            <button type="button" class="btn btn-success">เพิ่มสมาชิก</button>
-                        </div>
-                    </div>
-                    <span class="title text-primary">เป็นนักศึกษา</span>
-                    <div class="fields">
-                        <label class="text-primary">หลักสูตร</label>
-                        <label>วิทยาการคอมพิวเตอร์</label>
-                        <label class="text-primary">สาขา</label>
-                        <label>เทคโนโลยีคอมพิวเตอร์</label>
-                        <label class="text-primary">ระดับ</label>
-                        <label>ปริญาตรี 4 ปี</label>
-                        <label class="text-primary">ภาค</label>
-                        <label>ปกติ</label>
                     </div>
                 </div>
+
                 <div class="project-name">
                     <span class="title text-primary">ชื่อเรื่องโครงงานปริญญานิพนธ์</span>
                     <div class="fields">
@@ -59,37 +45,48 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="main-advisor">
                     <span class="title text-primary">อาจารย์ที่ปรึกษาหลัก</span>
                     <div class="fields">
                         <div class="input-fields">
-                            <select class="form-select">
+                            <select class="form-select" wire:model="">
                                 <option selected>กรุณาเลือกที่ปรึกษาหลัก</option>
                                 <option value="">อาจารย์ 1</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="co-advisor">
+                <div class="sub-advisor">
                     <span class="title text-primary">อาจารย์ที่ปรึกษาร่วม(ถ้ามี)</span>
-                    <div class="fields-co-advisor">
-                        <div class="input-fields">
-                            <label class="form-label">อาจารย์ที่ปรึกษาร่วมลำดับที่ 1</label>
-                            <select class="form-select">
-                                <option selected>กรุณาเลือกที่ปรึกษาร่วม</option>
-                                <option value="">อาจารย์ 1</option>
-                            </select>
+
+                    <div x-data="{ SubTeacherCount: 0 ,id_teacher: []}">
+                        <template x-for="sup_teacher in SubTeacherCount" :key="sup_teacher">
+                            <div class="fields-co-advisor">
+                                <div class="input-fields">
+                                    <label class="form-label">อาจารย์ที่ปรึกษาร่วมลำดับที่ <span
+                                            x-text="sup_teacher"></span></label>
+                                    <select class="form-select" x-model="$wire.id_teacher[sup_teacher]">
+                                        <option selected>กรุณาเลือกที่ปรึกษาร่วม</option>
+                                        @foreach ($teacher as $teacher)
+                                            <option value="{{$teacher->id_teacher}}" x-show="!id_teacher.includes({{$teacher->id_teacher}})">
+                                                {{$teacher->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+
+                        <button class="btn btn-success" type="button"
+                            @click="if(SubTeacherCount < 3)SubTeacherCount++">เพิ่มอาจารย์ที่ปรึกษาร่วม</button>
+
+                        <div x-show="SubTeacherCount > 0 ">
+                            <button class="btn btn-danger" type="button"
+                                @click="if(SubTeacherCount > 0)SubTeacherCount--">ลบอาจารย์ที่ปรึกษาร่วม</button>
                         </div>
                     </div>
-                    <div class="fields-co-advisor">
-                        <div class="input-fields">
-                            <label class="form-label">อาจารย์ที่ปรึกษาร่วมลำดับที่ 2</label>
-                            <select class="form-select">
-                                <option selected>กรุณาเลือกที่ปรึกษาร่วม</option>
-                                <option value="">อาจารย์ 1</option>
-                            </select>
-                        </div>
-                    </div>
+
                     <div class="fields-external_co-advisor">
                         <div class="input-fields">
                             <label class="form-label">อาจารย์ที่ปรึกษาร่วมลำดับที่ 3</label>
@@ -125,7 +122,7 @@
                 </div>
                 <div class="btn-input">
                     <button type="button" class="btn btn-danger">ยกเลิก</button>
-                    <button type="button" class="btn btn-success">ขออนุมัติชื่อเรื่องและแต่งตั้งที่ปรึกษา</button>
+                    <button type="submit" class="btn btn-success">ขออนุมัติชื่อเรื่องและแต่งตั้งที่ปรึกษา</button>
                 </div>
             </form>
         </div>
