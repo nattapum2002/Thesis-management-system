@@ -57,22 +57,36 @@ class Teacher extends Model implements Authenticatable
      *
      * @var array<string, string>
      */
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'advisers', 'id_teacher', 'id_project');
+    }
+
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function getAuthIdentifierName(){
-        return 'id_teacher' ;
+    public function getAuthIdentifierName()
+    {
+        return 'id_teacher';
     }
-    public function getAuthIdentifier(){
-        return $this->getKey(); ;
+    public function getAuthIdentifier()
+    {
+        return $this->getKey();;
     }
-    public function getAuthPassword(){
+    public function getAuthPassword()
+    {
         return $this->password;
     }
-    public function getRememberToken(){
+    public function getRememberToken()
+    {
         return null;
     }
-    public function setRememberToken($value){}
-    public function getRememberTokenName(){}
+    public function setRememberToken($value)
+    {
+    }
+    public function getRememberTokenName()
+    {
+    }
 }

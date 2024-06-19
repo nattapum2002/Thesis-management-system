@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('id_student');
             $table->foreign('id_student')->references('id_student')->on('members');
             $table->foreignId('id_document')->constrained(table: 'documents', column: 'id_document');
+            $table->boolean('confirm_status')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

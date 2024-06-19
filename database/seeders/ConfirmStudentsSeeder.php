@@ -22,6 +22,7 @@ class ConfirmStudentsSeeder extends Seeder
                 DB::table('confirm_students')->insert([
                     'id_student' => $memberId,
                     'id_document' => $documentId,
+                    'confirm_status' => false,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

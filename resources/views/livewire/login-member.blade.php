@@ -6,7 +6,7 @@
     @endif
 
     <form wire:submit.prevent="login" class="border rounded-3 p-3">
-        <h3 class="mb-3">เข้าสู่ระบบ</h3>
+        <h3 class="mb-3">เข้าสู่ระบบสำหรับนักศึกษา</h3>
 
         <div class="mb-3">
             <label for="username" class="form-label">ชื่อผู้ใช้</label>

@@ -63,8 +63,6 @@ Route::get('/logout', function () {
     }
 })->name('logout');
 
-
-
 //Admin
 
 Route::get('/admin', function () {
@@ -153,8 +151,8 @@ Route::get('/member', function () {
     return view('member.dashboard');
 });
 
-Route::get('/member/submit_project_documents/{groupLeaderId}', function ($groupLeaderId) {
-    return view('member.submit_project_documents', compact('groupLeaderId'));
+Route::get('/member/submit_project_documents', function () {
+    return view('member.submit_project_documents');
 });
 
 Route::get('/member/edit_member', function () {

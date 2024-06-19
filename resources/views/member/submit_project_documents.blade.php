@@ -3,5 +3,6 @@
 สมาชิก
 @endsection
 @section('content')
-@livewire('submit-project-documents')
+@livewire('doc-group-member-detail')
+{{-- @livewire('submit-project-documents') --}}
 @endsection
