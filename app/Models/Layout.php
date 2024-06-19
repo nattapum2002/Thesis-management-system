@@ -19,13 +19,11 @@ class Layout extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'id_layout',
-        'file_layout',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
+    protected $primaryKey = 'id_layout';
+    protected $fillable = ['file_layout', 'id_project', 'created_by', 'updated_by'];
 
-    ];
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'id_project');
+    }
 }

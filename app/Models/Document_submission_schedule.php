@@ -19,16 +19,11 @@ class Document_submission_schedule extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'id_submission',
-        'time_submission',
-        'date_submission',
-        'year_submission',
-        'id_document',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
+    protected $primaryKey = 'id_submission';
+    protected $fillable = ['time_submission', 'date_submission', 'year_submission', 'id_document', 'created_by', 'updated_by'];
 
-    ];
+    public function document()
+    {
+        return $this->belongsTo(Document::class, 'id_document');
+    }
 }

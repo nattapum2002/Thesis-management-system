@@ -19,15 +19,26 @@ class Director extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'id_director',
-        'id_project',
-        'id_document',
-        'id_teacher',
-        'id_position',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
-    ];
+    protected $primaryKey = 'id_director';
+    protected $fillable = ['id_project', 'id_document', 'id_teacher', 'id_position', 'created_by', 'updated_by'];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'id_project');
+    }
+
+    public function document()
+    {
+        return $this->belongsTo(Document::class, 'id_document');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'id_teacher');
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'id_position');
+    }
 }

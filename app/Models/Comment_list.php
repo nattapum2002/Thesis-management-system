@@ -19,12 +19,11 @@ class Comment_list extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'id_comment_list',
-        'comment_list',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
-    ];
+    protected $primaryKey = 'id_comment_list';
+    protected $fillable = ['comment_list', 'created_by', 'updated_by'];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'id_comment_list');
+    }
 }

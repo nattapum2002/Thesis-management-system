@@ -20,13 +20,13 @@ class Level extends Model
      *
      * @var array<int, string>
      */
+    use HasFactory;
+
     protected $primaryKey = 'id_level';
-    protected $fillable = [
-        'level',
-        'sector',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
-    ];
+    protected $fillable = ['level', 'sector', 'created_by', 'updated_by'];
+
+    public function members()
+    {
+        return $this->hasMany(Member::class, 'id_level');
+    }
 }

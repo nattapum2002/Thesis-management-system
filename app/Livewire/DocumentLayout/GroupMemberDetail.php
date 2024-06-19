@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\DocumentLayout;
 
 use Livewire\Component;
 use App\Models\Member;
@@ -13,7 +13,7 @@ use App\Models\Position;
 use App\Models\Adviser;
 use Illuminate\Support\Facades\Auth;
 
-class DocGroupMemberDetail extends Component
+class GroupMemberDetail extends Component
 {
     //public $members;
 
@@ -33,6 +33,6 @@ class DocGroupMemberDetail extends Component
                 $query->wherePivot('adviser_status', 'หลัก');
             }])->first();
 
-        return view('livewire.doc-group-member-detail', compact('project'));
+        return view('livewire.group-member-detail', compact('project'));
     }
 }

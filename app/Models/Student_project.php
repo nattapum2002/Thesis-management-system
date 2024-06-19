@@ -20,8 +20,7 @@ class Student_project extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'id_student',
-        'id_project',
-    ];
+    protected $table = 'student_projects';
+
+    protected $fillable = ['id_student', 'id_project'];
 }

@@ -19,15 +19,31 @@ class Comment extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'id_comment',
-        'comment',
-        'id_project',
-        'id_document',
-        'id_comment_list',
-        'id_teacher',
-        'id_position',
-        'created_at',
-        'updated_at',
-    ];
+    protected $primaryKey = 'id_comment';
+    protected $fillable = ['comment', 'id_project', 'id_document', 'id_comment_list', 'id_teacher', 'id_position'];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'id_project');
+    }
+
+    public function document()
+    {
+        return $this->belongsTo(Document::class, 'id_document');
+    }
+
+    public function commentList()
+    {
+        return $this->belongsTo(Comment_list::class, 'id_comment_list');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'id_teacher');
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'id_position');
+    }
 }

@@ -3,6 +3,8 @@
 สมาชิก
 @endsection
 @section('content')
-@livewire('doc-group-member-detail')
+@livewire('DocumentLayout.doc01-topic-input')
+@livewire('DocumentLayout.doc01-advisers-input')
+{{-- @livewire('DocumentLayout.group-member-detail') --}}
 {{-- @livewire('submit-project-documents') --}}
 @endsection

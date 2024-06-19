@@ -20,12 +20,10 @@ class Course extends Model
      * @var array<int, string>
      */
     protected $primaryKey = 'id_course';
-    protected $fillable = [
-        'course',
-        'branch',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
-    ];
+    protected $fillable = ['course', 'branch', 'created_by', 'updated_by'];
+
+    public function members()
+    {
+        return $this->hasMany(Member::class, 'id_course');
+    }
 }

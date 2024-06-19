@@ -21,28 +21,11 @@ class Member extends Model implements Authenticatable
      * @var array<int, string>
      */
     protected $primaryKey = 'id_student';
-    protected $keyType = 'string';
     public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = [
-        'id_student',
-        'prefix',
-        'name',
-        'surname',
-        'email',
-        'tel',
-        'id_line',
-        'student_image',
-        'signature_image',
-        'id_level',
-        'id_course',
-        'username',
-        'password',
-        'account_status',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
-
+        'id_student', 'prefix', 'name', 'surname', 'email', 'tel', 'id_line', 'student_image',
+        'id_level', 'id_course', 'username', 'password', 'account_status', 'created_by', 'updated_by'
     ];
 
     /**
@@ -50,10 +33,7 @@ class Member extends Model implements Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast.
@@ -67,12 +47,12 @@ class Member extends Model implements Authenticatable
 
     public function level()
     {
-        return $this->belongsTo(Level::class, 'id_level', 'id_level');
+        return $this->belongsTo(Level::class, 'id_level');
     }
 
     public function course()
     {
-        return $this->belongsTo(Course::class, 'id_course', 'id_course');
+        return $this->belongsTo(Course::class, 'id_course');
     }
 
     public function projects()
