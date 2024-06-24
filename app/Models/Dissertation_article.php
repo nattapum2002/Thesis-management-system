@@ -21,7 +21,7 @@ class Dissertation_article extends Model
      */
 
     protected $primaryKey = 'id_dissertation_article';
-    protected $fillable = ['title', 'details', 'thesis_image', 'file_dissertation', 'year_published', 'id_project', 'created_by', 'updated_by'];
+    protected $fillable = ['title', 'details', 'thesis_image', 'file_dissertation', 'year_published', 'type', 'status', 'id_project', 'created_by', 'updated_by'];
 
     public function project()
     {
