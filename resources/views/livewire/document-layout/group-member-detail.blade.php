@@ -1,7 +1,7 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <h3>คุณได้รับเชิญเป็นอาจารย์ที่ปรึกษาหลัก</h3>
+            <h3>รายละเอียดกลุ่มปริญญานิพนธ์</h3>
         </div>
         <div class="card-body">
             <table class="table">
@@ -12,8 +12,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($project)
-
                     @foreach ($project->members as $member)
                     <tr>
                         <th>นักศึกษาลำดับที่ {{ $loop->iteration }}</th>
@@ -26,7 +24,6 @@
                         </td>
                     </tr>
                     @endforeach
-
                     <tr>
                         <th>ชื่อเรื่องโครงงานปริญญานิพนธ์</th>
                         <td>
@@ -34,32 +31,35 @@
                             <b>ภาษาอังกฤษ : </b>{{ $project->project_name_en }}
                         </td>
                     </tr>
-
-                    @if ($project->advisers->isNotEmpty())
-                    @php
-                    $mainAdviser = $project->advisers->first();
-                    @endphp
+                    @foreach ($project->advisers as $mainAdviser)
+                    @if ($mainAdviser->id_position == 1)
                     <tr>
-                        <th>อาจารย์ที่ปรึกษาหลัก</th>
+                        <th>อาจารย์{{$mainAdviser->position->position}}</th>
                         <td>
-                            <b>ชื่อ : </b>{{ $mainAdviser->prefix }} {{ $mainAdviser->name }} {{ $mainAdviser->surname
+                            <b>ชื่อ : </b>{{ $mainAdviser->teacher->prefix }} {{ $mainAdviser->teacher->name }} {{
+                            $mainAdviser->teacher->surname
                             }}<br>
-                            <b>ตำแหน่งทางวิชาการ : </b>{{ $mainAdviser->academic_position }}<br>
-                            <b>วุฒิการศึกษา : </b>{{ $mainAdviser->educational_qualification }}<br>
-                            <b>สาขาที่จบการศึกษา : </b>{{ $mainAdviser->branch }}
+                            <b>ตำแหน่งทางวิชาการ : </b>{{ $mainAdviser->teacher->academic_position }}<br>
+                            <b>วุฒิการศึกษา : </b>{{ $mainAdviser->teacher->educational_qualification }}<br>
+                            <b>สาขาที่จบการศึกษา : </b>{{ $mainAdviser->teacher->branch }}
                         </td>
                     </tr>
-                    @else
+                    @endif
+                    @endforeach@foreach ($project->advisers as $mainAdviser)
+                    @if ($mainAdviser->id_position == 2)
                     <tr>
-                        <td colspan="2">ไม่มีข้อมูลอาจารย์ที่ปรึกษาหลักสำหรับโปรเจกต์นี้</td>
+                        <th>อาจารย์{{$mainAdviser->position->position}}</th>
+                        <td>
+                            <b>ชื่อ : </b>{{ $mainAdviser->teacher->prefix }} {{ $mainAdviser->teacher->name }} {{
+                            $mainAdviser->teacher->surname
+                            }}<br>
+                            <b>ตำแหน่งทางวิชาการ : </b>{{ $mainAdviser->teacher->academic_position }}<br>
+                            <b>วุฒิการศึกษา : </b>{{ $mainAdviser->teacher->educational_qualification }}<br>
+                            <b>สาขาที่จบการศึกษา : </b>{{ $mainAdviser->teacher->branch }}
+                        </td>
                     </tr>
                     @endif
-                    @else
-                    <tr>
-                        <td colspan="2">ไม่มีข้อมูลโปรเจกต์สำหรับผู้ใช้ปัจจุบัน</td>
-                    </tr>
-                    @endif
-
+                    @endforeach
                 </tbody>
             </table>
         </div>

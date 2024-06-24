@@ -24,7 +24,7 @@ class Project extends Model
     protected $primaryKey = 'id_project';
     protected $fillable = ['project_name_th', 'project_name_en', 'project_status', 'created_by', 'updated_by'];
 
-    public function students()
+    public function members()
     {
         return $this->belongsToMany(Member::class, 'student_projects', 'id_project', 'id_student');
     }
@@ -37,5 +37,10 @@ class Project extends Model
     public function documents()
     {
         return $this->hasMany(Document::class, 'id_project');
+    }
+
+    public function advisers()
+    {
+        return $this->hasMany(Adviser::class, 'id_project');
     }
 }

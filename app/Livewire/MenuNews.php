@@ -40,11 +40,9 @@ class MenuNews extends Component
         $news = News::with('teacher')
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%');
-                dd($this->search);
             })
             ->when($this->filterType != 'all', function ($query) {
                 $query->where('type', $this->filterType);
-                dd($this->filterType);
             })
             ->when($this->filterDate == 'oldest', function ($query) {
                 $query->orderBy('created_at', 'asc');

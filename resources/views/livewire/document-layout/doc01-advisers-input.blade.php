@@ -1,11 +1,12 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <h4 class="title text-primary">อาจารย์ที่ปรึกษาหลัก</h4>
+            <h4 class="title text-primary">อาจารย์ที่ปรึกษา</h4>
         </div>
         <div class="card-body">
+            <span class="title text-primary">อาจารย์ที่ปรึกษาหลัก</span>
             <div class="fields">
-                <div class="input-fields">
+                <div class="input-fields mt-2">
                     <select id="mainAdvisorSelect" wire:model="selectedAdvisor" class="form-select" required>
                         <option value="">กรุณาเลือกที่ปรึกษาหลัก</option>
                         @foreach ($advisors as $advisor)
@@ -15,15 +16,10 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="card mt-4">
-        <div class="card-header">
-            <h4 class="title text-primary">อาจารย์ที่ปรึกษาร่วม</h4>
-        </div>
         <div class="card-body">
+            <span class="title text-primary">อาจารย์ที่ปรึกษาร่วม(ถ้ามี)</span>
             @foreach ($selectedCoAdvisors as $index => $coAdvisorId)
-            <div class="fields-co-advisor mb-2">
+            <div class="fields-co-advisor mt-2">
                 <div class="input-fields">
                     <select id="coAdvisorSelect" wire:model="selectedCoAdvisors.{{ $index }}" class="form-select"
                         required>
@@ -38,28 +34,28 @@
             @endforeach
 
             @foreach ($externalCoAdvisors as $index => $externalCoAdvisor)
-            <div class="fields-external-co-advisor mb-2">
+            <div class="fields-external-co-advisor mt-2">
                 <div class="input-fields">
                     <label class="form-label">คำนำหน้าชื่อ</label>
                     <input wire:model="externalCoAdvisors.{{ $index }}.prefix" class="form-input" type="text"
                         placeholder="กรุณากรอกคำนำหน้าชื่อ" required>
-
+                    <br>
                     <label class="form-label">ชื่อ</label>
                     <input wire:model="externalCoAdvisors.{{ $index }}.name" class="form-input" type="text"
                         placeholder="กรุณากรอกชื่อ" required>
-
+                    <br>
                     <label class="form-label">นามสกุล</label>
                     <input wire:model="externalCoAdvisors.{{ $index }}.surname" class="form-input" type="text"
                         placeholder="กรุณากรอกนามสกุล" required>
-
+                    <br>
                     <label class="form-label">ตำแหน่งทางวิชาการ</label>
                     <input wire:model="externalCoAdvisors.{{ $index }}.academic_position" class="form-input" type="text"
                         placeholder="กรุณากรอกตำแหน่งทางวิชาการ" required>
-
+                    <br>
                     <label class="form-label">วุฒิการศึกษา</label>
                     <input wire:model="externalCoAdvisors.{{ $index }}.education_degree" class="form-input" type="text"
                         placeholder="กรุณากรอกวุฒิการศึกษา" required>
-
+                    <br>
                     <label class="form-label">สาขาที่จบการศึกษา</label>
                     <input wire:model="externalCoAdvisors.{{ $index }}.graduated_major" class="form-input" type="text"
                         placeholder="กรุณากรอกสาขาที่จบการศึกษา" required>
@@ -69,7 +65,7 @@
             </div>
             @endforeach
 
-            @if (count($selectedCoAdvisors) + count($externalCoAdvisors) < 3) <div class="input-fields mt-3">
+            @if (count($selectedCoAdvisors) + count($externalCoAdvisors) < 3) <div class="input-fields mt-2">
                 <button wire:click="addCoAdvisor" class="btn btn-primary">เพิ่มที่ปรึกษาร่วม</button>
                 <button wire:click="addExternalCoAdvisor" class="btn btn-primary">เพิ่มที่ปรึกษาร่วมจากภายนอก</button>
         </div>

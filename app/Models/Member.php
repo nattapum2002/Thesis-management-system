@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,11 +13,6 @@ class Member extends Model implements Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $primaryKey = 'id_student';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -28,25 +21,13 @@ class Member extends Model implements Authenticatable
         'id_level', 'id_course', 'username', 'password', 'account_status', 'created_by', 'updated_by'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function project(){
-        return $this->belongsToMany(Project::class , 'student_projects', 'id_project', 'id_student');
-    }
+
     public function level()
     {
         return $this->belongsTo(Level::class, 'id_level');
@@ -66,21 +47,26 @@ class Member extends Model implements Authenticatable
     {
         return 'id_student';
     }
+
     public function getAuthIdentifier()
     {
         return $this->getKey();
     }
+
     public function getAuthPassword()
     {
         return $this->password;
     }
+
     public function getRememberToken()
     {
         return null;
     }
+
     public function setRememberToken($value)
     {
     }
+
     public function getRememberTokenName()
     {
     }
