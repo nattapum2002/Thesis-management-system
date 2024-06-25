@@ -20,25 +20,25 @@ class CommentsSeeder extends Seeder
         $teacherIds = \App\Models\Teacher::pluck('id_teacher');
         $positionIds = \App\Models\Position::pluck('id_position');
 
-        foreach ($projectIds as $projectId) {
-            foreach ($documentIds as $documentId) {
-                foreach ($commentListIds as $commentListId) {
-                    foreach ($teacherIds as $teacherId) {
-                        foreach ($positionIds as $positionId) {
-                            DB::table('comments')->insert([
-                                'comment' => 'This is a sample comment.', // Example comment
-                                'id_project' => $projectId,
-                                'id_document' => $documentId,
-                                'id_comment_list' => $commentListId,
-                                'id_teacher' => $teacherId,
-                                'id_position' => $positionId,
-                                'created_at' => now(),
-                                'updated_at' => now(),
-                            ]);
-                        }
-                    }
-                }
-            }
-        }
+        // foreach ($projectIds as $projectId) {
+        //     foreach ($documentIds as $documentId) {
+        //         foreach ($commentListIds as $commentListId) {
+        //             foreach ($teacherIds as $teacherId) {
+        //                 foreach ($positionIds as $positionId) {
+        //                     DB::table('comments')->insert([
+        //                         'comment' => 'This is a sample comment.', // Example comment
+        //                         'id_project' => $projectId,
+        //                         'id_document' => $documentId,
+        //                         'id_comment_list' => $commentListId,
+        //                         'id_teacher' => $teacherId,
+        //                         'id_position' => $positionId,
+        //                         'created_at' => now(),
+        //                         'updated_at' => now(),
+        //                     ]);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     }
 }

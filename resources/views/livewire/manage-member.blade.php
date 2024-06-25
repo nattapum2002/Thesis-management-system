@@ -24,9 +24,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ( $data as $studentItems )
                     <tr>
                         <td>64222110108-4</td>
-                        <td>นายณัฐภูมิ ขำศรี</td>
+                        <td>{{$studentItems->name}}</td>
                         <td>หลักสูตรวิทยาศาสตรบัณฑิต</td>
                         <td>ป.ตรี 4 ปี</td>
                         <td>ปกติ</td>
@@ -38,8 +39,10 @@
                             <a class="btn btn-danger btn-sm" href="#">ยกเลิกบัญชี</a>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
+            {{ $data->links() }}
         </div>
     </div>
 
