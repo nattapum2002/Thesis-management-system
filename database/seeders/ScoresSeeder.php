@@ -2,9 +2,13 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Member;
+use App\Models\Document;
+use App\Models\Comment_list;
+use App\Models\Teacher;
+use App\Models\Position;
 
 class ScoresSeeder extends Seeder
 {
@@ -13,11 +17,11 @@ class ScoresSeeder extends Seeder
      */
     public function run(): void
     {
-        $students = \App\Models\Member::all();
-        $documents = \App\Models\Document::all();
-        $commentLists = \App\Models\Comment_list::all();
-        $teachers = \App\Models\Teacher::all();
-        $positions = \App\Models\Position::all();
+        $students = Member::all();
+        $documents = Document::whereIn('id_document', [3, 6])->get();
+        $commentLists = Comment_list::all();
+        $teachers = Teacher::all();
+        $positions = Position::whereIn('id_position', [5, 6, 7])->get();
 
         foreach ($documents as $document) {
             foreach ($students as $student) {

@@ -4,16 +4,17 @@
         <h1>ข่าวประชาสัมพันธ์</h1>
         <div class="row mb-3">
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="ค้นหาข่าว..." wire:model.debounce.100ms="search">
+                <input type="text" class="form-control" placeholder="ค้นหาข่าว..."
+                    wire:model.live.debounce.150ms="search">
             </div>
             <div class="col-md-3">
-                <select class="form-select" wire:model.debounce.100ms="filterDate">
+                <select class="form-select" wire:model.live.debounce.100ms="filterDate">
                     <option value="latest">ข่าวล่าสุด</option>
                     <option value="oldest">ข่าวเก่าสุด</option>
                 </select>
             </div>
             <div class="col-md-3">
-                <select class="form-select" wire:model.debounce.100ms="filterType">
+                <select class="form-select" wire:model.live.debounce.100ms="filterType">
                     <option value="all">ทุกประเภท</option>
                     <option value="general">ข่าวทั่วไป</option>
                     <option value="topic">ชื่อหัวข้อ</option>

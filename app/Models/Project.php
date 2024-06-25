@@ -22,30 +22,25 @@ class Project extends Model
      */
 
     protected $primaryKey = 'id_project';
-
-    protected $fillable = [
-        'project_name_th',
-        'project_name_en',
-        'project_status',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
-    ];
+    protected $fillable = ['project_name_th', 'project_name_en', 'project_status', 'created_by', 'updated_by'];
 
     public function members()
     {
         return $this->belongsToMany(Member::class, 'student_projects', 'id_project', 'id_student');
     }
 
-    public function advisers()
+    public function teachers()
     {
-        return $this->belongsToMany(Teacher::class, 'advisers', 'id_project', 'id_teacher')
-            ->withPivot('adviser_status'); // assuming there is an adviser_status column
+        return $this->belongsToMany(Teacher::class, 'advisers', 'id_project', 'id_teacher');
     }
 
-    public function mainAdviser()
+    public function documents()
     {
-        return $this->advisers()->wherePivot('adviser_status', 'หลัก')->first();
+        return $this->hasMany(Document::class, 'id_project');
+    }
+
+    public function advisers()
+    {
+        return $this->hasMany(Adviser::class, 'id_project');
     }
 }

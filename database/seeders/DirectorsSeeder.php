@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Project;
+use App\Models\Document;
+use App\Models\Teacher;
+use App\Models\Position;
 
 class DirectorsSeeder extends Seeder
 {
@@ -13,27 +16,26 @@ class DirectorsSeeder extends Seeder
      */
     public function run(): void
     {
-        // Assume you have projects, documents, teachers, and positions already seeded, retrieve their ids
-        $projectIds = \App\Models\Project::pluck('id_project');
-        $documentIds = \App\Models\Document::pluck('id_document');
-        $teacherIds = \App\Models\Teacher::pluck('id_teacher');
-        $positionIds = \App\Models\Position::pluck('id_position');
+        // Retrieve all ids from existing records
+        $projectIds = Project::pluck('id_project');
+        $documents = Document::whereIn('id_document', [3, 6])->get();
+        $teachers = Teacher::all();
+        $positions = Position::whereIn('id_position', [5, 6, 7])->get();
 
         foreach ($projectIds as $projectId) {
-            foreach ($documentIds as $documentId) {
-                foreach ($teacherIds as $teacherId) {
-                    foreach ($positionIds as $positionId) {
-                        DB::table('directors')->insert([
-                            'id_project' => $projectId,
-                            'id_document' => $documentId,
-                            'id_teacher' => $teacherId,
-                            'id_position' => $positionId,
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ]);
-                    }
-                }
-            }
+            // Randomly select documents, teachers, and positions
+            $selectedDocument = $documents->random();
+            $selectedTeacher = $teachers->random();
+            $selectedPosition = $positions->random();
+
+            DB::table('directors')->insert([
+                'id_project' => $projectId,
+                'id_document' => $selectedDocument->id_document,
+                'id_teacher' => $selectedTeacher->id_teacher,
+                'id_position' => $selectedPosition->id_position,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
     }
 }

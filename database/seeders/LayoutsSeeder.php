@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Project;
 
 class LayoutsSeeder extends Seeder
 {
@@ -13,17 +13,15 @@ class LayoutsSeeder extends Seeder
      */
     public function run(): void
     {
-        // Assume you have projects already seeded, retrieve project ids
-        $projectIds = \App\Models\Project::pluck('id_project');
+        // Retrieve all project ids
+        $projects = Project::all();
 
-        foreach ($projectIds as $projectId) {
-            // Insert multiple layouts for each project
-            for ($i = 1; $i <= 10; $i++) { // Insert 3 layouts for each project
+        foreach ($projects as $project) {
+            // Generate 3 layouts for each project
+            for ($i = 1; $i <= 3; $i++) {
                 DB::table('layouts')->insert([
                     'file_layout' => 'path/to/layout_' . $i . '.pdf', // Example path
-                    'id_project' => $projectId,
-                    'created_by' => null, // Adjust if you have a user table
-                    'updated_by' => null, // Adjust if you have a user table
+                    'id_project' => $project->id_project,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

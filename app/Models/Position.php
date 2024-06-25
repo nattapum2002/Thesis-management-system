@@ -20,13 +20,11 @@ class Position extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'id_position',
-        'position',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
+    protected $primaryKey = 'id_position';
+    protected $fillable = ['position', 'created_by', 'updated_by'];
 
-    ];
+    public function advisers()
+    {
+        return $this->hasMany(Adviser::class, 'id_position');
+    }
 }

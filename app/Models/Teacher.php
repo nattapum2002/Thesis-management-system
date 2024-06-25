@@ -19,27 +19,11 @@ class Teacher extends Model implements Authenticatable
      *
      * @var array<int, string>
      */
-    protected $primaryKey = 'id_teacher'; // Assuming the primary key is id_teacher
-
+    protected $primaryKey = 'id_teacher';
     protected $fillable = [
-        'prefix',
-        'name',
-        'surname',
-        'academic_position',
-        'educational_qualification',
-        'branch',
-        'user_type',
-        'email',
-        'tel',
-        'id_line',
-        'teacher_image',
-        'signature_image',
-        'username',
-        'password',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
+        'prefix', 'name', 'surname', 'academic_position', 'educational_qualification',
+        'branch', 'user_type', 'email', 'tel', 'id_line', 'teacher_image',
+        'signature_image', 'username', 'password', 'account_status', 'created_by', 'updated_by'
     ];
 
     /**
@@ -47,16 +31,18 @@ class Teacher extends Model implements Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
+
+    public function news()
+    {
+        return $this->hasMany(News::class, 'id_teacher');
+    }
 
     public function projects()
     {

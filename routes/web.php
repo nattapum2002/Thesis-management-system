@@ -1,6 +1,26 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LevelController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\StudentProjectController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\LayoutController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DissertationArticleController;
+use App\Http\Controllers\CommentListController;
+use App\Http\Controllers\AdviserController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ConfirmStudentController;
+use App\Http\Controllers\ConfirmTeacherController;
+use App\Http\Controllers\DirectorController;
+use App\Http\Controllers\DocumentSubmissionScheduleController;
+use App\Http\Controllers\ExamScheduleController;
+use App\Http\Controllers\ScoreController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +34,30 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+//Controllers
+
+Route::resource('levels', LevelController::class);
+Route::resource('courses', CourseController::class);
+Route::resource('members', MemberController::class);
+Route::resource('teachers', TeacherController::class);
+Route::resource('projects', ProjectController::class);
+Route::resource('positions', PositionController::class);
+Route::resource('student-projects', StudentProjectController::class);
+Route::resource('students', StudentController::class);
+Route::resource('news', NewsController::class);
+Route::resource('layouts', LayoutController::class);
+Route::resource('documents', DocumentController::class);
+Route::resource('dissertation-articles', DissertationArticleController::class);
+Route::resource('comment-lists', CommentListController::class);
+Route::resource('advisers', AdviserController::class);
+Route::resource('comments', CommentController::class);
+Route::resource('confirm-students', ConfirmStudentController::class);
+Route::resource('confirm-teachers', ConfirmTeacherController::class);
+Route::resource('directors', DirectorController::class);
+Route::resource('document-submission-schedules', DocumentSubmissionScheduleController::class);
+Route::resource('exam-schedules', ExamScheduleController::class);
+Route::resource('scores', ScoreController::class);
 
 //Welcome
 

@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Project;
+use App\Models\Document;
 
 class ExamSchedulesSeeder extends Seeder
 {
@@ -13,19 +14,23 @@ class ExamSchedulesSeeder extends Seeder
      */
     public function run(): void
     {
-        $projects = \App\Models\Project::all();
-        $documents = \App\Models\Document::all();
+        $projects = Project::all();
+        $documents = Document::whereIn('id_document', [3, 6])->get();
 
         foreach ($projects as $project) {
-            foreach ($documents as $document) {
+            // สุ่มเลือกจำนวนของ documents ที่จะใช้
+            $documentCount = rand(1, $documents->count());
+            $selectedDocuments = $documents->random($documentCount);
+
+            foreach ($selectedDocuments as $document) {
                 DB::table('exam_schedules')->insert([
-                    'exam_time' => now()->format('H:i:s'),
-                    'exam_day' => now()->format('Y-m-d'),
-                    'exam_room' => 'Exam Room',
-                    'exam_building' => 'Exam Building',
-                    'exam_group' => 'Group A',
+                    'exam_time' => now()->addMinutes(rand(0, 1440))->format('H:i:s'), // เพิ่มเวลาสุ่ม
+                    'exam_day' => now()->addDays(rand(0, 30))->format('Y-m-d'), // เพิ่มวันสุ่ม
+                    'exam_room' => 'Exam Room ' . rand(1, 10), // ห้องสอบสุ่ม
+                    'exam_building' => 'Exam Building ' . rand(1, 5), // อาคารสุ่ม
+                    'exam_group' => 'Group ' . chr(rand(65, 90)), // กลุ่มสุ่ม A-Z
                     'year_published' => now()->format('Y'),
-                    'semester' => 1, // Example semester
+                    'semester' => rand(1, 2), // สุ่มภาคการศึกษา
                     'id_project' => $project->id_project,
                     'id_document' => $document->id_document,
                     'created_at' => now(),

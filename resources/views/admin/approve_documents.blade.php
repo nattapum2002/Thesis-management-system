@@ -3,5 +3,7 @@
 อนุมัติเอกสาร
 @endsection
 @section('content')
-@livewire('approve-documents')
+{{-- @livewire('DocumentLayout.group-member-detail') --}}
+{{-- @livewire('DocumentLayout.doc01-comment-admin-input') --}}
+{{-- @livewire('approve-documents') --}}
 @endsection

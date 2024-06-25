@@ -19,16 +19,8 @@ class Student extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'STUDENT_NO',
-        'Prefix',
-        'NAME',
-        'LNAME',
-        'StatusName',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
-
-    ];
+    protected $primaryKey = 'STUDENT_NO';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $fillable = ['STUDENT_NO', 'Prefix', 'NAME', 'LNAME', 'StatusName', 'created_by', 'updated_by'];
 }
