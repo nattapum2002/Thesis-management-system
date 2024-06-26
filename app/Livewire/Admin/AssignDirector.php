@@ -37,7 +37,7 @@ class AssignDirector extends Component
             'selectedDocument' => 'required|exists:documents,id_document',
             'selectedPosition' => 'required|exists:positions,id_position',
         ]);
-        //dd(auth('teachers')->user());
+
         Director::create([
             'id_project' => $this->selectedProject,
             'id_document' => $this->selectedDocument,

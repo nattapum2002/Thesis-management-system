@@ -3,5 +3,5 @@
 อาจารย์ประจำวิชา
 @endsection
 @section('content')
-@livewire('admin.manage-teacher')
+@livewire('admin.edit-and-detail-teacher', ['id' => $teacherId])
 @endsection

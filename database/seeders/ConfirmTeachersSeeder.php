@@ -28,6 +28,7 @@ class ConfirmTeachersSeeder extends Seeder
                             'id_document' => $documentId,
                             'id_teacher' => $teacherId,
                             'id_position' => $positionId,
+                            'confirm_status' => false,
                             'created_at' => now(),
                             'updated_at' => now(),
                         ]);

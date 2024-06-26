@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('id_document')->constrained(table: 'documents', column: 'id_document');
             $table->foreignId('id_teacher')->constrained(table: 'teachers', column: 'id_teacher');
             $table->foreignId('id_position')->constrained(table: 'positions', column: 'id_position');
+            $table->boolean('confirm_status')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

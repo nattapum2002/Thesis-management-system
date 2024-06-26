@@ -5,7 +5,7 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <input type="text" class="form-control" placeholder="ค้นหาบทความ..."
-                    wire:model.live.debounce.300ms="search">
+                    wire:model.live.debounce.150ms="search">
             </div>
             <div class="col-md-3">
                 <select class="form-select" wire:model.live.debounce.300ms="filterDate">

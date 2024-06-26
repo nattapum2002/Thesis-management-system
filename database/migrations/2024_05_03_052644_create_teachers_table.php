@@ -20,15 +20,15 @@ return new class extends Migration
             $table->text('educational_qualification');
             $table->text('branch');
             $table->string('user_type');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('tel')->unique();
+            $table->string('tel')->unique()->nullable();
             $table->string('id_line')->unique()->nullable();
             $table->text('teacher_image')->nullable();
             $table->text('signature_image')->nullable();
             $table->string('username');
             $table->string('password');
-            $table->string('account_status');
+            $table->boolean('account_status')->default(true);
             $table->rememberToken();
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();

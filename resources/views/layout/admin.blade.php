@@ -28,7 +28,8 @@
 
                     <div class="title-name">
                         <i class='bx bx-user'></i>
-                        <span>Admin</span>
+                        <span>{{ Auth::guard('teachers')->user()->name }} {{ Auth::guard('teachers')->user()->surname
+                            }}</span>
                     </div>
                 </div>
                 <ul style="list-style-type: none">

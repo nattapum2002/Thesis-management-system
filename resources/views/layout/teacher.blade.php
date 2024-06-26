@@ -13,7 +13,8 @@
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 {{--
 <link href="{{Asset('Asset/main/css/sidebar.css')}}" rel="stylesheet"> --}}
-<link href="{{Asset('Asset/main/css/body2.css')}}" rel="stylesheet">
+
+<link href="{{Asset('Asset/main/css/body.css')}}" rel="stylesheet">
 
 <body>
     <div class="row">
@@ -72,7 +73,7 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script>
@@ -130,7 +131,7 @@
                 hideField(targetField);
             });
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>

@@ -3,5 +3,5 @@
 อาจารย์
 @endsection
 @section('content')
-@livewire('edit-teacher')
+@livewire('teacher.edit-and-detail-teacher')
 @endsection

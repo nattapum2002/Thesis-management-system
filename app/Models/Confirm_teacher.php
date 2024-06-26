@@ -20,7 +20,7 @@ class Confirm_teacher extends Model
      * @var array<int, string>
      */
     protected $primaryKey = 'id_confirm_teacher';
-    protected $fillable = ['id_project', 'id_document', 'id_teacher', 'id_position'];
+    protected $fillable = ['id_project', 'id_document', 'id_teacher', 'id_position', 'confirm_status'];
 
     public function project()
     {

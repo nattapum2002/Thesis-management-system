@@ -121,6 +121,10 @@ Route::get('/admin/manage_teacher', function () {
     return view('admin.manage_teacher');
 });
 
+Route::get('/admin/edit_and_detail_teacher/{teacherId}', function ($teacherId) {
+    return view('admin.edit_and_detail_teacher', compact('teacherId'));
+});
+
 Route::get('/admin/manage_member', function () {
     return view('admin.manage_member');
 });
@@ -179,6 +183,10 @@ Route::get('/teacher', function () {
 
 Route::get('/teacher/edit_teacher', function () {
     return view('teacher.edit_teacher');
+});
+
+Route::get('/teacher/edit_and_detail_teacher', function () {
+    return view('teacher.edit_and_detail_teacher');
 });
 
 Route::get('/teacher/manage_news_teacher', function () {
