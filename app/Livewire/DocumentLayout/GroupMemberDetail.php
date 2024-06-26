@@ -4,30 +4,22 @@ namespace App\Livewire\DocumentLayout;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use app\Models\Member;
+
+use App\Models\Project;
 
 class GroupMemberDetail extends Component
 {
     public function render()
     {
-        // ดึงข้อมูลผู้ใช้ปัจจุบันที่ลงชื่อเข้าใช้งาน
-        $currentUser = Auth::guard('members')->user();
-
-        // หากไม่มีผู้ใช้ปัจจุบันที่ลงชื่อเข้าใช้งาน ไม่ต้องทำอะไรเพิ่มเติม
-        if (!$currentUser) {
-            return abort(403, 'Unauthorized');
-        }
-
         // ดึงโปรเจกต์แรกที่ผู้ใช้ปัจจุบันเข้าร่วมพร้อมกับสมาชิกและที่ปรึกษาหลัก
-        $project = $currentUser->projects()->with([
-            'members' => function ($query) {
-                $query->with(['level', 'course']);
-            },
-            'advisers' => function ($query) {
-                $query->with('position');
-            }
-        ])->first();
-
-        return view('livewire.document-layout.group-member-detail', ['project' => $project]);
+        $projects = Project::whereHas('members' , function($query){
+            $query->where('student_projects.id_student',Auth::guard('members')->user()->id_student)
+            ->join('courses','courses.id_course','=','members.id_course');
+        }
+        )->with('members','teachers','advisers')
+        ->get();
+        
+        // dd($projects);
+        return view('livewire.document-layout.group-member-detail', ['projects' => $projects]);
     }
 }

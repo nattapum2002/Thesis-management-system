@@ -64,7 +64,7 @@
                                     @foreach ($teachers as $main_teacher)
                                         <option value="{{ $main_teacher->id_teacher }}"
                                             x-show="!id_teacher.includes('{{ $main_teacher->id_teacher }}')">
-                                            {{ $main_teacher->name }}
+                                            {{ $main_teacher->name }} {{ $main_teacher->surname }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -88,7 +88,7 @@
                                         @foreach ($teachers as $teacherItem)
                                             <option value="{{ $teacherItem->id_teacher }}"
                                                 x-show="!id_teacher.includes('{{ $teacherItem->id_teacher }}')">
-                                                {{ $teacherItem->name }}
+                                                {{ $teacherItem->name }} {{ $teacherItem->surname }}
                                             </option>
                                         @endforeach
                                     </select>

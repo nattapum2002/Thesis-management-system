@@ -31,7 +31,7 @@ class Project extends Model
 
     public function teachers()
     {
-        return $this->belongsToMany(Teacher::class, 'advisers', 'id_project', 'id_teacher');
+        return $this->belongsToMany(Teacher::class, 'advisers', 'id_project', 'id_teacher')->withPivot('id_position');
     }
 
     public function documents()
