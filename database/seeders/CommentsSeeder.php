@@ -23,7 +23,6 @@ class CommentsSeeder extends Seeder
         $teachers = Teacher::all();
         $positions = Position::whereBetween('id_position', [3, 7])->get();
 
-<<<<<<< HEAD
         // foreach ($projectIds as $projectId) {
         //     foreach ($documentIds as $documentId) {
         //         foreach ($commentListIds as $commentListId) {
@@ -44,7 +43,6 @@ class CommentsSeeder extends Seeder
         //         }
         //     }
         // }
-=======
         foreach ($projects as $project) {
             foreach ($documents as $document) {
                 foreach ($commentLists as $commentList) {
@@ -64,6 +62,5 @@ class CommentsSeeder extends Seeder
                 }
             }
         }
->>>>>>> ddac74c0652524bb7ce81ec2a07f55020e483afc
     }
 }
