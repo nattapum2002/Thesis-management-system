@@ -20,11 +20,16 @@ class Confirm_student extends Model
      * @var array<int, string>
      */
     protected $primaryKey = 'id_confirm_student';
-    protected $fillable = ['id_student', 'id_document', 'confirm_status'];
+    protected $fillable = ['id_student', 'id_project', 'id_document', 'confirm_status'];
 
     public function student()
     {
         return $this->belongsTo(Member::class, 'id_student');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'id_project');
     }
 
     public function document()

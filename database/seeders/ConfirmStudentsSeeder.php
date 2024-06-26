@@ -15,17 +15,21 @@ class ConfirmStudentsSeeder extends Seeder
     {
         // Assume you have members and documents already seeded, retrieve their ids
         $memberIds = \App\Models\Member::pluck('id_student');
+        $projectIds = \App\Models\Project::pluck('id_project');
         $documentIds = \App\Models\Document::pluck('id_document');
 
         foreach ($memberIds as $memberId) {
-            foreach ($documentIds as $documentId) {
-                DB::table('confirm_students')->insert([
-                    'id_student' => $memberId,
-                    'id_document' => $documentId,
-                    'confirm_status' => false,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+            foreach ($projectIds as $projectId) {
+                foreach ($documentIds as $documentId) {
+                    DB::table('confirm_students')->insert([
+                        'id_student' => $memberId,
+                        'id_project' => $projectId,
+                        'id_document' => $documentId,
+                        'confirm_status' => false,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
             }
         }
     }
