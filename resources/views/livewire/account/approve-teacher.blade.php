@@ -37,7 +37,8 @@
                     </tr>
                     <tr>
                         <th>รูปภาพลายเซ็น</th>
-                        <td colspan="2"><img src="{{ $teacher->signature_image }}" alt="{{ $teacher->name }}"></td>
+                        <td colspan="2"><img src="{{ asset('storage/'.$teacher->signature_image) }}"
+                                alt="{{ $teacher->name }}"></td>
                     </tr>
                     <tr>
                         <th>ตำแหน่งทางวิชาการ</th>
@@ -141,7 +142,6 @@
                         </td>
                         @else
                         <td>
-                            {{-- {{ $teacher->account_status }} --}}
                             @if ($teacher->account_status == '1')
                             <p class="text-success">บัญชียังถูกใช้งาน</p>
                             @else

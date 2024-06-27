@@ -1,7 +1,10 @@
 <div>
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search" wire:model.live.debounce.150ms="search">
-        <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+    <div>
+        <a href="/admin/add_teacher" class="btn btn-success">เพิ่มบัญชีอาจารย์</a>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" wire:model.live.debounce.150ms="search">
+            <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+        </div>
     </div>
     <div class="card">
         <div class="card-body table-responsive p-0">

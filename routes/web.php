@@ -119,7 +119,7 @@ Route::get('/admin/add_teacher', function () {
 
 Route::get('/admin/manage_teacher', function () {
     return view('admin.manage_teacher');
-});
+})->name('manage_teacher');
 
 Route::get('/admin/approve_teacher/{teacherId}', function ($teacherId) {
     return view('admin.approve_teacher', compact('teacherId'));
@@ -127,6 +127,10 @@ Route::get('/admin/approve_teacher/{teacherId}', function ($teacherId) {
 
 Route::get('/admin/manage_member', function () {
     return view('admin.manage_member');
+})->name('manage_member');
+
+Route::get('/admin/approve_member/{studentId}', function ($studentId) {
+    return view('admin.approve_member', compact('studentId'));
 });
 
 Route::get('/admin/edit_admin', function () {

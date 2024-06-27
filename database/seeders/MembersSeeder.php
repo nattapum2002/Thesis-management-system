@@ -34,7 +34,7 @@ class MembersSeeder extends Seeder
                 'id_course' => $courses[array_rand($courses)],
                 'username' => 'student' . $i,
                 'password' => Hash::make('password'),
-                'account_status' => 'active',
+                'account_status' => false,
                 'remember_token' => Str::random(10),
                 'created_by' => null,
                 'updated_by' => null,

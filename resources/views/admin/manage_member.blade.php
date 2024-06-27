@@ -3,5 +3,5 @@
 จัดการบัญชีสมาชิก
 @endsection
 @section('content')
-@livewire('manage-member')
+@livewire('account.manage-member')
 @endsection

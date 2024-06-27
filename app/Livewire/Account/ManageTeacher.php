@@ -15,10 +15,6 @@ class ManageTeacher extends Component
     public $editingId;
     public $editingVar;
 
-    public function delete()
-    {
-    }
-
     public function mount()
     {
         //$this->teachers = Teacher::all();
