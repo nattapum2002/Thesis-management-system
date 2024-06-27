@@ -32,7 +32,7 @@ class Confirm_student extends Model
         return $this->belongsTo(Project::class, 'id_project');
     }
 
-    public function document()
+    public function documents()
     {
         return $this->belongsTo(Document::class, 'id_document');
     }

@@ -3,6 +3,8 @@
 namespace App\Livewire\Document;
 
 use App\Models\Adviser;
+use App\Models\Confirm_student;
+use App\Models\Confirm_teacher;
 use App\Models\Member;
 use App\Models\Project;
 use App\Models\Teacher;
@@ -19,7 +21,7 @@ class CreateDocument extends Component
     public $memberIds, $teacherIds;
     public $teachers;
 
-    public $project_name_th, $project_name_eng , $project;
+    public $project_name_th, $project_name_eng, $project;
     protected $rules = [
         'id_members.*' => 'nullable|string|required', // validate array of integers
         'project_name_th' => 'required',
@@ -65,17 +67,35 @@ class CreateDocument extends Component
                 'project_status' => 'Pending',
             ]);
 
+            foreach ($memberIds as $member_Ids) {
+                $student_document = Confirm_student::create([
+                    'id_student' => $member_Ids,
+                    'id_document' => 1,
+                    'id_project' => $this->project->id_project,
+                    'confirm' => false,
+                ]);
+            }
+            foreach ($teacherIds as $index => $teacherId) {
+                $position = $index == 0 ? 1 : 2; // กำหนด position โดยที่ปรึกษาหลักคือ index 0, ที่ปรึกษาร่วมคือ index อื่นๆ
+                Confirm_teacher::create([
+                    'id_teacher' => $teacherId,
+                    'id_document' => 1,
+                    'id_project' => $this->project->id_project,
+                    'id_position' => $position,
+                    'confirm_status' => false,
+                ]);
+            }
             $advisers = collect($teacherIds)->mapWithKeys(function ($id_teacher, $index) {
                 $position = $index == 0 ? 1 : 2; // ที่ปรึกษาหลักคือ index 0 ที่ปรึกษาร่วมคือ index อื่นๆ
                 $adviser = Adviser::firstOrCreate(
                     ['id_teacher' => $id_teacher, 'id_position' => $position],
-                    ['adviser_status' => 'not_active' , 'id_project' => $this->project->id_project]
+                    ['adviser_status' => 'not_active', 'id_project' => $this->project->id_project]
                 );
                 return [$adviser->id_teacher => ['id_position' => $position, 'adviser_status' => 'not_active', 'id_project' => $this->project->id_project]];
             });
 
             $this->project->members()->sync($memberIds);
-            $this->project->advisers()->sync($advisers);
+            $this->project->teachers()->sync($advisers);
         });
 
         // session()->flash('message', 'Document created successfully!');

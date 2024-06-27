@@ -19,22 +19,22 @@ class ConfirmTeachersSeeder extends Seeder
         $teacherIds = \App\Models\Teacher::pluck('id_teacher');
         $positionIds = \App\Models\Position::pluck('id_position');
 
-        foreach ($projectIds as $projectId) {
-            foreach ($documentIds as $documentId) {
-                foreach ($teacherIds as $teacherId) {
-                    foreach ($positionIds as $positionId) {
-                        DB::table('confirm_teachers')->insert([
-                            'id_project' => $projectId,
-                            'id_document' => $documentId,
-                            'id_teacher' => $teacherId,
-                            'id_position' => $positionId,
-                            'confirm_status' => false,
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ]);
-                    }
-                }
-            }
-        }
+        // foreach ($projectIds as $projectId) {
+        //     foreach ($documentIds as $documentId) {
+        //         foreach ($teacherIds as $teacherId) {
+        //             foreach ($positionIds as $positionId) {
+        //                 DB::table('confirm_teachers')->insert([
+        //                     'id_project' => $projectId,
+        //                     'id_document' => $documentId,
+        //                     'id_teacher' => $teacherId,
+        //                     'id_position' => $positionId,
+        //                     'confirm_status' => false,
+        //                     'created_at' => now(),
+        //                     'updated_at' => now(),
+        //                 ]);
+        //             }
+        //         }
+        //     }
+        // }
     }
 }

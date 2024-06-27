@@ -14,8 +14,6 @@ class AdvisersSeeder extends Seeder
     public function run(): void
     {
         // Assume you have projects, teachers, and positions already seeded, retrieve their ids
-<<<<<<< HEAD
-=======
         // $projectIds = \App\Models\Project::pluck('id_project');
         // $teacherIds = \App\Models\Teacher::pluck('id_teacher');
         // $positionIds = \App\Models\Position::pluck('id_position');
@@ -36,7 +34,6 @@ class AdvisersSeeder extends Seeder
         //         }
         //     }
         // }
->>>>>>> 5e2d8c6c374056b8b2e1620fed98aa9e47b1d630
         $projectIds = \App\Models\Project::pluck('id_project')->toArray();
         $teacherIds = \App\Models\Teacher::pluck('id_teacher')->toArray();
 
