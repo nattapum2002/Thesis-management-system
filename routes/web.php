@@ -121,8 +121,8 @@ Route::get('/admin/manage_teacher', function () {
     return view('admin.manage_teacher');
 });
 
-Route::get('/admin/edit_and_detail_teacher/{teacherId}', function ($teacherId) {
-    return view('admin.edit_and_detail_teacher', compact('teacherId'));
+Route::get('/admin/approve_teacher/{teacherId}', function ($teacherId) {
+    return view('admin.approve_teacher', compact('teacherId'));
 });
 
 Route::get('/admin/manage_member', function () {

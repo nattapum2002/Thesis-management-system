@@ -1,6 +1,6 @@
 @extends('layout.member')
 @section('title')
-สมาชิก
+ยื่นเอกสารโปรเจค
 @endsection
 @section('content')
 @livewire('DocumentLayout.group-member-detail')

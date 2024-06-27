@@ -1,141 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ระบบจัดการปริญานิพนธ์ | @yield('title')</title>
-</head>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-{{--
-<link href="{{Asset('Asset/main/css/sidebar.css')}}" rel="stylesheet"> --}}
-
-<link href="{{Asset('Asset/main/css/body.css')}}" rel="stylesheet">
-
-<body>
-    <div class="row">
-        <div class="col-sm-2">
-            {{-- Main Sidebar --}}
-            <div class="sidebar">
-                <div class="title">
-                    <a href="/teacher">
-                        <i class='bx bx-user'></i>
-                        <h4>dashboard</h4>
-                    </a>
-
-                    <div class="title-name">
-                        <i class='bx bx-user'></i>
-                        <span>Teacher</span>
-                    </div>
-                </div>
-                <ul style="list-style-type: none">
-                    <div class="dropdown dropend">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class='bx bx-user'></i>
-                            <span>โปรเจค</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">จัดการโปรเจค</a></li>
-                            <li><a href="/teacher/approve_documents_teacher">อนุมัติเอกสาร</a></li>
-                        </ul>
-                    </div>
-                    <li><a href="/teacher/edit_teacher"><i class='bx bx-user'></i>จัดการบัญชีผู้ใช้</a></li>
-                    <li><a href="/teacher/manage_news_teacher"><i class='bx bx-news'></i>จัดการข่าวประชาสัมพันธ์</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-        <div class="col-sm-10">
-            <div class="navbar">
-                <a href="/admin"
-                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <span class="fs-4">ระบบจัดการปริญญานิพนธ์</span>
-                </a>
-
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="/menu_thesis" class="nav-link">บทความปริญญานิพนธ์</a></li>
-                    <li class="nav-item"><a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a></li>
-                    <li class="nav-item"><a href="https://computer.surin.rmuti.ac.th/computer/"
-                            class="nav-link">เกียวกับสาขา</a></li>
-                    <li class="nav item"><a class="btn btn-danger" href="{{route('logout')}}">ออกจากระบบ</a></li>
-                </ul>
-            </div>
-
-            {{-- Content --}}
-            <div class="content-wrapper">
-                @yield('content')
-            </div>
-        </div>
-    </div>
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-    <script>
-        // เลือกปุ่มและฟิลด์ทั้งหมด
-        const editButtons = document.querySelectorAll('.edit-button');
-        const saveButtons = document.querySelectorAll('.save-button');
-        const cancelButtons = document.querySelectorAll('.cancel-button');
-        const inputFields = document.querySelectorAll('.input-field');
-
-        // ซ่อนฟิลด์แก้ไขทั้งหมดเมื่อโหลดหน้าเว็บ
-        window.addEventListener('load', () => {
-            inputFields.forEach(field => field.style.display = 'none');
-            saveButtons.forEach(button => button.style.display = 'none');
-            cancelButtons.forEach(button => button.style.display = 'none');
-        });
-
-        // แสดงฟิลด์แก้ไขเมื่อคลิกปุ่มแก้ไข
-        editButtons.forEach(button => {
-            button.addEventListener('click', event => {
-                event.preventDefault();
-                const targetId = button.getAttribute('data-target');
-                const targetField = document.getElementById(targetId);
-                targetField.style.display = 'block';
-                button.style.display = 'none';
-                const saveButton = targetField.querySelector('.save-button');
-                const cancelButton = targetField.querySelector('.cancel-button');
-                saveButton.style.display = 'block';
-                cancelButton.style.display = 'block';
-            });
-        });
-
-        // ซ่อนฟิลด์แก้ไขเมื่อคลิกปุ่มบันทึกหรือยกเลิก
-        const hideField = (targetField) => {
-            targetField.style.display = 'none';
-            const editButton = document.querySelector(`.edit-button[data-target="${targetField.id}"]`);
-            editButton.style.display = 'block';
-            const saveButton = targetField.querySelector('.save-button');
-            const cancelButton = targetField.querySelector('.cancel-button');
-            saveButton.style.display = 'none';
-            cancelButton.style.display = 'none';
-        };
-
-        saveButtons.forEach(button => {
-            button.addEventListener('click', event => {
-                event.preventDefault();
-                const targetField = button.closest('.input-field');
-                hideField(targetField);
-            });
-        });
-
-        cancelButtons.forEach(button => {
-            button.addEventListener('click', event => {
-                event.preventDefault();
-                const targetField = button.closest('.input-field');
-                hideField(targetField);
-            });
-        });
-    </script> --}}
-</body>
-
-</html>
-
 @extends('layout.master')
 
 {{-- title --}}
@@ -150,55 +12,121 @@
 
 {{-- navbar --}}
 @section('masternavbar')
-<div class="navbar">
-    <a href="/admin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-        <span class="fs-4">ระบบจัดการปริญญานิพนธ์</span>
-    </a>
-
-    <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/menu_thesis" class="nav-link">บทความปริญญานิพนธ์</a></li>
-        <li class="nav-item"><a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a></li>
-        <li class="nav-item"><a href="https://computer.surin.rmuti.ac.th/computer/" class="nav-link">เกียวกับสาขา</a>
+<div class="container-fluid">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav item"><a class="btn btn-danger" href="{{route('logout')}}">ออกจากระบบ</a></li>
+        <li class="nav-item">
+            <a href="/teacher" class="nav-link">ระบบจัดการปริญญานิพนธ์</a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a href="/menu_thesis" class="nav-link">บทความปริญญานิพนธ์</a>
+        </li>
+        <li class="nav-item">
+            <a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a>
+        </li>
+        <li class="nav-item">
+            <a href="https://computer.surin.rmuti.ac.th/computer/" class="nav-link">เกียวกับสาขา</a>
+        </li>
+        <li class="nav item">
+            <a class="btn btn-danger" href="{{route('logout')}}">ออกจากระบบ</a>
+        </li>
     </ul>
 </div>
 @endsection
 
 {{-- sidebar --}}
 @section('mastersidebar')
+<a href="/teacher" class="brand-link">
+    <img src="{{asset('Asset/main/img/logo/RMUTI.png')}}" alt="RMUTI.png" class="brand-image img-circle elevation-3"
+        style="opacity: .8">
+    <span class="brand-text font-weight-light">TMS.TC</span>
+</a>
 <div class="sidebar">
-    <div class="title">
-        <a href="/admin">
-            <i class='bx bx-user'></i>
-            <h4>dashboard</h4>
-        </a>
-
-        <div class="title-name">
-            <i class='bx bx-user'></i>
-            <span>Branch Head</span>
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="{{ asset('storage/'.Auth::guard('teachers')->user()->teacher_image) }}"
+                class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+            <a href="/teacher/edit_teacher" class="d-block">
+                {{ Auth::guard('teachers')->user()->name }} {{ Auth::guard('teachers')->user()->surname }}
+            </a>
         </div>
     </div>
-    <ul style="list-style-type: none">
-        <div class="dropdown dropend">
-            <a class="dropdown-toggle" data-bs-toggle="dropdown">
-                <i class='bx bx-user'></i>
-                <span>โปรเจค</span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="#">จัดการโปรเจค</a></li>
-                <li><a href="/branch-head/approve_documents_branch_head">อนุมัติเอกสาร</a></li>
-            </ul>
-        </div>
-        <li><a href="/branch-head/edit_branch_head"><i class='bx bx-user'></i>จัดการบัญชีผู้ใช้</a></li>
-        <li><a href="/branch-head/manage_news_branch_head"><i class='bx bx-news'></i>จัดการข่าวประชาสัมพันธ์</a></li>
-    </ul>
+
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a class="nav-link active">
+                    <i class='nav-icon bx bx-book'></i>
+                    <p>
+                        โปรเจค
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class='nav-icon bx bx-circle'></i>
+                            จัดการโปรเจค
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/teacher/approve_documents_teacher">
+                            <i class='nav-icon bx bx-circle'></i>
+                            อนุมัติเอกสาร
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/teacher/edit_teacher">
+                    <i class='nav-icon bx bx-user'></i>
+                    <p>
+                        จัดการบัญชีผู้ใช้
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/teacher/manage_news_teacher">
+                    <i class='nav-icon bx bx-news'></i>
+                    <p>
+                        จัดการข่าวประชาสัมพันธ์
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 @endsection
 
 {{-- content --}}
 @section('mastercontent')
-@yield('content')
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">@yield('title')</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/teacher">Dashboard</a></li>
+                    <li class="breadcrumb-item active">@yield('title')</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        @yield('content')
+    </div>
+</section>
 @endsection
 
 {{-- footer --}}

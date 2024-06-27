@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('title')
-จัดการกำหนดการสอบ
+กำหนดกรรมการและเวลาสอบ
 @endsection
 @section('content')
 @livewire('manage-exam-schedule')

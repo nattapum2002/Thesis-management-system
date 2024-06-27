@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Account;
 
 use Livewire\Component;
 use App\Models\Teacher;
@@ -38,6 +38,6 @@ class ManageTeacher extends Component
             })
             ->get();
 
-        return view('livewire.admin.manage-teacher');
+        return view('livewire.account.manage-teacher');
     }
 }

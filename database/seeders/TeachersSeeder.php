@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -15,37 +14,6 @@ class TeachersSeeder extends Seeder
      */
     public function run(): void
     {
-        // $prefixes = ['Mr.', 'Ms.', 'Dr.'];
-        // $academicPositions = ['Professor', 'Associate Professor', 'Assistant Professor'];
-        // $branches = ['Computer Technology', 'Information Technology', 'Software Engineering'];
-        // $userTypes = ['Admin', 'Branch head', 'Teacher'];
-
-        // for ($i = 1; $i <= 10; $i++) {
-        //     DB::table('teachers')->insert([
-        //         'prefix' => $prefixes[array_rand($prefixes)],
-        //         'name' => 'ชื่อ ' . $i,
-        //         'surname' => 'นามสกุล ' . $i,
-        //         'academic_position' => $academicPositions[array_rand($academicPositions)],
-        //         'educational_qualification' => 'วุฒิการศึกษา ' . $i,
-        //         'branch' => $branches[array_rand($branches)],
-        //         'user_type' => $userTypes[array_rand($userTypes)],
-        //         'email' => 'teacher' . $i . '@example.com',
-        //         'email_verified_at' => now(),
-        //         'tel' => '081234567' . $i,
-        //         'id_line' => 'line' . $i,
-        //         'teacher_image' => 'https://via.placeholder.com/150',
-        //         'signature_image' => 'https://via.placeholder.com/50',
-        //         'username' => 'teacher' . $i,
-        //         'password' => Hash::make('password'),
-        //         'account_status' => 'active',
-        //         'created_by' => null,
-        //         'updated_by' => null,
-        //         'remember_token' => Str::random(10),
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-        // }
-
         DB::table('teachers')->insert([
             'prefix' => 'ผู้ช่วยศาสตราจารย์ ดร.',
             'name' => 'ศักดิ์ชาญ',
@@ -58,7 +26,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/TeEVioLD3lfrZVB8NiPa08o4YrBP01MHwHhJU1Vj.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'sakchan',
             'password' => Hash::make('password'),
@@ -81,7 +49,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/5KdbztGxxEMa1PWG4MzDiXc0aTT52RNBduTkGLQw.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'tongluan',
             'password' => Hash::make('password'),
@@ -104,7 +72,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/zHL0UDooglv28Omx3e9i3yQXIhOSl0TSCMXxPGEo.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'wiphasith',
             'password' => Hash::make('password'),
@@ -127,7 +95,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/fnBY33jl9LtoHb3f39bf9yN2ZQHptXSmDvb4tgf4.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'tongme',
             'password' => Hash::make('password'),
@@ -150,7 +118,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/rn4In0g21JPwjgBIUdbGv2yfscY5Mi1cdMTWFHHK.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'anyawee',
             'password' => Hash::make('password'),
@@ -173,7 +141,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/uWPX5bhDblQOgjXaZL2jZC2AIVqN7gpVSrVwQD3K.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'wathakan',
             'password' => Hash::make('password'),
@@ -196,7 +164,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/FEQw30fs5z5lEC9PGYuX5z2e0fFK5nkRpNZh9qlT.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'atipat',
             'password' => Hash::make('password'),
@@ -219,7 +187,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/AtPTT5dktyIW6rGuSaluLpLhLAAakU0UPJP71heZ.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'jeeranun',
             'password' => Hash::make('password'),
@@ -242,7 +210,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/HPS8UcivK5EzQWcb6LEN0jnzZ1qo6q8gR5d6CsY1.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'boonlueo',
             'password' => Hash::make('password'),
@@ -265,7 +233,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/905xtfzQGSnLbaCmFZdfhkJm3Uga8fXeE73wFZBV.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'nipon',
             'password' => Hash::make('password'),
@@ -288,7 +256,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/bn8NCMZjF1H3HHnqRKqOfSGLoyxEBcspuija4Y0F.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'narasuk',
             'password' => Hash::make('password'),
@@ -311,7 +279,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/gVr3PgZMuQYxQdAucLAQdy1yKw5quBLHYNnKNEMY.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'attapol',
             'password' => Hash::make('password'),
@@ -334,7 +302,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'https://via.placeholder.com/150',
+            'teacher_image' => 'teacher_image/aDxZkzpSjbrTLo7mSHyCclk3yy422PtD3lJ1FCTp.jpg',
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'anutchai',
             'password' => Hash::make('password'),

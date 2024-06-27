@@ -1,6 +1,6 @@
 @extends('layout.teacher')
 @section('title')
-หัวหน้าสาขา
+จัดการข่าวประชาสัมพันธ์
 @endsection
 @section('content')
 @livewire('manage-news-branch-head')

@@ -11,30 +11,31 @@
 @yield('mastercss')
 @include('layout.css')
 
-<body>
-    <div class="row">
-        <div class="col-sm-2">
-            {{-- Main Sidebar --}}
-            <div>
-                @yield('mastersidebar')
-            </div>
-        </div>
-        <div class="col-sm-8">
-            {{-- Navber --}}
-            <nav>
-                @yield('masternavbar')
-            </nav>
-            {{-- Content --}}
-            <div class="content-wrapper">
-                @yield('mastercontent')
-            </div>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        {{-- Main Sidebar --}}
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            @yield('mastersidebar')
+        </aside>
 
-            {{-- Footer --}}
-            <div>
+        {{-- Navber --}}
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            @yield('masternavbar')
+        </nav>
+
+        {{-- Content --}}
+        <div class="content-wrapper">
+            @yield('mastercontent')
+        </div>
+
+        {{-- Footer --}}
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
                 @yield('masterfooter')
             </div>
-        </div>
+        </footer>
     </div>
+
     {{-- Script --}}
     @yield('masterscript')
     @include('layout.script')

@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('title')
-Admin
+Dashboard
 @endsection
 @section('content')
 @livewire('admin.assign-director')

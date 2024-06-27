@@ -1,7 +1,7 @@
 @extends('layout.branch-head')
 @section('title')
-หัวหน้าสาขา
+จัดการบัญชีผู้ใช้
 @endsection
 @section('content')
-@livewire('edit-branch-head')
+@livewire('account.edit-and-detail-teacher')
 @endsection

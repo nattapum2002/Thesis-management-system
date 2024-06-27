@@ -1,6 +1,6 @@
 @extends('layout.member')
 @section('title')
-สมาชิก
+จัดการบทความปริญญานิพนธ์
 @endsection
 @section('content')
 @livewire('manage-thesis-member')
