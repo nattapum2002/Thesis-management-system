@@ -26,4 +26,7 @@ class Document extends Model
     {
         return $this->belongsTo(Project::class, 'id_project');
     }
+    public function member(){
+        return $this->belongsToMany(Member::class,'confirm_documents','id_document','id_student');
+    }
 }

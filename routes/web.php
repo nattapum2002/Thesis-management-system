@@ -221,4 +221,7 @@ Route::get('/member/create_document', function () {
     return view('member.create_document');
 });
 
+Route::get('/member/manage-document-01', function () {
+    return view('member.manage_document_01');
+});
 //Route::get('show', [AdminController::class, 'show']);
