@@ -364,9 +364,9 @@
                         <th>สถานะบัญชี</th>
                         <td colspan="2">
                             @if ($teacher->account_status == '1')
-                            บัญชียังถูกใช้งาน
+                            <p class="text-success">อนุมัติ</p>
                             @else
-                            บัญชีถูกยกเลิก
+                            <p class="text-danger">ถูกระงับ</p>
                             @endif
                         </td>
                     </tr>

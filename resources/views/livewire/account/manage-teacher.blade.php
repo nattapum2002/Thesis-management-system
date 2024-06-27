@@ -30,9 +30,9 @@
                         <td>{{ $teacher->user_type }}</td>
                         <td>
                             @if ($teacher->account_status == '1')
-                            บัญชียังถูกใช้งาน
+                            <p class="text-success">อนุมัติ</p>
                             @else
-                            บัญชีถูกยกเลิก
+                            <p class="text-danger">ถูกระงับ</p>
                             @endif
                         </td>
                         <td>

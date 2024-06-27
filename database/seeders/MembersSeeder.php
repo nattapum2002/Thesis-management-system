@@ -29,7 +29,7 @@ class MembersSeeder extends Seeder
                 'email_verified_at' => now(),
                 'tel' => '081234567' . str_pad($i, 2, '0', STR_PAD_LEFT),
                 'id_line' => 'line' . $i,
-                'student_image' => 'https://via.placeholder.com/150',
+                'student_image' => null,
                 'id_level' => $levels[array_rand($levels)],
                 'id_course' => $courses[array_rand($courses)],
                 'username' => 'student' . $i,

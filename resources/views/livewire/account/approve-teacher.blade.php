@@ -126,8 +126,8 @@
                         <td>
                             <div class="input-field">
                                 <select class="form-select" wire:model.live="edit_account_status">
-                                    <option selected value="1">ยังใช้งาน</option>
-                                    <option value="0">ยกเลิกใช้งาน</option>
+                                    <option selected value="1">อนุมัติ</option>
+                                    <option value="0">ระงับบัญชี</option>
                                 </select>
                                 @error('account_status')
                                 <span class="text-danger">{{ $message }}</span>
@@ -143,9 +143,9 @@
                         @else
                         <td>
                             @if ($teacher->account_status == '1')
-                            <p class="text-success">บัญชียังถูกใช้งาน</p>
+                            <p class="text-success">อนุมัติ</p>
                             @else
-                            <p class="text-danger">บัญชีถูกยกเลิกใช้งาน</p>
+                            <p class="text-danger">ถูกระงับ</p>
                             @endif
                         </td>
                         <td>

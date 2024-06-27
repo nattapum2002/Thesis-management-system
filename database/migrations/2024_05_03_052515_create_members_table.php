@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('student_image')->nullable();
             $table->foreignId('id_level')->constrained(table: 'levels', column: 'id_level');
             $table->foreignId('id_course')->constrained(table: 'courses', column: 'id_course');
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('password');
             $table->boolean('account_status')->default(false);
             $table->rememberToken();

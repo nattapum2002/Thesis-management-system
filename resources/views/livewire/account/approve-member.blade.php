@@ -18,9 +18,15 @@
                     <tr>
                         <th>รูปภาพนักศึกษา</th>
                         <td colspan="2">
+                            @if ($student->student_image == null)
+                            <img wire:live src="{{ asset('Asset/dist/img/avatar'.rand('1', '5').'.png') }}"
+                                alt="{{ $student->name }}"
+                                style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            @else
                             <img wire:live src="{{ asset('storage/'.$student->student_image) }}"
                                 alt="{{ $student->name }}"
                                 style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            @endif
                         </td>
                     </tr>
                     <tr>
@@ -74,8 +80,8 @@
                         <td>
                             <div class="input-field">
                                 <select class="form-select" wire:model.live="edit_account_status">
-                                    <option selected value="1">ยังใช้งาน</option>
-                                    <option value="0">ยกเลิกใช้งาน</option>
+                                    <option selected value="1">อนุมัติ</option>
+                                    <option value="0">ระงับบัญชี</option>
                                 </select>
                                 @error('account_status')
                                 <span class="text-danger">{{ $message }}</span>
@@ -91,9 +97,9 @@
                         @else
                         <td>
                             @if ($student->account_status == '1')
-                            <p class="text-success">บัญชียังถูกใช้งาน</p>
+                            <p class="text-success">อนุมัติ</p>
                             @else
-                            <p class="text-danger">บัญชีถูกยกเลิกใช้งาน</p>
+                            <p class="text-danger">ถูกระงับ</p>
                             @endif
                         </td>
                         <td>

@@ -48,8 +48,13 @@
 <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+            @if (Auth::guard('members')->user()->student_image == null)
+            <img src="{{ asset('Asset/dist/img/avatar'.rand('1', '5').'.png') }}" alt="User Image"
+                class="img-circle elevation-2">
+            @else
             <img src="{{ asset('storage/'.Auth::guard('members')->user()->student_image) }}"
                 class="img-circle elevation-2" alt="User Image">
+            @endif
         </div>
         <div class="info">
             <a href="/member/edit_member" class="d-block">

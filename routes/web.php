@@ -205,7 +205,7 @@ Route::get('/teacher/approve_documents_teacher', function () {
 
 Route::get('/member', function () {
     return view('member.dashboard');
-});
+})->name('member');
 
 Route::get('/member/submit_project_documents', function () {
     return view('member.submit_project_documents');
@@ -218,8 +218,6 @@ Route::get('/member/edit_member', function () {
 Route::get('/member/manage_thesis_member', function () {
     return view('member.manage_thesis_member');
 });
-
-
 
 Route::get('/member/create_document', function () {
     return view('member.create_document');

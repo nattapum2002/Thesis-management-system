@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Account;
 
 use App\Models\Member;
 use Livewire\Component;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Str;
 
 class Register extends Component
 {
-    public $prefix, $name, $surname, $id_level, $id_course, $id_student, $tel, $id_line, $email, $username, $password;
+    public $prefix, $other_prefix, $name, $surname, $id_level, $id_course, $id_student, $tel, $id_line, $email, $username, $password;
 
     protected $rules = [];
 
@@ -32,7 +31,10 @@ class Register extends Component
 
     public function register()
     {
-        //dd('ad');
+        if ($this->prefix == null) {
+            $this->prefix = $this->other_prefix;
+        }
+
         $this->validate();
 
         Member::create([
@@ -45,9 +47,11 @@ class Register extends Component
             'tel' => $this->tel,
             'id_line' => $this->id_line,
             'email' => $this->email,
+            'email_verified_at' => now(),
             'username' => $this->username,
             'password' => Hash::make($this->password),
-            'account_status' => 'active',
+            'account_status' => false,
+            'remember_token' => Str::random(10),
         ]);
 
         session()->flash('message', 'สมัครสมาชิกสำเร็จ!');
@@ -57,6 +61,6 @@ class Register extends Component
 
     public function render()
     {
-        return view('livewire.register');
+        return view('livewire.account.register');
     }
 }

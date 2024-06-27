@@ -35,9 +35,15 @@
                         </td>
                         @else
                         <td>
+                            @if ($student->student_image == null)
+                            <img wire:live src="{{ asset('Asset/dist/img/avatar'.rand('1', '5').'.png') }}"
+                                alt="{{ $student->name }}"
+                                style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            @else
                             <img wire:live src="{{ asset('storage/'.$student->student_image) }}"
                                 alt="{{ $student->name }}"
                                 style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            @endif
                         </td>
                         <td>
                             <div class="button-container">
@@ -337,9 +343,9 @@
                         <th>สถานะบัญชี</th>
                         <td colspan="2">
                             @if ($student->account_status == '1')
-                            บัญชียังถูกใช้งาน
+                            <p class="text-success">อนุมัติ</p>
                             @else
-                            บัญชีถูกยกเลิก
+                            <p class="text-danger">ถูกระงับ</p>
                             @endif
                         </td>
                     </tr>

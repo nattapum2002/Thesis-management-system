@@ -3,5 +3,5 @@
 สมัครสมาชิก
 @endsection
 @section('content')
-@livewire('register')
+@livewire('account.register')
 @endsection
