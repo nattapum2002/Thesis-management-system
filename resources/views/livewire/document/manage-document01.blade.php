@@ -21,7 +21,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
-                    @foreach ($projects as $projectItems)
+                    {{-- @foreach ($projects as $projectItems)
                         <tr class="">
                             <td>{{ $projectItems->project_name_th }} <br> {{ $projectItems->project_name_en }}</td>
                             <td>
@@ -41,7 +41,7 @@
 
                             </td>
                         </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>
         </div>

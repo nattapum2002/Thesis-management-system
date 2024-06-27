@@ -12,6 +12,37 @@ class AdvisersSeeder extends Seeder
      */
     public function run(): void
     {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        // Assume you have projects, teachers, and positions already seeded, retrieve their ids
+        // $projectIds = \App\Models\Project::pluck('id_project');
+        // $teacherIds = \App\Models\Teacher::pluck('id_teacher');
+        // $positionIds = \App\Models\Position::pluck('id_position');
+
+        // foreach ($projectIds as $projectId) {
+        //     foreach ($teacherIds as $teacherId) {
+        //         foreach ($positionIds as $positionId) {
+        //             DB::table('advisers')->insert([
+        //                 'adviser_status' => 'Active', // Example adviser status
+        //                 'id_project' => $projectId,
+        //                 'id_teacher' => $teacherId,
+        //                 'id_position' => $positionId,
+        //                 'created_by' => null, // Adjust if you have a user table
+        //                 'updated_by' => null, // Adjust if you have a user table
+        //                 'created_at' => now(),
+        //                 'updated_at' => now(),
+        //             ]);
+        //         }
+        //     }
+        // }
+<<<<<<< HEAD
+=======
+>>>>>>> 5e2d8c6c374056b8b2e1620fed98aa9e47b1d630
+>>>>>>> f00d0975e56290881ee21f26a325b79d120bf432
+>>>>>>> 1eb7e9e7bf95c9a1e3e02d1f4bbb35443c1c5c1f
+>>>>>>> ad85b7e55921ae54a4b4c23700213f9b4c7559af
         $projectIds = \App\Models\Project::pluck('id_project')->toArray();
         $teacherIds = \App\Models\Teacher::pluck('id_teacher')->toArray();
 
