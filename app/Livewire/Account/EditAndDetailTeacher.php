@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Account;
 
 use Livewire\Component;
 use App\Models\Teacher;
@@ -102,9 +102,9 @@ class EditAndDetailTeacher extends Component
         $this->toggle[$index] = !$this->toggle[$index];
     }
 
-    public function mount($id)
+    public function mount()
     {
-        $this->teacher = Teacher::find($id);
+        $this->teacher = Teacher::find(Auth::guard('teachers')->user()->id_teacher);
         $this->teacherId = $this->teacher->id_teacher;
         $this->path_teacher_image = $this->teacher->teacher_image;
         $this->path_signature_image = $this->teacher->signature_image;
@@ -122,6 +122,6 @@ class EditAndDetailTeacher extends Component
 
     public function render()
     {
-        return view('livewire.admin.edit-and-detail-teacher');
+        return view('livewire.account.edit-and-detail-teacher');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layout.teacher')
 @section('title')
-อาจารย์
+จัดการบัญชีผู้ใช้
 @endsection
 @section('content')
-@livewire('teacher.edit-and-detail-teacher')
+@livewire('account.edit-and-detail-teacher')
 @endsection

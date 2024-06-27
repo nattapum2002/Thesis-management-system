@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('title')
-อาจารย์ประจำวิชา
+จัดการบัญชีสมาชิก
 @endsection
 @section('content')
 @livewire('manage-member')

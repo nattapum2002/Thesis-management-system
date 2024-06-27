@@ -1,7 +1,7 @@
 @extends('layout.admin')
 @section('title')
-อาจารย์ประจำวิชา
+จัดการบัญชีอาจารย์
 @endsection
 @section('content')
-@livewire('admin.manage-teacher')
+@livewire('account.manage-teacher')
 @endsection

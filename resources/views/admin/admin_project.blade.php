@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('title')
-โปรเจค
+จัดการโปรเจค
 @endsection
 @section('content')
 @livewire('admin-project')

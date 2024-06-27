@@ -1,6 +1,6 @@
 @extends('layout.member')
 @section('title')
-member
+Dashboard
 @endsection
 @section('content')
 @endsection

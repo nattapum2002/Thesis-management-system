@@ -1,7 +1,7 @@
 @extends('layout.member')
 @section('title')
-สมาชิก
+จัดการบัญชีผู้ใช้
 @endsection
 @section('content')
-@livewire('edit-member')
+@livewire('account.edit-and-detail-member')
 @endsection

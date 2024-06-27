@@ -1,6 +1,6 @@
 @extends('layout.teacher')
 @section('title')
-teacher
+Dashboard
 @endsection
 @section('content')
 

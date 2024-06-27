@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('title')
-อาจารย์ประจำวิชา
+จัดการข่าวประชาสัมพันธ์
 @endsection
 @section('content')
 @livewire('manage-news')

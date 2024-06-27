@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('title')
-อาจารย์ประจำวิชา
+จัดการบทความปริญญานิพนธ์
 @endsection
 @section('content')
 @livewire('manage-thesis')
