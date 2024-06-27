@@ -15,11 +15,6 @@ class ManageMember extends Component
     public $editingId;
     public $editingVar;
 
-    public function mount()
-    {
-        //$this->teachers = Teacher::all();
-    }
-
     public function updatingSearch()
     {
         $this->resetPage();
