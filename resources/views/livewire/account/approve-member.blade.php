@@ -79,7 +79,7 @@
                         @if ($toggle['account_status'])
                         <td>
                             <div class="input-field">
-                                <select class="form-select" wire:model.live="edit_account_status">
+                                <select class="form-select" wire:model.live="account_status">
                                     <option selected value="1">อนุมัติ</option>
                                     <option value="0">ระงับบัญชี</option>
                                 </select>

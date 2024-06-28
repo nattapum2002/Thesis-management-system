@@ -11,24 +11,18 @@ class ManageMember extends Component
     use WithPagination;
 
     public $search = '';
-    public $members;
     public $editingId;
     public $editingVar;
 
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-
     public function render()
     {
-        $this->members = Member::with('course', 'level')
+        $members = Member::with('course', 'level')
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('surname', 'like', '%' . $this->search . '%');
             })
-            ->get();
+            ->paginate(15);
 
-        return view('livewire.account.manage-member');
+        return view('livewire.account.manage-member', ['members' => $members]);
     }
 }

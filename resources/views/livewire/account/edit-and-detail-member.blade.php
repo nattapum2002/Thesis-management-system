@@ -20,8 +20,8 @@
                         @if ($toggle['student_image'])
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="edit_student_image" type="file"
-                                    placeholder="เลือกไฟล์" required>
+                                <input class="form-input" wire:model="student_image" type="file" placeholder="เลือกไฟล์"
+                                    required>
                                 @error('student_image')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -62,15 +62,15 @@
                         @if ($toggle['prefix'])
                         <td>
                             <div class="input-field">
-                                <select class="form-select" wire:model.live="edit_prefix">
+                                <select class="form-select" wire:model.live="prefix">
                                     <option selected>คำนำหน้าชื่อ</option>
                                     <option value="นาย">นาย</option>
                                     <option value="นาง">นาง</option>
                                     <option value="นางสาว">นางสาว</option>
                                     <option value="อื่นๆ">อื่นๆ</option>
                                 </select>
-                                @if ($this->edit_prefix == 'อื่นๆ')
-                                <input class="form-input" wire:model="edit_other_prefix" type="text"
+                                @if ($this->prefix == 'อื่นๆ')
+                                <input class="form-input" wire:model="other_prefix" type="text"
                                     placeholder="คำนำหน้าชื่อ" required>
                                 @endif
                                 @error('prefix')
@@ -97,7 +97,7 @@
                         @if ($toggle['name'])
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="edit_name" type="text" placeholder="กรุณากรอกชื่อ"
+                                <input class="form-input" wire:model="name" type="text" placeholder="กรุณากรอกชื่อ"
                                     required>
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
@@ -123,8 +123,8 @@
                         @if ($toggle['surname'])
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="edit_surname" type="text"
-                                    placeholder="กรุณากรอกชื่อ" required>
+                                <input class="form-input" wire:model="surname" type="text" placeholder="กรุณากรอกชื่อ"
+                                    required>
                                 @error('surname')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -149,7 +149,7 @@
                         @if ($toggle['course'])
                         <td>
                             <div class="input-field">
-                                <select class="form-select" wire:model.live="edit_course">
+                                <select class="form-select" wire:model.live="course">
                                     <option selected>หลักสูตร</option>
                                     @foreach ($courses as $course)
                                     <option value="{{ $course->id_course }}">{{ $course->course }}</option>
@@ -179,7 +179,7 @@
                         @if ($toggle['level'])
                         <td>
                             <div class="input-field">
-                                <select class="form-select" wire:model.live="edit_level">
+                                <select class="form-select" wire:model.live="level">
                                     <option selected>ระดับ</option>
                                     @foreach ($levels as $level)
                                     <option value="{{ $level->id_level }}">{{ $level->level }}</option>
@@ -209,7 +209,7 @@
                         @if ($toggle['sector'])
                         <td>
                             <div class="input-field">
-                                <select class="form-select" wire:model.live="edit_sector">
+                                <select class="form-select" wire:model.live="sector">
                                     <option selected>ระดับ</option>
                                     @foreach ($levels as $level)
                                     <option value="{{ $level->id_level }}">{{ $level->sector }}</option>
@@ -239,8 +239,8 @@
                         @if ($toggle['tel'])
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="edit_tel" type="tel"
-                                    placeholder="กรุณากรอกเบอร์โทร" maxlength="10" minlength="10" required>
+                                <input class="form-input" wire:model="tel" type="tel" placeholder="กรุณากรอกเบอร์โทร"
+                                    maxlength="10" minlength="10" required>
                                 @error('tel')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -264,8 +264,8 @@
                         @if ($toggle['email'])
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="edit_email" type="email"
-                                    placeholder="กรุณากรอกอีเมล" required>
+                                <input class="form-input" wire:model="email" type="email" placeholder="กรุณากรอกอีเมล"
+                                    required>
                                 @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -290,7 +290,7 @@
                         @if ($toggle['line_id'])
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="edit_line_id" type="text"
+                                <input class="form-input" wire:model="line_id" type="text"
                                     placeholder="กรุณากรอกไอดีไลน์" required>
                                 @error('line_id')
                                 <span class="text-danger">{{ $message }}</span>
@@ -316,7 +316,7 @@
                         @if ($toggle['password'])
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="edit_password" type="password"
+                                <input class="form-input" wire:model="password" type="password"
                                     placeholder="กรุณากรอกรหัสผ่าน" minlength="8" required>
                                 @error('password')
                                 <span class="text-danger">{{ $message }}</span>

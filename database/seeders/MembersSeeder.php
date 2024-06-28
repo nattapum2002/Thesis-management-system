@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +14,7 @@ class MembersSeeder extends Seeder
      */
     public function run(): void
     {
-        $prefixes = ['Mr.', 'Ms.', 'Miss'];
+        $prefixes = ['นาย', 'นาง', 'นางสาว'];
         $levels = DB::table('levels')->pluck('id_level')->toArray();
         $courses = DB::table('courses')->pluck('id_course')->toArray();
 

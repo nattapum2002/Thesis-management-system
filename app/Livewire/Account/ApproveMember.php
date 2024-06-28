@@ -16,7 +16,7 @@ class ApproveMember extends Component
     ];
     public $student;
     public $studentId;
-    public $edit_account_status;
+    public $account_status;
 
     public function edit($index)
     {
@@ -25,27 +25,29 @@ class ApproveMember extends Component
 
     public function save($index)
     {
-        if ($index == 'account_status') {
-            DB::table('members')->where('id_student', $this->studentId)->update([$index => $this->edit_account_status], ['updated_at' => Auth::guard('teachers')->user()->id_teacher], ['updated_at' => now()]);
-        }
-        $this->cancel($index);
+        DB::table('members')->where('id_student', $this->studentId)->update([$index => $this->$index], ['updated_at' => Auth::guard('teachers')->user()->id_teacher], ['updated_at' => now()]);
+
         session()->flash('message', 'บันทึกข้อมูลเรียบร้อยแล้ว');
+        $this->cancel($index);
     }
 
     public function cancel($index)
     {
-        $this->reset('edit_account_status');
+        $this->reset('account_status');
         $this->toggle[$index] = !$this->toggle[$index];
+        $this->mount($this->studentId);
     }
 
     public function mount($id)
     {
         $this->student = Member::find($id);
         $this->studentId = $this->student->id_student;
-        $this->edit_account_status = $this->student->account_status;
+        $this->account_status = $this->student->account_status;
     }
     public function render()
     {
-        return view('livewire.account.approve-member');
+        return view('livewire.account.approve-member', [
+            'student' => $this->student->refresh()
+        ]);
     }
 }

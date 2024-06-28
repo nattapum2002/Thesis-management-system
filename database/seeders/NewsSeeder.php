@@ -15,7 +15,7 @@ class NewsSeeder extends Seeder
      */
     public function run(): void
     {
-        $newsTypes = ['general', 'topic'];
+        $newsTypes = ['ข่าวทั่วไป', 'ชื่อหัวข้อ'];
 
         // Assuming we have some teachers in the teachers table
         $teacherIds = DB::table('teachers')->pluck('id_teacher')->toArray();

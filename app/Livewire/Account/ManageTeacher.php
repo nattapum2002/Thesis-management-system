@@ -11,24 +11,18 @@ class ManageTeacher extends Component
     use WithPagination;
 
     public $search = '';
-    public $teachers;
     public $editingId;
     public $editingVar;
 
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-
     public function render()
     {
-        $this->teachers = Teacher::query()
+        $teachers = Teacher::query()
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('surname', 'like', '%' . $this->search . '%');
             })
-            ->get();
+            ->paginate(15);
 
-        return view('livewire.account.manage-teacher');
+        return view('livewire.account.manage-teacher', ['teachers' => $teachers]);
     }
 }

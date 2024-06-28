@@ -11,7 +11,7 @@
 @yield('mastercss')
 @include('layout.css')
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="sidebar-mini hold-transition layout-navbar-fixed layout-fixed">
     <div class="wrapper">
         {{-- Main Sidebar --}}
         <aside class="main-sidebar sidebar-dark-primary elevation-4">

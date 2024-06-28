@@ -40,6 +40,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center">
+                {{ $members->onEachSide(1)->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </div>
 </div>
