@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +14,7 @@ class MembersSeeder extends Seeder
      */
     public function run(): void
     {
-        $prefixes = ['Mr.', 'Ms.', 'Miss'];
+        $prefixes = ['นาย', 'นาง', 'นางสาว'];
         $levels = DB::table('levels')->pluck('id_level')->toArray();
         $courses = DB::table('courses')->pluck('id_course')->toArray();
 
@@ -29,12 +28,12 @@ class MembersSeeder extends Seeder
                 'email_verified_at' => now(),
                 'tel' => '081234567' . str_pad($i, 2, '0', STR_PAD_LEFT),
                 'id_line' => 'line' . $i,
-                'student_image' => 'https://via.placeholder.com/150',
+                'student_image' => null,
                 'id_level' => $levels[array_rand($levels)],
                 'id_course' => $courses[array_rand($courses)],
                 'username' => 'student' . $i,
                 'password' => Hash::make('password'),
-                'account_status' => 'active',
+                'account_status' => false,
                 'remember_token' => Str::random(10),
                 'created_by' => null,
                 'updated_by' => null,

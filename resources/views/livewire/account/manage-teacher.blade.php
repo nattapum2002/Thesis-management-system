@@ -1,9 +1,16 @@
 <div>
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search" wire:model.live.debounce.150ms="search">
-        <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+    <div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" wire:model.live.debounce.150ms="search">
+            <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+        </div>
     </div>
     <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-end">
+                <a href="/admin/add_teacher" class="btn btn-success">เพิ่มบัญชีอาจารย์</a>
+            </div>
+        </div>
         <div class="card-body table-responsive p-0">
             <table class="table text-nowrap table-striped">
                 <thead>
@@ -27,9 +34,9 @@
                         <td>{{ $teacher->user_type }}</td>
                         <td>
                             @if ($teacher->account_status == '1')
-                            บัญชียังถูกใช้งาน
+                            <p class="text-success">อนุมัติ</p>
                             @else
-                            บัญชีถูกยกเลิก
+                            <p class="text-danger">ถูกระงับ</p>
                             @endif
                         </td>
                         <td>
@@ -40,6 +47,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center">
+                {{ $teachers->onEachSide(1)->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </div>
 </div>

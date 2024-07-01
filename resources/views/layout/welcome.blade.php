@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', $lang ?? app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
@@ -10,9 +10,9 @@
 
 @include('layout.css')
 
-<body>
+<body class="layout-navbar-fixed">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg ">
+    <nav class="navbar navbar-expand navbar-light">
         <div class="container">
             <a class="navbar-brand" href="/">ระบบจัดการปริญญานิพนธ์</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

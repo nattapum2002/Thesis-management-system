@@ -3,8 +3,9 @@
 namespace App\Livewire\Account;
 
 use App\Models\Member;
+use App\Models\Course;
+use App\Models\Level;
 use Livewire\Component;
-use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
@@ -15,26 +16,35 @@ class EditAndDetailMember extends Component
     public $toggle = [
         'student_image' => false,
         'student_id' => false,
+        'prefix' => false,
         'name' => false,
+        'surname' => false,
         'course' => false,
         'level' => false,
-        'section' => false,
+        'sector' => false,
         'email' => false,
         'tel' => false,
-        'line_id' => false
+        'line_id' => false,
+        'password' => false,
+        'account_status' => false
     ];
     public $student;
     public $studentId;
-    public $edit_student_image;
+    public $student_image;
     public $path_student_image;
-    public $edit_student_id;
-    public $edit_name;
-    public $edit_course;
-    public $edit_level;
-    public $edit_section;
-    public $edit_email;
-    public $edit_tel;
-    public $edit_line_id;
+    public $prefix;
+    public $other_prefix;
+    public $name;
+    public $surname;
+    public $courses;
+    public $course;
+    public $levels;
+    public $level;
+    public $sector;
+    public $email;
+    public $tel;
+    public $line_id;
+    public $password;
 
     public function edit($index)
     {
@@ -44,60 +54,47 @@ class EditAndDetailMember extends Component
     public function save($index)
     {
         if ($index == 'student_image') {
-            $this->path_student_image = $this->edit_student_image->store('student_image', 'public');
-            DB::table('students')->where('id_student', $this->studentId)->update([$index => $this->path_student_image], ['updated_at' => now()]);
+            $this->path_student_image = $this->student_image->store('student_image', 'public');
+            DB::table('members')->where('id_student', $this->studentId)->update([$index => $this->path_student_image], ['updated_at' => now()]);
+        } else if ($this->prefix == 'อื่นๆ') {
+            DB::table('members')->where('id_student', $this->studentId)->update([$index => $this->other_prefix], ['updated_at' => now()]);
+        } else {
+            DB::table('members')->where('id_student', $this->studentId)->update([$index => $this->$index], ['updated_at' => now()]);
         }
-        if ($index == 'student_id') {
-            DB::table('students')->where('id_student', $this->studentId)->update([$index => $this->edit_student_id], ['updated_at' => now()]);
-        }
-        if ($index == 'name') {
-            DB::table('students')->where('id_student', $this->studentId)->update([$index => $this->edit_name], ['updated_at' => now()]);
-        }
-        if ($index == 'course') {
-            DB::table('students')->where('id_student', $this->studentId)->update([$index => $this->edit_course], ['updated_at' => now()]);
-        }
-        if ($index == 'level') {
-            DB::table('students')->where('id_student', $this->studentId)->update([$index => $this->edit_level], ['updated_at' => now()]);
-        }
-        if ($index == 'section') {
-            DB::table('students')->where('id_student', $this->studentId)->update([$index => $this->edit_section], ['updated_at' => now()]);
-        }
-        if ($index == 'email') {
-            DB::table('students')->where('id_student', $this->studentId)->update([$index => $this->edit_email], ['updated_at' => now()]);
-        }
-        if ($index == 'tel') {
-            DB::table('students')->where('id_student', $this->studentId)->update([$index => $this->edit_tel], ['updated_at' => now()]);
-        }
-        if ($index == 'line_id') {
-            DB::table('students')->where('id_student', $this->studentId)->update([$index => $this->edit_line_id], ['updated_at' => now()]);
-        }
-        $this->cancel($index);
         session()->flash('message', 'บันทึกข้อมูลเรียบร้อยแล้ว');
+        $this->cancel($index);
     }
 
     public function cancel($index)
     {
-        //$this->reset('edit_student_id', 'edit_name', 'edit_course', 'edit_level', 'edit_section', 'edit_email', 'edit_tel', 'edit_line_id');
+        $this->reset('course', 'level');
         $this->toggle[$index] = !$this->toggle[$index];
+        $this->mount();
     }
 
     public function mount()
     {
-        $this->student = Member::find(Auth::guard('members')->user()->id_student);
+        $this->courses = Course::all();
+        $this->levels = Level::all();
+        $this->student = Member::with('level', 'course')->find(Auth::guard('members')->user()->id_student);
         $this->studentId = $this->student->id_student;
         $this->path_student_image = $this->student->student_image;
-        $this->edit_student_id = $this->student->student_id;
-        $this->edit_name = $this->student->name;
-        $this->edit_course = $this->student->course;
-        $this->edit_level = $this->student->level;
-        $this->edit_section = $this->student->section;
-        $this->edit_email = $this->student->email;
-        $this->edit_tel = $this->student->tel;
-        $this->edit_line_id = $this->student->line_id;
+        $this->other_prefix = $this->student->prefix;
+        $this->name = $this->student->name;
+        $this->surname = $this->student->surname;
+        $this->course = $this->student->course->course;
+        $this->level = $this->student->level->level;
+        $this->sector = $this->student->level->sector;
+        $this->email = $this->student->email;
+        $this->tel = $this->student->tel;
+        $this->line_id = $this->student->line_id;
+        $this->password = $this->student->password;
     }
 
     public function render()
     {
-        return view('livewire.account.edit-and-detail-member');
+        return view('livewire.account.edit-and-detail-member', [
+            'student' => $this->student->refresh()
+        ]);
     }
 }

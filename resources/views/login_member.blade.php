@@ -3,5 +3,5 @@
 เข้าสู่ระบบ
 @endsection
 @section('content')
-@livewire('login-member')
+@livewire('account.login-member')
 @endsection

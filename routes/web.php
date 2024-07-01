@@ -119,7 +119,7 @@ Route::get('/admin/add_teacher', function () {
 
 Route::get('/admin/manage_teacher', function () {
     return view('admin.manage_teacher');
-});
+})->name('manage_teacher');
 
 Route::get('/admin/approve_teacher/{teacherId}', function ($teacherId) {
     return view('admin.approve_teacher', compact('teacherId'));
@@ -127,6 +127,10 @@ Route::get('/admin/approve_teacher/{teacherId}', function ($teacherId) {
 
 Route::get('/admin/manage_member', function () {
     return view('admin.manage_member');
+})->name('manage_member');
+
+Route::get('/admin/approve_member/{studentId}', function ($studentId) {
+    return view('admin.approve_member', compact('studentId'));
 });
 
 Route::get('/admin/edit_admin', function () {
@@ -135,6 +139,14 @@ Route::get('/admin/edit_admin', function () {
 
 Route::get('/admin/manage_news', function () {
     return view('admin.manage_news');
+})->name('manage_news');
+
+Route::get('/admin/add_news', function () {
+    return view('admin.add_news');
+});
+
+Route::get('/admin/edit_and_detail_news/{newsId}', function ($newsId) {
+    return view('admin.edit_and_detail_news', compact('newsId'));
 });
 
 Route::get('/admin/manage_thesis', function () {
@@ -201,7 +213,7 @@ Route::get('/teacher/approve_documents_teacher', function () {
 
 Route::get('/member', function () {
     return view('member.dashboard');
-});
+})->name('member');
 
 Route::get('/member/submit_project_documents', function () {
     return view('member.submit_project_documents');
@@ -215,12 +227,11 @@ Route::get('/member/manage_thesis_member', function () {
     return view('member.manage_thesis_member');
 });
 
-
-
 Route::get('/member/create_document', function () {
     return view('member.create_document');
 })->name('create_document_01');
 
+<<<<<<< HEAD
 Route::get('/member/send-document', function () {
     return view('member.manage_submit_document');
 })->name('submit_document');
@@ -229,3 +240,9 @@ Route::get('/member/manage-document', function () {
     return view('member.manage_document');
 })->name('manage_document');
 //Route::get('show', [AdminController::class, 'show']);
+=======
+Route::get('/member/manage-document-01', function () {
+    return view('member.manage_document_01');
+});
+//Route::get('show', [AdminController::class, 'show']);
+>>>>>>> 7180dd9122fc7bd9108b4592b6805ff9a7fa5fed

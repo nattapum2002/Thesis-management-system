@@ -37,7 +37,8 @@
                     </tr>
                     <tr>
                         <th>รูปภาพลายเซ็น</th>
-                        <td colspan="2"><img src="{{ $teacher->signature_image }}" alt="{{ $teacher->name }}"></td>
+                        <td colspan="2"><img src="{{ asset('storage/'.$teacher->signature_image) }}"
+                                alt="{{ $teacher->name }}"></td>
                     </tr>
                     <tr>
                         <th>ตำแหน่งทางวิชาการ</th>
@@ -86,7 +87,7 @@
                         @if ($toggle['user_type'])
                         <td>
                             <div class="input-field">
-                                <select class="form-select" wire:model.live="edit_user_type">
+                                <select class="form-select" wire:model.live="user_type">
                                     <option selected>ประเภทบัญชีผู้ใช้</option>
                                     <option value="Admin">อาจารย์ประจำวิชา (Admin)</option>
                                     <option value="Branch head">หัวหน้าสาขา</option>
@@ -124,9 +125,9 @@
                         @if ($toggle['account_status'])
                         <td>
                             <div class="input-field">
-                                <select class="form-select" wire:model.live="edit_account_status">
-                                    <option selected value="1">ยังใช้งาน</option>
-                                    <option value="0">ยกเลิกใช้งาน</option>
+                                <select class="form-select" wire:model.live="account_status">
+                                    <option selected value="1">อนุมัติ</option>
+                                    <option value="0">ระงับบัญชี</option>
                                 </select>
                                 @error('account_status')
                                 <span class="text-danger">{{ $message }}</span>
@@ -141,11 +142,10 @@
                         </td>
                         @else
                         <td>
-                            {{-- {{ $teacher->account_status }} --}}
                             @if ($teacher->account_status == '1')
-                            <p class="text-success">บัญชียังถูกใช้งาน</p>
+                            <p class="text-success">อนุมัติ</p>
                             @else
-                            <p class="text-danger">บัญชีถูกยกเลิกใช้งาน</p>
+                            <p class="text-danger">ถูกระงับ</p>
                             @endif
                         </td>
                         <td>
