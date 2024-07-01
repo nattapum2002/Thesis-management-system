@@ -233,9 +233,24 @@ Route::get('/member/manage_thesis_member', function () {
 
 Route::get('/member/create_document', function () {
     return view('member.create_document');
-});
+})->name('create_document_01');
 
+<<<<<<< HEAD
+Route::get('/member/send-document', function () {
+    return view('member.manage_submit_document');
+})->name('submit_document');
+
+Route::get('/member/manage-document', function () {
+    return view('member.manage_document');
+})->name('manage_document');
+//Route::get('show', [AdminController::class, 'show']);
+=======
 Route::get('/member/manage-document-01', function () {
     return view('member.manage_document_01');
 });
+<<<<<<< HEAD
 //Route::get('show', [AdminController::class, 'show']);
+=======
+//Route::get('show', [AdminController::class, 'show']);
+>>>>>>> 7180dd9122fc7bd9108b4592b6805ff9a7fa5fed
+>>>>>>> c0536a8573cc99c339490ae20e6d21b8f0035026

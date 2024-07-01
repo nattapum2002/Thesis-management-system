@@ -44,7 +44,7 @@ class Member extends Model implements Authenticatable
     }
     public function confirmDocument()
     {
-        return $this->belongsToMany(Document::class, 'confirm_documents', 'id_student', 'id_document');
+        return $this->hasMany(Document::class,'id_document');
     }
 
     public function getAuthIdentifierName()

@@ -48,6 +48,10 @@
 <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+<<<<<<< HEAD
+            {{-- <img src="{{ asset('storage/'.Auth::guard('members')->user()->student_image) }}"
+                class="img-circle elevation-2" alt="User Image"> --}}
+=======
             @if (Auth::guard('members')->user()->student_image == null)
             <img src="{{ asset('Asset/dist/img/avatar'.rand('1', '5').'.png') }}" alt="User Image"
                 class="img-circle elevation-2">
@@ -55,6 +59,7 @@
             <img src="{{ asset('storage/'.Auth::guard('members')->user()->student_image) }}"
                 class="img-circle elevation-2" alt="User Image">
             @endif
+>>>>>>> 7180dd9122fc7bd9108b4592b6805ff9a7fa5fed
         </div>
         <div class="info">
             <a href="/member/edit_member" class="d-block">
@@ -74,13 +79,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/member/submit_project_documents">
+                        <a class="nav-link" href="{{route('submit_document')}}">
                             <i class='nav-icon bx bx-circle'></i>
                             ยื่นเอกสารโปรเจค
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/member/manage_document">
+                        <a class="nav-link" href="{{route('manage_document')}}">
                             <i class='nav-icon bx bx-circle'></i>
                             จัดการเอกสาร
                         </a>

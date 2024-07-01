@@ -1,7 +1,7 @@
 @extends('layout.member')
 @section('title')
-เอกสาร 01
+ยื่นเอกสาร
 @endsection
 @section('content')
-@livewire('document.manage-document01')
+@livewire('document.manage-submit-document')
 @endsection

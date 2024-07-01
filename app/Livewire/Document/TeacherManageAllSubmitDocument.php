@@ -1,29 +1,25 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Document;
 
-use App\Models\Confirm_student;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class MemberManageDocument extends Component
+class TeacherManageAllSubmitDocument extends Component
 {
-
     public function render()
     {
-        
         $projects = Project::with([
             'confirmStudents.student', 
             'confirmStudents.documents',
             'confirmTeachers.teacher',
             'confirmTeachers.document'
         ])
-        ->whereHas('confirmStudents', function($query) {
-            $query->where('id_student', Auth::guard('members')->user()->id_student);
+        ->whereHas('confirmTeachers', function($query) {
+            $query->where('id_teacher', Auth::guard('teachers')->user()->id_teacher);
         })
         ->get();
-        // dd($projects);
-        return view('livewire.member-manage-document',['projects' => $projects]);
+        return view('livewire.document.teacher-manage-all-submit-document',['projects' => $projects]);
     }
 }

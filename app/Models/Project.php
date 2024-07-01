@@ -43,4 +43,13 @@ class Project extends Model
     {
         return $this->hasMany(Adviser::class, 'id_project');
     }
+    public function confirmStudents()
+    {
+        return $this->hasMany(Confirm_student::class, 'id_project');
+    }
+
+    public function confirmTeachers()
+    {
+        return $this->hasMany(Confirm_teacher::class, 'id_project');
+    }
 }

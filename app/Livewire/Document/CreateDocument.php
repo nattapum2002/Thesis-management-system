@@ -67,12 +67,33 @@ class CreateDocument extends Component
                 'project_status' => 'Pending',
             ]);
 
+            $admin_teacher = Teacher::where('user_type', 'Admin')->get();
+            foreach ($admin_teacher as $admin_teacher_items) {
+                $admin_teachers = Confirm_teacher::create([
+                    'id_teacher' => $admin_teacher_items->id_teacher,
+                    'id_document' => 1,
+                    'id_project' => $this->project->id_project,
+                    'id_position' => 3,
+                    'confirm_status' => false,
+                ]);
+            }
+           
+            $header_teacher = Teacher::where('user_type', 'Branch head')->first();
+            $headTeacher = Confirm_teacher::create([
+                'id_teacher' => $header_teacher->id_teacher,
+                'id_document' => 1,
+                'id_project' => $this->project->id_project,
+                'id_position' => 4,
+                'confirm_status' => false,
+            ]);
+
             foreach ($memberIds as $member_Ids) {
+                $send_member = $member_Ids == Auth::guard('members')->user()->id_student ? true : false;
                 $student_document = Confirm_student::create([
                     'id_student' => $member_Ids,
                     'id_document' => 1,
                     'id_project' => $this->project->id_project,
-                    'confirm' => false,
+                    'confirm_status' => $send_member,
                 ]);
             }
             foreach ($teacherIds as $index => $teacherId) {
@@ -99,6 +120,8 @@ class CreateDocument extends Component
         });
 
         // session()->flash('message', 'Document created successfully!');
+
+        return redirect()->route('manage_document');
     }
 
     public function confirmTeacherDocument()
