@@ -136,12 +136,27 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/manage_news">
+                <a class="nav-link">
                     <i class='nav-icon bx bx-news'></i>
                     <p>
-                        จัดการข่าวประชาสัมพันธ์
+                        จัดการข่าว
+                        <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/manage_news">
+                            <i class='nav-icon bx bx-circle'></i>
+                            จัดการข่าว
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/approve_news/">
+                            <i class='nav-icon bx bx-circle'></i>
+                            ซ่อน-แสดง ข่าว
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/admin/manage_thesis">

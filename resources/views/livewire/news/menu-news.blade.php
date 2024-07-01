@@ -1,5 +1,4 @@
 <div>
-    <!-- Content -->
     <div class="container mt-4">
         <h1>ข่าวประชาสัมพันธ์</h1>
         <div class="row mb-3">
@@ -9,15 +8,15 @@
             </div>
             <div class="col-md-3">
                 <select class="form-select" wire:model.live.debounce.100ms="filterDate">
-                    <option value="latest">ข่าวล่าสุด</option>
-                    <option value="oldest">ข่าวเก่าสุด</option>
+                    <option value="ข่าวล่าสุด">ข่าวล่าสุด</option>
+                    <option value="ข่าวเก่าสุด">ข่าวเก่าสุด</option>
                 </select>
             </div>
             <div class="col-md-3">
                 <select class="form-select" wire:model.live.debounce.100ms="filterType">
-                    <option value="all">ทุกประเภท</option>
-                    <option value="general">ข่าวทั่วไป</option>
-                    <option value="topic">ชื่อหัวข้อ</option>
+                    <option value="ทุกประเภท">ทุกประเภท</option>
+                    <option value="ข่าวทั่วไป">ข่าวทั่วไป</option>
+                    <option value="ชื่อหัวข้อ">ชื่อหัวข้อ</option>
                 </select>
             </div>
         </div>
@@ -27,7 +26,7 @@
             <div class="col-md-3 mb-4">
                 <div class="card news-card">
                     <img src="{{ $item->news_image }}" alt="{{ $item->title }}" class="img-fluid">
-                    <div class="ribbon">{{ $item->type == 'general' ? 'ข่าวทั่วไป' : 'ชื่อหัวข้อ' }}</div>
+                    <div class="ribbon">{{ $item->type }}</div>
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->title }}</h5>
                         <p class="card-text">โดย {{ $item->teacher->name }} วันที่ {{ $item->created_at->format('d/m/Y')
@@ -39,7 +38,6 @@
             </div>
             @endforeach
         </div>
-
         <div class="d-flex justify-content-center">
             {{ $news->onEachSide(1)->links('pagination::bootstrap-4') }}
         </div>

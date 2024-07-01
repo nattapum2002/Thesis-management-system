@@ -149,6 +149,10 @@ Route::get('/admin/edit_and_detail_news/{newsId}', function ($newsId) {
     return view('admin.edit_and_detail_news', compact('newsId'));
 });
 
+Route::get('/admin/approve_news/', function () {
+    return view('admin.approve_news');
+});
+
 Route::get('/admin/manage_thesis', function () {
     return view('admin.manage_thesis');
 });

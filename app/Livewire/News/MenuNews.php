@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\News;
 use Livewire\WithPagination;
 
-class ApproveNews extends Component
+class MenuNews extends Component
 {
     use WithPagination;
 
@@ -20,22 +20,9 @@ class ApproveNews extends Component
         'filterType' => ['except' => 'ทุกประเภท']
     ];
 
-    public function show($index)
-    {
-        News::where('id_news', $index)->update([
-            'status' => '1'
-        ]);
-    }
-    public function hide($index)
-    {
-        News::where('id_news', $index)->update([
-            'status' => '0'
-        ]);
-    }
-
     public function render()
     {
-        $news = News::with('teacher')
+        $news = News::with('teacher')->where('status', 1)
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%');
             })
@@ -50,6 +37,6 @@ class ApproveNews extends Component
             })
             ->paginate(15);
 
-        return view('livewire.news.approve-news', ['news' => $news]);
+        return view('livewire.news.menu-news', ['news' => $news]);
     }
 }
