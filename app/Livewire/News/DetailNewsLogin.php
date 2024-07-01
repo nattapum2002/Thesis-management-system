@@ -5,7 +5,7 @@ namespace App\Livewire\News;
 use Livewire\Component;
 use App\Models\News;
 
-class DetailNews extends Component
+class DetailNewsLogin extends Component
 {
     public $news;
 
@@ -16,6 +16,6 @@ class DetailNews extends Component
 
     public function render()
     {
-        return view('livewire.news.detail-news', ['news' => $this->news]);
+        return view('livewire.news.detail-news-login', ['news' => $this->news]);
     }
 }

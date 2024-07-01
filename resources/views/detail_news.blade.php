@@ -3,5 +3,5 @@
 รายละเอียดข่าวประชาสัมพันธ์
 @endsection
 @section('content')
-@livewire('news-detail', ['id' => $newsId])
+@livewire('news.detail-news', ['id' => $newsId])
 @endsection

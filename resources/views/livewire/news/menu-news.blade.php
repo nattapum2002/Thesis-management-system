@@ -25,14 +25,20 @@
             @foreach ($news as $item)
             <div class="col-md-3 mb-4">
                 <div class="card news-card">
-                    <img src="{{ $item->news_image }}" alt="{{ $item->title }}" class="img-fluid">
+                    @if ($item->news_image == null)
+                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}" alt=""
+                        style="width: auto; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    @else
+                    <img wire:live src="{{ asset('storage/'.$item->news_image)}}" alt="{{ $item->title }}"
+                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    @endif
                     <div class="ribbon">{{ $item->type }}</div>
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->title }}</h5>
                         <p class="card-text">โดย {{ $item->teacher->name }} วันที่ {{ $item->created_at->format('d/m/Y')
                             }}</p>
                         <p class="card-text">{{ Str::limit($item->details, 100) }}</p>
-                        <a href="/news_detail/{{ $item->id_news }}" class="btn btn-primary">อ่านเพิ่มเติม</a>
+                        <a href="/detail_news/{{ $item->id_news }}" class="btn btn-primary">อ่านเพิ่มเติม</a>
                     </div>
                 </div>
             </div>

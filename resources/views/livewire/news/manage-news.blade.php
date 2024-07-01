@@ -1,12 +1,12 @@
 <div>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-md-6">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Search" wire:model.live.debounce.150ms="search">
                 <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="input-group mb-3">
                 <select class="form-select" wire:model.live.debounce.100ms="filterDate">
                     <option value="ข่าวล่าสุด">ข่าวล่าสุด</option>
@@ -14,7 +14,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="input-group mb-3">
                 <select class="form-select" wire:model.live.debounce.100ms="filterType">
                     <option value="ทุกประเภท">ทุกประเภท</option>
@@ -27,7 +27,13 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-end">
+                @if ($users->user_type == 'Admin')
                 <a href="/admin/add_news" class="btn btn-success">เพิ่มข่าว</a>
+                @elseif ($users->user_type == 'Branch head')
+                <a href="/branch-head/add_news" class="btn btn-success">เพิ่มข่าว</a>
+                @elseif ($users->user_type == 'Teacher')
+                <a href="/teacher/add_news" class="btn btn-success">เพิ่มข่าว</a>
+                @endif
             </div>
         </div>
         <div class="card-body table-responsive p-0">
@@ -59,8 +65,17 @@
                             @endif
                         </td>
                         <td>
+                            @if ($users->user_type == 'Admin')
                             <a href="/admin/edit_and_detail_news/{{ $news_detail->id_news }}" class="btn btn-primary"><i
                                     class='bx bx-detail'></i></a>
+                            @elseif ($users->user_type == 'Branch head')
+                            <a href="/branch-head/edit_and_detail_news/{{ $news_detail->id_news }}"
+                                class="btn btn-primary"><i class='bx bx-detail'></i></a>
+                            @elseif ($users->user_type == 'Teacher')
+                            <a href="/teacher/edit_and_detail_news/{{ $news_detail->id_news }}"
+                                class="btn btn-primary"><i class='bx bx-detail'></i></a>
+                            @endif
+
                             @if ($news_detail->status == '0')
                             <a wire:click.live='show({{ $news_detail->id_news }})' class="btn btn-success"><i
                                     class='bx bxs-show'></i></a>

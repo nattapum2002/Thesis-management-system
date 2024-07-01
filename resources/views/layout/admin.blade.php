@@ -27,7 +27,7 @@
             <a href="/menu_thesis" class="nav-link">บทความปริญญานิพนธ์</a>
         </li>
         <li class="nav-item">
-            <a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a>
+            <a href="/admin/menu_news_login" class="nav-link">ข่าวประชาสัมพันธ์</a>
         </li>
         <li class="nav-item">
             <a href="https://computer.surin.rmuti.ac.th/computer/" class="nav-link">เกียวกับสาขา</a>
@@ -147,13 +147,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/manage_news">
                             <i class='nav-icon bx bx-circle'></i>
-                            จัดการข่าว
+                            จัดการข่าวของผู้ดูแลระบบ
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/approve_news/">
                             <i class='nav-icon bx bx-circle'></i>
-                            ซ่อน-แสดง ข่าว
+                            ซ่อน-แสดง ข่าวของผู้ใช้
                         </a>
                     </li>
                 </ul>

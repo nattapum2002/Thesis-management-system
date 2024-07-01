@@ -22,10 +22,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/menu_news">ข่าวประชาสัมพันธ์</a>
+                        <a class="nav-link" href="/menu_thesis">บทความปริญญานิพนธ์</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/menu_thesis">บทความปริญญานิพนธ์</a>
+                        <a class="nav-link" href="/menu_news">ข่าวประชาสัมพันธ์</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"

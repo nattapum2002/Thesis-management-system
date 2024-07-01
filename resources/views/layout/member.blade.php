@@ -26,7 +26,7 @@
             <a href="/menu_thesis" class="nav-link">บทความปริญญานิพนธ์</a>
         </li>
         <li class="nav-item">
-            <a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a>
+            <a href="/member/menu_news_login" class="nav-link">ข่าวประชาสัมพันธ์</a>
         </li>
         <li class="nav-item">
             <a href="https://computer.surin.rmuti.ac.th/computer/" class="nav-link">เกียวกับสาขา</a>
@@ -48,10 +48,6 @@
 <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-<<<<<<< HEAD
-            {{-- <img src="{{ asset('storage/'.Auth::guard('members')->user()->student_image) }}"
-                class="img-circle elevation-2" alt="User Image"> --}}
-=======
             @if (Auth::guard('members')->user()->student_image == null)
             <img src="{{ asset('Asset/dist/img/avatar'.rand('1', '5').'.png') }}" alt="User Image"
                 class="img-circle elevation-2">
@@ -59,7 +55,6 @@
             <img src="{{ asset('storage/'.Auth::guard('members')->user()->student_image) }}"
                 class="img-circle elevation-2" alt="User Image">
             @endif
->>>>>>> 7180dd9122fc7bd9108b4592b6805ff9a7fa5fed
         </div>
         <div class="info">
             <a href="/member/edit_member" class="d-block">
@@ -123,7 +118,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/member">Dashboard</a></li>
+                    @yield('navigation')
                     <li class="breadcrumb-item active">@yield('title')</li>
                 </ol>
             </div>

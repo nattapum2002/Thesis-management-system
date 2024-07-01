@@ -26,7 +26,7 @@
             <a href="/menu_thesis" class="nav-link">บทความปริญญานิพนธ์</a>
         </li>
         <li class="nav-item">
-            <a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a>
+            <a href="/branch-head/menu_news_login" class="nav-link">ข่าวประชาสัมพันธ์</a>
         </li>
         <li class="nav-item">
             <a href="https://computer.surin.rmuti.ac.th/computer/" class="nav-link">เกียวกับสาขา</a>
@@ -92,7 +92,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/branch-head/manage_news_branch_head">
+                <a class="nav-link" href="/branch-head/manage_news">
                     <i class='nav-icon bx bx-news'></i>
                     <p>
                         จัดการข่าวประชาสัมพันธ์
@@ -114,7 +114,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/branch-head">Dashboard</a></li>
+                    @yield('navigation')
                     <li class="breadcrumb-item active">@yield('title')</li>
                 </ol>
             </div>

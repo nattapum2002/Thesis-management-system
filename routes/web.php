@@ -77,8 +77,8 @@ Route::get('/menu_news', function () {
     return view('menu_news');
 });
 
-Route::get('/news_detail/{newsId}', function ($newsId) {
-    return view('news_detail', compact('newsId'));
+Route::get('/detail_news/{newsId}', function ($newsId) {
+    return view('detail_news', compact('newsId'));
 });
 
 Route::get('/register', function () {
@@ -107,7 +107,9 @@ Route::get('/logout', function () {
     }
 })->name('logout');
 
-//Admin
+//Global Routes
+
+//Admin Routes
 
 Route::get('/admin', function () {
     return view('admin.dashboard');
@@ -149,8 +151,16 @@ Route::get('/admin/edit_and_detail_news/{newsId}', function ($newsId) {
     return view('admin.edit_and_detail_news', compact('newsId'));
 });
 
-Route::get('/admin/approve_news/', function () {
+Route::get('/admin/approve_news', function () {
     return view('admin.approve_news');
+});
+
+Route::get('/admin/menu_news_login', function () {
+    return view('admin.menu_news_login');
+});
+
+Route::get('/admin/detail_news_login/{newsId}', function ($newsId) {
+    return view('admin.detail_news_login', compact('newsId'));
 });
 
 Route::get('/admin/manage_thesis', function () {
@@ -173,7 +183,7 @@ Route::get('/admin/approve_documents', function () {
     return view('admin.approve_documents');
 });
 
-// branch-head
+// branch-head Routes
 
 Route::get('/branch-head', function () {
     return view('branch-head.dashboard');
@@ -183,15 +193,31 @@ Route::get('/branch-head/edit_branch_head', function () {
     return view('branch-head.edit_branch_head');
 });
 
-Route::get('/branch-head/manage_news_branch_head', function () {
-    return view('branch-head.manage_news_branch_head');
+Route::get('/branch-head/manage_news', function () {
+    return view('branch-head.manage_news');
+});
+
+Route::get('/branch-head/add_news', function () {
+    return view('branch-head.add_news');
+});
+
+Route::get('/branch-head/edit_and_detail_news/{newsId}', function ($newsId) {
+    return view('branch-head.edit_and_detail_news', compact('newsId'));
+});
+
+Route::get('/branch-head/menu_news_login', function () {
+    return view('branch-head.menu_news_login');
+});
+
+Route::get('/branch-head/detail_news_login/{newsId}', function ($newsId) {
+    return view('branch-head.detail_news_login', compact('newsId'));
 });
 
 Route::get('/branch-head/approve_documents_branch_head', function () {
     return view('branch-head.approve_documents_branch_head');
 });
 
-// teacher
+// Teacher Routes
 
 Route::get('/teacher', function () {
     return view('teacher.dashboard');
@@ -205,15 +231,31 @@ Route::get('/teacher/edit_and_detail_teacher', function () {
     return view('teacher.edit_and_detail_teacher');
 });
 
-Route::get('/teacher/manage_news_teacher', function () {
-    return view('teacher.manage_news_teacher');
+Route::get('/teacher/manage_news', function () {
+    return view('teacher.manage_news');
+});
+
+Route::get('/teacher/add_news', function () {
+    return view('teacher.add_news');
+});
+
+Route::get('/teacher/edit_and_detail_news/{newsId}', function ($newsId) {
+    return view('teacher.edit_and_detail_news', compact('newsId'));
+});
+
+Route::get('/teacher/menu_news_login', function () {
+    return view('teacher.menu_news_login');
+});
+
+Route::get('/teacher/detail_news_login/{newsId}', function ($newsId) {
+    return view('teacher.detail_news_login', compact('newsId'));
 });
 
 Route::get('/teacher/approve_documents_teacher', function () {
     return view('teacher.approve_documents_teacher');
 });
 
-// member
+// Member Routes
 
 Route::get('/member', function () {
     return view('member.dashboard');
@@ -227,6 +269,14 @@ Route::get('/member/edit_member', function () {
     return view('member.edit_member');
 });
 
+Route::get('/member/menu_news_login', function () {
+    return view('member.menu_news_login');
+});
+
+Route::get('/member/detail_news_login/{newsId}', function ($newsId) {
+    return view('member.detail_news_login', compact('newsId'));
+});
+
 Route::get('/member/manage_thesis_member', function () {
     return view('member.manage_thesis_member');
 });
@@ -235,7 +285,6 @@ Route::get('/member/create_document', function () {
     return view('member.create_document');
 })->name('create_document_01');
 
-<<<<<<< HEAD
 Route::get('/member/send-document', function () {
     return view('member.manage_submit_document');
 })->name('submit_document');
@@ -244,13 +293,11 @@ Route::get('/member/manage-document', function () {
     return view('member.manage_document');
 })->name('manage_document');
 //Route::get('show', [AdminController::class, 'show']);
-=======
+
 Route::get('/member/manage-document-01', function () {
     return view('member.manage_document_01');
 });
-<<<<<<< HEAD
+
 //Route::get('show', [AdminController::class, 'show']);
-=======
+
 //Route::get('show', [AdminController::class, 'show']);
->>>>>>> 7180dd9122fc7bd9108b4592b6805ff9a7fa5fed
->>>>>>> c0536a8573cc99c339490ae20e6d21b8f0035026
