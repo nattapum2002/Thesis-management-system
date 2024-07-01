@@ -219,9 +219,13 @@ Route::get('/member/manage_thesis_member', function () {
 
 Route::get('/member/create_document', function () {
     return view('member.create_document');
-});
+})->name('create_document_01');
 
-Route::get('/member/manage-document-01', function () {
-    return view('member.manage_document_01');
-});
+Route::get('/member/send-document', function () {
+    return view('member.manage_submit_document');
+})->name('submit_document');
+
+Route::get('/member/manage-document', function () {
+    return view('member.manage_document');
+})->name('manage_document');
 //Route::get('show', [AdminController::class, 'show']);
