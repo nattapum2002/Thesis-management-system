@@ -179,12 +179,23 @@
                         @if ($toggle['level'])
                         <td>
                             <div class="input-field">
-                                <select class="form-select" wire:model.live="level">
-                                    <option selected>ระดับ</option>
-                                    @foreach ($levels as $level)
-                                    <option value="{{ $level->id_level }}">{{ $level->level }}</option>
-                                    @endforeach
+                                @if ($this->course == 1 || $student->course->id_course == 1)
+                                <select class="form-select" wire:model.live="level" id="level">
+                                    <option selected>เลือกระดับ</option>
+                                    <option value="1">ปวส.</option>
                                 </select>
+                                @elseif ($this->course == 2 || $this->course == 3 || $student->course->id_course == 2 ||
+                                $student->course->id_course == 3)
+                                <select class="form-select" wire:model.live="level" id="level">
+                                    <option selected>เลือกระดับ</option>
+                                    <option value="2">ปริญญาตรี 4 ปี</option>
+                                    <option value="3">ปริญญาตรี 2-3 ปี</option>
+                                </select>
+                                @else
+                                <select class="form-select" wire:model.live="level" id="level" disabled>
+                                    <option selected>กรุณาเลือกหลักสูตรก่อน</option>
+                                </select>
+                                @endif
                                 @error('level')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -206,33 +217,7 @@
                     </tr>
                     <tr>
                         <th>ภาค</th>
-                        @if ($toggle['sector'])
-                        <td>
-                            <div class="input-field">
-                                <select class="form-select" wire:model.live="sector">
-                                    <option selected>ระดับ</option>
-                                    @foreach ($levels as $level)
-                                    <option value="{{ $level->id_level }}">{{ $level->sector }}</option>
-                                    @endforeach
-                                </select>
-                                @error('sector')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </td>
-                        <td>
-                            <div class="button-container">
-                                <button class="btn btn-success" wire:click="save('sector')">บันทึก</button>
-                                <button class="btn btn-danger" wire:click="cancel('sector')">ยกเลิก</button>
-                            </div>
-                        </td>
-                        @else
                         <td>{{ $student->level->sector }}</td>
-                        <td>
-                            <button class="btn btn-primary" wire:click="edit('sector')"><i
-                                    class='bx bx-edit'></i></button>
-                        </td>
-                        @endif
                     </tr>
                     <tr>
                         <th>เบอร์โทรศัพท์</th>
