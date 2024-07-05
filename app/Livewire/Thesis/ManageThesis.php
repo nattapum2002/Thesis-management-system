@@ -28,13 +28,13 @@ class ManageThesis extends Component
     public function show($index)
     {
         Dissertation_article::where('id_dissertation_article', $index)->update([
-            'status' => '1'
+            'status' => '0'
         ]);
     }
     public function hide($index)
     {
         Dissertation_article::where('id_dissertation_article', $index)->update([
-            'status' => '0'
+            'status' => '1'
         ]);
     }
 
