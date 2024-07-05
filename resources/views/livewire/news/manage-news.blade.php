@@ -45,7 +45,6 @@
                         <th>รายละเอียด</th>
                         <th>ประเภท</th>
                         <th>วันที่-เวลา</th>
-                        <th>สถานะข่าว</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -59,12 +58,12 @@
                         <td>{{ $news_detail->updated_at }}</td>
                         <td>
                             @if ($news_detail->status == '1')
-                            <p class="text-success">แสดง</p>
+                            <a wire:click.live='show({{ $news_detail->id_news }})' class="btn btn-success"><i
+                                    class='bx bxs-show'></i></a>
                             @else
-                            <p class="text-danger">ซ่อน</p>
+                            <a wire:click.live='hide({{ $news_detail->id_news }})' class="btn btn-danger"><i
+                                    class='bx bxs-hide'></i></a>
                             @endif
-                        </td>
-                        <td>
                             @if ($users->user_type == 'Admin')
                             <a href="/admin/edit_and_detail_news/{{ $news_detail->id_news }}" class="btn btn-primary"><i
                                     class='bx bx-detail'></i></a>
@@ -74,14 +73,6 @@
                             @elseif ($users->user_type == 'Teacher')
                             <a href="/teacher/edit_and_detail_news/{{ $news_detail->id_news }}"
                                 class="btn btn-primary"><i class='bx bx-detail'></i></a>
-                            @endif
-
-                            @if ($news_detail->status == '0')
-                            <a wire:click.live='show({{ $news_detail->id_news }})' class="btn btn-success"><i
-                                    class='bx bxs-show'></i></a>
-                            @else
-                            <a wire:click.live='hide({{ $news_detail->id_news }})' class="btn btn-danger"><i
-                                    class='bx bxs-hide'></i></a>
                             @endif
                         </td>
                     </tr>
