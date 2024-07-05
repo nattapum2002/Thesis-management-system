@@ -25,8 +25,8 @@ body {
 .card-header {
     padding: 15px;
     border-bottom: 1px solid #ddd;
-    background-color: #007bff;
-    color: #fff;
+    /* background-color: #007bff; */
+    color: #333;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
@@ -46,9 +46,9 @@ body {
     margin-bottom: 15px;
 }
 
-.card .btn-primary:hover, .card .btn-primary:focus {
+/* .card .btn-primary:hover, .card .btn-primary:focus {
     background-color: greenyellow;
-}
+} */
 
 /* Header Styles */
 h1 {
@@ -152,9 +152,9 @@ h3 {
     transition: background-color 0.3s;
 }
 
-.btn-primary:hover, .btn-primary:focus {
+/* .btn-primary:hover, .btn-primary:focus {
     background-color: aqua;
-}
+} */
 
 .text-right {
     text-align: right;
