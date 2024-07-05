@@ -15,7 +15,7 @@ body {
 /* Card styles */
 .card {
     max-width: 1000px;
-    margin: 20px auto;
+    margin: 0 auto;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #fff;
@@ -45,6 +45,10 @@ body {
 .card-text {
     color: #666;
     margin-bottom: 15px;
+}
+
+.card h3 {
+    margin-bottom: 20px;
 }
 
 /* .card .btn-primary:hover, .card .btn-primary:focus {
@@ -83,6 +87,7 @@ h3 {
 .table thead th {
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6;
+    background-color: #f8f9fa;
 }
 
 .table tbody + tbody {
