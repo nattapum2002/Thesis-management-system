@@ -33,4 +33,11 @@
 <!-- master.css -->
 <link href="{{Asset('Asset/main/css/master.css')}}" rel="stylesheet">
 <!-- welcome.css -->
+<<<<<<< HEAD
 {{-- <link href="{{Asset('Asset/main/css/welcome.css')}}" rel="stylesheet"> --}}
+=======
+{{--
+<link href="{{Asset('Asset/main/css/welcome.css')}}" rel="stylesheet"> --}}
+{{--
+<link href="{{Asset('Asset/main/css/master.css')}}" rel="stylesheet"> --}}
+>>>>>>> 7a3aff46801a1cff2ccbe6c444e29fec35309f55
