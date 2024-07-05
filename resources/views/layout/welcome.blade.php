@@ -28,8 +28,8 @@
                         <a class="nav-link" href="/menu_news">ข่าวประชาสัมพันธ์</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"
-                            href="https://computer.surin.rmuti.ac.th/computer/index.php">เกี่ยวกับสาขา</a>
+                        <a href="https://computer.surin.rmuti.ac.th/computer/index.php" class="nav-link"
+                            onclick="window.open('https://computer.surin.rmuti.ac.th/computer/index.php');">เกี่ยวกับสาขา</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

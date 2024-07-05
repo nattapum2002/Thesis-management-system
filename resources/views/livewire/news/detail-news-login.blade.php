@@ -1,5 +1,4 @@
 <div>
-    <!-- Content -->
     <div class="container mt-4">
         <div class="news-detail">
             @if ($news->news_image == null)

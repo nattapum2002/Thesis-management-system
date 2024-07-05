@@ -69,8 +69,8 @@ Route::get('/menu_thesis', function () {
     return view('menu_thesis');
 });
 
-Route::get('/thesis_detail/{thesisId}', function ($thesisId) {
-    return view('thesis_detail', compact('thesisId'));
+Route::get('/detail_thesis/{thesisId}', function ($thesisId) {
+    return view('detail_thesis', compact('thesisId'));
 });
 
 Route::get('/menu_news', function () {
@@ -163,8 +163,20 @@ Route::get('/admin/detail_news_login/{newsId}', function ($newsId) {
     return view('admin.detail_news_login', compact('newsId'));
 });
 
-Route::get('/admin/manage_thesis', function () {
-    return view('admin.manage_thesis');
+Route::get('/admin/approve_thesis', function () {
+    return view('admin.approve_thesis');
+});
+
+Route::get('/admin/edit_and_detail_thesis/{thesisId}', function ($thesisId) {
+    return view('admin.edit_and_detail_thesis', compact('thesisId'));
+});
+
+Route::get('/admin/menu_thesis_login', function () {
+    return view('admin.menu_thesis_login');
+});
+
+Route::get('/admin/detail_thesis_login/{thesisId}', function ($thesisId) {
+    return view('admin.detail_thesis_login', compact('thesisId'));
 });
 
 Route::get('/admin/admin_project', function () {
@@ -213,6 +225,14 @@ Route::get('/branch-head/detail_news_login/{newsId}', function ($newsId) {
     return view('branch-head.detail_news_login', compact('newsId'));
 });
 
+Route::get('/branch-head/menu_thesis_login', function () {
+    return view('branch-head.menu_thesis_login');
+});
+
+Route::get('/branch-head/detail_thesis_login/{thesisId}', function ($thesisId) {
+    return view('branch-head.detail_thesis_login', compact('thesisId'));
+});
+
 Route::get('/branch-head/approve_documents_branch_head', function () {
     return view('branch-head.approve_documents_branch_head');
 });
@@ -251,6 +271,14 @@ Route::get('/teacher/detail_news_login/{newsId}', function ($newsId) {
     return view('teacher.detail_news_login', compact('newsId'));
 });
 
+Route::get('/teacher/menu_thesis_login', function () {
+    return view('teacher.menu_thesis_login');
+});
+
+Route::get('/teacher/detail_thesis_login/{thesisId}', function ($thesisId) {
+    return view('teacher.detail_thesis_login', compact('thesisId'));
+});
+
 Route::get('/teacher/approve_documents_teacher', function () {
     return view('teacher.approve_documents_teacher');
 });
@@ -277,8 +305,24 @@ Route::get('/member/detail_news_login/{newsId}', function ($newsId) {
     return view('member.detail_news_login', compact('newsId'));
 });
 
-Route::get('/member/manage_thesis_member', function () {
-    return view('member.manage_thesis_member');
+Route::get('/member/menu_thesis_login', function () {
+    return view('member.menu_thesis_login');
+});
+
+Route::get('/member/detail_thesis_login/{thesisId}', function ($thesisId) {
+    return view('member.detail_thesis_login', compact('thesisId'));
+});
+
+Route::get('/member/manage_thesis', function () {
+    return view('member.manage_thesis');
+})->name('manage_thesis');
+
+Route::get('/member/add_thesis', function () {
+    return view('member.add_thesis');
+});
+
+Route::get('/member/edit_and_detail_thesis/{thesisId}', function ($thesisId) {
+    return view('member.edit_and_detail_thesis', compact('thesisId'));
 });
 
 Route::get('/member/create_document', function () {

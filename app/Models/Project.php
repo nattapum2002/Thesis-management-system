@@ -24,6 +24,11 @@ class Project extends Model
     protected $primaryKey = 'id_project';
     protected $fillable = ['project_name_th', 'project_name_en', 'project_status', 'created_by', 'updated_by'];
 
+
+    public function membersProject()
+    {
+        return $this->hasMany(Student_project::class, 'id_project');
+    }
     public function members()
     {
         return $this->belongsToMany(Member::class, 'student_projects', 'id_project', 'id_student');

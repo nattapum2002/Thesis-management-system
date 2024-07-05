@@ -3,5 +3,5 @@
 บทความปริญญานิพนธ์
 @endsection
 @section('content')
-@livewire('menu-thesis')
+@livewire('thesis.menu-thesis')
 @endsection
