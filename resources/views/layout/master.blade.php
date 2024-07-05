@@ -14,7 +14,7 @@
 <body class="sidebar-mini hold-transition layout-navbar-fixed layout-fixed">
     <div class="wrapper">
         {{-- Main Sidebar --}}
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-no-expand">
             @yield('mastersidebar')
         </aside>
 
