@@ -47,12 +47,14 @@
                         <td>{{ $news_detail->updated_at }}</td>
                         <td>
                             @if ($news_detail->status == '1')
-                            <a wire:click.live='show({{ $news_detail->id_news }})' class="btn btn-success"><i
+                            <a wire:click='show({{ $news_detail->id_news }})' class="btn btn-success"><i
                                     class='bx bxs-show'></i></a>
                             @else
-                            <a wire:click.live='hide({{ $news_detail->id_news }})' class="btn btn-danger"><i
+                            <a wire:click='hide({{ $news_detail->id_news }})' class="btn btn-danger"><i
                                     class='bx bxs-hide'></i></a>
                             @endif
+                            <a href="/admin/edit_and_detail_news/{{ $news_detail->id_news }}" class="btn btn-primary"><i
+                                    class='bx bx-detail'></i></a>
                         </td>
                     </tr>
                     @endforeach

@@ -13,8 +13,8 @@
         <div class="card-body">
             @foreach ($projects as $projectItems)
                 @foreach ($projectItems->confirmStudents->groupBy('id_document') as $documentId => $confirmStudents)
-                <div class="card mb-3">
-                    <div class="card-body">
+                    <div class="card mb-3">
+                        <div class="card-body">
                             <h5 class="card-title">
                                 <strong>{{ $confirmStudents->first()->documents->document }}</strong> |
                                 โปรเจค: {{ $projectItems->project_name_th }}, {{ $projectItems->project_name_en }}
@@ -40,9 +40,9 @@
                                 <div class="col-md-3">
                                     <p class="mb-1"><strong>ที่ปรึกษาหลัก:</strong></p>
                                     <ul class="list-unstyled mb-3">
-                                        @foreach ($projectItems->teachers->where('pivot.id_position', 1) as $teacherItems)
+                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1) as $teacherItems)
                                             <li>
-                                                <span>{{ $teacherItems->name }} {{ $teacherItems->surname }}</span>
+                                                <span>{{ $teacherItems->teacher->name }} {{ $teacherItems->teacher->surname }}</span>
                                                 @if ($teacherItems->confirm_status == false)
                                                     <span class="badge bg-danger">ยังไม่ตอบรับ</span>
                                                 @elseif ($teacherItems->confirm_status == true)
@@ -53,9 +53,9 @@
                                     </ul>
                                     <p class="mb-1"><strong>ที่ปรึกษาร่วม:</strong></p>
                                     <ul class="list-unstyled mb-3">
-                                        @foreach ($projectItems->teachers->where('pivot.id_position', 2) as $teacherItems)
+                                        @foreach ($projectItems->confirmTeachers->where('id_position', 2) as $teacherItems)
                                             <li>
-                                                <span>{{ $teacherItems->name }} {{ $teacherItems->surname }}</span>
+                                                <span>{{ $teacherItems->teacher->name }} {{ $teacherItems->teacher->surname }}</span>
                                                 @if ($teacherItems->confirm_status == false)
                                                     <span class="badge bg-danger">ยังไม่ตอบรับ</span>
                                                 @elseif ($teacherItems->confirm_status == true)
@@ -65,10 +65,67 @@
                                         @endforeach
                                     </ul>
                                 </div>
+                                <div class="col-md-3">
+                                    <p class="mb-1"><strong>หัวหน้าสาขา</strong></p>
+                                    <ul class="list-unstyled mb-3">
+                                        @foreach ($projectItems->confirmTeachers->where('id_position', 4) as $confirmTeacher)
+                                            <li>
+                                                <span>{{ $confirmTeacher->teacher->name }}
+                                                    {{ $confirmTeacher->teacher->surname }}</span>
+                                                @if ($confirmTeacher->confirm_status == false)
+                                                    <span class="badge bg-danger">ยังไม่ตอบรับ</span>
+                                                @elseif ($confirmTeacher->confirm_status == true)
+                                                    <span class="badge bg-success">ตอบรับแล้ว</span>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <p class="mb-1"><strong>อาจารย์ประจำวิชา</strong></p>
+                                    <ul class="list-unstyled mb-3">
+                                        @foreach ($projectItems->confirmTeachers->where('id_position', 3)->where('id_document', $documentId) as $confirmTeacher)
+                                        <li>
+                                            <span>{{ $confirmTeacher->teacher->name }}
+                                                {{ $confirmTeacher->teacher->surname }}</span>
+                                            @if ($confirmTeacher->confirm_status == false)
+                                                <span class="badge bg-danger">ยังไม่ตอบรับ</span>
+                                            @elseif ($confirmTeacher->confirm_status == true)
+                                                <span class="badge bg-success">ตอบรับแล้ว</span>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                    </ul>
+                                </div>
+                                <div class="">
+                                    <form wire:submit="confirmDocument({{ $confirmStudents->first()->id_document }},{{ $projectItems->id_project }})">
+                                        @php
+                                            $currentConfirmStudent = $confirmStudents->firstWhere(
+                                                'id_student',
+                                                Auth::guard('members')->user()->id_student,
+                                            );
+                                        @endphp
+
+                                        @if ($currentConfirmStudent)
+                                            @if ($currentConfirmStudent->confirm_status == true)
+                                                <a class="btn btn-primary disabled" href="#" role="button"
+                                                    aria-disabled="true" style="pointer-events: none;">ยืนยันแล้ว</a>
+                                            @else
+                                                <button class="btn btn-primary" type="submit"
+                                                    role="button">ยืนยัน</button>
+                                            @endif
+                                        @endif
+                                        <a class="btn btn-danger" href="">ปฏิเสธ</a>
+
+                                        @if ($confirmStudents->every(fn($student) => $student->confirm_status == true))
+                                            5555555
+                                        @else
+                                            2222
+                                        @endif
+                                    </form>
+                                </div>
                             </div>
                             </p>
+                        </div>
                     </div>
-                </div>
                 @endforeach
             @endforeach
         </div>
