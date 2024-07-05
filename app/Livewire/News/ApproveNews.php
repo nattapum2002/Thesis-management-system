@@ -23,13 +23,13 @@ class ApproveNews extends Component
     public function show($index)
     {
         News::where('id_news', $index)->update([
-            'status' => '1'
+            'status' => '0'
         ]);
     }
     public function hide($index)
     {
         News::where('id_news', $index)->update([
-            'status' => '0'
+            'status' => '1'
         ]);
     }
 
