@@ -81,7 +81,6 @@
             </div>
         </div>
     </div>
-    <a href="/admin/approve_news/" class="btn btn-primary mb-3">ย้อนกลับ</a>
     @else
     <div>
         @if (session('message'))
