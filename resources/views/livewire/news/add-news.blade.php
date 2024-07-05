@@ -56,8 +56,8 @@
                             <div class="input-field">
                                 <select class="form-select" wire:model.live="add_type">
                                     <option selected>ประเภทข่าว</option>
-                                    <option value="ทั่วไป">ทั่วไป</option>
-                                    <option value="หัวข้อ">หัวข้อ</option>
+                                    <option value="ทั่วไป">ข่าวทั่วไป</option>
+                                    <option value="หัวข้อ">ชื่อหัวข้อ</option>
                                 </select>
                                 @error('user_type')
                                 <span class="text-danger">{{ $message }}</span>

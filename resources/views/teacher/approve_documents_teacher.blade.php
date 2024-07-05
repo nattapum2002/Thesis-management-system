@@ -3,6 +3,6 @@
 อนุมัติเอกสาร
 @endsection
 @section('content')
-@livewire('DocumentLayout.group-member-detail')
+@livewire('document.teacher-manage-all-submit-document')
 {{-- @livewire('approve-documents-teacher') --}}
 @endsection

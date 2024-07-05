@@ -15,11 +15,12 @@ body {
 /* Card styles */
 .card {
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 20px auto;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
 }
 
 .card-header {
@@ -65,12 +66,12 @@ h3 {
 .table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
 }
 
 .table th, .table td {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 0.75rem;
     vertical-align: top;
 }
 
@@ -79,9 +80,18 @@ h3 {
     text-align: left;
 }
 
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
 /* Input field styles */
 .input-fields {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
 }
 
 .input-field {
@@ -116,8 +126,36 @@ h3 {
 .form-input {
     width: calc(100% - 140px);
     padding: 5px;
+    font-size: 1rem;
+    line-height: 1.5;
     border: 1px solid #ccc;
     border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 /* Button styles */
@@ -132,6 +170,8 @@ h3 {
     border-radius: 4px;
     cursor: pointer;
     margin-left: 10px;
+    font-size: 1rem;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .btn-danger {

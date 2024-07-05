@@ -29,4 +29,15 @@ class Document extends Model
     public function member(){
         return $this->belongsToMany(Member::class,'confirm_documents','id_document','id_student');
     }
+    // การเชื่อมโยงกับ ConfirmStudent
+    public function confirmStudents()
+    {
+        return $this->hasMany(Confirm_student::class, 'id_document');
+    }
+
+    // การเชื่อมโยงกับ ConfirmTeacher
+    public function confirmTeachers()
+    {
+        return $this->hasMany(Confirm_teacher::class, 'id_document');
+    }
 }

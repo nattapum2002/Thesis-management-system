@@ -10,6 +10,14 @@ use Livewire\Component;
 class MemberManageDocument extends Component
 {
 
+    public function confirmDocument($document_id, $project_id){
+        Confirm_student::where('id_document', $document_id)
+        ->where('id_student', Auth::guard('members')->user()->id_student)
+        ->where('id_project', $project_id)
+        ->update([
+            'confirm_status' => true 
+        ]);
+    }
     public function render()
     {
         

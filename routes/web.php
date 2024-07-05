@@ -337,11 +337,17 @@ Route::get('/member/manage-document', function () {
     return view('member.manage_document');
 })->name('manage_document');
 //Route::get('show', [AdminController::class, 'show']);
+<<<<<<< HEAD
+=======
 
+>>>>>>> 96dc99b8d70f6221717abffaa4efa7ae934e44f6
 Route::get('/member/manage-document-01', function () {
     return view('member.manage_document_01');
 });
 
 //Route::get('show', [AdminController::class, 'show']);
+<<<<<<< HEAD
+=======
 
 //Route::get('show', [AdminController::class, 'show']);
+>>>>>>> 96dc99b8d70f6221717abffaa4efa7ae934e44f6
