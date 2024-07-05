@@ -14,20 +14,16 @@ class LevelSeeder extends Seeder
     public function run(): void
     {
         DB::table('levels')->insert([
-            'level' => 'ป.ตรี 4 ปี',
+            'level' => 'ปวส.',
             'sector' => 'ปกติ'
         ]);
         DB::table('levels')->insert([
             'level' => 'ป.ตรี 4 ปี',
-            'sector' => 'สมทบ'
-        ]);
-        DB::table('levels')->insert([
-            'level' => 'ปวส. 2 ปี',
             'sector' => 'ปกติ'
         ]);
         DB::table('levels')->insert([
-            'level' => 'ปวส. 2 ปี',
-            'sector' => 'สมทบ'
+            'level' => 'ป.ตรี 2-3 ปี',
+            'sector' => 'ปกติ'
         ]);
     }
 }

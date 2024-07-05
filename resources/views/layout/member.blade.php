@@ -23,13 +23,14 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a href="/menu_thesis" class="nav-link">บทความปริญญานิพนธ์</a>
+            <a href="/member/menu_thesis_login" class="nav-link">บทความปริญญานิพนธ์</a>
         </li>
         <li class="nav-item">
-            <a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a>
+            <a href="/member/menu_news_login" class="nav-link">ข่าวประชาสัมพันธ์</a>
         </li>
         <li class="nav-item">
-            <a href="https://computer.surin.rmuti.ac.th/computer/" class="nav-link">เกียวกับสาขา</a>
+            <a href="https://computer.surin.rmuti.ac.th/computer/index.php" class="nav-link"
+                onclick="window.open('https://computer.surin.rmuti.ac.th/computer/index.php');">เกี่ยวกับสาขา</a>
         </li>
         <li class="nav item">
             <a class="btn btn-danger" href="{{route('logout')}}">ออกจากระบบ</a>
@@ -48,8 +49,11 @@
 <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+<<<<<<< HEAD
             {{-- <img src="{{ asset('storage/'.Auth::guard('members')->user()->student_image) }}"
                 class="img-circle elevation-2" alt="User Image"> --}}
+=======
+>>>>>>> 96dc99b8d70f6221717abffaa4efa7ae934e44f6
             @if (Auth::guard('members')->user()->student_image == null)
             <img src="{{ asset('Asset/dist/img/avatar'.rand('1', '5').'.png') }}" alt="User Image"
                 class="img-circle elevation-2">
@@ -98,7 +102,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/member/manage_thesis_member">
+                <a class="nav-link" href="/member/manage_thesis">
                     <i class='nav-icon bx bx-news'></i>
                     <p>
                         จัดการบทความปริญญานิพนธ์
@@ -120,7 +124,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/member">Dashboard</a></li>
+                    @yield('navigation')
                     <li class="breadcrumb-item active">@yield('title')</li>
                 </ol>
             </div>

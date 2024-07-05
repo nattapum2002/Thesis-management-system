@@ -3,7 +3,13 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
+    /* background-color: sandybrown; */
+    color: #333;
+}
+
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px; /* Ensure footer is not overlapped */
 }
 
 /* Card styles */
@@ -19,14 +25,36 @@ body {
 .card-header {
     padding: 15px;
     border-bottom: 1px solid #ddd;
-    background-color: #007bff;
-    color: #fff;
+    /* background-color: #007bff; */
+    color: #333;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
 
 .card-body {
-    padding: 20px;
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-text {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* .card .btn-primary:hover, .card .btn-primary:focus {
+    background-color: greenyellow;
+} */
+
+/* Header Styles */
+h1 {
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: bold;
 }
 
 h3 {
@@ -71,6 +99,20 @@ h3 {
     margin-right: 20px;
 }
 
+/* Form Styles */
+.form-control, .form-select {
+    border-radius: 20px;
+    padding: 10px 15px;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #563d7c;
+    box-shadow: 0 0 5px rgba(86, 61, 124, 0.5);
+}
+
 .form-input {
     width: calc(100% - 140px);
     padding: 5px;
@@ -101,6 +143,18 @@ h3 {
     background-color: #28a745;
     color: white;
 }
+
+.btn-primary {
+    /* background-color: #3d5b7c; */
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+/* .btn-primary:hover, .btn-primary:focus {
+    background-color: aqua;
+} */
 
 .text-right {
     text-align: right;
@@ -134,9 +188,33 @@ h3 {
     background-color: #f8f9fa;
 }
 
+/* Thesis Card Styles */
+.thesis-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.thesis-card:hover {
+    transform: translateY(-10px);
+}
+
 /* News card styles */
 .news-card {
-    position: relative;
+    /* position: relative; */
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.news-card:hover {
+    transform: translateY(-10px);
 }
 
 .ribbon {
@@ -145,7 +223,7 @@ h3 {
     right: 10px;
     background-color: red;
     color: white;
-    padding: 5px;
+    padding: 5px 15px;
     font-size: 0.8rem;
     z-index: 10;
 }
@@ -162,4 +240,102 @@ h3 {
     height: auto;
     max-height: 500px;
     object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Pagination Styles */
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination .page-link {
+    color: #563d7c;
+    border-radius: 20px;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .page-link:hover, .pagination .page-link:focus {
+    background-color: blue;
+    color: white;
+}
+
+.pagination .page-item.active .page-link {
+    /* background-color: #563d7c; */
+    border-color: #563d7c;
+}
+
+/* Thesis Detail Styles */
+.thesis-detail {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.thesis-detail h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.thesis-detail .text-muted {
+    color: #666;
+    margin-top: 10px;
+}
+
+.thesis-detail .thesis-content {
+    margin-top: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.thesis-detail .btn-primary:hover, .thesis-detail .btn-primary:focus {
+    background-color: red;
+}
+
+/* News Detail Styles */
+.news-detail {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.news-detail .img-news {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.news-detail h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.news-detail p {
+    color: #666;
+    margin-top: 10px;
+}
+
+.news-detail .text-muted {
+    color: #999;
+    margin-top: 5px;
+}
+
+.news-detail .news-content {
+    margin-top: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    text-align: left;
+}
+
+.news-detail .btn-primary:hover, .news-detail .btn-primary:focus {
+    background-color: red;
 }

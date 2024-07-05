@@ -69,16 +69,16 @@ Route::get('/menu_thesis', function () {
     return view('menu_thesis');
 });
 
-Route::get('/thesis_detail/{thesisId}', function ($thesisId) {
-    return view('thesis_detail', compact('thesisId'));
+Route::get('/detail_thesis/{thesisId}', function ($thesisId) {
+    return view('detail_thesis', compact('thesisId'));
 });
 
 Route::get('/menu_news', function () {
     return view('menu_news');
 });
 
-Route::get('/news_detail/{newsId}', function ($newsId) {
-    return view('news_detail', compact('newsId'));
+Route::get('/detail_news/{newsId}', function ($newsId) {
+    return view('detail_news', compact('newsId'));
 });
 
 Route::get('/register', function () {
@@ -107,7 +107,9 @@ Route::get('/logout', function () {
     }
 })->name('logout');
 
-//Admin
+//Global Routes
+
+//Admin Routes
 
 Route::get('/admin', function () {
     return view('admin.dashboard');
@@ -149,8 +151,32 @@ Route::get('/admin/edit_and_detail_news/{newsId}', function ($newsId) {
     return view('admin.edit_and_detail_news', compact('newsId'));
 });
 
-Route::get('/admin/manage_thesis', function () {
-    return view('admin.manage_thesis');
+Route::get('/admin/approve_news', function () {
+    return view('admin.approve_news');
+});
+
+Route::get('/admin/menu_news_login', function () {
+    return view('admin.menu_news_login');
+});
+
+Route::get('/admin/detail_news_login/{newsId}', function ($newsId) {
+    return view('admin.detail_news_login', compact('newsId'));
+});
+
+Route::get('/admin/approve_thesis', function () {
+    return view('admin.approve_thesis');
+});
+
+Route::get('/admin/edit_and_detail_thesis/{thesisId}', function ($thesisId) {
+    return view('admin.edit_and_detail_thesis', compact('thesisId'));
+});
+
+Route::get('/admin/menu_thesis_login', function () {
+    return view('admin.menu_thesis_login');
+});
+
+Route::get('/admin/detail_thesis_login/{thesisId}', function ($thesisId) {
+    return view('admin.detail_thesis_login', compact('thesisId'));
 });
 
 Route::get('/admin/admin_project', function () {
@@ -169,7 +195,7 @@ Route::get('/admin/approve_documents', function () {
     return view('admin.approve_documents');
 });
 
-// branch-head
+// branch-head Routes
 
 Route::get('/branch-head', function () {
     return view('branch-head.dashboard');
@@ -179,15 +205,39 @@ Route::get('/branch-head/edit_branch_head', function () {
     return view('branch-head.edit_branch_head');
 });
 
-Route::get('/branch-head/manage_news_branch_head', function () {
-    return view('branch-head.manage_news_branch_head');
+Route::get('/branch-head/manage_news', function () {
+    return view('branch-head.manage_news');
+});
+
+Route::get('/branch-head/add_news', function () {
+    return view('branch-head.add_news');
+});
+
+Route::get('/branch-head/edit_and_detail_news/{newsId}', function ($newsId) {
+    return view('branch-head.edit_and_detail_news', compact('newsId'));
+});
+
+Route::get('/branch-head/menu_news_login', function () {
+    return view('branch-head.menu_news_login');
+});
+
+Route::get('/branch-head/detail_news_login/{newsId}', function ($newsId) {
+    return view('branch-head.detail_news_login', compact('newsId'));
+});
+
+Route::get('/branch-head/menu_thesis_login', function () {
+    return view('branch-head.menu_thesis_login');
+});
+
+Route::get('/branch-head/detail_thesis_login/{thesisId}', function ($thesisId) {
+    return view('branch-head.detail_thesis_login', compact('thesisId'));
 });
 
 Route::get('/branch-head/approve_documents_branch_head', function () {
     return view('branch-head.approve_documents_branch_head');
 });
 
-// teacher
+// Teacher Routes
 
 Route::get('/teacher', function () {
     return view('teacher.dashboard');
@@ -201,15 +251,39 @@ Route::get('/teacher/edit_and_detail_teacher', function () {
     return view('teacher.edit_and_detail_teacher');
 });
 
-Route::get('/teacher/manage_news_teacher', function () {
-    return view('teacher.manage_news_teacher');
+Route::get('/teacher/manage_news', function () {
+    return view('teacher.manage_news');
+});
+
+Route::get('/teacher/add_news', function () {
+    return view('teacher.add_news');
+});
+
+Route::get('/teacher/edit_and_detail_news/{newsId}', function ($newsId) {
+    return view('teacher.edit_and_detail_news', compact('newsId'));
+});
+
+Route::get('/teacher/menu_news_login', function () {
+    return view('teacher.menu_news_login');
+});
+
+Route::get('/teacher/detail_news_login/{newsId}', function ($newsId) {
+    return view('teacher.detail_news_login', compact('newsId'));
+});
+
+Route::get('/teacher/menu_thesis_login', function () {
+    return view('teacher.menu_thesis_login');
+});
+
+Route::get('/teacher/detail_thesis_login/{thesisId}', function ($thesisId) {
+    return view('teacher.detail_thesis_login', compact('thesisId'));
 });
 
 Route::get('/teacher/approve_documents_teacher', function () {
     return view('teacher.approve_documents_teacher');
 });
 
-// member
+// Member Routes
 
 Route::get('/member', function () {
     return view('member.dashboard');
@@ -223,8 +297,32 @@ Route::get('/member/edit_member', function () {
     return view('member.edit_member');
 });
 
-Route::get('/member/manage_thesis_member', function () {
-    return view('member.manage_thesis_member');
+Route::get('/member/menu_news_login', function () {
+    return view('member.menu_news_login');
+});
+
+Route::get('/member/detail_news_login/{newsId}', function ($newsId) {
+    return view('member.detail_news_login', compact('newsId'));
+});
+
+Route::get('/member/menu_thesis_login', function () {
+    return view('member.menu_thesis_login');
+});
+
+Route::get('/member/detail_thesis_login/{thesisId}', function ($thesisId) {
+    return view('member.detail_thesis_login', compact('thesisId'));
+});
+
+Route::get('/member/manage_thesis', function () {
+    return view('member.manage_thesis');
+})->name('manage_thesis');
+
+Route::get('/member/add_thesis', function () {
+    return view('member.add_thesis');
+});
+
+Route::get('/member/edit_and_detail_thesis/{thesisId}', function ($thesisId) {
+    return view('member.edit_and_detail_thesis', compact('thesisId'));
 });
 
 Route::get('/member/create_document', function () {
@@ -239,7 +337,17 @@ Route::get('/member/manage-document', function () {
     return view('member.manage_document');
 })->name('manage_document');
 //Route::get('show', [AdminController::class, 'show']);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 96dc99b8d70f6221717abffaa4efa7ae934e44f6
 Route::get('/member/manage-document-01', function () {
     return view('member.manage_document_01');
 });
+
 //Route::get('show', [AdminController::class, 'show']);
+<<<<<<< HEAD
+=======
+
+//Route::get('show', [AdminController::class, 'show']);
+>>>>>>> 96dc99b8d70f6221717abffaa4efa7ae934e44f6

@@ -24,13 +24,14 @@
 
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a href="/menu_thesis" class="nav-link">บทความปริญญานิพนธ์</a>
+            <a href="/teacher/menu_thesis_login" class="nav-link">บทความปริญญานิพนธ์</a>
         </li>
         <li class="nav-item">
-            <a href="/menu_news" class="nav-link">ข่าวประชาสัมพันธ์</a>
+            <a href="/teacher/menu_news_login" class="nav-link">ข่าวประชาสัมพันธ์</a>
         </li>
         <li class="nav-item">
-            <a href="https://computer.surin.rmuti.ac.th/computer/" class="nav-link">เกียวกับสาขา</a>
+            <a href="https://computer.surin.rmuti.ac.th/computer/index.php" class="nav-link"
+                onclick="window.open('https://computer.surin.rmuti.ac.th/computer/index.php');">เกี่ยวกับสาขา</a>
         </li>
         <li class="nav item">
             <a class="btn btn-danger" href="{{route('logout')}}">ออกจากระบบ</a>
@@ -93,7 +94,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/teacher/manage_news_teacher">
+                <a class="nav-link" href="/teacher/manage_news">
                     <i class='nav-icon bx bx-news'></i>
                     <p>
                         จัดการข่าวประชาสัมพันธ์
@@ -115,7 +116,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/teacher">Dashboard</a></li>
+                    @yield('navigation')
                     <li class="breadcrumb-item active">@yield('title')</li>
                 </ol>
             </div>

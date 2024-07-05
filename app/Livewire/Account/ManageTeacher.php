@@ -14,6 +14,19 @@ class ManageTeacher extends Component
     public $editingId;
     public $editingVar;
 
+    public function show($index)
+    {
+        Teacher::where('id_teacher', $index)->update([
+            'account_status' => '0'
+        ]);
+    }
+    public function hide($index)
+    {
+        Teacher::where('id_teacher', $index)->update([
+            'account_status' => '1'
+        ]);
+    }
+
     public function render()
     {
         $teachers = Teacher::query()

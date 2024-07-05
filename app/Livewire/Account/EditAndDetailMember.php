@@ -21,7 +21,6 @@ class EditAndDetailMember extends Component
         'surname' => false,
         'course' => false,
         'level' => false,
-        'sector' => false,
         'email' => false,
         'tel' => false,
         'line_id' => false,
@@ -40,7 +39,6 @@ class EditAndDetailMember extends Component
     public $course;
     public $levels;
     public $level;
-    public $sector;
     public $email;
     public $tel;
     public $line_id;
@@ -84,7 +82,6 @@ class EditAndDetailMember extends Component
         $this->surname = $this->student->surname;
         $this->course = $this->student->course->course;
         $this->level = $this->student->level->level;
-        $this->sector = $this->student->level->sector;
         $this->email = $this->student->email;
         $this->tel = $this->student->tel;
         $this->line_id = $this->student->line_id;

@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Account;
 
+use App\Models\Course;
+use App\Models\Level;
 use App\Models\Member;
 use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +12,6 @@ use Illuminate\Support\Str;
 class Register extends Component
 {
     public $prefix, $other_prefix, $name, $surname, $id_level, $id_course, $id_student, $tel, $id_line, $email, $username, $password;
-
     protected $rules = [];
 
     public function __construct()

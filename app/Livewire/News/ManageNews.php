@@ -4,6 +4,7 @@ namespace App\Livewire\News;
 
 use Livewire\Component;
 use App\Models\News;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
@@ -11,6 +12,7 @@ class ManageNews extends Component
 {
     use WithPagination;
 
+    public $users;
     public $search = '';
     public $filterDate = 'ข่าวล่าสุด';
     public $filterType = 'ทุกประเภท';
@@ -24,14 +26,21 @@ class ManageNews extends Component
     public function show($index)
     {
         News::where('id_news', $index)->update([
-            'status' => '1'
+            'status' => '0'
         ]);
     }
     public function hide($index)
     {
         News::where('id_news', $index)->update([
-            'status' => '0'
+            'status' => '1'
         ]);
+    }
+
+    public function mount()
+    {
+        if (Auth::guard('teachers')->check()) {
+            $this->users = Teacher::find(Auth::guard('teachers')->user()->id_teacher);
+        }
     }
 
     public function render()

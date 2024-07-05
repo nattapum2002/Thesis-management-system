@@ -3,5 +3,5 @@
 ข่าวประชาสัมพันธ์
 @endsection
 @section('content')
-@livewire('menu-news')
+@livewire('news.menu-news')
 @endsection
