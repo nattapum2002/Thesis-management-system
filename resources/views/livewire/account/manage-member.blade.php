@@ -13,7 +13,6 @@
                         <th>ชื่อ</th>
                         <th>นามสกุล</th>
                         <th>หลักสูตร</th>
-                        <th>สถานะบัญชี</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -27,12 +26,12 @@
                         <td>{{ $member->course->course }}</td>
                         <td>
                             @if ($member->account_status == '1')
-                            <p class="text-success">อนุมัติ</p>
+                            <a wire:click.live='show("{{ $member->id_student }}")' class="btn btn-success"><i
+                                    class='bx bx-user-check'></i></a>
                             @else
-                            <p class="text-danger">ถูกระงับ</p>
+                            <a wire:click.live='hide("{{ $member->id_student }}")' class="btn btn-danger"><i
+                                    class='bx bx-user-x'></i></a>
                             @endif
-                        </td>
-                        <td>
                             <a href="/admin/approve_member/{{ $member->id_student }}" class="btn btn-primary"><i
                                     class='bx bx-detail'></i></a>
                         </td>

@@ -20,7 +20,6 @@
                         <th>ชื่อ</th>
                         <th>นามสกุล</th>
                         <th>ประเภทผู้ใช้งาน</th>
-                        <th>สถานะบัญชี</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -34,12 +33,12 @@
                         <td>{{ $teacher->user_type }}</td>
                         <td>
                             @if ($teacher->account_status == '1')
-                            <p class="text-success">อนุมัติ</p>
+                            <a wire:click.live='show({{ $teacher->id_teacher }})' class="btn btn-success"><i
+                                    class='bx bx-user-check'></i></a>
                             @else
-                            <p class="text-danger">ถูกระงับ</p>
+                            <a wire:click.live='hide({{ $teacher->id_teacher }})' class="btn btn-danger"><i
+                                    class='bx bx-user-x'></i></a>
                             @endif
-                        </td>
-                        <td>
                             <a href="/admin/approve_teacher/{{ $teacher->id_teacher }}" class="btn btn-primary"><i
                                     class='bx bx-detail'></i></a>
                         </td>

@@ -14,6 +14,21 @@ class ManageMember extends Component
     public $editingId;
     public $editingVar;
 
+    public function show($index)
+    {
+        // dd($index);
+        Member::where('id_student', $index)->update([
+            'account_status' => '0'
+        ]);
+    }
+    public function hide($index)
+    {
+        // dd($index);
+        Member::where('id_student', $index)->update([
+            'account_status' => '1'
+        ]);
+    }
+
     public function render()
     {
         $members = Member::with('course', 'level')
