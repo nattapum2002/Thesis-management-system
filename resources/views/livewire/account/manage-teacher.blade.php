@@ -33,10 +33,10 @@
                         <td>{{ $teacher->user_type }}</td>
                         <td>
                             @if ($teacher->account_status == '1')
-                            <a wire:click.live='show({{ $teacher->id_teacher }})' class="btn btn-success"><i
+                            <a wire:click='show({{ $teacher->id_teacher }})' class="btn btn-success"><i
                                     class='bx bx-user-check'></i></a>
                             @else
-                            <a wire:click.live='hide({{ $teacher->id_teacher }})' class="btn btn-danger"><i
+                            <a wire:click='hide({{ $teacher->id_teacher }})' class="btn btn-danger"><i
                                     class='bx bx-user-x'></i></a>
                             @endif
                             <a href="/admin/approve_teacher/{{ $teacher->id_teacher }}" class="btn btn-primary"><i

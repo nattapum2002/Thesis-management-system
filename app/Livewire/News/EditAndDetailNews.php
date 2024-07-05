@@ -2,7 +2,9 @@
 
 namespace App\Livewire\News;
 
+use App\Models\Member;
 use App\Models\News;
+use App\Models\Teacher;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +22,7 @@ class EditAnddetailNews extends Component
         'status' => false
     ];
 
+    public $users;
     public $news;
     public $newsId;
     public $title;
@@ -61,6 +64,13 @@ class EditAnddetailNews extends Component
         $this->path_news_image = $this->news->news_image;
         $this->type = $this->news->type;
         $this->status = $this->news->status;
+
+        if (Auth::guard('teachers')->check()) {
+            $this->users = Teacher::find(Auth::guard('teachers')->user()->id_teacher);
+        }
+        if (Auth::guard('members')->check()) {
+            $this->users = Member::find(Auth::guard('members')->user()->id_student);
+        }
     }
     public function render()
     {

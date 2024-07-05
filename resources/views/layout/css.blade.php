@@ -33,5 +33,6 @@
 <!-- master.css -->
 <link href="{{Asset('Asset/main/css/master.css')}}" rel="stylesheet">
 <!-- welcome.css -->
-{{-- <link href="{{Asset('Asset/main/css/welcome.css')}}" rel="stylesheet"> --}}
 
+{{--
+<link href="{{Asset('Asset/main/css/welcome.css')}}" rel="stylesheet"> --}}

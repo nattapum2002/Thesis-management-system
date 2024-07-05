@@ -26,10 +26,10 @@
                         <td>{{ $member->course->course }}</td>
                         <td>
                             @if ($member->account_status == '1')
-                            <a wire:click.live='show("{{ $member->id_student }}")' class="btn btn-success"><i
+                            <a wire:click='show("{{ $member->id_student }}")' class="btn btn-success"><i
                                     class='bx bx-user-check'></i></a>
                             @else
-                            <a wire:click.live='hide("{{ $member->id_student }}")' class="btn btn-danger"><i
+                            <a wire:click='hide("{{ $member->id_student }}")' class="btn btn-danger"><i
                                     class='bx bx-user-x'></i></a>
                             @endif
                             <a href="/admin/approve_member/{{ $member->id_student }}" class="btn btn-primary"><i
