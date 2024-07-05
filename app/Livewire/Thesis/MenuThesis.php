@@ -37,6 +37,8 @@ class MenuThesis extends Component
             })
             ->paginate(8);
 
+
+
         return view('livewire.thesis.menu-thesis', ['articles' => $articles]);
     }
 }
