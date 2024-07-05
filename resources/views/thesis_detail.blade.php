@@ -1,6 +1,6 @@
 @extends('layout.welcome')
 @section('title')
-รายละบทความปริญญานิพนธ์
+รายละเอียดบทความปริญญานิพนธ์
 @endsection
 @section('content')
 @livewire('thesis-detail', ['id' => $thesisId])
