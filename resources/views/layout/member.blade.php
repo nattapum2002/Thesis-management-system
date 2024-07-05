@@ -23,13 +23,14 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a href="/menu_thesis" class="nav-link">บทความปริญญานิพนธ์</a>
+            <a href="/member/menu_thesis_login" class="nav-link">บทความปริญญานิพนธ์</a>
         </li>
         <li class="nav-item">
             <a href="/member/menu_news_login" class="nav-link">ข่าวประชาสัมพันธ์</a>
         </li>
         <li class="nav-item">
-            <a href="https://computer.surin.rmuti.ac.th/computer/" class="nav-link">เกียวกับสาขา</a>
+            <a href="https://computer.surin.rmuti.ac.th/computer/index.php" class="nav-link"
+                onclick="window.open('https://computer.surin.rmuti.ac.th/computer/index.php');">เกี่ยวกับสาขา</a>
         </li>
         <li class="nav item">
             <a class="btn btn-danger" href="{{route('logout')}}">ออกจากระบบ</a>
@@ -96,7 +97,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/member/manage_thesis_member">
+                <a class="nav-link" href="/member/manage_thesis">
                     <i class='nav-icon bx bx-news'></i>
                     <p>
                         จัดการบทความปริญญานิพนธ์

@@ -1,5 +1,4 @@
 <div>
-    <!-- Content -->
     <div class="container mt-4">
         <h1>บทความปริญญานิพนธ์</h1>
         <div class="row mb-3">
@@ -32,7 +31,7 @@
                         <h5 class="card-title">{{ $item->title }}</h5>
                         <p class="card-text">โดย {{ $item->author }} วันที่ {{ $item->created_at->format('d/m/Y') }}</p>
                         <p class="card-text">{{ Str::limit($item->details, 100) }}</p>
-                        <a href="/thesis_detail/{{ $item->id_dissertation_article }}"
+                        <a href="/detail_thesis/{{ $item->id_dissertation_article }}"
                             class="btn btn-primary">อ่านเพิ่มเติม</a>
                     </div>
                 </div>

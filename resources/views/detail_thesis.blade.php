@@ -3,5 +3,5 @@
 รายละบทความปริญญานิพนธ์
 @endsection
 @section('content')
-@livewire('thesis-detail', ['id' => $thesisId])
+@livewire('thesis.detail-thesis', ['id' => $thesisId])
 @endsection

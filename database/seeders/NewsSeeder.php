@@ -26,7 +26,7 @@ class NewsSeeder extends Seeder
                 'details' => 'นี่คือเนื้อหาของข่าวที่ ' . $i,
                 'news_image' => null,
                 'type' => $newsTypes[array_rand($newsTypes)],
-                'status' => (bool)rand(0, 1),
+                'status' => true,
                 'id_teacher' => $teacherIds[array_rand($teacherIds)],
                 'created_by' => null, // You can adjust this if you have a user table
                 'updated_by' => null, // You can adjust this if you have a user table

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('file_dissertation');
             $table->year('year_published');
             $table->string('type');
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(true);
             $table->foreignId('id_project')->constrained(table: 'projects', column: 'id_project');
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();

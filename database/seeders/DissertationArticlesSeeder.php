@@ -30,7 +30,7 @@ class DissertationArticlesSeeder extends Seeder
                 'file_dissertation' => 'path/to/dissertation_' . ($i + 1) . '.pdf', // Example path
                 'year_published' => now()->year,
                 'type' => ['Hardware', 'Software'][array_rand(['Hardware', 'Software'])], // Randomly select between Hardware and Software
-                'status' => false,
+                'status' => true,
                 'id_project' => $projectIds[$i], // Use shuffled project id
                 'created_by' => null, // Adjust if you have a user table
                 'updated_by' => null, // Adjust if you have a user table

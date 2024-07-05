@@ -1,5 +1,4 @@
 <div>
-    <!-- Content -->
     <div class="container mt-4">
         <div class="thesis-detail">
             <img src="{{ $article->thesis_image }}" alt="{{ $article->title }}" class="img-fluid img-detail">

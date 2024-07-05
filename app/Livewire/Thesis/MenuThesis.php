@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Thesis;
 
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -20,24 +20,9 @@ class MenuThesis extends Component
         'filterType' => ['except' => 'all']
     ];
 
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-
-    public function updatingFilterDate()
-    {
-        $this->resetPage();
-    }
-
-    public function updatingFilterType()
-    {
-        $this->resetPage();
-    }
-
     public function render()
     {
-        $articles = Dissertation_article::query()
+        $articles = Dissertation_article::where('status', 1)
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%');
             })
@@ -52,6 +37,6 @@ class MenuThesis extends Component
             })
             ->paginate(8);
 
-        return view('livewire.menu-thesis', ['articles' => $articles]);
+        return view('livewire.thesis.menu-thesis', ['articles' => $articles]);
     }
 }
