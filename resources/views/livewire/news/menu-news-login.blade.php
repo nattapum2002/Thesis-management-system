@@ -50,7 +50,7 @@
                             <ul class="ml-4 mb-0 fa-ul text-muted">
                                 <li class="small">
                                     <span class="fa-li"><i class='bx bx-user'></i></span>
-                                    <b>โดย: </b> {{ $item->teacher->name,' ',$item->teacher->surname }}
+                                    <b>โดย: </b> {{ $item->teacher->name}} {{$item->teacher->surname }}
                                 </li>
                                 <li class="small">
                                     <span class="fa-li"><i class='bx bx-calendar-edit'></i></span>
