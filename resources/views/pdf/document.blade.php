@@ -3,38 +3,41 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Language" content="th">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Document PDF</title>
     <style>
         @font-face {
-            font-family: 'THSarabun';
+            font-family: 'THSarabunNew';
             font-style: normal;
             font-weight: normal;
-            src: url("{{ asset('fonts/THSarabun.ttf') }}") format("truetype");
+            src: url("{{ public_path('fonts/THSarabunNew.ttf') }}") format("truetype");
         }
 
         @font-face {
-            font-family: 'THSarabun';
+            font-family: 'THSarabunNew';
             font-style: normal;
             font-weight: bold;
-            src: url("{{ asset('fonts/THSarabun-Bold.ttf') }}") format("truetype");
+            src: url("{{ public_path('fonts/THSarabunNew-Bold.ttf') }}") format("truetype");
         }
 
         @font-face {
-            font-family: 'THSarabun';
+            font-family: 'THSarabunNew';
             font-style: italic;
             font-weight: normal;
-            src: url("{{ asset('fonts/THSarabun-Italic.ttf') }}") format("truetype");
+            src: url("{{ public_path('fonts/THSarabunNew-Italic.ttf') }}") format("truetype");
         }
 
         @font-face {
-            font-family: 'THSarabun';
+            font-family: 'THSarabunNew';
             font-style: italic;
             font-weight: bold;
-            src: url("{{ asset('fonts/THSarabun-BoldItalic.ttf') }}") format("truetype");
+            src: url("{{ public_path('fonts/THSarabunNew-BoldItalic.ttf') }}") format("truetype");
         }
 
-        body {
-            font-family: 'THSarabun';
+        p {
+            font-family: 'THSarabunNew';
+            font-size: 20px;
         }
     </style>
 </head>
@@ -42,12 +45,12 @@
 {{-- @include('pdf.font') --}}
 
 <body>
-    <p>{{ $name.' '.$email }}</p>
+    <p>สวัสดี</p>
     {{-- <img src="{{ asset('Asset/dist/img/avatar.png') }}" alt="Logo"> --}}
     {{-- <img
         src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public\Asset\dist\img\user1-128x128.jpg'))); ?>"
         width="120"> --}}
-    <h1>คณะเกษตรศาสตร์และเทคโนโลยี</h1>
+    {{-- <h1>คณะเกษตรศาสตร์และเทคโนโลยี</h1>
     <h2>มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน วิทยาเขตสุรินทร์</h2>
     <p>แบบขออนุมัติชื่อเรื่อง ปัญหาพิเศษ โครงการพิเศษ โครงงานปริญญานิพนธ์ และแผนผังอาจารย์ที่ปรึกษา</p>
     <h3>1. ชื่อเรื่อง</h3>
@@ -72,7 +75,7 @@
     <p>วันที่ ....... เดือน .................... พ.ศ. ............</p>
     <p>ลงชื่อ ............................................................. นักศึกษา คนที่ 2</p>
     <p>( ............................................................. )</p>
-    <p>วันที่ ....... เดือน .................... พ.ศ. ............</p>
+    <p>วันที่ ....... เดือน .................... พ.ศ. ............</p> --}}
     {{-- <div class="container">
         <div class="header">
             <img src="{{ asset('path/to/logo.png') }}" alt="Logo">
