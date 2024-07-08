@@ -3,5 +3,5 @@
 Dashboard
 @endsection
 @section('content')
-@livewire('admin.assign-director')
+@livewire('pdf.test')
 @endsection

@@ -30,7 +30,7 @@
             <a href="/admin/menu_news_login" class="nav-link">ข่าวประชาสัมพันธ์</a>
         </li>
         <li class="nav-item">
-            <a href="https://computer.surin.rmuti.ac.th/computer/index.php" class="nav-link"
+            <a href="#" class="nav-link"
                 onclick="window.open('https://computer.surin.rmuti.ac.th/computer/index.php');">เกี่ยวกับสาขา</a>
         </li>
         <li class="nav item">

@@ -39,7 +39,6 @@
                         <th>ประเภท</th>
                         <th>ปีการศึกษา</th>
                         <th>วันที่-เวลา</th>
-                        <th>สถานะบทความ</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -53,21 +52,14 @@
                         <td>{{ $thesis_detail->updated_at }}</td>
                         <td>
                             @if ($thesis_detail->status == '1')
-                            <p class="text-success">แสดง</p>
-                            @else
-                            <p class="text-danger">ซ่อน</p>
-                            @endif
-                        </td>
-                        <td>
-                            <a href="/member/edit_and_detail_thesis/{{ $thesis_detail->id_dissertation_article }}"
-                                class="btn btn-primary"><i class='bx bx-detail'></i></a>
-                            @if ($thesis_detail->status == '0')
-                            <a wire:click.live='show({{ $thesis_detail->id_dissertation_article }})'
+                            <a wire:click='show({{ $thesis_detail->id_dissertation_article }})'
                                 class="btn btn-success"><i class='bx bxs-show'></i></a>
                             @else
-                            <a wire:click.live='hide({{ $thesis_detail->id_dissertation_article }})'
+                            <a wire:click='hide({{ $thesis_detail->id_dissertation_article }})'
                                 class="btn btn-danger"><i class='bx bxs-hide'></i></a>
                             @endif
+                            <a href="/member/edit_and_detail_thesis/{{ $thesis_detail->id_dissertation_article }}"
+                                class="btn btn-primary"><i class='bx bx-detail'></i></a>
                         </td>
                     </tr>
                     @endforeach
