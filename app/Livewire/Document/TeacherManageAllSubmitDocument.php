@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class TeacherManageAllSubmitDocument extends Component
 {
-    public $not_approve_document , $not_approve_project ,$id_document , $id_project;
+    public $not_approve_document , $not_approve_project;
     public function teacher_document($id_document, $id_project)
     {
         $id_teacher = Auth::guard('teachers')->user()->id_teacher;
@@ -25,11 +25,11 @@ class TeacherManageAllSubmitDocument extends Component
     }
     public function not_approve($id_document,$id_project){
         $this->dispatch('not_approve_comment');
-        $this->id_document = $id_document;
-        $this->id_project = $id_project;
+        $this->not_approve_document = Document::find($id_document);
+        $this->not_approve_project = Project::find($id_project);
     }
     public function mount(){
-        $this->not_approve_document = 5555555; // กำหนดค่าเริ่มต้น
+        $this->not_approve_document = new Document(); // กำหนดค่าเริ่มต้น
         $this->not_approve_project = new Project();   // กำหนดค่าเริ่มต้น
     }
     public function render()

@@ -154,14 +154,14 @@
                                         <div class="col-md-2">
                                             <label for="documentInput" class="col-form-label">เอกสาร:</label>
                                         </div>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" id="documentInput"  wire:model="not_approve_document" disabled>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" id="documentInput"  wire:model="not_approve_document.id_document" value="{{ $not_approve_document->document }}" disabled>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="documentInput" class="col-form-label text-center">กลุ่ม: </label>
                                         </div>
-                                        <div class="col-md-5">
-                                            <input type="text" class="form-control" id="documentInput" disabled>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" id="documentInput" wire:model="not_approve_project.id_project" value="{{ $not_approve_project->project_name_th }}"  disabled>
                                         </div>
                                     </div>
                                     <div class="mb-3">

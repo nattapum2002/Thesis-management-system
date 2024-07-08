@@ -336,7 +336,6 @@ Route::get('/member/send-document', function () {
 Route::get('/member/manage-document', function () {
     return view('member.manage_document');
 })->name('manage_document');
-
 Route::get('/member/manage-document-01', function () {
     return view('member.manage_document_01');
 });
