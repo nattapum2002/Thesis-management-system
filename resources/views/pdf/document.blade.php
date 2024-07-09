@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="th">
 
@@ -5,13 +6,20 @@
     <meta http-equiv="Content-Language" content="th">
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Document PDF</title>
+=======
+<html>
+<header>
+    <title>pdf</title>
+    <meta http-equiv=”Content-Language” content=”th” />
+    <meta http-equiv=”Content-Type” content=”text/html; charset=utf-8" />
+>>>>>>> a5a079dc7b66fe79cc001f95a6957c6bf5beb838
     <style>
         @font-face {
             font-family: 'THSarabunNew';
             font-style: normal;
-            font-weight: normal;
-            src: url("{{ public_path('fonts/THSarabunNew.ttf') }}") format("truetype");
+            src: url("{{ public_path('fonts/THSarabunNew.ttf') }}") format('truetype');
         }
+<<<<<<< HEAD
 
         @font-face {
             font-family: 'THSarabunNew';
@@ -409,6 +417,17 @@
         </div>
 
     </div>
+=======
+        body {
+            font-family: "THSarabunNew";
+            font-size: 20px;
+        }
+    </style>
+</header>
+
+<body>
+    <p>สวัสดี</p> ผม สร้างจาก domPs
+>>>>>>> a5a079dc7b66fe79cc001f95a6957c6bf5beb838
 </body>
 
 </html>

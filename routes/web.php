@@ -3,6 +3,7 @@
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\pdfGenerateController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PositionController;
@@ -341,9 +342,14 @@ Route::get('/member/manage-document-01', function () {
     return view('member.manage_document_01');
 });
 
+<<<<<<< HEAD
 Route::get('/pdf', [pdfGenerateController::class, 'generate'])->name('pdfGenerate');
 
 //test
 Route::get('/test', function () {
     return view('/pdf/document');
 })->name('test');
+=======
+Route::get('/gen', [pdfGenerateController::class, 'generate']);
+//Route::get('show', [AdminController::class, 'show']);
+>>>>>>> a5a079dc7b66fe79cc001f95a6957c6bf5beb838
