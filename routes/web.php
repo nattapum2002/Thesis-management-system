@@ -20,6 +20,7 @@ use App\Http\Controllers\ConfirmTeacherController;
 use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\DocumentSubmissionScheduleController;
 use App\Http\Controllers\ExamScheduleController;
+use App\Http\Controllers\pdfGenerateController;
 use App\Http\Controllers\ScoreController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -340,4 +341,9 @@ Route::get('/member/manage-document-01', function () {
     return view('member.manage_document_01');
 });
 
-//Route::get('show', [AdminController::class, 'show']);
+Route::get('/pdf', [pdfGenerateController::class, 'generate'])->name('pdfGenerate');
+
+//test
+Route::get('/test', function () {
+    return view('/pdf/document');
+})->name('test');
