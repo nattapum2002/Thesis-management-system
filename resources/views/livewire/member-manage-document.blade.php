@@ -113,9 +113,9 @@
                                                     role="button">ยืนยัน</button>
                                             @endif
                                         @endif
-                                        <a class="btn btn-danger" href="">ปฏิเสธ</a>
+                                        <a class="btn btn-danger"  href="">ปฏิเสธ</a>
 
-                                        @if ($confirmStudents->every(fn($student) => $student->confirm_status == true))
+                                        @if ($confirmStudents->every(fn($student) => $student->confirm_status == true) && $projectItems->teachers->every(fn($teacher) => $teacher->confirm_status == true))
                                             5555555
                                         @else
                                             2222
