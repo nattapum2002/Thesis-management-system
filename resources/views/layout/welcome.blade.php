@@ -77,7 +77,8 @@
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
                     <li class="nav-item"><a class="nav-link" href="/menu_thesis">บทความปริญญานิพนธ์</a></li>
                     <li class="nav-item"><a class="nav-link" href="/menu_news">ข่าวประชาสัมพันธ์</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link" target="_blank">เกี่ยวกับสาขา</a></li>
+                    <li class="nav-item"><a href="https://computer.surin.rmuti.ac.th/computer/index.php"
+                            class="nav-link" target="_blank">เกี่ยวกับสาขา</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
