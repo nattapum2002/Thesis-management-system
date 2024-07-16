@@ -3,12 +3,13 @@
     <div class="container ">
         {{-- alert --}}
         @if (session()->has('message'))
-        <div class="row justify-content-center">
-            <div class="col-sm-5 alert alert-primary d-flex justify-content-between align-items-center" role="alert">
-                {{session('message')}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="row justify-content-center">
+                <div class="col-sm-5 alert alert-primary d-flex justify-content-between align-items-center"
+                    role="alert">
+                    {{ session('message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             </div>
-        </div>
         @endif
         {{-- alert --}}
         <form class="border rounded-3 p-2" wire:submit="register" action="">
@@ -29,30 +30,32 @@
                             <option value="อื่นๆ">อื่นๆ</option>
                         </select>
                         @if ($this->prefix == 'อื่นๆ')
-                        <input class="form-control" wire:model="other_prefix" type="text" placeholder="คำนำหน้าชื่อ"
-                            required>
+                            <input class="form-control" wire:model="other_prefix" type="text"
+                                placeholder="คำนำหน้าชื่อ" required>
                         @endif
                     </div>
                     @error('prefix')
-                    <p class="text-danger text-center">{{ $message }}</p>
+                        <p class="text-danger text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-sm-4">
                     <div class="input-group">
                         <label for="name" class="input-group-text">ชื่อ</label>
-                        <input class="form-control" type="text" wire:model="name" id="name" placeholder="กรุณากรอกชื่อ">
+                        <input class="form-control" type="text" wire:model="name" id="name"
+                            placeholder="กรุณากรอกชื่อ">
                     </div>
                     @error('name')
-                    <p class="text-danger text-center">{{ $message }}</p>
+                        <p class="text-danger text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-sm-4">
                     <div class="input-group">
                         <label for="surname" class="input-group-text">นามสกุล</label>
-                        <input class="form-control" type="text" wire:model="surname" id="surname" placeholder="นามสกุล">
+                        <input class="form-control" type="text" wire:model="surname" id="surname"
+                            placeholder="นามสกุล">
                     </div>
                     @error('surname')
-                    <p class="text-danger text-center">{{ $message }}</p>
+                        <p class="text-danger text-center">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
@@ -68,31 +71,31 @@
                         </select>
                     </div>
                     @error('id_course')
-                    <p class="text-danger text-center">{{ $message }}</p>
+                        <p class="text-danger text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-sm-4">
                     <div class="input-group">
                         <label class="input-group-text" for="level">ระดับ</label>
                         @if ($this->id_course == 1)
-                        <select class="form-select" wire:model.live="id_level" id="level">
-                            <option selected>เลือกระดับ</option>
-                            <option value="1">ปวส.</option>
-                        </select>
+                            <select class="form-select" wire:model.live="id_level" id="level">
+                                <option selected>เลือกระดับ</option>
+                                <option value="1">ปวส.</option>
+                            </select>
                         @elseif ($this->id_course == 2 || $this->id_course == 3)
-                        <select class="form-select" wire:model.live="id_level" id="level">
-                            <option selected>เลือกระดับ</option>
-                            <option value="2">ปริญญาตรี 4 ปี</option>
-                            <option value="3">ปริญญาตรี 2-3 ปี</option>
-                        </select>
+                            <select class="form-select" wire:model.live="id_level" id="level">
+                                <option selected>เลือกระดับ</option>
+                                <option value="2">ปริญญาตรี 4 ปี</option>
+                                <option value="3">เทียบโอน</option>
+                            </select>
                         @else
-                        <select class="form-select" wire:model.live="id_level" id="level" disabled>
-                            <option selected>กรุณาเลือกหลักสูตรก่อน</option>
-                        </select>
+                            <select class="form-select" wire:model.live="id_level" id="level" disabled>
+                                <option selected>กรุณาเลือกหลักสูตรก่อน</option>
+                            </select>
                         @endif
                     </div>
                     @error('id_level')
-                    <p class="text-danger text-center">{{ $message }}</p>
+                        <p class="text-danger text-center">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
@@ -104,26 +107,27 @@
                             placeholder="*ไม่จำเป็นต้องใส่ขีด" maxlength="12">
                     </div>
                     @error('id_student')
-                    <p class="text-danger text-center">{{ $message }}</p>
+                        <p class="text-danger text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-sm-4">
                     <div class="input-group">
                         <label class="input-group-text" for="tel">เบอร์โทรศัพท์</label>
-                        <input class="col form-control" type="tel" wire:model="tel" id="tel" placeholder="เบอร์โทรศัพท์"
-                            maxlength="10">
+                        <input class="col form-control" type="tel" wire:model="tel" id="tel"
+                            placeholder="เบอร์โทรศัพท์" maxlength="10">
                     </div>
                     @error('tel')
-                    <p class="text-danger text-center">{{ $message }}</p>
+                        <p class="text-danger text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-sm-4">
                     <div class="input-group">
                         <label class="input-group-text" for="id_line">ID Line</label>
-                        <input class="form-control" type="text" wire:model="id_line" id="id_line" placeholder="ID Line">
+                        <input class="form-control" type="text" wire:model="id_line" id="id_line"
+                            placeholder="ID Line">
                     </div>
                     @error('id_line')
-                    <p class="text-danger text-center">{{ $message }}</p>
+                        <p class="text-danger text-center">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
@@ -135,7 +139,7 @@
                             placeholder="*อีเมลมหาลัย">
                     </div>
                     @error('email')
-                    <p class="text-danger text-center">{{ $message }}</p>
+                        <p class="text-danger text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-sm-4">
@@ -146,7 +150,7 @@
                     </div>
                 </div>
                 @error('username')
-                <span class="text-danger text-center" id="required_username">{{ $message }}</span>
+                    <span class="text-danger text-center" id="required_username">{{ $message }}</span>
                 @enderror
                 <div class="col-sm-4">
                     <div class="input-group">
@@ -156,7 +160,7 @@
                     </div>
                 </div>
                 @error('password')
-                <span class="text-danger text-center" id="required_password">{{ $message }}</span>
+                    <span class="text-danger text-center" id="required_password">{{ $message }}</span>
                 @enderror
             </div>
             <div>

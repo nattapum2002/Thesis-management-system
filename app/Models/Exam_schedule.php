@@ -21,11 +21,16 @@ class Exam_schedule extends Model
      * @var array<int, string>
      */
     protected $primaryKey = 'id_exam_schedule';
-    protected $fillable = ['exam_time', 'exam_day', 'exam_room', 'exam_building', 'exam_group', 'year_published', 'semester', 'id_project', 'id_document', 'created_by', 'updated_by'];
+    protected $fillable = ['exam_time', 'exam_day', 'exam_room', 'exam_building', 'exam_group', 'year_published', 'semester', 'id_project', 'id_document', 'id_teacher', 'created_by', 'updated_by'];
 
     public function project()
     {
         return $this->belongsTo(Project::class, 'id_project');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'id_teacher');
     }
 
     public function document()

@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use App\Models\Document;
+use App\Models\Teacher;
 
 class ExamSchedulesSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class ExamSchedulesSeeder extends Seeder
     {
         $projects = Project::all();
         $documents = Document::whereIn('id_document', [3, 6])->get();
+        $teachers = Teacher::where('user_type', 'Admin')->get();
 
         foreach ($projects as $project) {
             // สุ่มเลือกจำนวนของ documents ที่จะใช้
@@ -32,6 +34,7 @@ class ExamSchedulesSeeder extends Seeder
                     'year_published' => now()->format('Y'),
                     'semester' => rand(1, 2), // สุ่มภาคการศึกษา
                     'id_project' => $project->id_project,
+                    'id_teacher' => $teachers->random()->id_teacher,
                     'id_document' => $document->id_document,
                     'created_at' => now(),
                     'updated_at' => now(),

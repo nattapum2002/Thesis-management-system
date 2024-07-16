@@ -18,11 +18,11 @@ class LevelSeeder extends Seeder
             'sector' => 'ปกติ'
         ]);
         DB::table('levels')->insert([
-            'level' => 'ป.ตรี 4 ปี',
+            'level' => 'ปริญญาตรี 4 ปี',
             'sector' => 'ปกติ'
         ]);
         DB::table('levels')->insert([
-            'level' => 'ป.ตรี 2-3 ปี',
+            'level' => 'เทียบโอน',
             'sector' => 'ปกติ'
         ]);
     }

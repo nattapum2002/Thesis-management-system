@@ -21,6 +21,7 @@ return new class extends Migration
             $table->year('year_published');
             $table->tinyInteger('semester');
             $table->foreignId('id_project')->constrained(table: 'projects', column: 'id_project');
+            $table->foreignId('id_teacher')->constrained(table: 'teachers', column: 'id_teacher');
             $table->foreignId('id_document')->constrained(table: 'documents', column: 'id_document');
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
