@@ -21,6 +21,10 @@ use App\Http\Controllers\ConfirmTeacherController;
 use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\DocumentSubmissionScheduleController;
 use App\Http\Controllers\ExamScheduleController;
+<<<<<<< HEAD
+=======
+// use App\Http\Controllers\pdfGenerateController;
+>>>>>>> 9cbe4f737b743793aa445ac35248250997b3e71f
 use App\Http\Controllers\ScoreController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -341,6 +345,7 @@ Route::get('/member/manage-document-01', function () {
     return view('member.manage_document_01');
 });
 
+<<<<<<< HEAD
 //pdf
 Route::prefix('pdf')->group(function () {
     Route::get('/01/{projectId}', [pdfGenerateController::class, 'pdf01Generate'])->name('pdf01Generate');
@@ -351,8 +356,17 @@ Route::prefix('pdf')->group(function () {
     Route::get('/06/{projectId}', [pdfGenerateController::class, 'pdf06Generate'])->name('pdf06Generate');
     Route::get('/07/{projectId}', [pdfGenerateController::class, 'pdf07Generate'])->name('pdf07Generate');
 });
+=======
+Route::get('/pdf', [pdfGenerateController::class, 'generate'])->name('pdfGenerate');
+>>>>>>> 9cbe4f737b743793aa445ac35248250997b3e71f
 
 //test
 Route::get('/test/{projectId}', function () {
     return view('/pdf/document');
+<<<<<<< HEAD
 })->name('test');
+=======
+})->name('test');
+Route::get('/gen', [pdfGenerateController::class, 'generate']);
+//Route::get('show', [AdminController::class, 'show']);
+>>>>>>> 9cbe4f737b743793aa445ac35248250997b3e71f

@@ -118,14 +118,16 @@
 
                                             @if ($currentConfirmteacher->id_position == 3 || $currentConfirmteacher->id_position == 4)
                                                 <button class="btn btn-danger"
-                                                    wire:click="not_approve({{ $documentId }} ,{{ $projectItems->id_project }})"
+                                                    wire:click="not_approve({{ $documentId }} ,{{ $projectItems->id_project }} ,{{ $currentConfirmteacher->id_teacher }} ,{{$currentConfirmteacher->id_position}})"
                                                     role="button">ไม่อนุมัติ</button>
                                             @endif
                                         @endif
 
 
 
-                                        @if ($projectItems->teachers->every(fn($teacher) => $teacher->confirm_status == true))
+                                        @if (
+                                            $projectItems->teachers->every(fn($teacher) => $teacher->confirm_status == true) &&
+                                                $projectItems->confirmStudents->every(fn($student) => $student->confirm_status == true))
                                             5555555
                                         @else
                                             2222
@@ -139,125 +141,75 @@
                 @endforeach
             @endforeach
             <div>
-                <div class="modal fade" id="not_approveModal" tabindex="-1" aria-labelledby="not_approveModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">ไม่อนุมัติ</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="row text-center">
+                <form wire:submit.prevent="not_approve_confirmed">
+                    <div class="modal fade" id="not_approveModal" tabindex="-1"
+                        aria-labelledby="not_approveModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">ไม่อนุมัติ</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row text-center mb-3">
                                         <div class="col-md-2">
                                             <label for="documentInput" class="col-form-label">เอกสาร:</label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" id="documentInput"  wire:model="not_approve_document.id_document" value="{{ $not_approve_document->document }}" disabled>
+                                            <input type="text" class="form-control" id="documentInput"
+                                                value="{{ $not_approve_document->document }}" disabled>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="documentInput" class="col-form-label text-center">กลุ่ม: </label>
+                                            <label for="documentInput" class="col-form-label text-center">กลุ่ม:
+                                            </label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" id="documentInput" wire:model="not_approve_project.id_project" value="{{ $not_approve_project->project_name_th }}"  disabled>
+                                            <input type="text" class="form-control" id="documentInput"
+                                                value="{{ $not_approve_project->project_name_th }}" disabled>
                                         </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="message-text" class="col-form-label">หมายเหตุ:</label>
-                                        <textarea class="form-control" id="message-text"></textarea>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Send message</button>
+                                    {{-- <div class="row">
+                                        <div class="col">
+                                            <input type="checkbox" name=""
+                                            wire:model="not_approve_comment1"    id=""><span>มีวุฒิทางการศึกษาไม่เป็นไปตามเกณฑ์</span><br>
+                                            <input type="checkbox" name=""
+                                            wire:model="not_approve_comment2"    id=""><span>มีจำนวนนักศึกษาที่รับผิดชอบเกินเกณฑ์ที่กำหนดไว้</span><br>
+                                            <input type="checkbox" name="" id="other_comment"
+                                            wire:model="not_approve_comment3"    wire:click="$dispatch('toggleComment')"><span>อื่นๆ</span>
+                                        </div>
+                                    </div> --}}
+                                        <div class="mb-3" id="">
+                                            <label for="message-text" class="col-form-label">หมายเหตุ:</label>
+                                            <textarea class="form-control" wire:model="another_comment" id="message-text"></textarea>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Send message</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 @script
     <script>
-        $wire.on('not_approve_comment', ($documentId) => {
+        $wire.on('not_approve_comment', () => {
             //
             const not_approveModal = new bootstrap.Modal(document.getElementById('not_approveModal'));
             not_approveModal.show();
         });
     </script>
 @endscript
-{{-- <table class="table">
-    <thead class="text-center">
-        <tr>
-            <th style="width: 20%">หัวข้อ</th>
-            <th style="width: 20%">สมาชิก</th>
-            <th style="width: 30%">ที่ปรึกษา</th>
-            <th style="width: 30%">อาจารย์</th>
-            <th style="width: auto">รายละเอียด</th>
-        </tr>
-    </thead>
-    <tbody class="text-center">
-        @foreach ($projects as $projectItems)
-            <tr class="">
-                <td>{{ $projectItems->project_name_th }} <br> {{ $projectItems->project_name_en }}</td>
-                <td>
-                    @foreach ($projectItems->confirmStudents as $confirmStudent)
-                        {{ $confirmStudent->student->name }} {{ $confirmStudent->student->surname }}
-                        @if ($confirmStudent->confirm_status == false)
-                            <span class="text-danger"> (ยังไม่ยืนยัน)</span>
-                        @elseif($confirmStudent->confirm_status == true)
-                            <span class="text-success"> (ยืนยันแล้ว)</span>
-                        @endif
-                        <br>
-                    @endforeach
-                </td>
-                <td>
-                    <span>ที่ปรึกษาหลัก</span><br>
-                    @foreach ($projectItems->teachers->where('pivot.id_position', 1) as $teacherItems)
-                        <span>{{ $teacherItems->name }} {{ $teacherItems->surname }}</span>
-                        @if ($teacherItems->confirm_status == false)
-                            <span class="text-danger"> (ยังไม่ยืนยัน)</span>
-                        @elseif ($teacherItems->confirm_status == true)
-                            <span class="text-success"> (ยืนยันแล้ว)</span>
-                        @endif
-                        @unless ($loop->last)
-                            <br>
-                        @endunless
-                    @endforeach
-                    <br><span>ที่ปรึกษาร่วม</span><br>
-                    @foreach ($projectItems->teachers->where('pivot.id_position', 2) as $teacherItems)
-                        <span>{{ $teacherItems->name }} {{ $teacherItems->surname }}</span>
-                        @if ($teacherItems->confirm_status == false)
-                            <span class="text-danger"> (ยังไม่ยืนยัน)</span>
-                        @elseif($teacherItems->confirm_status == true)
-                            <span class="text-success"> (ยืนยันแล้ว)</span>
-                        @endif
-                        @unless ($loop->last)
-                            <br>
-                        @endunless
-                    @endforeach
-                </td>
-                <td>
-                    @foreach ($projectItems->confirmTeachers as $confirmTeacher)
-                        @if ($confirmTeacher->id_position == 3)
-                            <span>อาจารย์ประจำวิชา</span> {{ $confirmTeacher->teacher->name }}
-                            {{ $confirmTeacher->teacher->surname }}<br>
-                        @elseif($confirmTeacher->id_position == 4)
-                            <span>หัวหน้าสาขา</span> {{ $confirmTeacher->teacher->name }}
-                            {{ $confirmTeacher->teacher->surname }}<br>
-                        @endif
-                    @endforeach
-                </td>
-                <td>
-                    @if ($projectItems->confirmStudents->isNotEmpty())
-                        {{ $projectItems->confirmStudents->first()->documents->document }}<br>
-                    @endif
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table> --}}
+{{-- // $wire.on('toggleComment', () => {
+    //     const comment = document.getElementById('comment');
+    //     const other_comment = document.getElementById('other_comment');
+    //     if(other_comment.checked == true){
+    //         alert(other_comment);
+    //     }
+    // }); --}}
