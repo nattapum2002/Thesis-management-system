@@ -13,6 +13,10 @@ class Test extends Component
 
     public function generatePDF()
     {
+        // $pdf = App::make('dompdf.wrapper');
+        // $html = view('pdf.document')->render();
+        // $pdf->loadHTML($html);
+        // return $pdf->stream();
         // เพิ่มเวลาสูงสุดในการประมวลผล
         // set_time_limit(300); // 300 วินาที
 
