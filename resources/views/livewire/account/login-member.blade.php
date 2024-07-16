@@ -16,7 +16,7 @@
                         <h3 class="card-header">เข้าสู่ระบบสำหรับนักศึกษา</h3>
 
                         <div class="divider d-flex align-items-center my-4">
-                            
+
                         </div>
 
                         <!-- Username input -->
