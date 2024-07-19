@@ -25,24 +25,35 @@
                 </thead>
                 <tbody>
                     @foreach ($teachers as $teacher)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $teacher->prefix }}</td>
-                        <td>{{ $teacher->name }}</td>
-                        <td>{{ $teacher->surname }}</td>
-                        <td>{{ $teacher->user_type }}</td>
-                        <td>
-                            @if ($teacher->account_status == '1')
-                            <a wire:click='show({{ $teacher->id_teacher }})' class="btn btn-success"><i
-                                    class='bx bx-user-check'></i></a>
-                            @else
-                            <a wire:click='hide({{ $teacher->id_teacher }})' class="btn btn-danger"><i
-                                    class='bx bx-user-x'></i></a>
-                            @endif
-                            <a href="/admin/approve_teacher/{{ $teacher->id_teacher }}" class="btn btn-primary"><i
-                                    class='bx bx-detail'></i></a>
-                        </td>
-                    </tr>
+                        {{-- @dd($teachers->where('user_type', $teacher->user_type)->count()) --}}
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $teacher->prefix }}</td>
+                            <td>{{ $teacher->name }}</td>
+                            <td>{{ $teacher->surname }}</td>
+                            <td>{{ $teacher->user_type }}</td>
+                            <td>
+                                @php
+                                    $teachersCount = $teachers->where('user_type', $teacher->user_type)->count();
+                                    $isTeacherActive = $teacher->account_status == '1';
+                                @endphp
+
+                                @if ($teachersCount < 2)
+                                    <a wire:click='{{ $isTeacherActive ? 'show' : 'hide' }}({{ $teacher->id_teacher }})'
+                                        class="btn btn-{{ $isTeacherActive ? 'success' : 'danger' }} disabled">
+                                        <i class='bx bx-{{ $isTeacherActive ? 'user-check' : 'user-x' }}'></i>
+                                    </a>
+                                @else
+                                    <a wire:click='{{ $isTeacherActive ? 'show' : 'hide' }}({{ $teacher->id_teacher }})'
+                                        class="btn btn-{{ $isTeacherActive ? 'success' : 'danger' }}">
+                                        <i class='bx bx-{{ $isTeacherActive ? 'user-check' : 'user-x' }}'></i>
+                                    </a>
+                                @endif
+
+                                <a href="/admin/approve_teacher/{{ $teacher->id_teacher }}" class="btn btn-primary"><i
+                                        class='bx bx-detail'></i></a>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

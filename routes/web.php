@@ -180,8 +180,12 @@ Route::get('/admin/detail_thesis_login/{thesisId}', function ($thesisId) {
     return view('admin.detail_thesis_login', compact('thesisId'));
 });
 
-Route::get('/admin/admin_project', function () {
-    return view('admin.admin_project');
+Route::get('/admin/manage_project', function () {
+    return view('admin.manage_project');
+});
+
+Route::get('/admin/detail_project/{projectId}', function ($projectId) {
+    return view('admin.detail_project', compact('projectId'));
 });
 
 Route::get('/admin/manage_exam_schedule', function () {

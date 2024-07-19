@@ -19,6 +19,7 @@ class ApproveTeacher extends Component
     public $teacherId;
     public $user_type;
     public $account_status;
+    public $account_count;
 
     public function edit($index)
     {
@@ -46,6 +47,7 @@ class ApproveTeacher extends Component
         $this->teacherId = $this->teacher->id_teacher;
         $this->user_type = $this->teacher->user_type;
         $this->account_status = $this->teacher->account_status;
+        $this->account_count = Teacher::where('user_type', $this->teacher->user_type)->count();
     }
     public function render()
     {
