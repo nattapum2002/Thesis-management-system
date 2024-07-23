@@ -57,4 +57,8 @@ class Project extends Model
     {
         return $this->hasMany(Confirm_teacher::class, 'id_project');
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'id_project');
+    }
 }

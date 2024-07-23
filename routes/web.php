@@ -3,7 +3,6 @@
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\pdfGenerateController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PositionController;
@@ -195,7 +194,7 @@ Route::get('/admin/manage_document_schedule', function () {
 
 Route::get('/admin/approve_documents', function () {
     return view('admin.approve_documents');
-});
+})->name('admin_approve_documents');
 
 // branch-head Routes
 
@@ -327,9 +326,13 @@ Route::get('/member/edit_and_detail_thesis/{thesisId}', function ($thesisId) {
     return view('member.edit_and_detail_thesis', compact('thesisId'));
 });
 
-Route::get('/member/create_document', function () {
+Route::get('/member/create_document/01', function () {
     return view('member.create_document');
 })->name('create_document_01');
+
+Route::get('/member/create_document/02', function () {
+    return view('member.create_document_02');
+})->name('create_document_02');
 
 Route::get('/member/send-document', function () {
     return view('member.manage_submit_document');
@@ -342,14 +345,19 @@ Route::get('/member/manage-document-01', function () {
     return view('member.manage_document_01');
 });
 
-<<<<<<< HEAD
 Route::get('/pdf', [pdfGenerateController::class, 'generate'])->name('pdfGenerate');
 
 //test
 Route::get('/test', function () {
     return view('/pdf/document');
 })->name('test');
-=======
 Route::get('/gen', [pdfGenerateController::class, 'generate']);
 //Route::get('show', [AdminController::class, 'show']);
->>>>>>> a5a079dc7b66fe79cc001f95a6957c6bf5beb838
+
+Route::get('Document/01/{id_project}', function ($id_project){
+    return view('detail-document.detail_document_01',compact('id_project'));
+})->name('detail_document_01');
+
+Route::get('Document/02/{id_project}', function ($id_project){
+    return view('detail-document.detail_document_02',compact('id_project'));
+})->name('detail_document_02');

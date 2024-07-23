@@ -40,9 +40,10 @@
                                 <div class="col-md-3">
                                     <p class="mb-1"><strong>ที่ปรึกษาหลัก:</strong></p>
                                     <ul class="list-unstyled mb-3">
-                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1) as $teacherItems)
+                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $teacherItems)
                                             <li>
-                                                <span>{{ $teacherItems->teacher->name }} {{ $teacherItems->teacher->surname }}</span>
+                                                <span>{{ $teacherItems->teacher->name }}
+                                                    {{ $teacherItems->teacher->surname }}</span>
                                                 @if ($teacherItems->confirm_status == false)
                                                     <span class="badge bg-danger">ยังไม่ตอบรับ</span>
                                                 @elseif ($teacherItems->confirm_status == true)
@@ -53,9 +54,10 @@
                                     </ul>
                                     <p class="mb-1"><strong>ที่ปรึกษาร่วม:</strong></p>
                                     <ul class="list-unstyled mb-3">
-                                        @foreach ($projectItems->confirmTeachers->where('id_position', 2) as $teacherItems)
+                                        @foreach ($projectItems->confirmTeachers->where('id_position', 2)->where('id_document', $documentId) as $teacherItems)
                                             <li>
-                                                <span>{{ $teacherItems->teacher->name }} {{ $teacherItems->teacher->surname }}</span>
+                                                <span>{{ $teacherItems->teacher->name }}
+                                                    {{ $teacherItems->teacher->surname }}</span>
                                                 @if ($teacherItems->confirm_status == false)
                                                     <span class="badge bg-danger">ยังไม่ตอบรับ</span>
                                                 @elseif ($teacherItems->confirm_status == true)
@@ -68,7 +70,7 @@
                                 <div class="col-md-3">
                                     <p class="mb-1"><strong>หัวหน้าสาขา</strong></p>
                                     <ul class="list-unstyled mb-3">
-                                        @foreach ($projectItems->confirmTeachers->where('id_position', 4) as $confirmTeacher)
+                                        @foreach ($projectItems->confirmTeachers->where('id_position', 4)->where('id_document', $documentId) as $confirmTeacher)
                                             <li>
                                                 <span>{{ $confirmTeacher->teacher->name }}
                                                     {{ $confirmTeacher->teacher->surname }}</span>
@@ -83,20 +85,21 @@
                                     <p class="mb-1"><strong>อาจารย์ประจำวิชา</strong></p>
                                     <ul class="list-unstyled mb-3">
                                         @foreach ($projectItems->confirmTeachers->where('id_position', 3)->where('id_document', $documentId) as $confirmTeacher)
-                                        <li>
-                                            <span>{{ $confirmTeacher->teacher->name }}
-                                                {{ $confirmTeacher->teacher->surname }}</span>
-                                            @if ($confirmTeacher->confirm_status == false)
-                                                <span class="badge bg-danger">ยังไม่ตอบรับ</span>
-                                            @elseif ($confirmTeacher->confirm_status == true)
-                                                <span class="badge bg-success">ตอบรับแล้ว</span>
-                                            @endif
-                                        </li>
-                                    @endforeach
+                                            <li>
+                                                <span>{{ $confirmTeacher->teacher->name }}
+                                                    {{ $confirmTeacher->teacher->surname }}</span>
+                                                @if ($confirmTeacher->confirm_status == false)
+                                                    <span class="badge bg-danger">ยังไม่ตอบรับ</span>
+                                                @elseif ($confirmTeacher->confirm_status == true)
+                                                    <span class="badge bg-success">ตอบรับแล้ว</span>
+                                                @endif
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <div class="">
-                                    <form wire:submit="confirmDocument({{ $confirmStudents->first()->id_document }},{{ $projectItems->id_project }})">
+                                    <form
+                                        wire:submit="confirmDocument({{ $confirmStudents->first()->id_document }},{{ $projectItems->id_project }})">
                                         @php
                                             $currentConfirmStudent = $confirmStudents->firstWhere(
                                                 'id_student',
@@ -113,12 +116,34 @@
                                                     role="button">ยืนยัน</button>
                                             @endif
                                         @endif
-                                        <a class="btn btn-danger"  href="">ปฏิเสธ</a>
+                                        <a class="btn btn-danger" href="">ปฏิเสธ</a>
+                                        @if (
+                                            $confirmStudents->every(fn($student) => $student->confirm_status == true) &&
+                                                $projectItems->confirmTeachers->where('id_document', $documentId)->where('id_project', $projectItems->id_project)->every(fn($teacher) => $teacher->confirm_status == true))
 
-                                        @if ($confirmStudents->every(fn($student) => $student->confirm_status == true) && $projectItems->teachers->every(fn($teacher) => $teacher->confirm_status == true))
-                                            5555555
+                                            @switch($documentId)
+                                                @case(1)
+                                                    <a class="btn btn-primary" href="{{route('create_document_02')}}">สร้างเอกสาร 02</a>
+                                                @break
+
+                                                @case(2)
+                                                    
+                                                @break
+
+                                                @default
+                                            @endswitch
                                         @else
-                                            2222
+                                            @switch($documentId)
+                                                @case(1)
+                                                    <button class="btn btn-primary" disabled>สร้างเอกสาร 02</button>
+                                                @break
+
+                                                @case(2)
+                                                    
+                                                @break
+
+                                                @default
+                                            @endswitch
                                         @endif
                                     </form>
                                 </div>
