@@ -1,8 +1,8 @@
 <div>
     @if (session('message'))
-    <div class="alert alert-success" role="alert">
-        {{ session('message') }}
-    </div>
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
+        </div>
     @endif
     <div class="card">
         <div class="card-body table-responsive p-0">
@@ -19,13 +19,13 @@
                         <th>รูปภาพนักศึกษา</th>
                         <td colspan="2">
                             @if ($student->student_image == null)
-                            <img wire:live src="{{ asset('Asset/dist/img/avatar'.rand('1', '5').'.png') }}"
-                                alt="{{ $student->name }}"
-                                style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <img wire:live src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}"
+                                    alt="{{ $student->name }}"
+                                    style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                             @else
-                            <img wire:live src="{{ asset('storage/'.$student->student_image) }}"
-                                alt="{{ $student->name }}"
-                                style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <img wire:live src="{{ asset('storage/' . $student->student_image) }}"
+                                    alt="{{ $student->name }}"
+                                    style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                             @endif
                         </td>
                     </tr>
@@ -77,35 +77,35 @@
                     <tr>
                         <th>สถานะบัญชี</th>
                         @if ($toggle['account_status'])
-                        <td>
-                            <div class="input-field">
-                                <select class="form-select" wire:model.live="account_status">
-                                    <option selected value="1">อนุมัติ</option>
-                                    <option value="0">ระงับบัญชี</option>
-                                </select>
-                                @error('account_status')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </td>
-                        <td>
-                            <div class="button-container">
-                                <button class="btn btn-success" wire:click="save('account_status')">บันทึก</button>
-                                <button class="btn btn-danger" wire:click="cancel('account_status')">ยกเลิก</button>
-                            </div>
-                        </td>
+                            <td>
+                                <div class="input-field">
+                                    <select class="form-select" wire:model.live="account_status">
+                                        <option selected value="1">อนุมัติ</option>
+                                        <option value="0">ระงับบัญชี</option>
+                                    </select>
+                                    @error('account_status')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-container">
+                                    <button class="btn btn-success" wire:click="save('account_status')">บันทึก</button>
+                                    <button class="btn btn-danger" wire:click="cancel('account_status')">ยกเลิก</button>
+                                </div>
+                            </td>
                         @else
-                        <td>
-                            @if ($student->account_status == '1')
-                            <p class="text-success">อนุมัติ</p>
-                            @else
-                            <p class="text-danger">ถูกระงับ</p>
-                            @endif
-                        </td>
-                        <td>
-                            <button class="btn btn-primary" wire:click="edit('account_status')"><i
-                                    class='bx bx-edit'></i></button>
-                        </td>
+                            <td>
+                                @if ($student->account_status == '1')
+                                    <p class="text-success">อนุมัติ</p>
+                                @else
+                                    <p class="text-danger">ถูกระงับ</p>
+                                @endif
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" wire:click="edit('account_status')"><i
+                                        class='bx bx-edit'></i></button>
+                            </td>
                         @endif
                     </tr>
                 </tbody>

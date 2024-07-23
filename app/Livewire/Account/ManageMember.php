@@ -16,17 +16,17 @@ class ManageMember extends Component
 
     public function show($index)
     {
-        // dd($index);
         Member::where('id_student', $index)->update([
             'account_status' => '0'
         ]);
+        session()->flash('danger', 'ยุติบัญชีของ ' . Member::find($index)->prefix . ' ' . Member::find($index)->name . ' ' . Member::find($index)->surname . ' เรียบร้อยแล้ว');
     }
     public function hide($index)
     {
-        // dd($index);
         Member::where('id_student', $index)->update([
             'account_status' => '1'
         ]);
+        session()->flash('success', 'อนุมัติบัญชีของ ' . Member::find($index)->prefix . ' ' . Member::find($index)->name . ' ' . Member::find($index)->surname . ' เรียบร้อยแล้ว');
     }
 
     public function render()

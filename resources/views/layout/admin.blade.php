@@ -201,4 +201,5 @@
 
 {{-- script --}}
 @section('masterscript')
+    @yield('script')
 @endsection
