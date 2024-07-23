@@ -180,8 +180,12 @@ Route::get('/admin/detail_thesis_login/{thesisId}', function ($thesisId) {
     return view('admin.detail_thesis_login', compact('thesisId'));
 });
 
-Route::get('/admin/admin_project', function () {
-    return view('admin.admin_project');
+Route::get('/admin/manage_project', function () {
+    return view('admin.manage_project');
+});
+
+Route::get('/admin/detail_project/{projectId}', function ($projectId) {
+    return view('admin.detail_project', compact('projectId'));
 });
 
 Route::get('/admin/manage_exam_schedule', function () {
@@ -346,9 +350,19 @@ Route::get('/member/manage-document-01', function () {
 });
 
 Route::get('/pdf', [pdfGenerateController::class, 'generate'])->name('pdfGenerate');
+//pdf
+Route::prefix('pdf')->group(function () {
+    Route::get('/01/{projectId}', [pdfGenerateController::class, 'pdf01Generate'])->name('pdf01Generate');
+    Route::get('/02/{projectId}', [pdfGenerateController::class, 'pdf02Generate'])->name('pdf02Generate');
+    Route::get('/03/{projectId}', [pdfGenerateController::class, 'pdf03Generate'])->name('pdf03Generate');
+    Route::get('/04/{projectId}', [pdfGenerateController::class, 'pdf04Generate'])->name('pdf04Generate');
+    Route::get('/05/{projectId}', [pdfGenerateController::class, 'pdf05Generate'])->name('pdf05Generate');
+    Route::get('/06/{projectId}', [pdfGenerateController::class, 'pdf06Generate'])->name('pdf06Generate');
+    Route::get('/07/{projectId}', [pdfGenerateController::class, 'pdf07Generate'])->name('pdf07Generate');
+});
 
 //test
-Route::get('/test', function () {
+Route::get('/test/{projectId}', function () {
     return view('/pdf/document');
 })->name('test');
 Route::get('/gen', [pdfGenerateController::class, 'generate']);

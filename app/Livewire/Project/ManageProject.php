@@ -1,32 +1,20 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Project;
 
-use App\Models\Member;
 use App\Models\Project;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class AdminProject extends Component
+class ManageProject extends Component
 {
     use WithPagination;
-    protected $paginationTheme = 'bootstrap';
 
-    public $projects;
     public $search = '';
-
-    public function mount()
-    {
-    }
-
-    public function delete()
-    {
-        dd($this->project_name_th);
-    }
 
     public function render()
     {
-        $this->projects = Project::with([
+        $projects = Project::with([
             'members' => function ($query) {
                 $query->with(['level', 'course']);
             },
@@ -38,7 +26,7 @@ class AdminProject extends Component
                 $query->where('project_name_th', 'like', '%' . $this->search . '%')
                     ->orWhere('project_name_en', 'like', '%' . $this->search . '%');
             })
-            ->get();
-        return view('livewire.admin-project', ['projects' => $this->projects]);
+            ->paginate(15);
+        return view('livewire.project.manage-project', ['projects' => $projects]);
     }
 }

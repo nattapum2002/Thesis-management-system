@@ -355,8 +355,4 @@
         font-weight: bold;
         src: url("{{ asset('Asset/fonts/TH Baijam BoldItalic.ttf') }}") format("truetype");
     }
-
-    body {
-        font-family: 'THSarabun';
-    }
 </style>

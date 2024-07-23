@@ -18,24 +18,24 @@
                 </thead>
                 <tbody>
                     @foreach ($members as $member)
-                    <tr>
-                        <td>{{ $member->id_student }}</td>
-                        <td>{{ $member->prefix }}</td>
-                        <td>{{ $member->name }}</td>
-                        <td>{{ $member->surname }}</td>
-                        <td>{{ $member->course->course }}</td>
-                        <td>
-                            @if ($member->account_status == '1')
-                            <button wire:click='show("{{ $member->id_student }}")' class="btn btn-success"><i
-                                    class='bx bx-user-check'></i></button>
-                            @else
-                            <button wire:click='hide("{{ $member->id_student }}")' class="btn btn-danger"><i
-                                    class='bx bx-user-x'></i></button>
-                            @endif
-                            <a href="/admin/approve_member/{{ $member->id_student }}" class="btn btn-primary"><i
-                                    class='bx bx-detail'></i></a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $member->id_student }}</td>
+                            <td>{{ $member->prefix }}</td>
+                            <td>{{ $member->name }}</td>
+                            <td>{{ $member->surname }}</td>
+                            <td>{{ $member->course->course }}</td>
+                            <td>
+                                @if ($member->account_status == '1')
+                                    <button wire:click='show("{{ $member->id_student }}")' class="btn btn-success"><i
+                                            class='bx bx-user-check'></i></button>
+                                @else
+                                    <button wire:click='hide("{{ $member->id_student }}")' class="btn btn-danger"><i
+                                            class='bx bx-user-x'></i></button>
+                                @endif
+                                <a href="/admin/approve_member/{{ $member->id_student }}" class="btn btn-primary"><i
+                                        class='bx bx-detail'></i></a>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

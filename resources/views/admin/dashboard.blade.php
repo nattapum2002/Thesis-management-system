@@ -1,7 +1,7 @@
 @extends('layout.admin')
 @section('title')
-Dashboard
+    Dashboard
 @endsection
 @section('content')
-@livewire('pdf.test')
+    @livewire('admin.dashboard')
 @endsection
