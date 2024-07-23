@@ -48,6 +48,9 @@ class Teacher extends Model implements Authenticatable
     {
         return $this->belongsToMany(Project::class, 'advisers', 'id_teacher', 'id_project');
     }
+    public function comments(){
+        return $this->hasMany(Comment::class, 'id_teacher');
+    }
 
     protected $casts = [
         'email_verified_at' => 'datetime',

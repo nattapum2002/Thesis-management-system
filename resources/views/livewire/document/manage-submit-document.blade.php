@@ -24,7 +24,7 @@
                     <div class="card-header">
                         <h3 class="card-title">เอกสาร คกท. 02</h3>
                         <div class="card-tools">
-                            <a class="btn btn-primary" href="">สร้างเอกสาร</a>
+                            <a class="btn btn-primary" href="{{route('create_document_02')}}">สร้างเอกสาร</a>
                         </div>
                     </div>
                 </div>
