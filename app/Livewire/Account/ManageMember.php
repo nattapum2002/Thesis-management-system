@@ -19,7 +19,7 @@ class ManageMember extends Component
         Member::where('id_student', $index)->update([
             'account_status' => '0'
         ]);
-        session()->flash('danger', 'ยุติบัญชีของ ' . Member::find($index)->prefix . ' ' . Member::find($index)->name . ' ' . Member::find($index)->surname . ' เรียบร้อยแล้ว');
+        session()->flash('danger', 'ระงับบัญชีของ ' . Member::find($index)->prefix . ' ' . Member::find($index)->name . ' ' . Member::find($index)->surname . ' เรียบร้อยแล้ว');
     }
     public function hide($index)
     {

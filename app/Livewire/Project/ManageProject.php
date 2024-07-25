@@ -26,7 +26,7 @@ class ManageProject extends Component
                 $query->where('project_name_th', 'like', '%' . $this->search . '%')
                     ->orWhere('project_name_en', 'like', '%' . $this->search . '%');
             })
-            ->paginate(15);
+            ->paginate(5);
         return view('livewire.project.manage-project', ['projects' => $projects]);
     }
 }
