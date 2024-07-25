@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="chart">
+                    <div class="chart text-center">
                         <canvas id="memberChart" style="width:100%;max-width:600px"></canvas>
                     </div>
                 </div>
