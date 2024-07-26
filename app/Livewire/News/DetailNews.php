@@ -2,8 +2,8 @@
 
 namespace App\Livewire\News;
 
-use Livewire\Component;
 use App\Models\News;
+use Livewire\Component;
 
 class DetailNews extends Component
 {
@@ -16,6 +16,7 @@ class DetailNews extends Component
 
     public function render()
     {
-        return view('livewire.news.detail-news', ['news' => $this->news]);
+        $other_news = News::where('id_news', '!=', $this->news->id_news)->orderBy('created_at', 'desc')->paginate(4);
+        return view('livewire.news.detail-news', ['other_news' => $other_news]);
     }
 }

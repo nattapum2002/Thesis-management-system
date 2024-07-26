@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     @if (session()->has('message'))
     <div class="alert alert-danger">
         {{ session('message') }}
@@ -51,6 +51,19 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </section>
+</div> --}}
+
+<div>
+    @if (session('message'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
+    <section id="login-member">
+        <div class="container">
+
         </div>
     </section>
 </div>

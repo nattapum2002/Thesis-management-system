@@ -22,7 +22,7 @@ body {
     font-family: var(--font);
     margin: 0;
     padding: 0;
-    color: var(--grey-44-color);
+    color: var(--grey-1e-color);
     font-size: medium;
 }
 
@@ -52,7 +52,7 @@ img {
 }
 
 section {
-    padding: 80px 0px;
+    padding: 70px 0px;
 }
 
 /* navbar */
@@ -65,15 +65,9 @@ nav.navbar {
     z-index: 999;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    min-height: 80px;
+    /* min-height: 80px;
     font-weight: 500;
-    font-size: medium;
-    vertical-align: middle;
-}
-
-ul.navbar-list {
-    list-style-type: none;
-    display: inline-flex;
+    font-size: medium; */
     vertical-align: middle;
 }
 
@@ -104,7 +98,7 @@ a.navbar-link, a.dropdown-item {
     color: var(--grey-44-color);
 }
 
-a.navbar-link:hover, a.navbar-link:focus {
+a.navbar-link:hover, a.active {
     color: var(--orange-color);
     border-bottom: var(--orange-color) 2px solid;
 }
@@ -126,36 +120,75 @@ a.btn-brand {
 }
 
 a.btn-brand:hover, a.btn-brand:focus {
+    color: var(--orange-color);
     background-color: var(--white-color);
+    border-color: var(--orange-color);
 }
 
+/* pagination */
+
+.pagination {
+    margin-top: 5px;
+    justify-content: center;
+}
+
+p.page-number {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination .page-item .page-link {
+    color: var(--orange-color);
+    border: 1px solid var(--grey-cc-color);
+    padding: 8px 16px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+    color: var(--white-color);
+}
+
+.pagination .page-item.active .page-link:hover {
+    background-color: var(--white-color);
+    border-color: var(--grey-cc-color);
+    color: var(--orange-color);
+}
+
+.pagination .page-item.disabled .page-link {
+    color: var(--grey-cc-color);
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #e9ecef;
+}
 
 
 /* --------------------------------------- welcome page --------------------------------------- */
 
 /* slider */
 
-div.slide1 {
+#slider div.slide1 {
     background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/2/5000/3333.jpg?hmac=_KDkqQVttXw_nM-RyJfLImIbafFrqLsuGO5YuHqD-qQ");
 }
 
-div.slide2 {
+#slider div.slide2 {
     background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/180/2400/1600.jpg?hmac=Ig-CXcpNdmh51k3kXpNqNqcDYTwXCIaonYiBOnLXBb8");
 }
 
-div.slide3 {
+#slider div.slide3 {
     background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/250/4928/3264.jpg?hmac=4oIwzXlpK4KU3wySTnATICCa4H6xwbSGifrxv7GafWU");
 }
 
 /* about */
 
-div.about-info {
+#about div.about-info {
     display: flex;
     align-items: center;
     max-width: fit-content;
 }
 
-div.about-info:hover {
+#about div.about-info:hover {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -163,7 +196,7 @@ div.about-info:hover {
     transition: transform 0.3s ease-in-out;
 }
 
-div.about-info i {
+#about div.about-info i {
     color: var(--white-color);
     background-color: var(--orange-color);
     font-size: 80px;
@@ -173,17 +206,17 @@ div.about-info i {
     border-radius: 10px;
 }
 
-div.about-info h4 {
+#about div.about-info h4 {
     margin-bottom: 5px;
 }
 
-div.about-img img {
+#about div.about-img img {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
-div.about-img img:hover {
+#about div.about-img img:hover {
     transform: scale(1.08);
     transition: transform 0.3s ease-in-out;
 }
@@ -209,7 +242,7 @@ div.about-img img:hover {
 
 /* team */
 
-div.social-links a {
+#team div.social-links a {
     width: 50px;
     height: 50px;
     background-color: rgba(204, 204, 204, 0.7);
@@ -221,21 +254,21 @@ div.social-links a {
     border-radius: 100%;
 }
 
-div.social-links a:hover {
+#team div.social-links a:hover {
     background-color: var(--white-color);
     color: var(--orange-color);
 }
 
-div.team-member {
+#team div.team-member {
     text-align: center;
 }
 
-div.team-member div.img-wrapper {
+#team div.team-member div.img-wrapper {
     position: relative;
     overflow: hidden;
 }
 
-div.team-member div.overlay {
+#team div.team-member div.overlay {
     position: absolute;
     top: -10%;
     left: 0;
@@ -246,12 +279,12 @@ div.team-member div.overlay {
     transition: all 0.3s ease;
 }
 
-div.team-member:hover div.overlay {
+#team div.team-member:hover div.overlay {
     opacity: 1;
     top: 0;
 }
 
-div.team-member div.social-links {
+#team div.team-member div.social-links {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -260,12 +293,12 @@ div.team-member div.social-links {
     opacity: 0;
 }
 
-div.team-member:hover div.social-links {
+#team div.team-member:hover div.social-links {
     opacity: 1;
     top: 50%;
 }
 
-div.team-member h3 {
+#team div.team-member h3 {
     margin-top: 24px;
 }
 
@@ -276,10 +309,14 @@ footer {
     padding-bottom: 40px;
     color: var(--white-color);
     text-align: center;
-    background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/250/4928/3264.jpg?hmac=4oIwzXlpK4KU3wySTnATICCa4H6xwbSGifrxv7GafWU");
+    background-image: linear-gradient(rgba(9, 32, 50, 0.5), rgba(9, 32, 50, 0.8)), url("https://fastly.picsum.photos/id/26/4209/2769.jpg?hmac=vcInmowFvPCyKGtV7Vfh7zWcA_Z0kStrPDW3ppP0iGI");
 }
 
 footer a.navbar-brand {
+    color: var(--orange-color);
+}
+
+footer a.navbar-brand:hover {
     color: var(--white-color);
 }
 
@@ -287,57 +324,52 @@ footer p {
     margin-top: 24px;
 }
 
-div.footer-top {
+footer div.footer-top {
     margin-bottom: 40px;
 }
 
-div.footer-bottom {
+footer div.footer-bottom {
     border-top: 1px solid var(--white-color);
     padding-top: 20px;
 }
 
 /* --------------------------------------- end welcome page --------------------------------------- */
 
-/* --------------------------------------- menu-thesis page --------------------------------------- */
+/* --------------------------------------- menu-thesis, menu-news page --------------------------------------- */
 
-#menu-thesis h1 {
+h2 {
     margin-top: 20px;
 }
 
-#menu-thesis div.tools {
+div.tools {
     margin-top: 5px;
     display: flex;
 }
 
-/* thesis-post */
-
-div.thesis-post {
+div.post {
     position: relative;
     margin-top: 20px;
-    padding: 10px;
     border-radius: 10px;
 }
 
-div.thesis-post:hover {
+div.post:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
     border-radius: 10px;
 }
 
-div.thesis-post a {
+div.post a {
     text-decoration: none;
     color: var(--grey-1e-color);
 }
 
-div.thesis-post img {
-    margin-bottom: 12px;
+div.post img {
     border-radius: 10px;
     overflow: hidden;
 }
 
-div.thesis-post p.tag {
+div.post p.tag {
     padding: 4px 12px;
     background-color: var(--orange-color);
     color: var(--white-color);
@@ -347,13 +379,114 @@ div.thesis-post p.tag {
     position: absolute;
 }
 
-div.thesis-post h4 {
+div.details {
+    padding: 10px 20px;
+}
+
+div.post small {
+    color: var(--orange-color);
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+div.post h4 {
     margin-top: 12px;
     margin-bottom: 12px;
 }
 
-div.thesis-post small {
+div.post p {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+/* --------------------------------------- end menu-thesis, menu-news page --------------------------------------- */
+
+/* --------------------------------------- detail-thesis page --------------------------------------- */
+
+#detail-thesis :where(div.img, h3, h5) {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+#detail-thesis div.img {
+    position: relative;
+}
+
+#detail-thesis img {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#detail-thesis p.tag {
+    padding: 4px 12px;
+    background-color: var(--orange-color);
+    color: var(--white-color);
+    border-radius: 5px;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+}
+
+#detail-thesis h3, h5 {
     color: var(--orange-color);
-    text-decoration: underline;
-    text-transform: uppercase;
+}
+
+#detail-thesis h4 {
+    margin-bottom: 5px;
+}
+
+#detail-thesis p {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+/* --------------------------------------- end detail-thesis page --------------------------------------- */
+
+/* --------------------------------------- detail-news page --------------------------------------- */
+
+#detail-news :where(div.img, h3, h5) {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+#detail-news div.img {
+    position: relative;
+}
+
+#detail-news img {
+    border-radius: 10px;
+    overflow: hidden;
+    max-height: 500px;
+}
+
+#detail-news p.tag {
+    padding: 4px 12px;
+    background-color: var(--orange-color);
+    color: var(--white-color);
+    border-radius: 5px;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+}
+
+#detail-news h3, h5 {
+    color: var(--orange-color);
+}
+
+#detail-news h4 {
+    margin-bottom: 5px;
+}
+
+#detail-news p {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+/* --------------------------------------- end detail-news page --------------------------------------- */
+
+
+/* --------------------------------------- register page --------------------------------------- */
+
+#register :where(h3, .row) {
+    margin-top: 20px;
 }

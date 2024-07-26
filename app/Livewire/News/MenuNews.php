@@ -35,7 +35,7 @@ class MenuNews extends Component
             ->when($this->filterDate == 'ข่าวล่าสุด', function ($query) {
                 $query->orderBy('created_at', 'desc');
             })
-            ->paginate(15);
+            ->paginate(8);
 
         return view('livewire.news.menu-news', ['news' => $news]);
     }
