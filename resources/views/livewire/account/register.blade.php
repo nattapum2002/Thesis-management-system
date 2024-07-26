@@ -170,24 +170,14 @@
 <div>
     <section id="register">
         <div class="container">
-            {{-- <form class="border rounded-3 p-2" wire:submit="register" action=""> --}}
-                <div class="row">
-                    <div class="col-12">
-                        <h1 class="card-header">สมัครสมาชิก</h1>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-sm-4">
-                        <div class="input-group">
-                            {{-- <label for="prefix" class="input-group-text">คำนำหน้าชื่อ</label> --}}
             <form wire:submit="register" action="">
-                <div class="row">
-                    <div class="col-lg-10">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
                         <h3>สมัครสมาชิก</h3>
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <!-- <label for="prefix" class="input-group-text">คำนำหน้าชื่อ</label> -->
                             <select class="form-select" wire:model.live="prefix" id="prefix">
@@ -208,7 +198,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <label for="name" class="input-group-text">ชื่อ</label>
                             <input class="form-control" type="text" wire:model="name" id="name"
@@ -220,7 +210,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <label for="surname" class="input-group-text">นามสกุล</label>
                             <input class="form-control" type="text" wire:model="surname" id="surname"
@@ -232,7 +222,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <label class="input-group-text" for="course">หลักสูตร</label>
                             <select class="form-select" wire:model.live="id_course">
@@ -248,7 +238,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <label class="input-group-text" for="level">ระดับ</label>
                             @if ($this->id_course == 1)
@@ -274,7 +264,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <label class="input-group-text" for="id_student">รหัสนักศึกษา</label>
                             <input class="col form-control" type="text" wire:model="id_student" id="id_student"
@@ -286,7 +276,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <label class="input-group-text" for="tel">เบอร์โทรศัพท์</label>
                             <input class="col form-control" type="tel" wire:model="tel" id="tel"
@@ -298,7 +288,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <label class="input-group-text" for="id_line">ID Line</label>
                             <input class="form-control" type="text" wire:model="id_line" id="id_line"
@@ -310,7 +300,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <label class="input-group-text" for="email">E-mail </label>
                             <input class="form-control" type="text" wire:model="email" id="email"
@@ -322,7 +312,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <label class="input-group-text" for="username">ชื่อผู้ใช้</label>
                             <input class="form-control" type="text" wire:model="username" id="username"
@@ -334,7 +324,7 @@
                     @enderror
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                    <div class="col-lg-6">
                         <div class="input-group">
                             <label class="input-group-text" for="password">รหัสผ่าน</label>
                             <input class="form-control" type="password" wire:model="password" id="password"
@@ -345,8 +335,8 @@
                         <span class="text-danger text-center" id="required_password">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="row">
-                    <div class="col-lg-10">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
                         <button class="btn btn-success" type="submit">ยืนยัน</button>
                         <button class="btn btn-danger" type="reset">ยกเลิก</button>
                     </div>
