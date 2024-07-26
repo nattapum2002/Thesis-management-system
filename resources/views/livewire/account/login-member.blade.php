@@ -63,7 +63,43 @@
     @endif
     <section id="login-member">
         <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <img src="https://fastly.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I"
+                        alt="img">
+                </div>
+                <div class="col-lg-5">
+                    <form wire:submit.prevent="login">
+                        <h3>เข้าสู่ระบบสำหรับนักศึกษา</h3>
 
+                        <!-- Username input -->
+                        <div class="input-group username">
+                            <label for="username" class="input-group-text">ชื่อผู้ใช้</label>
+                            <input type="text" wire:model="username" id="username" class="form-control">
+                        </div>
+                        @error('username')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+
+                        <!-- Password input -->
+                        <div class="input-group password">
+                            <label for="password" class="input-group-text">รหัสผ่าน</label>
+                            <input type="password" wire:model="password" id="password" class="form-control">
+                        </div>
+                        @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+
+                        <!-- button -->
+                        <div class="group">
+                            <button type="submit" class="btn btn-brand">เข้าสู่ระบบ</button>
+                            <button type="cancel" class="btn">ยกเลิก</button>
+                        </div>
+
+                        <p>ยังไม่มีบัญชี? <a href="/register">สมัครสมาชิก</a></p>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 </div>

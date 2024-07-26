@@ -490,3 +490,105 @@ div.post p {
 #register :where(h3, .row) {
     margin-top: 20px;
 }
+
+/* --------------------------------------- eng register page --------------------------------------- */
+
+
+/* --------------------------------------- login-member page --------------------------------------- */
+
+#login-member .row {
+    margin-top: 20px;
+}
+
+#login-member :where(h3, p, .username, .password, .group) {
+    margin-top: 20px;
+    margin-bottom: 2px;
+}
+
+#login-member img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#login-member img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+#login-member button {
+    padding: 9px 24px;
+    border: solid 2px var(--orange-color);
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-member button.btn-brand {
+    color: var(--white-color);
+    background-color: var(--orange-color);
+}
+
+#login-member button.btn-brand:hover {
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-member button.btn-brand:hover {
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-member a {
+    color: var(--orange-color);
+}
+
+#login-member a:hover {
+    color: rgb(200, 77, 0);
+}
+
+/* --------------------------------------- eng login-member page --------------------------------------- */
+
+
+/* --------------------------------------- login-teacher page --------------------------------------- */
+
+#login-teacher .row {
+    margin-top: 20px;
+}
+
+#login-teacher :where(h3, .username, .password, .group) {
+    margin-top: 20px;
+    margin-bottom: 2px;
+}
+
+#login-teacher img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#login-teacher img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+#login-teacher button {
+    padding: 9px 24px;
+    border: solid 2px var(--orange-color);
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-teacher button.btn-brand {
+    color: var(--white-color);
+    background-color: var(--orange-color);
+}
+
+#login-teacher button.btn-brand:hover {
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-teacher button.btn-brand:hover {
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}

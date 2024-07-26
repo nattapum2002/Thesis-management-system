@@ -170,16 +170,6 @@
 <div>
     <section id="register">
         <div class="container">
-            {{-- <form class="border rounded-3 p-2" wire:submit="register" action=""> --}}
-                <div class="row">
-                    <div class="col-12">
-                        <h1 class="card-header">สมัครสมาชิก</h1>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-sm-4">
-                        <div class="input-group">
-                            {{-- <label for="prefix" class="input-group-text">คำนำหน้าชื่อ</label> --}}
             <form wire:submit="register" action="">
                 <div class="row">
                     <div class="col-lg-10">
@@ -189,7 +179,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
                         <div class="input-group">
-                            <!-- <label for="prefix" class="input-group-text">คำนำหน้าชื่อ</label> -->
+                            <label for="prefix" class="input-group-text">คำนำหน้าชื่อ</label>
                             <select class="form-select" wire:model.live="prefix" id="prefix">
                                 <option selected>คำนำหน้าชื่อ</option>
                                 <option value="นาย">นาย</option>
