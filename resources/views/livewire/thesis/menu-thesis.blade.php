@@ -50,7 +50,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>บทความปริญญานิพนธ์</h1>
+                    <h2>บทความปริญญานิพนธ์</h2>
                 </div>
             </div>
             <div class="row gy-3 tools">
@@ -74,21 +74,36 @@
             </div>
             <div class="row gy-3">
                 @foreach ($articles as $item)
-                    <div class="col-lg-3 lg-4">
-                        <div class="thesis-post">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="post">
                             <a href="/detail_thesis/{{ $item->id_dissertation_article }}">
                                 <p class="tag">{{ $item->type }}</p>
-                                <img src="{{ $item->thesis_image }}" alt="{{ $item->title }}" class="img-fluid">
-                                <div>
-                                    <small class="card-text">โดย {{ $item->author }} วันที่
-                                        {{ $item->created_at->format('d/m/Y') }}</small>
-                                    <h4 class="card-title">{{ $item->title }}</h4>
-                                    <p class="card-text">{{ Str::limit($item->details, 100) }}</p>
+                                @if ($item->thesis_image == null)
+                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                        alt="{{ $item->title }}">
+                                @else
+                                    <img wire:live src="{{ asset('storage/' . $item->thesis_image) }}"
+                                        alt="{{ $item->title }}">
+                                @endif
+                                <div class="details">
+                                    <small>{{ $item->created_at->thaidate('วันที่ j F พ.ศ.Y') }}</small>
+                                    <h4>{{ $item->title }}</h4>
+                                    <p>{{ Str::limit($item->details, 100) }}</p>
                                 </div>
                             </a>
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <div class="row gy-3">
+                <div class="col-12">
+                    <p class="page-number">
+                        แสดงบทความ <b>{{ $articles->firstItem() }}</b>
+                        ถึง <b>{{ $articles->lastItem() }}</b>
+                        จากทั้งหมด <b>{{ $articles->total() }}</b> บทความ
+                    </p>
+                    {{ $articles->onEachSide(2)->links('pagination::bootstrap-4') }}
+                </div>
             </div>
         </div>
     </section>

@@ -96,7 +96,7 @@
         </div>
     </nav> --}}
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-xl navbar-light bg-white">
         <div class="container">
             <a class="navbar-brand" href="/">ระบบจัดการปริญญานิพนธ์</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
@@ -104,13 +104,17 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                    <li class="navbar-item"><a class="navbar-link" href="/menu_thesis">บทความปริญญานิพนธ์</a></li>
-                    <li class="navbar-item"><a class="navbar-link" href="/menu_news">ข่าวประชาสัมพันธ์</a></li>
-                    <li class="navbar-item"><a href="https://computer.surin.rmuti.ac.th/computer/index.php"
+                    <li class="navbar-item my-1"><a class="navbar-link {{ Request::is('menu_thesis') ? 'active' : '' }}"
+                            href="/menu_thesis">บทความปริญญานิพนธ์</a>
+                    </li>
+                    <li class="navbar-item my-1"><a class="navbar-link {{ Request::is('menu_news') ? 'active' : '' }}"
+                            href="/menu_news">ข่าวประชาสัมพันธ์</a></li>
+                    <li class="navbar-item my-1"><a href="https://computer.surin.rmuti.ac.th/computer/index.php"
                             class="navbar-link" target="_blank">เกี่ยวกับสาขา</a></li>
-                    <li class="navbar-item dropdown">
-                        <a class="navbar-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="navbar-item my-1 dropdown">
+                        <a class="navbar-link dropdown-toggle {{ Request::is('login_member') ? 'active' : '' }} {{ Request::is('login_teacher') ? 'active' : '' }}"
+                            href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             เข้าสู่ระบบ
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -135,7 +139,7 @@
         </div>
     </footer> --}}
 
-    <footer>
+    <footer class="bg-cover">
         <div class="footer-top">
             <div class="container">
                 <div class="row">

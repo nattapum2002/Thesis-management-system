@@ -26,7 +26,7 @@ class DissertationArticlesSeeder extends Seeder
             DB::table('dissertation_articles')->insert([
                 'title' => 'บทความปริญญานิพนธ์ ' . ($i + 1),
                 'details' => 'รายละเอียดบทความปริญญานิพนธ์ ' . ($i + 1),
-                'thesis_image' => 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000',
+                'thesis_image' => null,
                 'file_dissertation' => 'path/to/dissertation_' . ($i + 1) . '.pdf', // Example path
                 'year_published' => now()->year,
                 'type' => ['Hardware', 'Software'][array_rand(['Hardware', 'Software'])], // Randomly select between Hardware and Software
