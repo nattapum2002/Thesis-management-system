@@ -65,9 +65,6 @@ nav.navbar {
     z-index: 999;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    /* min-height: 80px;
-    font-weight: 500;
-    font-size: medium; */
     vertical-align: middle;
 }
 
@@ -178,6 +175,10 @@ p.page-number {
 
 #slider div.slide3 {
     background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/250/4928/3264.jpg?hmac=4oIwzXlpK4KU3wySTnATICCa4H6xwbSGifrxv7GafWU");
+}
+
+#sliders {
+    padding-bottom: 0px;
 }
 
 /* about */

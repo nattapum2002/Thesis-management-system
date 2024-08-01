@@ -1,4 +1,4 @@
-<!-- jQuery -->
+{{-- <!-- jQuery -->
 <script src="{{ Asset('Asset/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ Asset('Asset/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -31,7 +31,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ Asset('Asset/dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ Asset('Asset/dist/js/pages/dashboard.js') }}"></script>
+<script src="{{ Asset('Asset/dist/js/pages/dashboard.js') }}"></script> --}}
 
 <!-- -------------------------------------------------------------------------------------------------------- -->
 
@@ -43,8 +43,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.cjs"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.cjs.map"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.js.map"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js.map"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <!-- master.js -->
-{{-- <script src="{{ Asset('Asset/main/js/master.js') }}"></script> --}}
+<script src="{{ Asset('Asset/main/js/master.js') }}"></script>
 
 <!-- -------------------------------------------------------------------------------------------------------- -->
 

@@ -61,9 +61,13 @@
             }
         }
     </style> --}}
-</head>
 
-@include('layout.css')
+    <!-- css -->
+    @include('layout.css')
+
+    <!-- welcome.css -->
+    <link href="{{ Asset('Asset/main/css/welcome2.css') }}" rel="stylesheet">
+</head>
 
 <body id="page-top">
     <!-- Navigation-->
