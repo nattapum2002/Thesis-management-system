@@ -1,238 +1,224 @@
 <div>
-    <div class="row">
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-primary">
-                <div class="inner">
-                    <h3>{{ $projects->count() }}</h3>
-                    <p>โปรเจคทังหมด</p>
+    <section id="small-boxs">
+        <div class="row gy-2 align-items-center justify-content-center">
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h2>{{ $projects->count() }}</h2>
+                        <p>โปรเจคทังหมด</p>
+                    </div>
+                    <div class="icon">
+                        <i class='bx bx-book'></i>
+                    </div>
+                    <a href="/admin/manage_project" class="small-box-footer">
+                        รายละเอียดเพิ่มเติม
+                        <i class='bx bxs-right-arrow'></i>
+                    </a>
                 </div>
-                <div class="icon">
-                    <i class='bx bx-book'></i>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h2>{{ $projects->where('project_status', 'In Progress')->count() }}</h2>
+                        <p>โปรเจคที่กําลังดําเนินการ</p>
+                    </div>
+                    <div class="icon">
+                        <i class='bx bx-loader'></i>
+                    </div>
+                    <a href="/admin/manage_project" class="small-box-footer">
+                        รายละเอียดเพิ่มเติม
+                        <i class='bx bxs-right-arrow'></i>
+                    </a>
                 </div>
-                <a href="/admin/manage_project" class="small-box-footer">
-                    รายละเอียดเพิ่มเติม
-                    <i class='bx bxs-right-arrow'></i>
-                </a>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h2>{{ $projects->where('project_status', 'Completed')->count() }}</h2>
+                        <p>โปรเจคที่เสร็จสิ้น</p>
+                    </div>
+                    <div class="icon">
+                        <i class='bx bx-check-circle'></i>
+                    </div>
+                    <a href="/admin/manage_project" class="small-box-footer">
+                        รายละเอียดเพิ่มเติม
+                        <i class='bx bxs-right-arrow'></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h2>{{ $projects->where('project_status', 'Cancelled')->count() }}</h2>
+                        <p>โปรเจคที่ยกเลิก</p>
+                    </div>
+                    <div class="icon">
+                        <i class='bx bx-x-circle'></i>
+                    </div>
+                    <a href="/admin/manage_project" class="small-box-footer">
+                        รายละเอียดเพิ่มเติม
+                        <i class='bx bxs-right-arrow'></i>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3>{{ $projects->where('project_status', 'In Progress')->count() }}</h3>
-                    <p>โปรเจคที่กําลังดําเนินการ</p>
+    </section>
+    <section id="admin-chart">
+        <div class="row gy-2">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class='bx bxs-user-account'></i>
+                            บัญชีสมาชิก
+                        </div>
+                        <div class="card-tools">
+                            <a class="tools-link" href="/admin/manage_member">
+                                <span>จัดการบัญชีสมาชิก</span>
+                                <i class='bx bxs-right-arrow'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart text-center">
+                            <canvas id="memberChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-                <div class="icon">
-                    <i class='bx bx-loader'></i>
+                <br>
+                <div class="row gy-2">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class='bx bxs-user-account'></i>
+                                    บทความปริญญานิพนธ์
+                                </div>
+                                <div class="card-tools">
+                                    <a class="tools-link" href="/admin/approve_thesis">
+                                        <span>จัดการ...</span>
+                                        <i class='bx bxs-right-arrow'></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart text-center">
+                                    <canvas id="thesisChart"></canvas>
+                                    <p>บทความปริญญานิพนธ์</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class='bx bxs-user-account'></i>
+                                    ข่าวประชาสัมพันธ์
+                                </div>
+                                <div class="card-tools">
+                                    <a class="tools-link" href="/admin/approve_news">
+                                        <span>จัดการ...</span>
+                                        <i class='bx bxs-right-arrow'></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart text-center">
+                                    <canvas id="newsChart"></canvas>
+                                    <p>ข่าวประชาสัมพันธ์</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <a href="/admin/manage_project" class="small-box-footer">
-                    รายละเอียดเพิ่มเติม
-                    <i class='bx bxs-right-arrow'></i>
-                </a>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class='bx bxs-user-account'></i>
+                            บัญชีอาจารย์
+                        </div>
+                        <div class="card-tools">
+                            <a class="tools-link" href="/admin/manage_teacher">
+                                <span>จัดการบัญชีอาจารย์</span>
+                                <i class='bx bxs-right-arrow'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart text-center">
+                            <canvas id="teacherChart"></canvas>
+                            <p>บัญชีอาจารย์</p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class='bx bx-file-find'></i>
+                            พิจารณาเอกสาร
+                        </div>
+                        <div class="card-tools">
+                            <a class="tools-link" href="/admin/approve_documents">
+                                <span>อนุมัติเอกสาร</span>
+                                <i class='bx bxs-right-arrow'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if ($confirms->isNotEmpty())
+                            <div class="chart">
+                                <canvas id="confirmChart"></canvas>
+                            </div>
+                        @else
+                            <div class="chart">
+                                <p class="text-center">ไม่มีเอกสารให้พิจารณา</p>
+                            </div>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3>{{ $projects->where('project_status', 'Completed')->count() }}</h3>
-                    <p>โปรเจคที่เสร็จสิ้น</p>
-                </div>
-                <div class="icon">
-                    <i class='bx bx-check-circle'></i>
-                </div>
-                <a href="/admin/manage_project" class="small-box-footer">
-                    รายละเอียดเพิ่มเติม
-                    <i class='bx bxs-right-arrow'></i>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    <h3>{{ $projects->where('project_status', 'Cancelled')->count() }}</h3>
-                    <p>โปรเจคที่ยกเลิก</p>
-                </div>
-                <div class="icon">
-                    <i class='bx bx-x-circle'></i>
-                </div>
-                <a href="/admin/manage_project" class="small-box-footer">
-                    รายละเอียดเพิ่มเติม
-                    <i class='bx bxs-right-arrow'></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <section class="col-md-7 connectedSortable">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <i class='bx bxs-user-account'></i>
-                        บัญชีสมาชิก
-                    </div>
-                    <div class="card-tools">
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin/manage_member">
-                                    จัดการบัญชีสมาชิก
-                                    <i class='bx bxs-right-arrow'></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart text-center">
-                        <canvas id="memberChart" style="width:100%;max-width:600px"></canvas>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <i class='bx bxs-user-account'></i>
-                                บทความปริญญานิพนธ์
-                            </div>
-                            <div class="card-tools">
-                                <ul class="nav nav-pills">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/admin/approve_thesis">
-                                            ...
-                                            <i class='bx bxs-right-arrow'></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart text-center">
-                                <canvas id="thesisChart" style="width:100%;max-width:600px"></canvas>
-                                <p>บทความปริญญานิพนธ์</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <i class='bx bxs-user-account'></i>
-                                ข่าวประชาสัมพันธ์
-                            </div>
-                            <div class="card-tools">
-                                <ul class="nav nav-pills">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/admin/approve_news">
-                                            ...
-                                            <i class='bx bxs-right-arrow'></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart text-center">
-                                <canvas id="newsChart" style="width:100%;max-width:600px"></canvas>
-                                <p>ข่าวประชาสัมพันธ์</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="col-md-5 connectedSortable">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <i class='bx bxs-user-account'></i>
-                        บัญชีอาจารย์
-                    </div>
-                    <div class="card-tools">
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin/manage_teacher">
-                                    จัดการบัญชีอาจารย์
-                                    <i class='bx bxs-right-arrow'></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart text-center">
-                        <canvas id="teacherChart" style="width:100%;max-width:600px"></canvas>
-                        <p>บัญชีอาจารย์</p>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <i class='bx bx-file-find'></i>
-                        พิจารณาเอกสาร
-                    </div>
-                    <div class="card-tools">
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin/approve_documents">
-                                    อนุมัติเอกสาร
-                                    <i class='bx bxs-right-arrow'></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    @if ($confirms->isNotEmpty())
-                        <div class="chart">
-                            <canvas id="confirmChart" style="width:100%;max-width:600px"></canvas>
-                        </div>
-                    @else
-                        <div class="chart">
-                            <p class="text-center">ไม่มีเอกสารให้พิจารณา</p>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </section>
-    </div>
+    </section>
     <hr>
-    <div class="row">
-        <section class="col-md-6 connectedSortable">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <i class='bx bxs-user-account'></i>
-                        ที่ปรึกษา
+    <section id="teacher-chart">
+        <div class="row gy-2">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class='bx bxs-user-account'></i>
+                            ที่ปรึกษา
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <canvas id="adviserChart" style="width:100%;max-width:600px"></canvas>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="col-md-6 connectedSortable">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <i class='bx bxs-user-account'></i>
-                        คณะกรรมการ
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart text-center">
-                        <canvas id="directorChart" style="width:100%;max-width:600px"></canvas>
-                        <p>คณะกรรมการ</p>
+                    <div class="card-body">
+                        <div class="chart">
+                            <canvas id="adviserChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class='bx bxs-user-account'></i>
+                            คณะกรรมการ
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart text-center">
+                            <canvas id="directorChart"></canvas>
+                            <p>คณะกรรมการ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 
