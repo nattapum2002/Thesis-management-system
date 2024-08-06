@@ -9,15 +9,15 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th style="width: 200px">หัวข้อ</th>
-                        <th style="width: 880px">รายละเอียด</th>
-                        <th></th>
+                        <th style="min-width: 160px">หัวข้อ</th>
+                        <th>รายละเอียด</th>
+                        <th style="min-width: 160px"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th>รูปภาพนักศึกษา</th>
-                        <td colspan="2">
+                        <td>
                             @if ($student->student_image == null)
                                 <img wire:live src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}"
                                     alt="{{ $student->name }}"
@@ -28,51 +28,63 @@
                                     style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                             @endif
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>รหัสนักศึกษา</th>
-                        <td colspan="2">{{ $student->id_student }}</td>
+                        <td>{{ $student->id_student }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>คำนำหน้าชื่อ</th>
-                        <td colspan="2">{{ $student->prefix }}</td>
+                        <td>{{ $student->prefix }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>ชื่อ</th>
-                        <td colspan="2">{{ $student->name }}</td>
+                        <td>{{ $student->name }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>นามสกุล</th>
-                        <td colspan="2">{{ $student->surname }}</td>
+                        <td>{{ $student->surname }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>หลักสูตร</th>
-                        <td colspan="2">{{ $student->course->course }}</td>
+                        <td>{{ $student->course->course }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>ระดับ</th>
-                        <td colspan="2">{{ $student->level->level }}</td>
+                        <td>{{ $student->level->level }}</td>
+                        <td></td>
                     <tr>
                         <th>ภาค</th>
-                        <td colspan="2">{{ $student->level->sector }}</td>
+                        <td>{{ $student->level->sector }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>เบอร์โทรศัพท์</th>
-                        <td colspan="2">{{ $student->tel }}</td>
+                        <td>{{ $student->tel }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>อีเมล</th>
-                        <td colspan="2">{{ $student->email }}</td>
+                        <td>{{ $student->email }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>ไอดีไลน์</th>
-                        <td colspan="2">{{ $student->id_line }}</td>
+                        <td>{{ $student->id_line }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>รหัสผ่าน</th>
-                        <td colspan="2">
+                        <td>
                             {{ $student->password }}
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>สถานะบัญชี</th>
@@ -103,7 +115,7 @@
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-primary" wire:click="edit('account_status')"><i
+                                <button class="btn btn-orange" wire:click="edit('account_status')"><i
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif

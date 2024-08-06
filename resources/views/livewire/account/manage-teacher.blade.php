@@ -1,13 +1,22 @@
 <div>
+    @if (session('danger'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('danger') }}
+        </div>
+    @elseif (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div>
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Search" wire:model.live.debounce.150ms="search">
-            <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+            <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
         </div>
     </div>
     <div class="card">
         <div class="card-header">
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-start">
                 <a href="/admin/add_teacher" class="btn btn-success">เพิ่มบัญชีอาจารย์</a>
             </div>
         </div>
@@ -15,7 +24,7 @@
             <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th></th>
                         <th>คำนำหน้า</th>
                         <th>ชื่อ</th>
                         <th>นามสกุล</th>
@@ -50,7 +59,7 @@
                                     </a>
                                 @endif
 
-                                <a href="/admin/approve_teacher/{{ $teacher->id_teacher }}" class="btn btn-primary"><i
+                                <a href="/admin/approve_teacher/{{ $teacher->id_teacher }}" class="btn btn-orange"><i
                                         class='bx bx-detail'></i></a>
                             </td>
                         </tr>

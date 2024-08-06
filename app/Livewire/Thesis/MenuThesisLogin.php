@@ -7,7 +7,6 @@ use App\Models\Member;
 use App\Models\Project;
 use Livewire\Component;
 use App\Models\Teacher;
-use Illuminate\Bus\Dispatcher;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
@@ -39,7 +38,7 @@ class MenuthesisLogin extends Component
     public function render()
     {
         $projects = Project::with('members')->get();
-        $thesis = Dissertation_article::with('project')->where('status', 1)
+        $articles = Dissertation_article::with('project')->where('status', 1)
             ->when($this->search, function ($query) {
                 $query->where('dissertation_articles.title', 'like', '%' . $this->search . '%');
             })
@@ -52,8 +51,8 @@ class MenuthesisLogin extends Component
             ->when($this->filterDate == 'บทความล่าสุด', function ($query) {
                 $query->orderBy('dissertation_articles.created_at', 'desc');
             })
-            ->paginate(15);
+            ->paginate(8);
 
-        return view('livewire.thesis.menu-thesis-login', ['thesis' => $thesis], ['projects' => $projects]);
+        return view('livewire.thesis.menu-thesis-login', ['articles' => $articles], ['projects' => $projects]);
     }
 }

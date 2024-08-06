@@ -30,7 +30,7 @@
         <!-- Content -->
         <div class="content-wrapper">
             @yield('mastercontent')
-            <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button"
+            <a id="back-to-top" href="#" class="btn btn-orange back-to-top" role="button"
                 aria-label="Scroll to top">
                 <i class="fas fa-chevron-up"></i>
             </a>

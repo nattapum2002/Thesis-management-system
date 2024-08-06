@@ -158,7 +158,7 @@
                 </div>
                 <div class="btn-input">
                     <button type="button" class="btn btn-danger">ยกเลิก</button>
-                    <button type="submit" class="btn btn-primary" data-bs-toggle="modal">
+                    <button type="submit" class="btn btn-orange" data-bs-toggle="modal">
                         ยืนยัน
                     </button>
                 </div>
@@ -215,7 +215,7 @@
                                 <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Close</button>
                                 <button type="button" wire:click.prevent="confirmDocument"
-                                    class="btn btn-primary">Save changes</button>
+                                    class="btn btn-orange">Save changes</button>
                             </div>
                         </div>
                     </div>

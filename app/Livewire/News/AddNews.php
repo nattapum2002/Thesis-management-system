@@ -35,7 +35,7 @@ class AddNews extends Component
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        session()->flash('message', 'เพิ่มข่าวสารสำเร็จ!');
+        session()->flash('message', 'เพิ่มข่าวสารเรียบร้อยแล้ว');
         return redirect()->route('manage_news');
     }
 

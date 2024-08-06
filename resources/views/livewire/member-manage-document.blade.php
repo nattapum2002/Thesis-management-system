@@ -6,7 +6,7 @@
             <div class="card-tools">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search">
-                    <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+                    <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
                 </div>
             </div>
         </div>
@@ -109,10 +109,10 @@
 
                                         @if ($currentConfirmStudent)
                                             @if ($currentConfirmStudent->confirm_status == true)
-                                                <a class="btn btn-primary disabled" href="#" role="button"
+                                                <a class="btn btn-orange disabled" href="#" role="button"
                                                     aria-disabled="true" style="pointer-events: none;">ยืนยันแล้ว</a>
                                             @else
-                                                <button class="btn btn-primary" type="submit"
+                                                <button class="btn btn-orange" type="submit"
                                                     role="button">ยืนยัน</button>
                                             @endif
                                         @endif
@@ -120,14 +120,13 @@
                                         @if (
                                             $confirmStudents->every(fn($student) => $student->confirm_status == true) &&
                                                 $projectItems->confirmTeachers->where('id_document', $documentId)->where('id_project', $projectItems->id_project)->every(fn($teacher) => $teacher->confirm_status == true))
-
                                             @switch($documentId)
                                                 @case(1)
-                                                    <a class="btn btn-primary" href="{{route('create_document_02')}}">สร้างเอกสาร 02</a>
+                                                    <a class="btn btn-orange"
+                                                        href="{{ route('create_document_02') }}">สร้างเอกสาร 02</a>
                                                 @break
 
                                                 @case(2)
-                                                    
                                                 @break
 
                                                 @default
@@ -135,11 +134,10 @@
                                         @else
                                             @switch($documentId)
                                                 @case(1)
-                                                    <button class="btn btn-primary" disabled>สร้างเอกสาร 02</button>
+                                                    <button class="btn btn-orange" disabled>สร้างเอกสาร 02</button>
                                                 @break
 
                                                 @case(2)
-                                                    
                                                 @break
 
                                                 @default

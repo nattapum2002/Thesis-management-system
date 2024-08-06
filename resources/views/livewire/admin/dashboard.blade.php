@@ -186,7 +186,7 @@
     <hr>
     <section id="teacher-chart">
         <div class="row gy-2">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
@@ -201,7 +201,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">

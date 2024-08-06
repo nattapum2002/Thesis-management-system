@@ -44,7 +44,7 @@ class AddThesis extends Component
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        session()->flash('message', 'เพิ่มข่าวสารสำเร็จ!');
+        session()->flash('message', 'เพิ่มข้อมูลเรียบร้อยแล้ว');
         return redirect()->route('manage_thesis');
     }
 

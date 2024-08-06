@@ -9,6 +9,3 @@ const hamBurger = document.querySelector(".toggle-btn");
 hamBurger.addEventListener("click", function () {
     document.querySelector("#sidebar").classList.toggle("expand");
 });
-
-// Get the button:
-let BackToTopButton = document.getElementById("back-to-top");

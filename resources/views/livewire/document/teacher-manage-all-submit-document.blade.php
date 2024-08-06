@@ -6,7 +6,7 @@
             <div class="card-tools">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search">
-                    <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+                    <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
                 </div>
             </div>
         </div>
@@ -119,16 +119,17 @@
                                     @endphp
                                     @if ($currentConfirmteacher)
                                         @if ($projectItems->confirmTeachers->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)->where('id_document', $documentId)->first()->confirm_status == true)
-                                            <a class="btn btn-primary disabled" href="#" role="button"
+                                            <a class="btn btn-orange disabled" href="#" role="button"
                                                 aria-disabled="true" style="pointer-events: none;">อนุมัติแล้ว</a>
                                         @else
-                                            <button class="btn btn-primary"
+                                            <button class="btn btn-orange"
                                                 wire:click="teacher_document({{ $confirm_teachers->first()->id_document }},{{ $projectItems->id_project }})"
                                                 role="button">อนุมัติ</button>
                                         @endif
 
                                         @if ($currentConfirmteacher->id_position == 3 || $currentConfirmteacher->id_position == 4)
-                                            <button class="btn btn-primary" wire:click="document({{ $documentId }} ,{{ $projectItems->id_project }})">
+                                            <button class="btn btn-orange"
+                                                wire:click="document({{ $documentId }} ,{{ $projectItems->id_project }})">
                                                 ตรวจสอบ
                                             </button>
                                             <button class="btn btn-danger"
@@ -197,7 +198,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Send message</button>
+                                    <button type="submit" class="btn btn-orange">Send message</button>
                                 </div>
                             </div>
                         </div>
@@ -217,9 +218,9 @@
     </script>
 @endscript
 // $wire.on('toggleComment', () => {
-    //     const comment = document.getElementById('comment');
-    //     const other_comment = document.getElementById('other_comment');
-    //     if(other_comment.checked == true){
-    //         alert(other_comment);
-    //     }
-    // });
+// const comment = document.getElementById('comment');
+// const other_comment = document.getElementById('other_comment');
+// if(other_comment.checked == true){
+// alert(other_comment);
+// }
+// });

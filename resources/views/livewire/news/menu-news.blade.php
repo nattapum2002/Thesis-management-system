@@ -38,7 +38,7 @@
                         <p class="card-text">โดย {{ $item->teacher->name }} วันที่ {{ $item->created_at->format('d/m/Y')
                             }}</p>
                         <p class="card-text">{{ Str::limit($item->details, 100) }}</p>
-                        <a href="/detail_news/{{ $item->id_news }}" class="btn btn-primary">อ่านเพิ่มเติม</a>
+                        <a href="/detail_news/{{ $item->id_news }}" class="btn btn-orange">อ่านเพิ่มเติม</a>
                     </div>
                 </div>
             </div>

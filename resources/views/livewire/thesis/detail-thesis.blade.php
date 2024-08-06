@@ -7,7 +7,7 @@
             <div>
                 {!! nl2br(e($articles->details)) !!}
             </div>
-            <a href="{{ url()->previous() }}" class="btn btn-primary mt-4">ย้อนกลับ</a>
+            <a href="{{ url()->previous() }}" class="btn btn-orange mt-4">ย้อนกลับ</a>
         </div>
     </div>
 </div> --}}

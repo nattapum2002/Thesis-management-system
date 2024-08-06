@@ -1,12 +1,12 @@
 <div>
     @if (session('message'))
-    <div class="alert alert-success" role="alert">
-        {{ session('message') }}
-    </div>
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
+        </div>
     @endif
     <div class="card">
         <div class="card-body table-responsive p-0">
-            <table class="table table-striped">
+            <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
                         <th style="width: 200px">หัวข้อ</th>
@@ -21,7 +21,7 @@
                                 <input class="form-input" wire:model="add_thesis_image" type="file"
                                     placeholder="เลือกไฟล์">
                                 @error('add_thesis_image')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -33,13 +33,13 @@
                                 <select class="form-select" wire:model.live="add_project">
                                     <option selected>ชี่อบทความ</option>
                                     @foreach ($projects as $project)
-                                    <option value="{{ $project->id_project }}">
-                                        {{ $project->project_name_th }}
-                                    </option>
+                                        <option value="{{ $project->id_project }}">
+                                            {{ $project->project_name_th }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('add_project')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -48,10 +48,9 @@
                         <th>รายละเอียด</th>
                         <td>
                             <div class="input-field">
-                                <textarea class="form-input" wire:model="add_detail" type="text"
-                                    placeholder="กรุณากรอกรายละเอียด"></textarea>
+                                <textarea class="form-input" wire:model="add_detail" type="text" placeholder="กรุณากรอกรายละเอียด"></textarea>
                                 @error('news_detail')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -63,7 +62,7 @@
                                 <input class="form-input" wire:model="add_year" type="text"
                                     placeholder="กรุณากรอกปีการศึกษา">
                                 @error('add_year')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -78,7 +77,7 @@
                                     <option value="Hardware">Hardware</option>
                                 </select>
                                 @error('user_type')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -90,7 +89,7 @@
                                 <input class="form-input" wire:model="add_thesis_file" type="file"
                                     placeholder="เลือกไฟล์">
                                 @error('add_thesis_file')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -105,7 +104,7 @@
                                     <option value="0">ซ่อน</option>
                                 </select>
                                 @error('add_status')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>

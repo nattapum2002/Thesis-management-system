@@ -1,16 +1,16 @@
 <div>
     @if (session('message'))
-    <div class="alert alert-success" role="alert">
-        {{ session('message') }}
-    </div>
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
+        </div>
     @endif
     <div class="card">
         <div class="card-body table-responsive p-0">
-            <table class="table table-striped">
+            <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th style="width: 200px">หัวข้อ</th>
-                        <th style="width: 880px">รายละเอียด</th>
+                        <th style="width: 160px">หัวข้อ</th>
+                        <th>รายละเอียด</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,7 +21,7 @@
                                 <input class="form-input" wire:model="add_teacher_image" type="file"
                                     placeholder="เลือกไฟล์">
                                 @error('teacher_image')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -38,11 +38,11 @@
                                     <option value="อื่นๆ">อื่นๆ</option>
                                 </select>
                                 @if ($this->add_prefix == 'อื่นๆ')
-                                <input class="form-input" wire:model="add_other_prefix" type="text"
-                                    placeholder="คำนำหน้าชื่อ">
+                                    <input class="form-input" wire:model="add_other_prefix" type="text"
+                                        placeholder="คำนำหน้าชื่อ">
                                 @endif
                                 @error('prefix')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -51,9 +51,10 @@
                         <th>ชื่อ</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_name" type="text" placeholder="กรุณากรอกชื่อ">
+                                <input class="form-input" wire:model="add_name" type="text"
+                                    placeholder="กรุณากรอกชื่อ">
                                 @error('name')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -65,7 +66,7 @@
                                 <input class="form-input" wire:model="add_surname" type="text"
                                     placeholder="กรุณากรอกนามสกุล">
                                 @error('surname')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -77,7 +78,7 @@
                             <input class="form-input" wire:model="add_signature_image" type="file"
                                 placeholder="เลือกไฟล์">
                             @error('signature_image')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </td>
                     </tr>
@@ -88,7 +89,7 @@
                                 <input class="form-input" wire:model="add_academic_position" type="text"
                                     placeholder="กรุณากรอกตำแหน่งทางวิชาการ">
                                 @error('academic_position')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -100,7 +101,7 @@
                                 <textarea class="form-control" wire:model="add_educational_qualification" type="text"
                                     placeholder="กรุณากรอกวุฒิการศึกษา"></textarea>
                                 @error('educational_qualification')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -109,10 +110,9 @@
                         <th>สาขาที่จบการศึกษา</th>
                         <td>
                             <div class="form-floating">
-                                <textarea class="form-control" wire:model="add_branch" type="text"
-                                    placeholder="กรุณากรอกสาขาที่จบการศึกษา"></textarea>
+                                <textarea class="form-control" wire:model="add_branch" type="text" placeholder="กรุณากรอกสาขาที่จบการศึกษา"></textarea>
                                 @error('branch')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -124,7 +124,7 @@
                                 <input class="form-input" wire:model="add_tel" type="tel"
                                     placeholder="กรุณากรอกเบอร์โทร" maxlength="10" minlength="10">
                                 @error('tel')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -136,7 +136,7 @@
                                 <input class="form-input" wire:model="add_email" type="email"
                                     placeholder="กรุณากรอกอีเมล">
                                 @error('email')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -148,7 +148,7 @@
                                 <input class="form-input" wire:model="add_id_line" type="text"
                                     placeholder="กรุณากรอกไอดีไลน์">
                                 @error('id_line')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -160,7 +160,7 @@
                                 <input class="form-input" wire:model="add_username" type="text"
                                     placeholder="กรุณากรอกชื่อผู้ใช้" minlength="8">
                                 @error('username')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -172,7 +172,7 @@
                                 <input class="form-input" wire:model="add_password" type="password"
                                     placeholder="กรุณากรอกรหัสผ่าน" minlength="8">
                                 @error('password')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -188,7 +188,7 @@
                                     <option value="Teacher">อาจารย์</option>
                                 </select>
                                 @error('user_type')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>
@@ -203,7 +203,7 @@
                                     <option value="0">ยกเลิกใช้งาน</option>
                                 </select>
                                 @error('account_status')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </td>

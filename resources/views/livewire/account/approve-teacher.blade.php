@@ -9,78 +9,90 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th style="width: 200px">หัวข้อ</th>
-                        <th style="width: 880px">รายละเอียด</th>
-                        <th></th>
+                        <th style="min-width: 160px">หัวข้อ</th>
+                        <th>รายละเอียด</th>
+                        <th style="min-width: 160px"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th>รูปภาพอาจารย์</th>
-                        <td colspan="2">
+                        <td>
                             <img wire:live src="{{ asset('storage/' . $teacher->teacher_image) }}"
                                 alt="{{ $teacher->name }}"
                                 style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>คำนำหน้าชื่อ</th>
-                        <td colspan="2">{{ $teacher->prefix }}</td>
+                        <td>{{ $teacher->prefix }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>ชื่อ</th>
-                        <td colspan="2">{{ $teacher->name }}</td>
+                        <td>{{ $teacher->name }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>นามสกุล</th>
-                        <td colspan="2">{{ $teacher->surname }}</td>
+                        <td>{{ $teacher->surname }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>รูปภาพลายเซ็น</th>
-                        <td colspan="2"><img src="{{ asset('storage/' . $teacher->signature_image) }}"
-                                alt="{{ $teacher->name }}"></td>
+                        <td><img src="{{ asset('storage/' . $teacher->signature_image) }}" alt="{{ $teacher->name }}">
+                        </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>ตำแหน่งทางวิชาการ</th>
-                        <td colspan="2">{{ $teacher->academic_position }}</td>
+                        <td>{{ $teacher->academic_position }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>วุฒิการศึกษา</th>
-                        <td colspan="2">{{ $teacher->educational_qualification }}</td>
+                        <td>{{ $teacher->educational_qualification }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>สาขาที่จบการศึกษา</th>
-                        <td colspan="2">{{ $teacher->branch }}</td>
+                        <td>{{ $teacher->branch }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>เบอร์โทรศัพท์</th>
-                        <td colspan="2">
+                        <td>
                             @if ($teacher->tel == null)
                                 <p class="text-danger">ไมมีการลงบันทึกข้อมูล</p>
                             @else
                                 {{ $teacher->tel }}
                             @endif
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>อีเมล</th>
-                        <td colspan="2">{{ $teacher->email }}</td>
+                        <td>{{ $teacher->email }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>ไอดีไลน์</th>
-                        <td colspan="2">
+                        <td>
                             @if ($teacher->id_line == null)
                                 <p class="text-danger">ไมมีการลงบันทึกข้อมูล</p>
                             @else
                                 {{ $teacher->id_line }}
                             @endif
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>รหัสผ่าน</th>
-                        <td colspan="2">
+                        <td>
                             {{ $teacher->password }}
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>ประเภทบัญชีผู้ใช้</th>
@@ -115,7 +127,7 @@
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-primary {{ $account_count < 2 ? 'disabled' : '' }}"
+                                <button class="btn btn-orange {{ $account_count < 2 ? 'disabled' : '' }}"
                                     wire:click="edit('user_type')"><i class='bx bx-edit'></i></button>
                             </td>
                         @endif
@@ -149,7 +161,7 @@
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-primary {{ $account_count < 2 ? 'disabled' : '' }}"
+                                <button class="btn btn-orange {{ $account_count < 2 ? 'disabled' : '' }}"
                                     wire:click="edit('account_status')"><i class='bx bx-edit'></i></button>
                             </td>
                         @endif

@@ -10,13 +10,14 @@
     @endif
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Search" wire:model.live.debounce.150ms="search">
-        <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+        <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
     </div>
     <div class="card">
         <div class="card-body table-responsive p-0">
             <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>รหัสนักศึกษา</th>
                         <th>คำนำหน้า</th>
                         <th>ชื่อ</th>
@@ -28,6 +29,7 @@
                 <tbody>
                     @foreach ($members as $member)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $member->id_student }}</td>
                             <td>{{ $member->prefix }}</td>
                             <td>{{ $member->name }}</td>
@@ -42,7 +44,7 @@
                                     <button wire:click='hide("{{ $member->id_student }}")'
                                         class="btn btn-danger swalDefaultError"><i class='bx bx-user-x'></i></button>
                                 @endif
-                                <a href="/admin/approve_member/{{ $member->id_student }}" class="btn btn-primary"><i
+                                <a href="/admin/approve_member/{{ $member->id_student }}" class="btn btn-orange"><i
                                         class='bx bx-detail'></i></a>
                             </td>
                         </tr>

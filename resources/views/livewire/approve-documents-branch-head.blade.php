@@ -6,7 +6,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th></th>
                         <th>ชื่อโปรเจค</th>
                         <th>ชื่อนักศึกษา</th>
                         <th>สถานะปรึกษา</th>

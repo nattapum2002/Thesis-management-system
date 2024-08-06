@@ -16,7 +16,7 @@
             <div>
                 {!! nl2br(e($news->details)) !!}
             </div>
-            <a href="/menu_news" class="btn btn-primary mt-4">ย้อนกลับ</a>
+            <a href="/menu_news" class="btn btn-orange mt-4">ย้อนกลับ</a>
         </div>
     </div>
 </div> --}}

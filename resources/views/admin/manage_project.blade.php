@@ -7,5 +7,5 @@
 @endsection
 @section('content')
     @livewire('project.manage-project')
-    <a href="/admin" class="btn btn-primary mb-3">ย้อนกลับ</a>
+    <a href="/admin" class="btn btn-orange mt-3 mb-3">ย้อนกลับ</a>
 @endsection

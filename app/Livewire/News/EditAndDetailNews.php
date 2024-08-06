@@ -44,7 +44,7 @@ class EditAnddetailNews extends Component
         } else {
             DB::table('news')->where('id_news', $this->newsId)->update([$index => $this->$index], ['updated_by' => Auth::guard('teachers')->user()->id_teacher], ['updated_at' => now()]);
         }
-        session()->flash('message', 'แก้ไขข่าวสารสำเร็จ!');
+        session()->flash('message', 'บันทึกข้อมูลเรียบร้อยแล้ว');
         $this->cancel($index);
     }
 

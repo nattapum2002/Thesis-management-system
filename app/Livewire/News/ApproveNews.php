@@ -25,12 +25,14 @@ class ApproveNews extends Component
         News::where('id_news', $index)->update([
             'status' => '0'
         ]);
+        session()->flash('danger', 'ซ่อนข่าว ' . News::find($index)->title .  ' เรียบร้อยแล้ว');
     }
     public function hide($index)
     {
         News::where('id_news', $index)->update([
             'status' => '1'
         ]);
+        session()->flash('success', 'แสดงข่าว ' . News::find($index)->title .  ' เรียบร้อยแล้ว');
     }
 
     public function render()

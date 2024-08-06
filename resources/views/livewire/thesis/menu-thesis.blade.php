@@ -32,7 +32,7 @@
                         <p class="card-text">โดย {{ $item->author }} วันที่ {{ $item->created_at->format('d/m/Y') }}</p>
                         <p class="card-text">{{ Str::limit($item->details, 100) }}</p>
                         <a href="/detail_thesis/{{ $item->id_dissertation_article }}"
-                            class="btn btn-primary">อ่านเพิ่มเติม</a>
+                            class="btn btn-orange">อ่านเพิ่มเติม</a>
                     </div>
                 </div>
             </div>

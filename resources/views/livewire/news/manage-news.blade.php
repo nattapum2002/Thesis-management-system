@@ -1,9 +1,18 @@
 <div>
+    @if (session('danger'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('danger') }}
+        </div>
+    @elseif (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-6">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Search" wire:model.debounce.150ms="search">
-                <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+                <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
             </div>
         </div>
         <div class="col-sm-3">
@@ -26,13 +35,13 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-start">
                 @if ($users->user_type == 'Admin')
-                <a href="/admin/add_news" class="btn btn-success">เพิ่มข่าว</a>
+                    <a href="/admin/add_news" class="btn btn-success">เพิ่มข่าว</a>
                 @elseif ($users->user_type == 'Branch head')
-                <a href="/branch-head/add_news" class="btn btn-success">เพิ่มข่าว</a>
+                    <a href="/branch-head/add_news" class="btn btn-success">เพิ่มข่าว</a>
                 @elseif ($users->user_type == 'Teacher')
-                <a href="/teacher/add_news" class="btn btn-success">เพิ่มข่าว</a>
+                    <a href="/teacher/add_news" class="btn btn-success">เพิ่มข่าว</a>
                 @endif
             </div>
         </div>
@@ -40,7 +49,7 @@
             <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th></th>
                         <th>หัวข้อข่าว</th>
                         <th>รายละเอียด</th>
                         <th>ประเภท</th>
@@ -50,32 +59,32 @@
                 </thead>
                 <tbody>
                     @foreach ($news as $news_detail)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $news_detail->title }}</td>
-                        <td>{{ $news_detail->details }}</td>
-                        <td>{{ $news_detail->type }}</td>
-                        <td>{{ $news_detail->updated_at }}</td>
-                        <td>
-                            @if ($news_detail->status == '1')
-                            <a wire:click='show({{ $news_detail->id_news }})' class="btn btn-success"><i
-                                    class='bx bxs-show'></i></a>
-                            @else
-                            <a wire:click='hide({{ $news_detail->id_news }})' class="btn btn-danger"><i
-                                    class='bx bxs-hide'></i></a>
-                            @endif
-                            @if ($users->user_type == 'Admin')
-                            <a href="/admin/edit_and_detail_news/{{ $news_detail->id_news }}" class="btn btn-primary"><i
-                                    class='bx bx-detail'></i></a>
-                            @elseif ($users->user_type == 'Branch head')
-                            <a href="/branch-head/edit_and_detail_news/{{ $news_detail->id_news }}"
-                                class="btn btn-primary"><i class='bx bx-detail'></i></a>
-                            @elseif ($users->user_type == 'Teacher')
-                            <a href="/teacher/edit_and_detail_news/{{ $news_detail->id_news }}"
-                                class="btn btn-primary"><i class='bx bx-detail'></i></a>
-                            @endif
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $news_detail->title }}</td>
+                            <td>{{ $news_detail->details }}</td>
+                            <td>{{ $news_detail->type }}</td>
+                            <td>{{ $news_detail->updated_at }}</td>
+                            <td>
+                                @if ($news_detail->status == '1')
+                                    <a wire:click='show({{ $news_detail->id_news }})' class="btn btn-success"><i
+                                            class='bx bxs-show'></i></a>
+                                @else
+                                    <a wire:click='hide({{ $news_detail->id_news }})' class="btn btn-danger"><i
+                                            class='bx bxs-hide'></i></a>
+                                @endif
+                                @if ($users->user_type == 'Admin')
+                                    <a href="/admin/edit_and_detail_news/{{ $news_detail->id_news }}"
+                                        class="btn btn-orange"><i class='bx bx-detail'></i></a>
+                                @elseif ($users->user_type == 'Branch head')
+                                    <a href="/branch-head/edit_and_detail_news/{{ $news_detail->id_news }}"
+                                        class="btn btn-orange"><i class='bx bx-detail'></i></a>
+                                @elseif ($users->user_type == 'Teacher')
+                                    <a href="/teacher/edit_and_detail_news/{{ $news_detail->id_news }}"
+                                        class="btn btn-orange"><i class='bx bx-detail'></i></a>
+                                @endif
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

@@ -25,12 +25,14 @@ class ApproveThesis extends Component
         Dissertation_article::where('id_dissertation_article', $index)->update([
             'status' => '0'
         ]);
+        session()->flash('danger', 'ซ่อนบทความ ' . Dissertation_article::find($index)->title .  ' เรียบร้อยแล้ว');
     }
     public function hide($index)
     {
         Dissertation_article::where('id_dissertation_article', $index)->update([
             'status' => '1'
         ]);
+        session()->flash('success', 'แสดงบทความ ' . Dissertation_article::find($index)->title .  ' เรียบร้อยแล้ว');
     }
 
     public function render()

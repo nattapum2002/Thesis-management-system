@@ -62,7 +62,7 @@ class AddTeacher extends Component
             'created_by' => Auth::guard('teachers')->user()->id_teacher,
             'created_at' => now()
         ]);
-        session()->flash('message', 'เพิ่ม ' . $this->add_prefix . ' ' . $this->add_name . ' ' . $this->add_surname . ' สำเร็จ!');
+        session()->flash('message', 'เพิ่ม ' . $this->add_prefix . ' ' . $this->add_name . ' ' . $this->add_surname . ' เรียบร้อยแล้ว');
         return redirect()->route('manage_teacher');
     }
 

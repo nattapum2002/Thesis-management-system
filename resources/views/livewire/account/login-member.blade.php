@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
+                            <button type="submit" class="btn btn-orange">เข้าสู่ระบบ</button>
                         <p class="small fw-bold mt-2 pt-1 mb-0">ยังไม่มีบัญชี? <a href="/register"
                             class="link-danger">สมัครสมาชิก</a></p>
                         </div>

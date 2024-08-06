@@ -194,6 +194,14 @@ Route::get('/admin/manage_exam_schedule', function () {
 
 Route::get('/admin/manage_document_schedule', function () {
     return view('admin.manage_document_schedule');
+})->name('manage_document_schedule');
+
+Route::get('/admin/add_document_schedule', function () {
+    return view('admin.add_document_schedule');
+});
+
+Route::get('/admin/edit_and_detail_document_schedule/{scheduleId}', function ($scheduleId) {
+    return view('admin.edit_and_detail_document_schedule', compact('scheduleId'));
 });
 
 Route::get('/admin/approve_documents', function () {
@@ -368,10 +376,10 @@ Route::get('/test/{projectId}', function () {
 Route::get('/gen', [pdfGenerateController::class, 'generate']);
 //Route::get('show', [AdminController::class, 'show']);
 
-Route::get('Document/01/{id_project}', function ($id_project){
-    return view('detail-document.detail_document_01',compact('id_project'));
+Route::get('Document/01/{id_project}', function ($id_project) {
+    return view('detail-document.detail_document_01', compact('id_project'));
 })->name('detail_document_01');
 
-Route::get('Document/02/{id_project}', function ($id_project){
-    return view('detail-document.detail_document_02',compact('id_project'));
+Route::get('Document/02/{id_project}', function ($id_project) {
+    return view('detail-document.detail_document_02', compact('id_project'));
 })->name('detail_document_02');

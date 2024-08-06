@@ -6,7 +6,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th></th>
                         <th>ชื่อโปรเจค</th>
                         <th>ชื่อนักศึกษา</th>
                         <th>สถานะปรึกษา</th>
@@ -451,9 +451,11 @@
                         <td>
                             <div class="input-fields">
                                 <div class="input-field">
-                                    <input type="radio" name="document-approval" id="document-approval" value="approve">
+                                    <input type="radio" name="document-approval" id="document-approval"
+                                        value="approve">
                                     <label for="approve">อนุมัติเอกสาร</label>
-                                    <input type="radio" name="document-approval" id="document-reject" value="reject">
+                                    <input type="radio" name="document-approval" id="document-reject"
+                                        value="reject">
                                     <label for="reject">ไม่อนุมัติเอกสาร</label>
                                 </div>
                                 <div class="input-field" id="document-reason-field">
@@ -633,7 +635,7 @@
                                             <option value="f2">อาจารย์ 2</option>
                                         </select>
                                         @error('#')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="input-field">
@@ -644,10 +646,10 @@
                                             <option value="f2">อาจารย์ 2</option>
                                         </select>
                                         @error('#')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <button type="button" class="btn btn-primary">เพิ่มกรรมการ</button>
+                                    <button type="button" class="btn btn-orange">เพิ่มกรรมการ</button>
                                     <br><b>กรรมการและเลขานุการ : </b>อาจารย์ที่ปรึกษาหลัก
                                 </div>
                             </div>
@@ -742,7 +744,7 @@
                                         <input class="form-input" type="time" wire:model='#'
                                             placeholder="กรุณากรอกเวลาสอบ" required>
                                         @error('#')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="input-field">
@@ -750,7 +752,7 @@
                                         <input class="form-input" type="date" wire:model='#'
                                             placeholder="กรุณากรอกวันสอบ" required>
                                         @error('#')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
@@ -767,7 +769,7 @@
                                         <input class="form-input" type="text" wire:model='#'
                                             placeholder="กรุณากรอกห้องสอบ" required>
                                         @error('#')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="input-field">
@@ -775,7 +777,7 @@
                                         <input class="form-input" type="text" wire:model='#'
                                             placeholder="กรุณากรอกอาคารสอบ" required>
                                         @error('#')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="input-field">
@@ -786,7 +788,7 @@
                                             <option value="g2">คณะเกษตรและเทคโนโลยี</option>
                                         </select>
                                         @error('#')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
@@ -807,7 +809,7 @@
                                             <option value="s3">ภาคฤดูร้อน</option>
                                         </select>
                                         @error('#')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="input-field">
@@ -815,7 +817,7 @@
                                         <input class="form-input" type="number" wire:model='#'
                                             placeholder="กรุณากรอกปีการศึกษา" required>
                                         @error('#')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
@@ -907,9 +909,11 @@
                         <td>
                             <div class="input-fields">
                                 <div class="input-field">
-                                    <input type="radio" name="document-approval" id="document-approval" value="approve">
+                                    <input type="radio" name="document-approval" id="document-approval"
+                                        value="approve">
                                     <label for="approve">อนุมัติเอกสาร</label>
-                                    <input type="radio" name="document-approval" id="document-reject" value="reject">
+                                    <input type="radio" name="document-approval" id="document-reject"
+                                        value="reject">
                                     <label for="reject">ไม่อนุมัติเอกสาร</label>
                                 </div>
                                 <div class="input-field" id="document-reason-field">

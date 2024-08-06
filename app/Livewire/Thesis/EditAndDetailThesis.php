@@ -56,7 +56,7 @@ class EditAnddetailThesis extends Component
         } else {
             DB::table('dissertation_articles')->where('id_dissertation_article', $this->thesisId)->update([$index => $this->$index], ['updated_at' => now()]);
         }
-        session()->flash('message', 'แก้ไขข่าวสารสำเร็จ!');
+        session()->flash('message', 'บันทึกข้อมูลเรียบร้อยแล้ว');
         $this->cancel($index);
     }
 

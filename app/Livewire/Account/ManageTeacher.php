@@ -19,12 +19,14 @@ class ManageTeacher extends Component
         Teacher::where('id_teacher', $index)->update([
             'account_status' => '0'
         ]);
+        session()->flash('danger', 'ระงับบัญชีของ ' . Teacher::find($index)->prefix . ' ' . Teacher::find($index)->name . ' ' . Teacher::find($index)->surname . ' เรียบร้อยแล้ว');
     }
     public function hide($index)
     {
         Teacher::where('id_teacher', $index)->update([
             'account_status' => '1'
         ]);
+        session()->flash('success', 'อนุมัติบัญชีของ ' . Teacher::find($index)->prefix . ' ' . Teacher::find($index)->name . ' ' . Teacher::find($index)->surname . ' เรียบร้อยแล้ว');
     }
 
     public function render()

@@ -10,11 +10,8 @@
 
     --font: "kanit", "Montserrat", sans-serif;
 
-    /* light mode */
-    --white-color: #fff; /* background */
-
-    /* dark mode */
-    --black-color: #000; /* background */
+    --white-color: #fff;
+    --black-color: #000;
 }
 
 body {

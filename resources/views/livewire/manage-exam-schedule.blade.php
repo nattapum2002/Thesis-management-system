@@ -6,7 +6,7 @@
             <div class="btn btn-success btn-sm" href="#">เพิ่มรายการสอบ</div>
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search">
-                <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+                <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
                         </td>
                         <td>ห้องปริญญานิพนธ์</td>
                         <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="#">รายละเอียด/แก้ไข</a>
+                            <a class="btn btn-orange btn-sm" href="#">รายละเอียด/แก้ไข</a>
                         </td>
                     </tr>
                 </tbody>
@@ -139,17 +139,17 @@
                                 <option value="f-exam">สอบจบ</option>
                             </select>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-field">
                             <label class="form-label">ชื่อโปรเจค</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="ชื่อโปรเจค">
-                                <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+                                <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
                             </div>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -165,7 +165,7 @@
                                 <option value="f2">อาจารย์ 2</option>
                             </select>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-field">
@@ -176,7 +176,7 @@
                                 <option value="f2">อาจารย์ 2</option>
                             </select>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-field">
@@ -187,7 +187,7 @@
                                 <option value="f2">อาจารย์ 2</option>
                             </select>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -200,14 +200,15 @@
                             <input class="form-input" type="time" wire:model='#' placeholder="กรุณากรอกเวลาสอบ"
                                 required>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-field">
                             <label class="form-label">วันสอบ</label>
-                            <input class="form-input" type="date" wire:model='#' placeholder="กรุณากรอกวันสอบ" required>
+                            <input class="form-input" type="date" wire:model='#' placeholder="กรุณากรอกวันสอบ"
+                                required>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -220,7 +221,7 @@
                             <input class="form-input" type="text" wire:model='#' placeholder="กรุณากรอกห้องสอบ"
                                 required>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-field">
@@ -228,7 +229,7 @@
                             <input class="form-input" type="text" wire:model='#' placeholder="กรุณากรอกอาคารสอบ"
                                 required>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-field">
@@ -239,7 +240,7 @@
                                 <option value="g2">คณะเกษตรและเทคโนโลยี</option>
                             </select>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -256,15 +257,15 @@
                                 <option value="s3">ภาคฤดูร้อน</option>
                             </select>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-field">
                             <label class="form-label">ปีการศึกษา</label>
-                            <input class="form-input" type="number" wire:model='#' placeholder="กรุณากรอกปีการศึกษา"
-                                required>
+                            <input class="form-input" type="number" wire:model='#'
+                                placeholder="กรุณากรอกปีการศึกษา" required>
                             @error('#')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
