@@ -18,6 +18,18 @@ class ManageThesis extends Component
     public $search = '';
     public $filterDate = 'บทความล่าสุด';
     public $filterType = 'ทุกประเภท';
+    public $sortField = 'id_dissertation_article';
+    public $sortDirection = 'asc';
+
+    public function sortBy($field)
+    {
+        if ($this->sortField == $field) {
+            $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortField = $field;
+            $this->sortDirection = 'asc';
+        }
+    }
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -67,7 +79,7 @@ class ManageThesis extends Component
             })
             ->when($this->filterDate == 'บทความล่าสุด', function ($query) {
                 $query->orderBy('created_at', 'desc');
-            })
+            })->orderBy($this->sortField, $this->sortDirection)
             ->paginate(15);
 
         return view('livewire.thesis.manage-thesis', ['thesis' => $thesis]);

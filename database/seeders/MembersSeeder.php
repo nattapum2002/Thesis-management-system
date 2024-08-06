@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class MembersSeeder extends Seeder
 {
@@ -19,6 +21,15 @@ class MembersSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             $course = ($i % 3) + 1; // 1, 2, 3, 1, 2, 3, ...
             $level = $course;
+            $filename = 'avatar' . rand(1, 5) . '.png';
+            $source_path = public_path('Asset/dist/img/' . $filename);
+            $destination_path = 'student_image/' . $filename;
+            if (File::exists($source_path)) {
+                Storage::disk('public')->put($destination_path, File::get($source_path));
+                $path_member_img = $destination_path;
+            } else {
+                echo "File not found: $source_path";
+            }
 
             if ($course == 1) {
                 $level = 1;
@@ -35,7 +46,7 @@ class MembersSeeder extends Seeder
                 'email_verified_at' => now(),
                 'tel' => '081234567' . str_pad($i, 2, '0', STR_PAD_LEFT),
                 'id_line' => 'line' . $i,
-                'student_image' => null,
+                'student_image' => $path_member_img,
                 'id_level' => $level,
                 'id_course' => $course,
                 'username' => 'student' . $i,

@@ -25,11 +25,10 @@
             <div class="sidebar-user">
                 <a href="/admin/edit_admin">
                     <div>
-                        <img src="{{ asset('storage/' . Auth::guard('teachers')->user()->teacher_image) }}"
-                            alt="teachers Image">
+                        <img src="{{ asset('storage/' . Auth::guard('teachers')->user()->teacher_image) }}" alt="UserImage">
                     </div>
                     <div class="info">
-                        <span>{{ Auth::guard('teachers')->user()->prefix . ' ' . Auth::guard('teachers')->user()->name . ' ' . Auth::guard('teachers')->user()->surname }}</span>
+                        <span>{{ Auth::guard('teachers')->user()->name . ' ' . Auth::guard('teachers')->user()->surname }}</span>
                         <small>อาจารย์ประจำวิชา</small>
                     </div>
                 </a>
@@ -224,10 +223,8 @@
 @section('mastercontent')
     <section id="content-header">
         <div class="row mb-2">
-            <div class="col col-sm-6">
+            <div class="col col-sm-12">
                 <h1 class="m-0">@yield('title')</h1>
-            </div>
-            <div class="col col-sm-6">
                 <ol class="breadcrumb">
                     @yield('navigation')
                     <li class="breadcrumb-item active">@yield('title')</li>

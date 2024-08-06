@@ -24,19 +24,49 @@
             <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>คำนำหน้า</th>
-                        <th>ชื่อ</th>
-                        <th>นามสกุล</th>
-                        <th>ประเภทผู้ใช้งาน</th>
-                        <th></th>
+                        <th>
+                            <a wire:click="sortBy('id_teacher')">
+                                <span>ID</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('prefix')">
+                                <span>คำนำหน้า</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('name')">
+                                <span>ชื่อ</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('surname')">
+                                <span>นามสกุล</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('user_type')">
+                                <span>ประเภทบัญชี</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('account_status')">
+                                <span>สถานะ</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($teachers as $teacher)
                         {{-- @dd($teachers->where('user_type', $teacher->user_type)->count()) --}}
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $teacher->id_teacher }}</td>
                             <td>{{ $teacher->prefix }}</td>
                             <td>{{ $teacher->name }}</td>
                             <td>{{ $teacher->surname }}</td>
@@ -66,7 +96,14 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
+        </div>
+        <div class="row gy-3">
+            <div class="col-12">
+                <p class="page-number">
+                    แสดงบัญชีอาจารย์ <b>{{ $teachers->firstItem() }}</b>
+                    ถึง <b>{{ $teachers->lastItem() }}</b>
+                    จากทั้งหมด <b>{{ $teachers->total() }}</b> บัญชี
+                </p>
                 {{ $teachers->onEachSide(1)->links('pagination::bootstrap-4') }}
             </div>
         </div>

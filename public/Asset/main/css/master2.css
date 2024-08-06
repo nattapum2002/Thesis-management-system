@@ -569,15 +569,20 @@ p.page-number {
     padding: 0px 20px;
 }
 
+.main div.content #content-header div.col{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .main div.content #content-header h1 {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 500;
     color: var(--orange-color);
     padding: 10px 0px;
 }
 
 .main div.content #content-header ol.breadcrumb {
-    justify-content: end;
     padding: 10px 0px;
     margin: 0px;
 }
@@ -821,111 +826,6 @@ footer div.footer-bottom {
 
 /* ------------------------------------- end main ------------------------------------- */
 
-@media (max-width: 970px) {
-    .main .navbar .navbar-nav .navbar-item .navbar-link span {
-        display: none;
-    }
-
-    .main .navbar .navbar-nav .navbar-item .btn-logout span {
-        display: none;
-    }
-
-    .main .navbar .navbar-nav .navbar-item .btn-logout i {
-        display: flex;
-        justify-items: center;
-        align-items: center;
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    #sidebar {
-        width: 70px;
-        transition: all 0.3s ease;
-    }
-
-    #sidebar hr {
-        width: 60px;
-        transition: all 0.3s ease;
-    }
-
-    #sidebar span,
-    #sidebar small,
-    #sidebar .arrow,
-    #sidebar .sidebar-user .info {
-        display: none;
-    }
-
-    #sidebar .sidebar-dropdown .sidebar-item .sidebar-link{
-        padding-left: 0px;
-        transition: all 0.3s ease;
-    }
-
-    .main {
-        width: calc(100% - 70px);
-        left: 70px;
-    }
-
-    .main .navbar {
-        width: calc(100% - 70px);
-        left: 70px;
-    }
-
-    #sidebar.collapsed {
-        width: 280px;
-        transition: all 0.3s ease;
-    }
-
-    #sidebar.collapsed hr {
-        width: 270px;
-        transition: all 0.3s ease;
-    }
-
-    #sidebar.collapsed span,
-    #sidebar.collapsed small{
-        display: flex;
-    }
-
-    #sidebar.collapsed .arrow,
-    #sidebar.collapsed .sidebar-user .info {
-        display: inline;
-    }
-
-    #sidebar.collapsed .sidebar-dropdown .sidebar-item .sidebar-link {
-        padding-left: 10px;
-        transition: all 0.3s ease;
-    }
-
-    .main.collapsed {
-        width: calc(100% - 70px);
-        left: 70px;
-    }
-
-    .main .navbar.collapsed {
-        width: calc(100% - 280px);
-        left: 280px;
-    }
-}
-
-@media (max-width: 570px) {
-    .main .navbar {
-        padding: 0 5px;
-    }
-    .main .navbar.collapsed ul {
-        display: none;
-    }
-}
-
-@container container-chart (max-width: 320px) {
-    #admin-chart .card .card-header .card-tools a.tools-link span{
-        display: none;
-    }
-
-    #teacher-chart .card .card-header .card-tools a.tools-link span{
-        display: none;
-    }
-}
-
 /* --------------------------------------- menu-thesis, menu-news page --------------------------------------- */
 
 h2 {
@@ -1050,6 +950,7 @@ div.post p {
     border-radius: 10px;
     overflow: hidden;
     max-height: 500px;
+    width: 100%;
 }
 
 #detail-news p.tag {
@@ -1076,3 +977,118 @@ div.post p {
 }
 
 /* --------------------------------------- end detail-news page --------------------------------------- */
+
+@media (max-width: 970px) {
+    .main .navbar .navbar-nav .navbar-item .navbar-link span {
+        display: none;
+    }
+
+    .main .navbar .navbar-nav .navbar-item .btn-logout span {
+        display: none;
+    }
+
+    .main .navbar .navbar-nav .navbar-item .btn-logout i {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        width: 70px;
+        transition: all 0.3s ease;
+    }
+
+    #sidebar hr {
+        width: 60px;
+        transition: all 0.3s ease;
+    }
+
+    #sidebar span,
+    #sidebar small,
+    #sidebar .arrow,
+    #sidebar .sidebar-user .info {
+        display: none;
+    }
+
+    #sidebar .sidebar-dropdown .sidebar-item .sidebar-link{
+        padding-left: 0px;
+        transition: all 0.3s ease;
+    }
+
+    .main {
+        width: calc(100% - 70px);
+        left: 70px;
+    }
+
+    .main .navbar {
+        width: calc(100% - 70px);
+        left: 70px;
+    }
+
+    #sidebar.collapsed {
+        width: 280px;
+        transition: all 0.3s ease;
+    }
+
+    #sidebar.collapsed hr {
+        width: 270px;
+        transition: all 0.3s ease;
+    }
+
+    #sidebar.collapsed span,
+    #sidebar.collapsed small{
+        display: flex;
+    }
+
+    #sidebar.collapsed .arrow,
+    #sidebar.collapsed .sidebar-user .info {
+        display: inline;
+    }
+
+    #sidebar.collapsed .sidebar-dropdown .sidebar-item .sidebar-link {
+        padding-left: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .main.collapsed {
+        width: calc(100% - 70px);
+        left: 70px;
+    }
+
+    .main .navbar.collapsed {
+        width: calc(100% - 280px);
+        left: 280px;
+    }
+
+    .main div.content #content-header h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 620px) {
+    .main div.content #content-header ol.breadcrumb {
+        display: none;
+    }
+}
+
+@media (max-width: 570px) {
+    .main .navbar {
+        padding: 0 5px;
+    }
+    .main .navbar.collapsed ul {
+        display: none;
+    }
+}
+
+@container container-chart (max-width: 320px) {
+    #admin-chart .card .card-header .card-tools a.tools-link span{
+        display: none;
+    }
+
+    #teacher-chart .card .card-header .card-tools a.tools-link span{
+        display: none;
+    }
+}

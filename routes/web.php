@@ -346,13 +346,14 @@ Route::get('/member/create_document/02', function () {
     return view('member.create_document_02');
 })->name('create_document_02');
 
-Route::get('/member/send-document', function () {
+Route::get('/member/manage_submit_document', function () {
     return view('member.manage_submit_document');
 })->name('submit_document');
 
-Route::get('/member/manage-document', function () {
+Route::get('/member/manage_document', function () {
     return view('member.manage_document');
 })->name('manage_document');
+
 Route::get('/member/manage-document-01', function () {
     return view('member.manage_document_01');
 });

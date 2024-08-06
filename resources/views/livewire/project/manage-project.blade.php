@@ -7,29 +7,39 @@
                     <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
                 </div>
                 <div class="card">
-                    <div class="d-flex justify-content-center">
-                        {{ $projects->onEachSide(1)->links('pagination::bootstrap-4') }}
-                    </div>
                     <div class="card-body table-responsive p-0">
                         <table class="table text-nowrap table-striped">
                             <thead>
                                 <tr>
-                                    <th></th>
                                     <th>
-                                        <span>ชื่อโปรเจค</span>
-                                        <a><i class='bx bx-transfer-alt bx-rotate-90'></i></a>
+                                        <a wire:click="sortBy('id_project')">
+                                            <span>ID</span>
+                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                        </a>
                                     </th>
                                     <th>
-                                        <span>ชื่อนักศึกษา</span>
-                                        <a><i class='bx bx-transfer-alt bx-rotate-90'></i></a>
+                                        <a wire:click="sortBy('project_name_th')">
+                                            <span>ชื่อโปรเจค</span>
+                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                        </a>
                                     </th>
                                     <th>
-                                        <span>ชื่ออาจารย์ที่ปรึกษา</span>
-                                        <a><i class='bx bx-transfer-alt bx-rotate-90'></i></a>
+                                        <a wire:click="sortBy('member.name')">
+                                            <span>ชื่อนักศึกษา</span>
+                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                        </a>
                                     </th>
                                     <th>
-                                        <span>สถานะการดำเนินงาน</span>
-                                        <a><i class='bx bx-transfer-alt bx-rotate-90'></i></a>
+                                        <a wire:click="sortBy('teacher.name')">
+                                            <span>ชื่ออาจารย์ที่ปรึกษา</span>
+                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a wire:click="sortBy('project_status')">
+                                            <span>สถานะการดำเนินงาน</span>
+                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                        </a>
                                     </th>
                                     <th></th>
                                 </tr>
@@ -37,7 +47,7 @@
                             <tbody>
                                 @foreach ($projects as $project)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $project->id_project }}</td>
                                         <td>
                                             <p>{{ $project->project_name_th }}</p>
                                             <small>{{ $project->project_name_en }}</small>
@@ -101,8 +111,15 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        {{ $projects->onEachSide(1)->links('pagination::bootstrap-4') }}
+                    <div class="row gy-3">
+                        <div class="col-12">
+                            <p class="page-number">
+                                แสดงโปรเจค <b>{{ $projects->firstItem() }}</b>
+                                ถึง <b>{{ $projects->lastItem() }}</b>
+                                จากทั้งหมด <b>{{ $projects->total() }}</b> โปรเจค
+                            </p>
+                            {{ $projects->onEachSide(1)->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                 </div>
             </div>

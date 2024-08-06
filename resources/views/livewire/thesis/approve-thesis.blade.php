@@ -38,18 +38,48 @@
             <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>ชื่อบทความ</th>
-                        <th>ประเภท</th>
-                        <th>ปีการศึกษา</th>
-                        <th>วันที่-เวลา</th>
-                        <th></th>
+                        <th>
+                            <a wire:click="sortBy('id_dissertation_article')">
+                                <span>ID</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('title')">
+                                <span>ชื่อบทความ</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('type')">
+                                <span>ประเภท</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('year_published')">
+                                <span>ปีการศึกษา</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('updated_at')">
+                                <span>อัพเดทล่าสุด</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('status')">
+                                <span>สถานะ</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($thesis as $thesis_detail)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $thesis_detail->id_dissertation_article }}</td>
                             <td>{{ $thesis_detail->title }}</td>
                             <td>{{ $thesis_detail->type }}</td>
                             <td>{{ $thesis_detail->year_published }}</td>
@@ -69,7 +99,14 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
+        </div>
+        <div class="row gy-3">
+            <div class="col-12">
+                <p class="page-number">
+                    แสดงบทความ <b>{{ $thesis->firstItem() }}</b>
+                    ถึง <b>{{ $thesis->lastItem() }}</b>
+                    จากทั้งหมด <b>{{ $thesis->total() }}</b> บทความ
+                </p>
                 {{ $thesis->onEachSide(1)->links('pagination::bootstrap-4') }}
             </div>
         </div>

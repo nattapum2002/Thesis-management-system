@@ -76,8 +76,15 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        {{ $documents_schedule->onEachSide(1)->links('pagination::bootstrap-4') }}
+                    <div class="row gy-3">
+                        <div class="col-12">
+                            <p class="page-number">
+                                แสดงกำหนดการ <b>{{ $documents_schedule->firstItem() }}</b>
+                                ถึง <b>{{ $documents_schedule->lastItem() }}</b>
+                                จากทั้งหมด <b>{{ $documents_schedule->total() }}</b> รายการ
+                            </p>
+                            {{ $documents_schedule->onEachSide(1)->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                 </div>
             </div>

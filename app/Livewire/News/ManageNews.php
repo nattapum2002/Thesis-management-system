@@ -16,6 +16,18 @@ class ManageNews extends Component
     public $search = '';
     public $filterDate = 'ข่าวล่าสุด';
     public $filterType = 'ทุกประเภท';
+    public $sortField = 'id_news';
+    public $sortDirection = 'asc';
+
+    public function sortBy($field)
+    {
+        if ($this->sortField == $field) {
+            $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortField = $field;
+            $this->sortDirection = 'asc';
+        }
+    }
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -59,8 +71,8 @@ class ManageNews extends Component
             })
             ->when($this->filterDate == 'ข่าวล่าสุด', function ($query) {
                 $query->orderBy('created_at', 'desc');
-            })
-            ->paginate(15);
+            })->orderBy($this->sortField, $this->sortDirection)
+            ->paginate(10);
 
         return view('livewire.news.manage-news', ['news' => $news]);
     }

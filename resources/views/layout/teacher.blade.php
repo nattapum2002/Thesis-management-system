@@ -2,140 +2,147 @@
 
 {{-- title --}}
 @section('mastertitle')
-@yield('title')
+    @yield('title')
 @endsection
 
 {{-- css --}}
 @section('mastercss')
-
-@endsection
-
-{{-- navbar --}}
-@section('masternavbar')
-<div class="container-fluid">
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item">
-            <a href="/teacher" class="nav-link">ระบบจัดการปริญญานิพนธ์</a>
-        </li>
-    </ul>
-
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a href="/teacher/menu_thesis_login" class="nav-link">บทความปริญญานิพนธ์</a>
-        </li>
-        <li class="nav-item">
-            <a href="/teacher/menu_news_login" class="nav-link">ข่าวประชาสัมพันธ์</a>
-        </li>
-        <li class="nav-item">
-            <a href="https://computer.surin.rmuti.ac.th/computer/index.php" target="_blank"
-                class="nav-link">เกี่ยวกับสาขา</a>
-        </li>
-        <li class="nav item">
-            <a class="btn btn-danger" href="{{route('logout')}}">ออกจากระบบ</a>
-        </li>
-    </ul>
-</div>
 @endsection
 
 {{-- sidebar --}}
 @section('mastersidebar')
-<a href="/teacher" class="brand-link">
-    <img src="{{asset('Asset/main/img/logo/RMUTI.png')}}" alt="RMUTI.png" class="brand-image img-circle elevation-3"
-        style="opacity: .8">
-    <span class="brand-text font-weight-light">TMS.TC</span>
-</a>
-<div class="sidebar">
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-            <img src="{{ asset('storage/'.Auth::guard('teachers')->user()->teacher_image) }}"
-                class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-            <a href="/teacher/edit_teacher" class="d-block">
-                {{ Auth::guard('teachers')->user()->name }} {{ Auth::guard('teachers')->user()->surname }}
-            </a>
-        </div>
-    </div>
-
-    <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
-                <a class="nav-link active">
-                    <i class='nav-icon bx bx-book'></i>
-                    <p>
-                        โปรเจค
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <a href="/teacher">
+                    <div>
+                        <img src="{{ asset('Asset/main/img/logo/RMUTI.png') }}" alt="RMUTI.png">
+                    </div>
+                    <span>TMS.TC</span>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
+            </div>
+            <hr>
+            <div class="sidebar-user">
+                <a href="/teacher/edit_teacher">
+                    <div class="image">
+                        <img src="{{ asset('storage/' . Auth::guard('teachers')->user()->teacher_image) }}"alt="UserImage">
+                    </div>
+                    <div class="info">
+                        <span>{{ Auth::guard('teachers')->user()->name . ' ' . Auth::guard('teachers')->user()->surname }}</span>
+                        <small>อาจารย์</small>
+                    </div>
+                </a>
+            </div>
+            <hr>
+        </div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-item">
+                <div class="sidebar-collapse">
+                    <a href="#"
+                        class="sidebar-link has-dropdown collapsed{{ Request::is('teacher/manage_project') || Request::is('admin/approve_documents_teacher') ? 'off active' : '' }}"
+                        data-bs-target="#project" data-bs-toggle="collapse"
+                        aria-expanded="{{ Request::is('teacher/manage_project') || Request::is('teacher/approve_documents_teacher') ? 'true' : 'false' }}">
+                        <div>
+                            <i class='nav-icon bx bx-book'></i>
+                            <span class="link-name">โปรเจค</span>
+                        </div>
+                        <i class="bx bx-chevron-down arrow"></i>
+                    </a>
+                </div>
+                <ul id="project"
+                    class="sidebar-dropdown list-unstyled collapse {{ Request::is('teacher/manage_project') || Request::is('teacher/approve_documents_teacher') ? 'show' : '' }}"
+                    data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link {{ Request::is('teacher/manage_project') ? 'active' : '' }}"
+                            href="/teacher/manage_project">
                             <i class='nav-icon bx bx-circle'></i>
-                            จัดการโปรเจค
+                            <span class="link-name">จัดการโปรเจค</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/teacher/approve_documents_teacher">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link {{ Request::is('teacher/approve_documents_teacher') ? 'active' : '' }}"
+                            href="/teacher/approve_documents_teacher">
                             <i class='nav-icon bx bx-circle'></i>
-                            อนุมัติเอกสาร
+                            <span class="link-name">อนุมัติเอกสาร</span>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/teacher/edit_teacher">
+            <li class="sidebar-item">
+                <a class="sidebar-link {{ Request::is('teacher/edit_teacher') ? 'active' : '' }}"
+                    href="/teacher/edit_teacher">
                     <i class='nav-icon bx bx-user'></i>
-                    <p>
-                        จัดการบัญชีผู้ใช้
-                    </p>
+                    <span class="link-name">จัดการบัญชีผู้ใช้</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/teacher/manage_news">
+            <li class="sidebar-item">
+                <a class="sidebar-link {{ Request::is('teacher/manage_news') ? 'active' : '' }}"
+                    href="/teacher/manage_news">
                     <i class='nav-icon bx bx-news'></i>
-                    <p>
-                        จัดการข่าวประชาสัมพันธ์
-                    </p>
+                    <span class="link-name">จัดการข่าวประชาสัมพันธ์</span>
                 </a>
             </li>
         </ul>
-    </nav>
-</div>
+    </div>
+@endsection
+
+{{-- navbar --}}
+@section('masternavbar')
+    <button class="btn" id="toggleSidebar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse">
+        <ul class="navbar-nav ms-auto my-2 my-lg-0">
+            <li class="navbar-item my-1">
+                <a href="/teacher/menu_thesis_login"
+                    class="navbar-link {{ Request::is('teacher/menu_thesis_login') ? 'active' : '' }}">
+                    <i class='nav-icon bx bx-bookmarks'></i>
+                    <span>บทความปริญญานิพนธ์</span>
+                </a>
+            </li>
+            <li class="navbar-item my-1">
+                <a href="/teacher/menu_news_login"
+                    class="navbar-link {{ Request::is('teacher/menu_news_login') ? 'active' : '' }}">
+                    <i class='nav-icon bx bx-news'></i>
+                    <span>ข่าวประชาสัมพันธ์</span>
+                </a>
+            </li>
+            <li class="navbar-item my-1">
+                <a href="https://computer.surin.rmuti.ac.th/computer/index.php" target="_blank" class="navbar-link">
+                    <i class='bx bx-info-circle'></i>
+                    <span>เกี่ยวกับสาขา</span>
+                </a>
+            </li>
+            <li class="navbar-item my-1">
+                <a class="btn btn-logout" href="{{ route('logout') }}">
+                    <i class='bx bx-log-out'></i>
+                    <span>ออกจากระบบ</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 @endsection
 
 {{-- content --}}
 @section('mastercontent')
-<div class="content-header">
-    <div class="container-fluid">
+    <section id="content-header">
         <div class="row mb-2">
-            <div class="col-sm-6">
+            <div class="col col-sm-12">
                 <h1 class="m-0">@yield('title')</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <ol class="breadcrumb">
                     @yield('navigation')
                     <li class="breadcrumb-item active">@yield('title')</li>
                 </ol>
             </div>
         </div>
-    </div>
-</div>
-<section class="content">
-    <div class="container-fluid">
-        @yield('content')
-    </div>
-</section>
+    </section>
+    @yield('content')
 @endsection
 
 {{-- footer --}}
 @section('masterfooter')
-
 @endsection
 
 {{-- script --}}
 @section('masterscript')
-
 @endsection

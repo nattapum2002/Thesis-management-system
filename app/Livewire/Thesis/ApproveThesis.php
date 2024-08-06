@@ -13,6 +13,18 @@ class ApproveThesis extends Component
     public $search = '';
     public $filterDate = 'ข่าวล่าสุด';
     public $filterType = 'ทุกประเภท';
+    public $sortField = 'id_dissertation_article';
+    public $sortDirection = 'asc';
+
+    public function sortBy($field)
+    {
+        if ($this->sortField == $field) {
+            $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortField = $field;
+            $this->sortDirection = 'asc';
+        }
+    }
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -49,7 +61,7 @@ class ApproveThesis extends Component
             })
             ->when($this->filterDate == 'ข่าวล่าสุด', function ($query) {
                 $query->orderBy('created_at', 'desc');
-            })
+            })->orderBy($this->sortField, $this->sortDirection)
             ->paginate(15);
 
         return view('livewire.thesis.approve-thesis', ['thesis' => $thesis]);

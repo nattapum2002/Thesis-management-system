@@ -38,12 +38,42 @@
             <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>หัวข้อข่าว</th>
-                        <th>ผู้เขียน</th>
-                        <th>ประเภท</th>
-                        <th>วันที่-เวลา</th>
-                        <th></th>
+                        <th>
+                            <a wire:click="sortBy('id_news')">
+                                <span>ID</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('title')">
+                                <span>หัวข้อ</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('details')">
+                                <span>รายละเอียด</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('type')">
+                                <span>ประเภท</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('updated_at')">
+                                <span>อัพเดทล่าสุด</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('status')">
+                                <span>สถานะ</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,7 +99,14 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
+        </div>
+        <div class="row gy-3">
+            <div class="col-12">
+                <p class="page-number">
+                    แสดงข่าว <b>{{ $news->firstItem() }}</b>
+                    ถึง <b>{{ $news->lastItem() }}</b>
+                    จากทั้งหมด <b>{{ $news->total() }}</b> ข่าว
+                </p>
                 {{ $news->onEachSide(1)->links('pagination::bootstrap-4') }}
             </div>
         </div>

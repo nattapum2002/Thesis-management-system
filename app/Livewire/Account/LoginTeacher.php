@@ -28,7 +28,7 @@ class LoginTeacher extends Component
                 } else if (Auth::guard('teachers')->user()->user_type == 'Admin') {
                     return redirect()->route('admin');
                 } elseif (Auth::guard('teachers')->user()->user_type == 'Branch head') {
-                    return redirect()->route('teacher');
+                    return redirect()->route('brand-head');
                 }
             } else {
                 Auth::guard('teachers')->logout();

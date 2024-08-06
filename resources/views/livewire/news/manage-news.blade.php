@@ -49,22 +49,55 @@
             <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>หัวข้อข่าว</th>
-                        <th>รายละเอียด</th>
-                        <th>ประเภท</th>
-                        <th>วันที่-เวลา</th>
-                        <th></th>
+                        <th>
+                            <a wire:click="sortBy('id_news')">
+                                <span>ID</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('title')">
+                                <span>หัวข้อ</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('details')">
+                                <span>รายละเอียด</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('type')">
+                                <span>ประเภท</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('updated_at')">
+                                <span>อัพเดทล่าสุด</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('status')">
+                                <span>สถานะ</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($news as $news_detail)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $news_detail->id_news }}</td>
                             <td>{{ $news_detail->title }}</td>
                             <td>{{ $news_detail->details }}</td>
                             <td>{{ $news_detail->type }}</td>
-                            <td>{{ $news_detail->updated_at }}</td>
+                            <td>
+                                <p>{{ $news_detail->created_at->thaidate('H:i น.') }}</p>
+                                <small>{{ $news_detail->created_at->thaidate('d M Y') }}</small>
+                            </td>
                             <td>
                                 @if ($news_detail->status == '1')
                                     <a wire:click='show({{ $news_detail->id_news }})' class="btn btn-success"><i
@@ -88,7 +121,14 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
+        </div>
+        <div class="row gy-3">
+            <div class="col-12">
+                <p class="page-number">
+                    แสดงข่าว <b>{{ $news->firstItem() }}</b>
+                    ถึง <b>{{ $news->lastItem() }}</b>
+                    จากทั้งหมด <b>{{ $news->total() }}</b> ข่าว
+                </p>
                 {{ $news->onEachSide(1)->links('pagination::bootstrap-4') }}
             </div>
         </div>

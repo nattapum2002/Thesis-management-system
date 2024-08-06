@@ -17,19 +17,47 @@
             <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>รหัสนักศึกษา</th>
-                        <th>คำนำหน้า</th>
-                        <th>ชื่อ</th>
-                        <th>นามสกุล</th>
-                        <th>หลักสูตร</th>
-                        <th></th>
+                        <th>
+                            <a wire:click="sortBy('id_student')">
+                                <span>รหัสนักศึกษา</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('prefix')">
+                                <span>คำนำหน้า</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('name')">
+                                <span>ชื่อ</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('surname')">
+                                <span>นามสกุล</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('id_course')">
+                                <span>หลักสูตร</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a wire:click="sortBy('account_status')">
+                                <span>สถานะ</span>
+                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($members as $member)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $member->id_student }}</td>
                             <td>{{ $member->prefix }}</td>
                             <td>{{ $member->name }}</td>
@@ -51,7 +79,14 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
+        </div>
+        <div class="row gy-3">
+            <div class="col-12">
+                <p class="page-number">
+                    แสดงบัญชีสมาชิก <b>{{ $members->firstItem() }}</b>
+                    ถึง <b>{{ $members->lastItem() }}</b>
+                    จากทั้งหมด <b>{{ $members->total() }}</b> บัญชี
+                </p>
                 {{ $members->onEachSide(1)->links('pagination::bootstrap-4') }}
             </div>
         </div>

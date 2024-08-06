@@ -88,8 +88,15 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        {{ $exam_schedules->onEachSide(1)->links('pagination::bootstrap-4') }}
+                    <div class="row gy-3">
+                        <div class="col-12">
+                            <p class="page-number">
+                                แสดงกำหนดการ <b>{{ $exam_schedules->firstItem() }}</b>
+                                ถึง <b>{{ $exam_schedules->lastItem() }}</b>
+                                จากทั้งหมด <b>{{ $exam_schedules->total() }}</b> รายการ
+                            </p>
+                            {{ $exam_schedules->onEachSide(1)->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                 </div>
             </div>

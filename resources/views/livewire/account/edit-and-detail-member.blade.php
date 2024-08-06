@@ -218,6 +218,7 @@
                     <tr>
                         <th>ภาค</th>
                         <td>{{ $student->level->sector }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>เบอร์โทรศัพท์</th>
