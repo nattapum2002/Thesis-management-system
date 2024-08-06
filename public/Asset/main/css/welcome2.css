@@ -489,6 +489,18 @@ div.post p {
     margin-top: 20px;
 }
 
+#register img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 50px;
+}
+
+#register img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
 /* --------------------------------------- eng register page --------------------------------------- */
 
 

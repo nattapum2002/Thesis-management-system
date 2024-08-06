@@ -82,10 +82,10 @@
                 <div class="col-lg-5">
                     <div class="row">
                         <div class="col-12 about-info">
-                            <i class='bx bx-timer'></i>
+                            <i class='bx bx-news'></i>
                             <div>
-                                <h3>รวดเร็วกว่า</h3>
-                                <p>ใช้เวลาในการดำเนินการเอกสารน้อยกว่า ถ้าเทียบกับระบบเดิม</p>
+                                <h3>ข่าวสาร</h3>
+                                <p>รู้ข่าวสารและความเคลื่อนไหวได้ทุกเวลา</p>
                             </div>
                         </div>
                     </div>
@@ -93,17 +93,17 @@
                         <div class="col-12 about-info mt-4">
                             <i class='bx bxs-edit-location'></i>
                             <div>
-                                <h3>ได้ทุกที่</h3>
-                                <p>สามารถเข้าถึงข้อมูลและใช้งานได้ทุกที่</p>
+                                <h3>ยืดหยุ่นครบจบในที่เดียว</h3>
+                                <p>ตอบโจทย์ทุกข้อมูลและใช้งานได้ทุกที่</p>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 about-info mt-4">
-                            <i class='bx bx-transfer'></i>
+                            <i class='bx bx-timer'></i>
                             <div>
-                                <h3>ส่งต่อข้อมูล</h3>
-                                <p>สามารถส่งต่อข้อมูลได้ ไม่ต้องกรอกข้อมูลหลายครั้ง</p>
+                                <h3>เร็วกว่า</h3>
+                                <p>เหมาะสมและประหยัดเวลากว่าเมื่อเทียบกับระบบเดิม</p>
                             </div>
                         </div>
                     </div>
