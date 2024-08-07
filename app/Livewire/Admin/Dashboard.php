@@ -6,6 +6,8 @@ use App\Models\Adviser;
 use App\Models\Confirm_teacher;
 use App\Models\Director;
 use App\Models\Dissertation_article;
+use App\Models\Document_submission_schedule;
+use App\Models\Exam_schedule;
 use App\Models\Member;
 use App\Models\News;
 use App\Models\Project;
@@ -25,6 +27,9 @@ class Dashboard extends Component
         $advisers = Adviser::with(['project', 'teacher', 'position'])->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)->get();
         $directors = Director::with(['project', 'teacher', 'position'])->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)->get();
         $confirms = Confirm_teacher::with(['project', 'teacher', 'position'])->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)->get();
+        $documentSchedules = Document_submission_schedule::with('document')->get();
+        $examSchedules = Exam_schedule::with('project', 'teacher', 'document')->get();
+
         return view('livewire.admin.dashboard', [
             'projects' => $projects,
             'members' => $members,
@@ -33,7 +38,9 @@ class Dashboard extends Component
             'directors' => $directors,
             'confirms' => $confirms,
             'thesis' => $thesis,
-            'news' => $news
+            'news' => $news,
+            'documentSchedules' => $documentSchedules,
+            'examSchedules' => $examSchedules
         ]);
     }
 }

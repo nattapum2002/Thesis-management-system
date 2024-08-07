@@ -219,6 +219,97 @@
             </div>
         </div>
     </section>
+    <section id="schedule">
+        <div class="row gy-2">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class='bx bxs-calendar'></i>
+                            กำหนดการสอบ
+                        </div>
+                        <div class="card-tools">
+                            <a class="tools-link" href="/admin/manage_exam_schedule">
+                                <span>จัดการกำหนดการสอบ</span>
+                                <i class='bx bxs-right-arrow'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <table class="table text-nowrap table-striped">
+                            <thead>
+                                <tr>
+                                    <th>วันที่</th>
+                                    <th>เวลา</th>
+                                    <th>ชื่อโปรเจค</th>
+                                    <th>ประเภท</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($examSchedules as $examSchedule)
+                                    <tr>
+                                        <td>{{ $examSchedule->exam_day }}</td>
+                                        <td>{{ $examSchedule->exam_time }}</td>
+                                        <td>
+                                            <p>{{ $examSchedule->project->project_name_th }}</p>
+                                            <small>{{ $examSchedule->project->project_name_en }}</small>
+                                        </td>
+                                        <td>{{ $examSchedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}</td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class='bx bxs-calendar'></i>
+                            กำหนดการเอกสาร
+                        </div>
+                        <div class="card-tools">
+                            <a class="tools-link" href="/admin/manage_document_schedule">
+                                <span>จัดการกำหนดการเอกสาร</span>
+                                <i class='bx bxs-right-arrow'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <table class="table text-nowrap table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>วันที่</th>
+                                    <th>เวลา</th>
+                                    <th>ชื่อเอกสาร</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($documentSchedules as $documentSchedule)
+                                    <tr onclick="window.location.href='/admin/edit_and_detail_document_schedule/{{ $documentSchedule->id_submission }}'"
+                                        style="cursor:pointer;">
+                                        <td></td>
+                                        <td>{{ $documentSchedule->date_submission }}</td>
+                                        <td>{{ $documentSchedule->time_submission }}</td>
+                                        <td>
+                                            <p>{{ 'เอกสาร คกท.-คง.-0' . $documentSchedule->id_document }}</p>
+                                            <small>{{ $documentSchedule->document->document }}</small>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 

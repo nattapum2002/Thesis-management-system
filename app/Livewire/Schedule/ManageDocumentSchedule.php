@@ -23,6 +23,23 @@ class ManageDocumentSchedule extends Component
             $this->sortDirection = 'asc';
         }
     }
+
+    public function show($index)
+    {
+        Document_submission_schedule::where('id_submission', $index)->update([
+            'status' => '0'
+        ]);
+        session()->flash('danger', 'ระงับกำหนดการ ID ที่ ' . Document_submission_schedule::find($index)->id_document .  ' เรียบร้อยแล้ว');
+    }
+
+    public function hide($index)
+    {
+        Document_submission_schedule::where('id_submission', $index)->update([
+            'status' => '1'
+        ]);
+        session()->flash('success', 'ใช้งานกำหนดการ ID ที่ ' . Document_submission_schedule::find($index)->id_document .  ' เรียบร้อยแล้ว');
+    }
+
     public function render()
     {
         $documents_schedule = Document_submission_schedule::with('document')

@@ -25,7 +25,12 @@
             <div class="sidebar-user">
                 <a href="/branch-head/edit_branch_head">
                     <div class="image">
-                        <img src="{{ asset('storage/' . Auth::guard('teachers')->user()->teacher_image) }}"alt="UserImage">
+                        @if (Auth::guard('teachers')->user()->teacher_image == null)
+                            <img src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}" alt="UserImage">
+                        @else
+                            <img src="{{ asset('storage/' . Auth::guard('teachers')->user()->teacher_image) }}"
+                                alt="UserImage">
+                        @endif
                     </div>
                     <div class="info">
                         <span>{{ Auth::guard('teachers')->user()->name . ' ' . Auth::guard('teachers')->user()->surname }}</span>

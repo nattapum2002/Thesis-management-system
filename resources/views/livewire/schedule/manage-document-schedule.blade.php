@@ -1,14 +1,19 @@
 <div>
     <section id="manage-document-schedule">
-        @if (session('message'))
+        @if (session('danger'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('danger') }}
+            </div>
+        @elseif (session('success'))
             <div class="alert alert-success" role="alert">
-                {{ session('message') }}
+                {{ session('success') }}
             </div>
         @endif
         <div class="row">
             <div class="col-12">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search" wire:model.live.debounce.150ms="search">
+                    <input type="text" class="form-control" placeholder="Search"
+                        wire:model.live.debounce.150ms="search">
                     <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
                 </div>
                 <div class="card">
@@ -51,7 +56,12 @@
                                             <i class='bx bx-transfer-alt bx-rotate-90'></i>
                                         </a>
                                     </th>
-                                    <th></th>
+                                    <th>
+                                        <a wire:click="sortBy('status')">
+                                            <span>สถานะ</span>
+                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                        </a>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,6 +76,13 @@
                                         <td>{{ $document_schedule->date_submission }}</td>
                                         <td>{{ $document_schedule->year_submission }}</td>
                                         <td>
+                                            @if ($document_schedule->status == '1')
+                                                <a wire:click='show({{ $document_schedule->id_submission }})'
+                                                    class="btn btn-success"><i class='bx bxs-show'></i></a>
+                                            @else
+                                                <a wire:click='hide({{ $document_schedule->id_submission }})'
+                                                    class="btn btn-danger"><i class='bx bxs-hide'></i></a>
+                                            @endif
                                             <a class="btn btn-orange btn-sm"
                                                 href="/admin/edit_and_detail_document_schedule/{{ $document_schedule->id_submission }}">
                                                 <i class="bx bx-detail"></i>

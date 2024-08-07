@@ -20,6 +20,7 @@ class DocumentSubmissionSchedulesSeeder extends Seeder
                 'time_submission' => now()->format('H:i:s'),
                 'date_submission' => now()->format('Y-m-d'),
                 'year_submission' => now()->format('Y'),
+                'status' => true,
                 'id_document' => $document->id_document,
                 'created_at' => now(),
                 'updated_at' => now(),
