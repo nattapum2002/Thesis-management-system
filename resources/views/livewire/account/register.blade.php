@@ -190,7 +190,7 @@
                                         <option selected>คำนำหน้าชื่อ</option>
                                         <option value="นาย">นาย</option>
                                         <option value="นาง">นาง</option>
-                                        <option value="นางสาว">นางสาว</option>
+                                        <option value="นางสาว">นางสาวs</option>
                                         <option value="อื่นๆ">อื่นๆ</option>
                                     </select>
                                     @if ($this->prefix == 'อื่นๆ')
