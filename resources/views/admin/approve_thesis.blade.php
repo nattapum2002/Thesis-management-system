@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('title')
-    ซ่อน-แสดง บทความ
+    ซ่อน-แสดง บทความของผู้ใช้
 @endsection
 @section('navigation')
     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>

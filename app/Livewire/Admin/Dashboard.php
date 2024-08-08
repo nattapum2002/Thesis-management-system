@@ -13,6 +13,7 @@ use App\Models\News;
 use App\Models\Project;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -30,6 +31,21 @@ class Dashboard extends Component
         $documentSchedules = Document_submission_schedule::with('document')->get();
         $examSchedules = Exam_schedule::with('project', 'teacher', 'document')->get();
 
+        $chartColors = [
+            "#4e73df", "#1cc88a", "#36b9cc", "#f6c23e", "#e74a3b", "#858796",
+            "#FF0000", "#FFC0CB", "#800080", "#87CEEB", "#98FF98", "#808080",
+            "#FFFFFF", "#000000", "#FFD700", "#FFA07A", "#F5F5DC", "#00FF00",
+            "#00CED1", "#FFD700", "#4F4F4F", "#DC143C", "#FF69B4", "#006400",
+            "#00008B", "#D8BFD8", "#FF8C00", "#FFFDD0", "#FFFF00", "#0000FF"
+        ];
+        $chartNewsLabels = News::pluck('type')->unique()->values()->toArray();
+        $chartNewsData = News::select('type', DB::raw('count(*) as count'))
+            ->groupBy('type')
+            ->pluck('count')
+            ->toArray();
+        // dd($chartNewsLabels);
+
+
         return view('livewire.admin.dashboard', [
             'projects' => $projects,
             'members' => $members,
@@ -40,7 +56,10 @@ class Dashboard extends Component
             'thesis' => $thesis,
             'news' => $news,
             'documentSchedules' => $documentSchedules,
-            'examSchedules' => $examSchedules
+            'examSchedules' => $examSchedules,
+            'chartColors' => $chartColors,
+            'chartNewsLabels' => $chartNewsLabels,
+            'chartNewsData' => $chartNewsData
         ]);
     }
 }

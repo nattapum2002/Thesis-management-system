@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row gy-3 justify-content-center">
+            <div class="row gy-2 justify-content-center">
                 <div class="col-lg-9">
                     <h3>{{ $news->title }}</h3>
                     <div>
@@ -52,12 +52,12 @@
                 </div>
             </div>
             <hr>
-            <div class="row gy-3">
+            <div class="row gy-2">
                 <div class="col-12">
                     <h3>ข่าวอื่นๆ</h3>
                 </div>
             </div>
-            <div class="row gy-3 justify-content-center">
+            <div class="row gy-2 justify-content-center">
                 @foreach ($other_news as $item)
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post">

@@ -336,12 +336,7 @@ footer div.footer-bottom {
 /* --------------------------------------- menu-thesis, menu-news page --------------------------------------- */
 
 h2 {
-    margin-top: 20px;
-}
-
-div.tools {
-    margin-top: 5px;
-    display: flex;
+    margin: 20px 0;
 }
 
 div.post {

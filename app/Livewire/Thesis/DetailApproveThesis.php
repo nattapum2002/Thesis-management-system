@@ -7,9 +7,8 @@ use App\Models\Project;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
-class EditAnddetailThesis extends Component
+class DetailApproveThesis extends Component
 {
     use WithFileUploads;
 
@@ -79,13 +78,6 @@ class EditAnddetailThesis extends Component
     }
     public function render()
     {
-        $projects = Project::with('membersProject')
-            ->whereHas('membersProject', function ($query) {
-                $query->where('id_student', Auth::guard('members')->user()->id_student);
-            })
-            ->get();
-        return view('livewire.thesis.edit-and-detail-thesis', [
-            'thesis' => $this->thesis->refresh(), 'projects' => $projects,
-        ]);
+        return view('livewire.thesis.detail-approve-thesis');
     }
 }

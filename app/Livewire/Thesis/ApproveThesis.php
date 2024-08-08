@@ -63,7 +63,8 @@ class ApproveThesis extends Component
                 $query->orderBy('created_at', 'desc');
             })->orderBy($this->sortField, $this->sortDirection)
             ->paginate(15);
+        $types = Dissertation_article::select('type')->distinct()->get();
 
-        return view('livewire.thesis.approve-thesis', ['thesis' => $thesis]);
+        return view('livewire.thesis.approve-thesis', ['thesis' => $thesis, 'types' => $types]);
     }
 }

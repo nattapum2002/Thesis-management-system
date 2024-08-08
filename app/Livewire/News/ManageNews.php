@@ -73,7 +73,8 @@ class ManageNews extends Component
                 $query->orderBy('created_at', 'desc');
             })->orderBy($this->sortField, $this->sortDirection)
             ->paginate(10);
+        $types = News::select('type')->distinct()->get();
 
-        return view('livewire.news.manage-news', ['news' => $news]);
+        return view('livewire.news.manage-news', ['news' => $news, 'types' => $types]);
     }
 }

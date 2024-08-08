@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('title')
-    กำหนดกรรมการและเวลาสอบ
+    กำหนดการสอบ
 @endsection
 @section('navigation')
     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>

@@ -91,7 +91,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <i class='bx bxs-user-account'></i>
+                                    <i class="nav-icon bx bx-bookmarks"></i>
                                     บทความปริญญานิพนธ์
                                 </div>
                                 <div class="card-tools">
@@ -113,7 +113,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <i class='bx bxs-user-account'></i>
+                                    <i class="nav-icon bx bx-news"></i>
                                     ข่าวประชาสัมพันธ์
                                 </div>
                                 <div class="card-tools">
@@ -395,18 +395,15 @@
         });
     </script>
 @endscript
-
 @script
     <script>
         new Chart(document.getElementById('newsChart').getContext('2d'), {
             type: "doughnut",
             data: {
-                labels: ["ข่าวทั่วไป", "ชื่อหัวข้อ"],
+                labels: @json($chartNewsLabels),
                 datasets: [{
-                    backgroundColor: ["#1E90FF", "#000000"],
-                    data: [{{ $news->where('type', 'ข่าวทั่วไป')->count() }},
-                        {{ $news->where('type', 'ชื่อหัวข้อ')->count() }}
-                    ]
+                    backgroundColor: @json($chartColors),
+                    data: @json($chartNewsData)
                 }]
             }
         });

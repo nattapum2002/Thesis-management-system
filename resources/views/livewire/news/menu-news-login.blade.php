@@ -99,69 +99,73 @@
 
 <div>
     <section id="menu-news">
-        <div class="container">
-            <div class="row gy-3 tools">
-                <div class="col-lg-6">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="mb-2">
                     <input type="text" class="form-control" placeholder="ค้นหาข่าว..."
                         wire:model.live.debounce.150ms="search">
                 </div>
-                <div class="col-lg-3">
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="mb-2">
                     <select class="form-select" wire:model.live.debounce.100ms="filterDate">
                         <option value="ข่าวล่าสุด">ข่าวล่าสุด</option>
                         <option value="ข่าวเก่าสุด">ข่าวเก่าสุด</option>
                     </select>
                 </div>
-                <div class="col-lg-3">
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="mb-2">
                     <select class="form-select" wire:model.live.debounce.100ms="filterType">
                         <option value="ทุกประเภท">ทุกประเภท</option>
-                        <option value="ข่าวทั่วไป">ข่าวทั่วไป</option>
-                        <option value="ชื่อหัวข้อ">ชื่อหัวข้อ</option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->type }}">{{ $type->type }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
-            <div class="row gy-3">
-                @foreach ($news as $item)
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="post">
-                            {{-- <a href="/detail_news/{{ $item->id_news }}"> --}}
-                            @if ($users->user_type == 'Admin')
-                                <a href="/admin/detail_news_login/{{ $item->id_news }}">
-                                @elseif ($users->user_type == 'Branch head')
-                                    <a href="/branch-head/detail_news_login/{{ $item->id_news }}">
-                                    @elseif ($users->user_type == 'Teacher')
-                                        <a href="/teacher/detail_news_login/{{ $item->id_news }}">
-                                        @else
-                                            <a href="/member/detail_news_login/{{ $item->id_news }}">
-                            @endif
-                            <p class="tag">{{ $item->type }}</p>
-                            @if ($item->news_image == null)
-                                <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
-                                    alt="{{ $item->title }}">
-                            @else
-                                <img wire:live src="{{ asset('storage/' . $item->news_image) }}"
-                                    alt="{{ $item->title }}">
-                            @endif
-                            <div class="details">
-                                <small>{{ $item->created_at->thaidate('วันที่ j F พ.ศ.Y') }}</small>
-                                <h4>{{ $item->title }}</h4>
-                                <p>{{ $item->teacher->prefix . ' ' . $item->teacher->name . ' ' . $item->teacher->surname }}
-                                </p>
-                                <p>{{ Str::limit($item->details, 100) }}</p>
-                            </div>
-                            </a>
+        </div>
+        <div class="row gy-2">
+            @foreach ($news as $item)
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="post">
+                        @if ($users->user_type == 'Admin')
+                            <a href="/admin/detail_news_login/{{ $item->id_news }}">
+                            @elseif ($users->user_type == 'Branch head')
+                                <a href="/branch-head/detail_news_login/{{ $item->id_news }}">
+                                @elseif ($users->user_type == 'Teacher')
+                                    <a href="/teacher/detail_news_login/{{ $item->id_news }}">
+                                    @else
+                                        <a href="/member/detail_news_login/{{ $item->id_news }}">
+                        @endif
+                        <p class="tag">{{ $item->type }}</p>
+                        @if ($item->news_image == null)
+                            <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                alt="{{ $item->title }}">
+                        @else
+                            <img wire:live src="{{ asset('storage/' . $item->news_image) }}" alt="{{ $item->title }}">
+                        @endif
+                        <div class="details">
+                            <small>{{ $item->created_at->thaidate('วันที่ j F พ.ศ.Y') }}</small>
+                            <h4>{{ $item->title }}</h4>
+                            <p>{{ $item->teacher->prefix . ' ' . $item->teacher->name . ' ' . $item->teacher->surname }}
+                            </p>
+                            <p>{{ Str::limit($item->details, 100) }}</p>
                         </div>
+                        </a>
                     </div>
-                @endforeach
-            </div>
-            <div class="row gy-3">
-                <div class="col-12">
-                    <p class="page-number">
-                        แสดงข่าว <b>{{ $news->firstItem() }}</b>
-                        ถึง <b>{{ $news->lastItem() }}</b>
-                        จากทั้งหมด <b>{{ $news->total() }}</b> ข่าว
-                    </p>
-                    {{ $news->onEachSide(2)->links('pagination::bootstrap-4') }}
                 </div>
+            @endforeach
+        </div>
+        <div class="row gy-2">
+            <div class="col-lg-12">
+                <p class="page-number">
+                    แสดงข่าว <b>{{ $news->firstItem() }}</b>
+                    ถึง <b>{{ $news->lastItem() }}</b>
+                    จากทั้งหมด <b>{{ $news->total() }}</b> ข่าว
+                </p>
+                {{ $news->onEachSide(2)->links('pagination::bootstrap-4') }}
             </div>
+        </div>
     </section>
 </div>

@@ -58,26 +58,33 @@
                     <h2>ข่าวประชาสัมพันธ์</h2>
                 </div>
             </div>
-            <div class="row gy-3 tools">
-                <div class="col-lg-6">
-                    <input type="text" class="form-control" placeholder="ค้นหาข่าว..."
-                        wire:model.live.debounce.150ms="search">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="mb-2">
+                        <input type="text" class="form-control" placeholder="ค้นหาข่าว..."
+                            wire:model.live.debounce.150ms="search">
+                    </div>
                 </div>
-                <div class="col-lg-3">
-                    <select class="form-select" wire:model.live.debounce.100ms="filterDate">
-                        <option value="ข่าวล่าสุด">ข่าวล่าสุด</option>
-                        <option value="ข่าวเก่าสุด">ข่าวเก่าสุด</option>
-                    </select>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="mb-2">
+                        <select class="form-select" wire:model.live.debounce.100ms="filterDate">
+                            <option value="ข่าวล่าสุด">ข่าวล่าสุด</option>
+                            <option value="ข่าวเก่าสุด">ข่าวเก่าสุด</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-lg-3">
-                    <select class="form-select" wire:model.live.debounce.100ms="filterType">
-                        <option value="ทุกประเภท">ทุกประเภท</option>
-                        <option value="ข่าวทั่วไป">ข่าวทั่วไป</option>
-                        <option value="ชื่อหัวข้อ">ชื่อหัวข้อ</option>
-                    </select>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="mb-2">
+                        <select class="form-select" wire:model.live.debounce.100ms="filterType">
+                            <option value="ทุกประเภท">ทุกประเภท</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->type }}">{{ $type->type }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="row gy-3">
+            <div class="row gy-2">
                 @foreach ($news as $item)
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post">
@@ -102,8 +109,8 @@
                     </div>
                 @endforeach
             </div>
-            <div class="row gy-3">
-                <div class="col-12">
+            <div class="row gy-2">
+                <div class="col-lg-12">
                     <p class="page-number">
                         แสดงข่าว <b>{{ $news->firstItem() }}</b>
                         ถึง <b>{{ $news->lastItem() }}</b>

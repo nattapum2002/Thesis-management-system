@@ -63,7 +63,8 @@ class ApproveNews extends Component
                 $query->orderBy('created_at', 'desc');
             })->orderBy($this->sortField, $this->sortDirection)
             ->paginate(15);
+        $types = News::select('type')->distinct()->get();
 
-        return view('livewire.news.approve-news', ['news' => $news]);
+        return view('livewire.news.approve-news', ['news' => $news, 'types' => $types]);
     }
 }

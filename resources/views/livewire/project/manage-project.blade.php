@@ -1,11 +1,35 @@
 <div>
     <section id="manage-project">
         <div class="row">
-            <div class="col-12">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search" wire:model.live.debounce.150ms="search">
-                    <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
+            <div class="col-lg-6 col-md-12">
+                <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="ค้นหาโปรเจค..."
+                        wire:model.live.debounce.150ms="search">
                 </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="mb-2">
+                    <select class="form-select" wire:model.live.debounce.100ms="filterAdviser">
+                        <option value="all">ทั้งหมด</option>
+                        <option value="adviserAll">ที่ปรึกษาทั้งหมด</option>
+                        <option value="1">ที่ปรึกษาหลัก</option>
+                        <option value="2">ที่ปรึกษาร่วม</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="mb-2">
+                    <select class="form-select" wire:model.live.debounce.100ms="filterStatus">
+                        <option value="all">ทุกสถานะ</option>
+                        @foreach ($status as $item)
+                            <option value="{{ $item->project_status }}">{{ $item->project_status }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body table-responsive p-0">
                         <table class="table text-nowrap table-striped">
@@ -54,7 +78,8 @@
                                         </td>
                                         <td>
                                             @foreach ($project->members as $member)
-                                                <p>{{ $member->prefix }} {{ $member->name }} {{ $member->surname }}</p>
+                                                <p>{{ $member->prefix }} {{ $member->name }} {{ $member->surname }}
+                                                </p>
                                             @endforeach
                                         </td>
                                         <td>
@@ -111,14 +136,14 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row gy-3">
-                        <div class="col-12">
+                    <div class="row gy-2">
+                        <div class="col-lg-12">
                             <p class="page-number">
                                 แสดงโปรเจค <b>{{ $projects->firstItem() }}</b>
                                 ถึง <b>{{ $projects->lastItem() }}</b>
                                 จากทั้งหมด <b>{{ $projects->total() }}</b> โปรเจค
                             </p>
-                            {{ $projects->onEachSide(1)->links('pagination::bootstrap-4') }}
+                            {{ $projects->onEachSide(2)->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
                 </div>

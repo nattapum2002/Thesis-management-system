@@ -156,6 +156,10 @@ Route::get('/admin/approve_news', function () {
     return view('admin.approve_news');
 });
 
+Route::get('/admin/detail_approve_news/{newsId}', function ($newsId) {
+    return view('admin.detail_approve_news', compact('newsId'));
+});
+
 Route::get('/admin/menu_news_login', function () {
     return view('admin.menu_news_login');
 });
@@ -168,8 +172,8 @@ Route::get('/admin/approve_thesis', function () {
     return view('admin.approve_thesis');
 });
 
-Route::get('/admin/edit_and_detail_thesis/{thesisId}', function ($thesisId) {
-    return view('admin.edit_and_detail_thesis', compact('thesisId'));
+Route::get('/admin/detail_approve_thesis/{thesisId}', function ($thesisId) {
+    return view('admin.detail_approve_thesis', compact('thesisId'));
 });
 
 Route::get('/admin/menu_thesis_login', function () {

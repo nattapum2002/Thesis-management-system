@@ -28,7 +28,7 @@
 <div>
     <section id="detail-thesis">
         <div class="container">
-            <div class="row gy-3 justify-content-center">
+            <div class="row gy-2 justify-content-center">
                 <div class="col-lg-3">
                     <div class="img">
                         <p class="tag">{{ $articles->type }}</p>
@@ -73,12 +73,12 @@
                 </div>
             </div>
             <hr>
-            <div class="row gy-3">
+            <div class="row gy-2">
                 <div class="col-12">
                     <h3>บทความอื่นๆ</h3>
                 </div>
             </div>
-            <div class="row gy-3 justify-content-center">
+            <div class="row gy-2 justify-content-center">
                 @foreach ($other_articles as $item)
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post">

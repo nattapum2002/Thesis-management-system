@@ -1,11 +1,35 @@
 <div>
     <section id="manage-exam-schedule">
         <div class="row">
-            <div class="col-12">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search" wire:model.live.debounce.150ms="search">
-                    <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
+            <div class="col-lg-6 col-md-12">
+                <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="ค้นหากำหนดการสอบ..."
+                        wire:model.live.debounce.150ms="search">
                 </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="mb-2">
+                    <select class="form-select" wire:model.live.debounce.100ms="filterAdviser">
+                        <option value="ทั้งหมด">ทั้งหมด</option>
+                        <option value="1">ที่ปรึกษา</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="mb-2">
+                    <select class="form-select" wire:model.live.debounce.100ms="filterType">
+                        <option value="ทุกประเภท">ทุกประเภท</option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->id_document }}">
+                                {{ $type->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body table-responsive p-0">
                         <table class="table text-nowrap table-striped">
@@ -52,7 +76,6 @@
                             </thead>
                             <tbody>
                                 @foreach ($exam_schedules as $exam_schedule)
-                                    {{-- @dd($director->teacher) --}}
                                     <tr>
                                         <td>{{ $exam_schedule->id_exam_schedule }}</td>
                                         <td>
@@ -88,14 +111,14 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row gy-3">
-                        <div class="col-12">
+                    <div class="row gy-2">
+                        <div class="col-lg-12">
                             <p class="page-number">
                                 แสดงกำหนดการ <b>{{ $exam_schedules->firstItem() }}</b>
                                 ถึง <b>{{ $exam_schedules->lastItem() }}</b>
                                 จากทั้งหมด <b>{{ $exam_schedules->total() }}</b> รายการ
                             </p>
-                            {{ $exam_schedules->onEachSide(1)->links('pagination::bootstrap-4') }}
+                            {{ $exam_schedules->onEachSide(2)->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
                 </div>

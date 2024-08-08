@@ -88,6 +88,10 @@ p {
     background-size: cover !important;
 }
 
+.btn {
+    white-space: nowrap;
+}
+
 .btn-orange {
     background-color: var(--orange-color);
     color: white;
@@ -889,40 +893,35 @@ footer div.footer-bottom {
 
 /* --------------------------------------- menu-thesis, menu-news page --------------------------------------- */
 
-h2 {
+#menu-thesis h2, #menu-news h2 {
     margin-top: 20px;
 }
 
-div.tools {
-    margin-top: 5px;
-    display: flex;
-}
-
-div.post {
+#menu-thesis div.post, #menu-news div.post {
     position: relative;
     margin-top: 20px;
     border-radius: 10px;
 }
 
-div.post:hover {
+#menu-thesis div.post:hover, #menu-news div.post:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
 
-div.post a {
+#menu-thesis div.post a, #menu-news div.post a {
     text-decoration: none;
     color: var(--grey-1e-color);
 }
 
-div.post img {
+#menu-thesis div.post img, #menu-news div.post img {
     border-radius: 10px;
     overflow: hidden;
     width: 100%;
 }
 
-div.post p.tag {
+#menu-thesis div.post p.tag, #menu-news div.post p.tag {
     padding: 4px 12px;
     background-color: var(--orange-color);
     color: var(--white-color);
@@ -932,22 +931,22 @@ div.post p.tag {
     position: absolute;
 }
 
-div.details {
+#menu-thesis div.details, #menu-news div.details {
     padding: 10px 20px;
 }
 
-div.post small {
+#menu-thesis div.post small, #menu-news div.post small {
     color: var(--orange-color);
     text-decoration: underline;
     text-transform: uppercase;
 }
 
-div.post h4 {
+#menu-thesis div.post h4, #menu-news div.post h4 {
     margin-top: 12px;
     margin-bottom: 12px;
 }
 
-div.post p {
+#menu-thesis div.post p, #menu-news div.post p {
     margin-top: 0px;
     margin-bottom: 5px;
 }

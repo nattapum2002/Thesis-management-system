@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('title')
-    ซ่อน-แสดง ข่าว
+    ซ่อน-แสดง ข่าวของผู้ใช้
 @endsection
 @section('navigation')
     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>

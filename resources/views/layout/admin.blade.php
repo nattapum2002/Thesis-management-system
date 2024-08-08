@@ -132,7 +132,7 @@
                         <a class="sidebar-link {{ Request::is('admin/manage_exam_schedule') ? 'active' : '' }}"
                             href="/admin/manage_exam_schedule">
                             <i class='nav-icon bx bx-circle'></i>
-                            <span class="link-name">กำหนดกรรมการและเวลาสอบ</span>
+                            <span class="link-name">กำหนดการสอบ</span>
                         </a>
                     </li>
                     <li class="sidebar-item">

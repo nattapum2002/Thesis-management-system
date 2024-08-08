@@ -10,12 +10,15 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-12">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search"
+            <div class="col-lg-12">
+                <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="ค้นหากำหนดการเอกสาร..."
                         wire:model.live.debounce.150ms="search">
-                    <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-start">
@@ -93,18 +96,19 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row gy-3">
-                        <div class="col-12">
+                    <div class="row gy-2">
+                        <div class="col-lg-12">
                             <p class="page-number">
                                 แสดงกำหนดการ <b>{{ $documents_schedule->firstItem() }}</b>
                                 ถึง <b>{{ $documents_schedule->lastItem() }}</b>
                                 จากทั้งหมด <b>{{ $documents_schedule->total() }}</b> รายการ
                             </p>
-                            {{ $documents_schedule->onEachSide(1)->links('pagination::bootstrap-4') }}
+                            {{ $documents_schedule->onEachSide(2)->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </section>
 </div>
