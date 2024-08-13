@@ -249,8 +249,8 @@
                             <tbody>
                                 @foreach ($examSchedules as $examSchedule)
                                     <tr>
-                                        <td>{{ $examSchedule->exam_day }}</td>
-                                        <td>{{ $examSchedule->exam_time }}</td>
+                                        <td>{{ thaidate('j M Y', $examSchedule->exam_day) }}</td>
+                                        <td>{{ thaidate('H:i น.', $examSchedule->exam_time) }}</td>
                                         <td>
                                             <p>{{ $examSchedule->project->project_name_th }}</p>
                                             <small>{{ $examSchedule->project->project_name_en }}</small>
@@ -294,8 +294,8 @@
                                     <tr onclick="window.location.href='/admin/edit_and_detail_document_schedule/{{ $documentSchedule->id_submission }}'"
                                         style="cursor:pointer;">
                                         <td></td>
-                                        <td>{{ $documentSchedule->date_submission }}</td>
-                                        <td>{{ $documentSchedule->time_submission }}</td>
+                                        <td>{{ thaidate('j M Y', $documentSchedule->date_submission) }}</td>
+                                        <td>{{ thaidate('H:i น.', $documentSchedule->time_submission) }}</td>
                                         <td>
                                             <p>{{ 'เอกสาร คกท.-คง.-0' . $documentSchedule->id_document }}</p>
                                             <small>{{ $documentSchedule->document->document }}</small>

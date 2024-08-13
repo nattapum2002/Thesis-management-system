@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <th>ปีการศึกษา</th>
-                            <td>{{ $thesis->year_published }}</td>
+                            <td>{{ thaidate('Y', $thesis->year_published) }}</td>
                             <td></td>
                         </tr>
                         <tr>

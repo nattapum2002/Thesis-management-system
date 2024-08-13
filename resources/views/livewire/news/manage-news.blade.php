@@ -39,7 +39,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="d-flex justify-content-start">
+                        <div class="d-flex justify-content-end">
                             @if ($users->user_type == 'Admin')
                                 <a href="/admin/add_news" class="btn btn-success">เพิ่มข่าว</a>
                             @elseif ($users->user_type == 'Branch head')

@@ -134,7 +134,7 @@
                                     </div>
                                 </td>
                             @else
-                                <td>{{ $thesis->year_published }}</td>
+                                <td>{{ thaidate('Y', $thesis->year_published) }}</td>
                                 <td>
                                     <button class="btn btn-orange" wire:click="edit('year_published')"><i
                                             class='bx bx-edit'></i></button>

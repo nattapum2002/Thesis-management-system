@@ -80,7 +80,7 @@ class ManageThesis extends Component
             ->when($this->filterDate == 'บทความล่าสุด', function ($query) {
                 $query->orderBy('created_at', 'desc');
             })->orderBy($this->sortField, $this->sortDirection)
-            ->paginate(15);
+            ->paginate(10);
         $types = Dissertation_article::select('type')->distinct()->get();
 
         return view('livewire.thesis.manage-thesis', ['thesis' => $thesis, 'types' => $types]);

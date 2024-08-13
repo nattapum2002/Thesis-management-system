@@ -1038,6 +1038,178 @@ footer div.footer-bottom {
 
 /* --------------------------------------- end detail-news page --------------------------------------- */
 
+/* dashboard member */
+
+#project-status .project .card,
+#project-status .member .card,
+#project-status .adviser .card,
+#project-status .document .card,
+#project-status .exam .card{
+    margin-bottom: 10px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; */
+    overflow: hidden;
+    padding: 10px;
+}
+
+#project-status h4 {
+    color: var(--orange-color);
+    margin-bottom: 5px;
+}
+
+#project-status .project .card p {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#project-status .adviser .card .main-adviser {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#project-status .exam .card .examCountdown {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+    /* background-color: var(--grey-44-color); */
+    border: var(--grey-44-color) 2px solid;
+    border-radius: 10px;
+}
+
+#project-status .exam .card .examCountdown p {
+    text-align: center;
+}
+
+#project-status .exam .card .examCountdown span {
+    text-align: center;
+    padding: 10px;
+}
+
+#project-status .exam .card-table {
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+}
+
+
+#project-status .status .card {
+    border: var(--grey-44-color) 5px solid;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+#project-status .status .card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+#project-status .status .card.processing {
+    border: var(--orange-color) 5px solid;
+}
+
+#project-status .status .card.completed {
+    border: var(--green-color) 5px solid;
+}
+
+#project-status .status .card.rejected {
+    border: var(--red-color) 5px solid;
+}
+
+#project-status .status table,
+#project-status .status th,
+#project-status .status td {
+    border: none;
+}
+
+#project-status .status .card th span {
+    height: 100%;
+    font-size: 36px;
+    color: var(--grey-44-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 20px;
+}
+
+#project-status .status .card.processing th span {
+    color: var(--orange-color);
+}
+
+#project-status .status .card.completed th span {
+    color: var(--green-color);
+}
+
+#project-status .status .card.rejected th span {
+    color: var(--red-color);
+}
+
+#project-status .status ul {
+    margin: 0;
+    padding: 0;
+}
+
+#project-status .status ul li {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+#project-status .status .confirmed {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    padding: 10px;
+    background-color: var(--green-color);
+    color: var(--white-color);
+    border-radius: 100% ;
+    margin-left: 5px;
+}
+
+#project-status .status .unconfirmed {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    padding: 10px;
+    background-color: var(--grey-cc-color);
+    color: var(--white-color);
+    border-radius: 100% ;
+    margin-left: 5px;
+}
+
+#project-status .confirmed .tooltipText, #project-status .unconfirmed .tooltipText {
+    visibility: hidden;
+    min-width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    top: -15%;
+    right: 128%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#project-status .confirmed:hover .tooltipText, #project-status .unconfirmed:hover .tooltipText {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* end dashboard member */
+
 @media (max-width: 970px) {
     .main .navbar .navbar-nav .navbar-item .navbar-link span {
         display: none;

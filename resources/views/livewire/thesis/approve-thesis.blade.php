@@ -85,8 +85,11 @@
                                     <td>{{ $thesis_detail->id_dissertation_article }}</td>
                                     <td>{{ $thesis_detail->title }}</td>
                                     <td>{{ $thesis_detail->type }}</td>
-                                    <td>{{ $thesis_detail->year_published }}</td>
-                                    <td>{{ $thesis_detail->updated_at }}</td>
+                                    <td>{{ thaidate('Y', $thesis_detail->year_published) }}</td>
+                                    <td>
+                                        <p>{{ $thesis_detail->updated_at->thaidate('H:i น.') }}</p>
+                                        <small>{{ $thesis_detail->updated_at->thaidate('j M Y') }}</small>
+                                    </td>
                                     <td>
                                         @if ($thesis_detail->status == '1')
                                             <a wire:click='show({{ $thesis_detail->id_dissertation_article }})'

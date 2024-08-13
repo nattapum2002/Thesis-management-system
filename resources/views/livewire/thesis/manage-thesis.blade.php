@@ -90,7 +90,7 @@
                                     <td>{{ $thesis_detail->id_dissertation_article }}</td>
                                     <td>{{ $thesis_detail->title }}</td>
                                     <td>{{ $thesis_detail->type }}</td>
-                                    <td>{{ $thesis_detail->year_published }}</td>
+                                    <td>{{ thaidate('Y', $thesis_detail->year_published) }}</td>
                                     <td>
                                         <p>{{ $thesis_detail->created_at->thaidate('H:i น.') }}</p>
                                         <small>{{ $thesis_detail->created_at->thaidate('d M Y') }}</small>

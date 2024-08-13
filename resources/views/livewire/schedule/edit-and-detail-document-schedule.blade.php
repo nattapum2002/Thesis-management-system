@@ -77,7 +77,7 @@
                                             </div>
                                         </td>
                                     @else
-                                        <td>{{ $submission->time_submission }}</td>
+                                        <td>{{ thaidate('H:i น.', $submission->time_submission) }}</td>
                                         <td>
                                             <button class="btn btn-orange" wire:click="edit('time_submission')"><i
                                                     class='bx bx-edit'></i></button>
@@ -105,7 +105,7 @@
                                             </div>
                                         </td>
                                     @else
-                                        <td>{{ $submission->date_submission }}</td>
+                                        <td>{{ thaidate('วันl ที่ j F พ.ศ.Y', $submission->date_submission) }}</td>
                                         <td>
                                             <button class="btn btn-orange" wire:click="edit('date_submission')"><i
                                                     class='bx bx-edit'></i></button>
@@ -141,7 +141,7 @@
                                             </div>
                                         </td>
                                     @else
-                                        <td>{{ $submission->year_submission }}</td>
+                                        <td>{{ thaidate('Y', $submission->year_submission) }}</td>
                                         <td>
                                             <button class="btn btn-orange" wire:click="edit('year_submission')"><i
                                                     class='bx bx-edit'></i></button>

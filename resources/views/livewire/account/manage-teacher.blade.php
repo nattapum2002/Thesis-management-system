@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-start">
+                    <div class="d-flex justify-content-end">
                         <a href="/admin/add_teacher" class="btn btn-success">เพิ่มบัญชีอาจารย์</a>
                     </div>
                 </div>

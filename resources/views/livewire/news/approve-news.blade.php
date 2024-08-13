@@ -86,11 +86,14 @@
                                     <td>{{ $news_detail->title }}</td>
                                     <td>{{ $news_detail->teacher->name . ' ' . $news_detail->teacher->surname }}</td>
                                     <td>{{ $news_detail->type }}</td>
-                                    <td>{{ $news_detail->updated_at }}</td>
+                                    <td>
+                                        <p>{{ $news_detail->updated_at->thaidate('H:i น.') }}</p>
+                                        <small>{{ $news_detail->updated_at->thaidate('j M Y') }}</small>
+                                    </td>
                                     <td>
                                         @if ($news_detail->status == '1')
-                                            <a wire:click='show({{ $news_detail->id_news }})' class="btn btn-success"><i
-                                                    class='bx bxs-show'></i></a>
+                                            <a wire:click='show({{ $news_detail->id_news }})'
+                                                class="btn btn-success"><i class='bx bxs-show'></i></a>
                                         @else
                                             <a wire:click='hide({{ $news_detail->id_news }})' class="btn btn-danger"><i
                                                     class='bx bxs-hide'></i></a>

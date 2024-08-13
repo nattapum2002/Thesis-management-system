@@ -65,11 +65,7 @@
     <section id="login-teacher">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-5">
-                    <img src="https://fastly.picsum.photos/id/36/4179/2790.jpg?hmac=OCuYYm0PkDCMwxWhrtoSefG5UDir4O0XCcR2x-aSPjs"
-                        alt="img">
-                </div>
-                <div class="col-lg-5">
+                <div class="col-lg-6">
                     <form wire:submit.prevent="login">
                         <h3>เข้าสู่ระบบสำหรับอาจารย์</h3>
 

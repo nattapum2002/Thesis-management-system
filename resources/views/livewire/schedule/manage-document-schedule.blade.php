@@ -21,7 +21,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="d-flex justify-content-start">
+                        <div class="d-flex justify-content-end">
                             <a href="/admin/add_document_schedule" class="btn btn-success">เพิ่มกำหนดการ</a>
                         </div>
                     </div>
@@ -75,9 +75,9 @@
                                             <p>{{ 'เอกสาร คกท.-คง.-0' . $document_schedule->document->id_document }}</p>
                                             <small>{{ $document_schedule->document->document }}</small>
                                         </td>
-                                        <td>{{ $document_schedule->time_submission }}</td>
-                                        <td>{{ $document_schedule->date_submission }}</td>
-                                        <td>{{ $document_schedule->year_submission }}</td>
+                                        <td>{{ thaidate('H:i น.', $document_schedule->time_submission) }}</td>
+                                        <td>{{ thaidate('j M Y', $document_schedule->date_submission) }}</td>
+                                        <td>{{ thaidate('Y', $document_schedule->year_submission) }}</td>
                                         <td>
                                             @if ($document_schedule->status == '1')
                                                 <a wire:click='show({{ $document_schedule->id_submission }})'

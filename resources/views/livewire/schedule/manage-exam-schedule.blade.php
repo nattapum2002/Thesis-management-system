@@ -98,8 +98,8 @@
                                             <p>{{ $exam_schedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $exam_schedule->exam_time }}</p>
-                                            <small>{{ $exam_schedule->exam_day }}</small>
+                                            <p>{{ thaidate('H:i น.', $exam_schedule->exam_time) }}</p>
+                                            <small>{{ thaidate('j M Y', $exam_schedule->exam_day) }}</small>
                                         </td>
                                         <td>
                                             <p>{{ $exam_schedule->exam_room }}</p>

@@ -1,6 +1,7 @@
 @extends('layout.member')
 @section('title')
-Dashboard
+    Dashboard
 @endsection
 @section('content')
+    @livewire('member.dashboard')
 @endsection
