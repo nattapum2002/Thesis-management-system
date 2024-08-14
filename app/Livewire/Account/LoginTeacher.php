@@ -12,10 +12,22 @@ class LoginTeacher extends Component
     public $password;
     public $remember = false;
 
-    protected $rules = [
-        'username' => 'required|string',
-        'password' => 'required|string',
-    ];
+    public function rules()
+    {
+        return [
+            'username' => 'required|string',
+            'password' => 'required|min:8',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'username.required' => 'กรุณากรอกชื่อผู้ใช้งาน',
+            'username.string' => 'ชื่อผู้ใช้งานต้องเป็นตัวอักษร',
+            'password.required' => 'กรุณากรอกรหัสผ่าน',
+            'password.min' => 'รหัสผ่านต้องอย่างน้อย 8 ตัวอักษร',
+        ];
+    }
 
     public function login()
     {

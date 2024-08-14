@@ -530,7 +530,7 @@ div.post p {
 
 #register span {
     margin-left: 130px;
-    padding-left: 0;
+    padding: 0;
 }
 
 /* --------------------------------------- eng register page --------------------------------------- */
@@ -539,7 +539,7 @@ div.post p {
 /* --------------------------------------- login-member page --------------------------------------- */
 
 #login-member .row {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #login-member :where(h3, p, .username, .password, .group) {
@@ -588,13 +588,22 @@ div.post p {
     color: rgb(200, 77, 0);
 }
 
+#login-member label {
+    width: 85px;
+}
+
+#login-member span {
+    margin-left: 90px;
+    padding: 0;
+}
+
 /* --------------------------------------- eng login-member page --------------------------------------- */
 
 
 /* --------------------------------------- login-teacher page --------------------------------------- */
 
 #login-teacher .row {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #login-teacher :where(h3, .username, .password, .group) {
@@ -633,4 +642,13 @@ div.post p {
 #login-teacher button.btn-brand:hover {
     color: var(--orange-color);
     background-color: var(--white-color);
+}
+
+#login-teacher label {
+    width: 85px;
+}
+
+#login-teacher span {
+    margin-left: 90px;
+    padding: 0;
 }

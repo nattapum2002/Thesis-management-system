@@ -89,7 +89,7 @@
                         <!-- button -->
                         <div class="group">
                             <button type="submit" class="btn btn-brand">เข้าสู่ระบบ</button>
-                            <button type="cancel" class="btn">ยกเลิก</button>
+                            <button type="reset" class="btn" onclick="window.location.href='/'">ยกเลิก</button>
                         </div>
 
                         <p>ยังไม่มีบัญชี? <a href="/register">สมัครสมาชิก</a></p>

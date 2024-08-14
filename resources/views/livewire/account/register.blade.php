@@ -352,7 +352,8 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6 text-center">
                             <button class="btn btn-success" type="submit">ยืนยัน</button>
-                            <button class="btn btn-danger" type="reset">ยกเลิก</button>
+                            <button class="btn btn-danger" type="reset"
+                                onclick="window.location.href='{{ route('login_member') }}'">ยกเลิก</button>
                         </div>
                     </div>
                 </form>
