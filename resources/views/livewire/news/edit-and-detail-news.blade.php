@@ -135,6 +135,16 @@
                             @endif
                         </tr>
                         <tr>
+                            <th>สร้างเมื่อ</th>
+                            <td>{{ thaidate('H:i น. วันl ที่ j F พ.ศ.Y', $news->created_at) }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>แก้ไขล่าสุดเมื่อ</th>
+                            <td>{{ thaidate('H:i น. วันl ที่ j F พ.ศ.Y', $news->updated_at) }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
                             <th>สถานะข่าว</th>
                             @if ($toggle['status'])
                                 <td>

@@ -70,11 +70,10 @@
                                             <select class="form-select" wire:model='add_year' required>
                                                 <option selected>กรุณาเลือกปีการศึกษา</option>
                                                 <option value="{{ now()->format('Y') }}">
-                                                    {{ now()->thaidate('Y') }}</option>
+                                                    {{ now()->thaidate('Y') }}
                                                 </option>
                                                 <option value="{{ now()->subYear()->format('Y') }}">
                                                     {{ now()->subYear()->thaidate('Y') }}
-                                                </option>
                                                 </option>
                                             </select>
                                             @error('#')

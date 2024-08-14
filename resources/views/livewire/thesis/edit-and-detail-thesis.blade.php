@@ -7,7 +7,7 @@
         @endif
         <div class="card">
             <div class="card-body table-responsive p-0">
-                <table class="table text-nowrap table-striped">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th style="width: 160px">หัวข้อ</th>
@@ -89,7 +89,7 @@
                             @endif
                         </tr>
                         <tr>
-                            <th>รายละเอียด</th>
+                            <th>บทคัดย่อ</th>
                             @if ($toggle['details'])
                                 <td>
                                     <div class="input-field">
@@ -118,8 +118,15 @@
                             @if ($toggle['year_published'])
                                 <td>
                                     <div class="input-field">
-                                        <input class="form-input" wire:model="year_published" type="text"
-                                            placeholder="รายละเอียด" required>
+                                        <select class="form-select" wire:model='year_published' required>
+                                            <option selected>กรุณาเลือกปีการศึกษา</option>
+                                            <option value="{{ now()->format('Y') }}">
+                                                {{ now()->thaidate('Y') }}
+                                            </option>
+                                            <option value="{{ now()->subYear()->format('Y') }}">
+                                                {{ now()->subYear()->thaidate('Y') }}
+                                            </option>
+                                        </select>
                                         @error('year_published')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -205,6 +212,16 @@
                                     </div>
                                 </td>
                             @endif
+                        </tr>
+                        <tr>
+                            <th>สร้างเมื่อ</th>
+                            <td>{{ thaidate('H:i น. วันl ที่ j F พ.ศ.Y', $thesis->created_at) }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>แก่ไขล่าสุดเมื่อ</th>
+                            <td>{{ thaidate('H:i น. วันl ที่ j F พ.ศ.Y', $thesis->updated_at) }}</td>
+                            <td></td>
                         </tr>
                         <tr>
                             <th>สถานะบทความ</th>

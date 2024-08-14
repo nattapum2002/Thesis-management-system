@@ -45,7 +45,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>รายละเอียด</th>
+                        <th>บทคัดย่อ</th>
                         <td>
                             <div class="input-field">
                                 <textarea class="form-input" wire:model="add_detail" type="text" placeholder="กรุณากรอกรายละเอียด"></textarea>
@@ -59,8 +59,15 @@
                         <th>ปีการศึกษา</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_year" type="text"
-                                    placeholder="กรุณากรอกปีการศึกษา">
+                                <select class="form-select" wire:model='add_year' required>
+                                    <option selected>กรุณาเลือกปีการศึกษา</option>
+                                    <option value="{{ now()->format('Y') }}">
+                                        {{ now()->thaidate('Y') }}
+                                    </option>
+                                    <option value="{{ now()->subYear()->format('Y') }}">
+                                        {{ now()->subYear()->thaidate('Y') }}
+                                    </option>
+                                </select>
                                 @error('add_year')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -111,10 +118,11 @@
                     </tr>
                     <tr>
                         <th></th>
-                        <td colspan="2">
+                        <td>
                             <button class="btn btn-success" wire:click="add">เพิ่มบทความ</button>
                             <button class="btn btn-danger" wire:click="cancel">ยกเลิก</button>
                         </td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>

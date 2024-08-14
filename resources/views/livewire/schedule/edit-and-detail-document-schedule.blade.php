@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body table-responsive p-0">
-                        <table class="table text-nowrap table-striped">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th style="width: 160px">หัวข้อ</th>
@@ -120,11 +120,10 @@
                                                 <select class="form-select" wire:model='year_submission' required>
                                                     <option selected>กรุณาเลือกปีการศึกษา</option>
                                                     <option value="{{ now()->format('Y') }}">
-                                                        {{ now()->thaidate('Y') }}</option>
+                                                        {{ now()->thaidate('Y') }}
                                                     </option>
                                                     <option value="{{ now()->subYear()->format('Y') }}">
                                                         {{ now()->subYear()->thaidate('Y') }}
-                                                    </option>
                                                     </option>
                                                 </select>
                                                 @error('edit_year')

@@ -194,7 +194,7 @@
                                 @endif
                             </div>
                             @error('prefix')
-                                <p class="text-danger text-center">{{ $message }}</p>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -206,7 +206,7 @@
                                     placeholder="กรุณากรอกชื่อ">
                             </div>
                             @error('name')
-                                <p class="text-danger text-center">{{ $message }}</p>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -218,7 +218,7 @@
                                     placeholder="นามสกุล">
                             </div>
                             @error('surname')
-                                <p class="text-danger text-center">{{ $message }}</p>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                                 </select>
                             </div>
                             @error('id_course')
-                                <p class="text-danger text-center">{{ $message }}</p>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -260,7 +260,7 @@
                                 @endif
                             </div>
                             @error('id_level')
-                                <p class="text-danger text-center">{{ $message }}</p>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -272,7 +272,7 @@
                                     placeholder="*ไม่จำเป็นต้องใส่ขีด" maxlength="12">
                             </div>
                             @error('id_student')
-                                <p class="text-danger text-center">{{ $message }}</p>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -284,7 +284,7 @@
                                     placeholder="เบอร์โทรศัพท์" maxlength="10">
                             </div>
                             @error('tel')
-                                <p class="text-danger text-center">{{ $message }}</p>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -296,7 +296,7 @@
                                     placeholder="ID Line">
                             </div>
                             @error('id_line')
-                                <p class="text-danger text-center">{{ $message }}</p>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -308,7 +308,7 @@
                                     placeholder="*อีเมลมหาลัย">
                             </div>
                             @error('email')
-                                <p class="text-danger text-center">{{ $message }}</p>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -317,24 +317,37 @@
                             <div class="input-group">
                                 <label class="input-group-text" for="username">ชื่อผู้ใช้</label>
                                 <input class="form-control" type="text" wire:model="username" id="username"
-                                    placeholder="Username" aria-describedby="required_username">
+                                    placeholder="ชื่อผู้ใช้" aria-describedby="required_username">
                             </div>
+                            @error('username')
+                                <span class="text-danger" id="required_username">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('username')
-                            <span class="text-danger text-center" id="required_username">{{ $message }}</span>
-                        @enderror
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <div class="input-group">
                                 <label class="input-group-text" for="password">รหัสผ่าน</label>
                                 <input class="form-control" type="password" wire:model="password" id="password"
-                                    placeholder="password" aria-describedby="required_password">
+                                    placeholder="รหัสผ่าน" aria-describedby="required_password">
                             </div>
+                            @error('password')
+                                <span class="text-danger" id="required_password">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('password')
-                            <span class="text-danger text-center" id="required_password">{{ $message }}</span>
-                        @enderror
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <label class="input-group-text" for="password">ยืนยันรหัสผ่าน</label>
+                                <input class="form-control" type="password" wire:model="password_confirmation"
+                                    id="password_confirmation" placeholder="ยืนยันรหัสผ่าน"
+                                    aria-describedby="password_confirmation">
+                            </div>
+                            @error('password_confirmation')
+                                <span class="text-danger" id="password_confirmation">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-lg-6 text-center">

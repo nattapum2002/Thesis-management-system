@@ -7,11 +7,12 @@
     --grey-cc-color: #CCCCCC;
     --grey-44-color: #444444;
     --grey-1e-color: #1E1E1E;
-
-    --font: "kanit", "Montserrat", sans-serif;
-
     --white-color: #fff;
     --black-color: #000;
+    --green-color: #00a400;
+    --red-color: #ff0000;
+
+    --font: "kanit", "Montserrat", sans-serif;
 }
 
 body {
@@ -485,7 +486,7 @@ div.post p {
 /* --------------------------------------- register page --------------------------------------- */
 
 #register :where(h3, .row) {
-    margin-top: 20px;
+    padding-top: 10px;
 }
 
 #register img {
@@ -498,6 +499,38 @@ div.post p {
 #register img:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
+}
+
+#register label {
+    width: 120px;
+}
+
+#register .btn-success {
+    color: var(--white-color);
+    background-color: var(--green-color);
+    border: var(--green-color) solid 2px;
+}
+
+#register .btn-success:hover {
+    color: var(--green-color);
+    background-color: var(--white-color);
+}
+
+#register .btn-danger {
+    color: var(--white-color);
+    background-color: var(--red-color);
+    border: var(--red-color) solid 2px;
+}
+
+#register .btn-danger:hover {
+    color: var(--red-color);
+    background-color: var(--white-color);
+    border: var(--red-color) solid 2px;
+}
+
+#register span {
+    margin-left: 130px;
+    padding-left: 0;
 }
 
 /* --------------------------------------- eng register page --------------------------------------- */

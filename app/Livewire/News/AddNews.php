@@ -36,13 +36,19 @@ class AddNews extends Component
             'updated_at' => now()
         ]);
         session()->flash('message', 'เพิ่มข่าวสารเรียบร้อยแล้ว');
-        return redirect()->route('manage_news');
+        $this->cancel();
     }
 
     public function cancel()
     {
         $this->reset();
-        return redirect()->route('manage_news');
+        if (Auth::guard('teachers')->user()->user_type == 'Branch head') {
+            return redirect()->route('branchHeadManageNews');
+        } elseif (Auth::guard('teachers')->user()->user_type == 'Admin') {
+            return redirect()->route('adminManageNews');
+        } else {
+            return redirect()->route('teacherManageNews');
+        }
     }
 
     public function render()
