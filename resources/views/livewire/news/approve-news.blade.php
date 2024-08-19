@@ -82,7 +82,7 @@
                         <tbody>
                             @foreach ($news as $news_detail)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $news_detail->id_news }}</td>
                                     <td>{{ $news_detail->title }}</td>
                                     <td>{{ $news_detail->teacher->name . ' ' . $news_detail->teacher->surname }}</td>
                                     <td>{{ $news_detail->type }}</td>

@@ -23,10 +23,10 @@
                                     <div class="input-field">
                                         <input class="form-input" wire:model="news_image" type="file"
                                             placeholder="เลือกไฟล์" required>
-                                        @error('news_image')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('news_image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -61,10 +61,10 @@
                                     <div class="input-field">
                                         <input class="form-input" wire:model="title" type="text" placeholder="หัวข้อ"
                                             required>
-                                        @error('title')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -86,10 +86,10 @@
                                 <td>
                                     <div class="input-field">
                                         <textarea class="form-input" wire:model="details" type="text" placeholder="รายละเอียด" required></textarea>
-                                        @error('details')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('details')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -112,13 +112,13 @@
                                     <div class="input-field">
                                         <select class="form-select" wire:model.live="type">
                                             <option selected>ประเภทข่าว</option>
-                                            <option value="ทั่วไป">ทั่วไป</option>
-                                            <option value="หัวข้อ">หัวข้อ</option>
+                                            <option value="ข่าวทั่วไป">ข่าวทั่วไป</option>
+                                            <option value="ชื่อหัวข้อ">ชื่อหัวข้อ</option>
                                         </select>
-                                        @error('type')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -154,10 +154,10 @@
                                             <option value="1">แสดง</option>
                                             <option value="0">ซ่อน</option>
                                         </select>
-                                        @error('status')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('status')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -167,11 +167,9 @@
                                 </td>
                             @else
                                 <td>
-                                    @if ($news->status == 1)
-                                        <p class="text-success">แสดง</p>
-                                    @else
-                                        <p class="text-danger">ซ่อน</p>
-                                    @endif
+                                    <p class="{{ $news->status == 1 ? 'text-success' : 'text-danger' }}">
+                                        {{ $news->status == 1 ? 'แสดง' : 'ซ่อน' }}
+                                    </p>
                                 </td>
                                 <td>
                                     <button class="btn btn-orange" wire:click="edit('status')"><i

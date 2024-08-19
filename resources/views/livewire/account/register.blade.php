@@ -21,7 +21,7 @@
                 <div class="col-sm-4">
                     <div class="input-group">
                         <!-- <label for="prefix" class="input-group-text">คำนำหน้าชื่อ</label> -->
-                        <select class="form-select" wire:model.live="prefix" id="prefix">
+                        <select class="form-select" wire:model="prefix" id="prefix">
                             <option selected>คำนำหน้าชื่อ</option>
                             <option value="นาย">นาย</option>
                             <option value="นาง">นาง</option>
@@ -60,7 +60,7 @@
                 <div class="col-sm-4">
                     <div class="input-group">
                         <label class="input-group-text" for="course">หลักสูตร</label>
-                        <select class="form-select" wire:model.live="id_course">
+                        <select class="form-select" wire:model="id_course">
                             <option selected>กรุณาเลือกหลักสูตร</option>
                             <option value="1">หลักสูตรประกาศนียบัตรวิชาชีพชั้นสูง</option>
                             <option value="2">หลักสูตรครุศาสตร์อุตสาหกรรมบัณฑิต</option>
@@ -75,18 +75,18 @@
                     <div class="input-group">
                         <label class="input-group-text" for="level">ระดับ</label>
                         @if ($this->id_course == 1)
-                        <select class="form-select" wire:model.live="id_level" id="level">
+                        <select class="form-select" wire:model="id_level" id="level">
                             <option selected>เลือกระดับ</option>
                             <option value="1">ปวส.</option>
                         </select>
                         @elseif ($this->id_course == 2 || $this->id_course == 3)
-                        <select class="form-select" wire:model.live="id_level" id="level">
+                        <select class="form-select" wire:model="id_level" id="level">
                             <option selected>เลือกระดับ</option>
                             <option value="2">ปริญญาตรี 4 ปี</option>
                             <option value="3">เทียบโอน</option>
                         </select>
                         @else
-                        <select class="form-select" wire:model.live="id_level" id="level" disabled>
+                        <select class="form-select" wire:model="id_level" id="level" disabled>
                             <option selected>กรุณาเลือกหลักสูตรก่อน</option>
                         </select>
                         @endif
@@ -171,7 +171,7 @@
     <section id="register">
         <div class="container">
             <div class="row justify-content-center">
-                <form wire:submit="register" action="">
+                <form wire:submit="register">
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <h3>สมัครสมาชิก</h3>
@@ -190,9 +190,12 @@
                                 </select>
                                 @if ($this->prefix == 'อื่นๆ')
                                     <input class="form-control" wire:model="other_prefix" type="text"
-                                        placeholder="คำนำหน้าชื่อ" required>
+                                        placeholder="คำนำหน้าชื่อ">
                                 @endif
                             </div>
+                            @error('other_prefix')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                             @error('prefix')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -243,18 +246,18 @@
                             <div class="input-group">
                                 <label class="input-group-text" for="level">ระดับ</label>
                                 @if ($this->id_course == 1)
-                                    <select class="form-select" wire:model.live="id_level" id="level">
+                                    <select class="form-select" wire:model="id_level" id="level">
                                         <option selected>เลือกระดับ</option>
                                         <option value="1">ปวส.</option>
                                     </select>
                                 @elseif ($this->id_course == 2 || $this->id_course == 3)
-                                    <select class="form-select" wire:model.live="id_level" id="level">
+                                    <select class="form-select" wire:model="id_level" id="level">
                                         <option selected>เลือกระดับ</option>
                                         <option value="2">ปริญญาตรี 4 ปี</option>
                                         <option value="3">เทียบโอน</option>
                                     </select>
                                 @else
-                                    <select class="form-select" wire:model.live="id_level" id="level" disabled>
+                                    <select class="form-select" wire:model="id_level" id="level" disabled>
                                         <option selected>กรุณาเลือกหลักสูตรก่อน</option>
                                     </select>
                                 @endif

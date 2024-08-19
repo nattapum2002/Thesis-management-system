@@ -87,6 +87,7 @@ class Register extends Component
     {
         return [
             'prefix' => 'required',
+            'other_prefix' => 'required_if:prefix,อื่นๆ',
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'id_level' => 'required',
@@ -105,6 +106,7 @@ class Register extends Component
     {
         return [
             'prefix.required' => 'กรุณาเลือกคํานําหน้า',
+            'other_prefix.required_if' => 'กรุณากรอกคํานําหน้า',
             'name.required' => 'กรุณากรอกชื่อ',
             'name.string' => 'ชื่อต้องเป็นตัวอักษร',
             'name.max' => 'ชื่อไม่เกิน 255 ตัวอักษร',
@@ -138,24 +140,11 @@ class Register extends Component
     public function register()
     {
         // ถ้าไม่มี prefix ให้ใช้ other_prefix แทน
-        if ($this->prefix == null) {
+        if ($this->prefix == 'อื่นๆ') {
             $this->prefix = $this->other_prefix;
         }
 
-        $this->validate([
-            'prefix' => 'required',
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
-            'id_level' => 'required',
-            'id_course' => 'required',
-            'id_student' => 'required|numeric|digits:12|unique:members,id_student',
-            'tel' => 'required|numeric|digits:10',
-            'id_line' => 'nullable|string|max:255',
-            'email' => 'required|email|max:255|unique:members,email',
-            'username' => 'required|string|max:255|unique:members,username',
-            'password' => 'required|min:8|confirmed',
-            'password_confirmation' => 'nullable|required_with:password',
-        ]);
+        $this->validate();
 
         // สร้างข้อมูลสมาชิกใหม่
         Member::create([

@@ -995,6 +995,20 @@ footer div.footer-bottom {
 
 /* --------------------------------------- end detail-thesis page --------------------------------------- */
 
+/* --------------------------------------- edit-and-detail-thesis page --------------------------------------- */
+
+#edit-and-detail-thesis a:link, #edit-and-detail-thesis a:visited {
+    color: var(--orange-color);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#edit-and-detail-thesis a:link:active, #edit-and-detail-thesis a:visited:active {
+    color: (internal value);
+}
+
+/* --------------------------------------- end edit-and-detail-thesis page --------------------------------------- */
+
 /* --------------------------------------- detail-news page --------------------------------------- */
 
 #detail-news :where(div.img, h3, h5) {

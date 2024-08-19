@@ -43,7 +43,7 @@
                     <h5>เผยแพร่เมื่อ</h5>
                     <p>{{ $articles->created_at->thaidate('วันที่ j F พ.ศ.Y เวลา H:i') }}</p>
                     <h5>เอกสาร</h5>
-                    <a href="#">{{ $articles->file_dissertation }}</a>
+                    <a href="{{ url('storage/' . $articles->file_dissertation) }}" target="_blank">ดาวน์โหลด PDF</a>
                 </div>
                 <div class="col-lg-6">
                     <h3>{{ $projects->project_name_th }}</h3>

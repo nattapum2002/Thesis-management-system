@@ -36,7 +36,7 @@ class MenuThesis extends Component
                 $query->orderBy('created_at', 'desc');
             })
             ->paginate(8);
-        $types = Dissertation_article::select('type')->distinct()->get();
+        $types = Dissertation_article::select('type')->where('status', '1')->distinct()->get();
 
         return view('livewire.thesis.menu-thesis', ['articles' => $articles, 'types' => $types]);
     }
