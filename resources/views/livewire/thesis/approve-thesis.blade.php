@@ -9,18 +9,10 @@
         </div>
     @endif
     <div class="row">
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-9 col-md-12">
             <div class="mb-2">
                 <input type="text" class="form-control" placeholder="ค้นหาบทความ..."
                     wire:model.live.debounce.150ms="search">
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="mb-2">
-                <select class="form-select" wire:model.live.debounce.100ms="filterDate">
-                    <option value="บทความล่าสุด">บทความล่าสุด</option>
-                    <option value="บทความเก่าสุด">บทความเก่าสุด</option>
-                </select>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
@@ -41,42 +33,14 @@
                     <table class="table text-nowrap table-striped">
                         <thead>
                             <tr>
-                                <th>
-                                    <a wire:click="sortBy('id_dissertation_article')">
-                                        <span>ID</span>
-                                        <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a wire:click="sortBy('title')">
-                                        <span>ชื่อบทความ</span>
-                                        <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a wire:click="sortBy('type')">
-                                        <span>ประเภท</span>
-                                        <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a wire:click="sortBy('year_published')">
-                                        <span>ปีการศึกษา</span>
-                                        <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a wire:click="sortBy('updated_at')">
-                                        <span>อัพเดทล่าสุด</span>
-                                        <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a wire:click="sortBy('status')">
-                                        <span>สถานะ</span>
-                                        <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                    </a>
-                                </th>
+                                @foreach (['id_dissertation_article' => 'ID', 'title' => 'ชื่อบทความ', 'type' => 'ประเภท', 'year_published' => 'ปีการศึกษา', 'updated_at' => 'อัพเดทล่าสุด'] as $field => $label)
+                                    <th>
+                                        <a wire:click="sortBy('{{ $field }}')">
+                                            <span>{{ $label }}</span>
+                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                        </a>
+                                    </th>
+                                @endforeach
                             </tr>
                         </thead>
                         <tbody>
@@ -91,13 +55,11 @@
                                         <small>{{ $thesis_detail->updated_at->thaidate('j M Y') }}</small>
                                     </td>
                                     <td>
-                                        @if ($thesis_detail->status == '1')
-                                            <a wire:click='show({{ $thesis_detail->id_dissertation_article }})'
-                                                class="btn btn-success"><i class='bx bxs-show'></i></a>
-                                        @else
-                                            <a wire:click='hide({{ $thesis_detail->id_dissertation_article }})'
-                                                class="btn btn-danger"><i class='bx bxs-hide'></i></a>
-                                        @endif
+                                        <a wire:click="{{ $thesis_detail->status == '1' ? 'show(' . $thesis_detail->id_dissertation_article . ')' : 'hide(' . $thesis_detail->id_dissertation_article . ')' }}"
+                                            class="btn {{ $thesis_detail->status == '1' ? 'btn-success' : 'btn-danger' }}">
+                                            <i
+                                                class='bx {{ $thesis_detail->status == '1' ? 'bxs-show' : 'bxs-hide' }}'></i>
+                                        </a>
                                         <a href="/admin/detail_approve_thesis/{{ $thesis_detail->id_dissertation_article }}"
                                             class="btn btn-orange"><i class='bx bx-detail'></i></a>
                                     </td>

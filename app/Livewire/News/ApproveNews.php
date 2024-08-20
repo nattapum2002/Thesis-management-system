@@ -55,12 +55,6 @@ class ApproveNews extends Component
             })
             ->when($this->filterType != 'ทุกประเภท', function ($query) {
                 $query->where('type', $this->filterType);
-            })
-            ->when($this->filterDate == 'ข่าวเก่าสุด', function ($query) {
-                $query->orderBy('created_at', 'asc');
-            })
-            ->when($this->filterDate == 'ข่าวล่าสุด', function ($query) {
-                $query->orderBy('created_at', 'desc');
             })->orderBy($this->sortField, $this->sortDirection)
             ->paginate(15);
         $types = News::select('type')->distinct()->get();

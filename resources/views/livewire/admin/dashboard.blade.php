@@ -239,6 +239,7 @@
                         <table class="table text-nowrap table-striped">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>วันที่</th>
                                     <th>เวลา</th>
                                     <th>ชื่อโปรเจค</th>
@@ -249,6 +250,7 @@
                             <tbody>
                                 @foreach ($examSchedules as $examSchedule)
                                     <tr>
+                                        <td></td>
                                         <td>{{ thaidate('j M Y', $examSchedule->exam_day) }}</td>
                                         <td>{{ thaidate('H:i น.', $examSchedule->exam_time) }}</td>
                                         <td>
@@ -262,6 +264,16 @@
                             </tbody>
                         </table>
                     </div>
+                    {{-- <div class="row">
+                        <div class="col-lg-12">
+                            <p class="page-number">
+                                แสดงกำหนดการ <b>{{ $examSchedules->firstItem() }}</b>
+                                ถึง <b>{{ $examSchedules->lastItem() }}</b>
+                                จากทั้งหมด <b>{{ $examSchedules->total() }}</b> กำหนดการ
+                            </p>
+                            {{ $examSchedules->onEachSide(2)->links('pagination::bootstrap-4') }}
+                        </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="col-md-6">
@@ -306,6 +318,16 @@
                             </tbody>
                         </table>
                     </div>
+                    {{-- <div class="row">
+                        <div class="col-lg-12">
+                            <p class="page-number">
+                                แสดงกำหนดการ <b>{{ $documentSchedules->firstItem() }}</b>
+                                ถึง <b>{{ $documentSchedules->lastItem() }}</b>
+                                จากทั้งหมด <b>{{ $documentSchedules->total() }}</b> กำหนดการ
+                            </p>
+                            {{ $documentSchedules->onEachSide(2)->links('pagination::bootstrap-4') }}
+                        </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

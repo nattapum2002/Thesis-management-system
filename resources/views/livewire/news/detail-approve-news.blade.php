@@ -69,11 +69,9 @@
                                 </td>
                             @else
                                 <td>
-                                    @if ($news->status == 1)
-                                        <p class="text-success">แสดง</p>
-                                    @else
-                                        <p class="text-danger">ซ่อน</p>
-                                    @endif
+                                    <p class="{{ $news->status == 1 ? 'text-success' : 'text-danger' }}">
+                                        {{ $news->status == 1 ? 'แสดง' : 'ซ่อน' }}
+                                    </p>
                                 </td>
                                 <td>
                                     <button class="btn btn-orange" wire:click="edit('status')"><i
