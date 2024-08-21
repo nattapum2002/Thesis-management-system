@@ -59,9 +59,19 @@ class TeacherManageAllSubmitDocument extends Component
      public function document($id_document ,$id_project) {
         switch ($id_document) {
             case 1:
-                return redirect()->route('detail_document_01',['id_project' => $id_project]);
+                return redirect()->route('detail_document_01',['id_project' => $id_project , 'id_document' => $id_document]);
             case 2:
-                return redirect()->route('detail_document_02',['id_project' => $id_project]);
+                return redirect()->route('detail_document_02',['id_project' => $id_project , 'id_document' => $id_document]);
+            case 3:
+                return redirect()->route('detail_document_03',['id_project' => $id_project , 'id_document' => $id_document]);
+            case 4:
+                return redirect()->route('detail_document_04',['id_project' => $id_project , 'id_document' => $id_document]);
+            case 5:
+                return redirect()->route('detail_document_05',['id_project' => $id_project , 'id_document' => $id_document]);
+
+            default:
+                // Redirect to a fallback route or handle the case where id_document is not recognized
+                return dd(5555);
         }
      }
     public function mount()
@@ -83,7 +93,7 @@ class TeacherManageAllSubmitDocument extends Component
                 $query->where('id_teacher', Auth::guard('teachers')->user()->id_teacher);
             })
             ->get();
-            // dd($projects);
+            //  dd($projects);
         return view('livewire.document.teacher-manage-all-submit-document', ['projects' => $projects]);
     }
 }

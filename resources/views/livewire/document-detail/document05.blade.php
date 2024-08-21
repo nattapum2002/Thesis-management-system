@@ -1,7 +1,7 @@
 <div>
     @if (Auth::guard('teachers')->user()->user_type == 'Admin')
         <div>
-            <form wire:submit.prevent="confirmDocument_02">
+            <form wire:submit.prevent="confirmDocument_05">
                 <strong>เสนอชื่อกรรมการสอบเค้าโครง</strong>
                 <div x-data="{ id_teacher: @entangle('id_teacher') }">
                     <div class="main-director">
@@ -164,7 +164,5 @@
 
         </form>
     @endif
-
-</div>
 
 </div>

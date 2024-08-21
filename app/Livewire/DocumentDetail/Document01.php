@@ -10,18 +10,20 @@ use Illuminate\Support\Facades\Auth;
 
 class Document01 extends Component
 {
-    public $id_project , $comment;
+    public $id_project,$id_document , $admin_comment;
     public $approve_project_name = [];
     public $approve_teacher = [];
-    public $not_approve = [];
+    public $admin_not_approve = [];
     public $not_enough_Qualifications = [];
     public $out_of_student = [];
-    public $other_comment = false;
-    public function mount($id_project){
+    public $admin_other_comment = false;
+    public $branch_head_approve , $branch_head_not_approve , $branch_head_comment ;
+    public function mount($id_project,$id_document){
         $this->id_project = $id_project;
+        $this->id_document = $id_document;
     }
     public function approve(){
-        if($this->approve_project_name ||$this->not_approve ){
+        if($this->approve_project_name ||$this->admin_not_approve ){
             if ($this->approve_project_name) {
                 Comment::create([
                     'comment' => $this->approve_project_name[0],
@@ -42,9 +44,18 @@ class Document01 extends Component
                     'id_position' => 3,
                 ]);
             }
+
+            if($this->approve_project_name||$this->approve_teacher){
+                Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                ->where('id_project', $this->id_project)
+                ->where('id_document', 1)
+                ->update([
+                    'confirm_status' => true
+                ]);
+            }
     
-            if ($this->not_approve) {
-                Comment::create(['comment' => $this->not_approve[0],
+            if ($this->admin_not_approve) {
+                Comment::create(['comment' => $this->admin_not_approve[0],
                     'id_project' => $this->id_project,
                     'id_document' => 1,
                     'id_comment_list' => 1,
@@ -73,8 +84,9 @@ class Document01 extends Component
                 ]);
             }
     
-            if ($this->other_comment) {
-                Comment::create(['comment' => $this->other_comment,
+            if ($this->admin_other_comment) {
+                Comment::create([
+                    'comment' => $this->admin_comment,
                     'id_project' => $this->id_project,
                     'id_document' => 1,
                     'id_comment_list' => 2,
@@ -83,34 +95,47 @@ class Document01 extends Component
                 ]);
             }
         }else{
-            session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
-            return;
+            return session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
         }
         
     }
+    public function Brance_head_approve(){
+        if($this->branch_head_approve || $this->branch_head_not_approve ){
+            if ($this->branch_head_approve) {
+                Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                ->where('id_project', $this->id_project)
+                ->where('id_document', 1)
+                ->update([
+                    'confirm_status' => true
+                ]);
+
+                return redirect()->route('admin_approve_documents');
+            }
+            else if($this->branch_head_not_approve){
+                Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                ->where('id_project', $this->id_project)
+                ->where('id_document', 1)
+                ->update([
+                    'confirm_status' => false
+                ]);
+
+                Comment::create([
+                    'comment' => $this->branch_head_comment,
+                    'id_project' => $this->id_project,
+                    'id_document' => 1,
+                    'id_comment_list' => 2,
+                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                    'id_position' => 4,
+                ]);
+
+                return redirect()->route('admin_approve_documents');
+            }
+        }else{
+            return session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
+        }
+    }
     public function render()
     {
-
-        $projects = Project::with([
-            'confirmStudents'=> function($query) {
-                $query->where('id_document', 1)->with('student');
-            },
-            'confirmTeachers'=> function($query) {
-                $query->where('id_document', 1)->with('teacher');
-            },
-            'comments.project',
-            'comments.teacher'
-        ])
-            ->whereHas('confirmTeachers', function ($query) {
-                $query->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
-                    ->where('id_document', 1)
-                    ->where('id_project', $this->id_project);
-            })
-            ->get();
-            // $groupedConfirmed = $projects->map(function ($project) {
-            //     return $project->confirmTeachers->groupBy('id_document');
-            // });
-            // dd($groupedConfirmed);
-        return view('livewire.document-detail.document01',['projects' => $projects]);
+        return view('livewire.document-detail.document01');
     }
 }

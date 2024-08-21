@@ -7,13 +7,14 @@ use App\Models\Confirm_teacher;
 use App\Models\Member;
 use App\Models\Project;
 use App\Models\Teacher;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class CreateDocument02 extends Component
+class CreateDocument04 extends Component
 {
     public $selectProject, $members, $teachers , $project, $id_project = 'none';
+
     public function mount()
     {
         $this->selectProject = Project::with([
@@ -46,7 +47,7 @@ class CreateDocument02 extends Component
                 foreach ($admin_teacher as $admin_teacher_items) {
                     $admin_teachers = Confirm_teacher::create([
                         'id_teacher' => $admin_teacher_items->id_teacher,
-                        'id_document' => 2,
+                        'id_document' => 4,
                         'id_project' => $this->project->first()->id_project,
                         'id_position' => 3,
                         'confirm_status' => false,
@@ -56,7 +57,7 @@ class CreateDocument02 extends Component
                 $header_teacher = Teacher::where('user_type', 'Branch head')->first();
                 $headTeacher = Confirm_teacher::create([
                     'id_teacher' => $header_teacher->id_teacher,
-                    'id_document' => 2,
+                    'id_document' => 4,
                     'id_project' => $this->project->first()->id_project,
                     'id_position' => 4,
                     'confirm_status' => false,
@@ -66,19 +67,60 @@ class CreateDocument02 extends Component
                     $send_member = $member_Ids == Auth::guard('members')->user()->id_student ? true : false;
                     $student_document = Confirm_student::create([
                         'id_student' => $member_Ids,
-                        'id_document' => 2,
+                        'id_document' => 4,
                         'id_project' => $this->project->first()->id_project,
                         'confirm_status' => $send_member,
                     ]);
                 }
-                $main_teacher = $this->project->first()->teachers->where('pivot.id_position', 1);
+                $main_adviser = $this->project->first()->teachers->where('pivot.id_position', 1);
                     Confirm_teacher::create([
-                        'id_teacher' => $main_teacher->first()->id_teacher,
-                        'id_document' => 2,
+                        'id_teacher' => $main_adviser->first()->id_teacher,
+                        'id_document' => 4,
                         'id_project' => $this->project->first()->id_project,
                         'id_position' => 1,
                         'confirm_status' => false,
                     ]);
+
+                $sub_adviser = $this->project->first()->teachers->where('pivot.id_position', 2);
+                foreach ($sub_adviser as $sub_adviser_items) {
+                    Confirm_teacher::create([
+                        'id_teacher' => $sub_adviser_items->id_teacher,
+                        'id_document' => 4,
+                        'id_project' => $this->project->first()->id_project,
+                        'id_position' => 2,
+                        'confirm_status' => false,
+                    ]);
+                }
+                
+                $main_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 5)->get();
+                    Confirm_teacher::create([
+                        'id_teacher' => $main_director->first()->id_teacher,
+                        'id_document' => 4,
+                        'id_project' => $this->project->first()->id_project,
+                        'id_position' => 5,
+                        'confirm_status' => false,
+                    ]);
+
+                $sub_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 6)->get();
+                foreach ($sub_director as $sub_director_items) {
+                    Confirm_teacher::create([
+                        'id_teacher' => $sub_director_items->id_teacher,
+                        'id_document' => 4,
+                        'id_project' => $this->project->first()->id_project,
+                        'id_position' => 6,
+                        'confirm_status' => false,
+                    ]);
+                }
+
+                $sub_teacher = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 7)->get();
+                Confirm_teacher::create([
+                    'id_teacher' => $sub_teacher->first()->id_teacher,
+                    'id_document' => 4,
+                    'id_project' => $this->project->first()->id_project,
+                    'id_position' => 7,
+                    'confirm_status' => false,
+                ]);
+                // dd($sub_teacher);
             });
             return redirect()->route('manage_document');
         }else{
@@ -88,7 +130,7 @@ class CreateDocument02 extends Component
     }
     function test()
     {
-        dd($this->members->id_student);
+        dd($this->project);
     }
     public function render()
     {
@@ -106,6 +148,6 @@ class CreateDocument02 extends Component
             $this->members = $this->project->first()->members;
             $this->teachers = $this->project->first()->teachers;
         }
-        return view('livewire.document.create-document02', ['project' => $this->project]);
+        return view('livewire.document.create-document04',['project' => $this->project]);
     }
 }

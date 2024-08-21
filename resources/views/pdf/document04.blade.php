@@ -229,7 +229,7 @@
                 </td>
             </tr>
             @if ($projects->confirmTeachers->whereIn('id_position', [1, 2])->isNotEmpty())
-            @foreach ($projects->confirmTeachers->whereIn('id_position', [1, 2]) as $confirm)
+            @foreach ($projects->confirmTeachers->whereIn('id_position', [1, 2])->unique('id_teacher') as $confirm)
             <tr>
                 <td style="width: 1.8em"></td>
                 <td class="signature">
@@ -292,7 +292,7 @@
                 </td>
             </tr>
             @if ($projects->confirmTeachers->whereIn('id_position', [5, 6, 7])->isNotEmpty())
-            @foreach ($projects->confirmTeachers->whereIn('id_position', [5, 6, 7]) as $confirm)
+            @foreach ($projects->confirmTeachers->whereIn('id_position', [5, 6, 7])->unique('id_teacher') as $confirm)
             <tr>
                 <td style="width: 1.8em"></td>
                 <td class="signature">
@@ -407,8 +407,8 @@
                 </td>
                 <td colspan="3">
                     <div>
-                        @if ($adminComments->where('comment', 'เห็นชอบ')->isNotEmpty())
-                        <span class="dotted"> {{ $adminOtherComment->where('comment', 'เห็นชอบ')->first()->comment
+                        @if ($adminComments->where('comment', 'เห็นชอบแต่ให้มีการแก้ไขเพิ่มเติม')->isNotEmpty())
+                        <span class="dotted"> {{ $adminOtherComment->where('id_document', 4)->first()->comment
                             }} </span>
                         @else
                         .........................................................................................................................
@@ -534,8 +534,8 @@
                 </td>
                 <td colspan="3">
                     <div>
-                        @if ($branchHeadComments->where('comment', 'เห็นชอบ')->isNotEmpty())
-                        <span class="dotted"> {{ $branchHeadOtherComment->where('comment', 'เห็นชอบ')->first()->comment
+                        @if ($branchHeadComments->where('comment', 'เห็นชอบแต่ให้มีการแก้ไขเพิ่มเติม')->isNotEmpty())
+                        <span class="dotted"> {{ $branchHeadOtherComment->where('id_document', 4)->first()->comment
                             }} </span>
                         @else
                         .........................................................................................................................

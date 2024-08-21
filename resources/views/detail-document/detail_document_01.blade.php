@@ -3,5 +3,6 @@
 รายละเอียดเอกสาร
 @endsection
 @section('content')
-@livewire('document-detail.document01',['id_project' => $id_project])
+<livewire:document-layout.document-head :id_project="$id_project" :id_document="$id_document" />
+@livewire('document-detail.document01',['id_project' => $id_project ,'id_document' => $id_document])
 @endsection

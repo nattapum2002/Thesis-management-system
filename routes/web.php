@@ -22,6 +22,7 @@ use App\Http\Controllers\DocumentSubmissionScheduleController;
 use App\Http\Controllers\ExamScheduleController;
 use App\Http\Controllers\pdfGenerateController;
 use App\Http\Controllers\ScoreController;
+use App\Livewire\DocumentDetail\Document03;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -338,6 +339,15 @@ Route::get('/member/create_document/02', function () {
     return view('member.create_document_02');
 })->name('create_document_02');
 
+Route::get('/member/create_document/04', function () {
+    return view('member.create_document_04');
+})->name('create_document_04');
+
+Route::get('/member/create_document/05', function () {
+    return view('member.create_document_05');
+})->name('create_document_05');
+
+
 Route::get('/member/send-document', function () {
     return view('member.manage_submit_document');
 })->name('submit_document');
@@ -359,6 +369,8 @@ Route::prefix('pdf')->group(function () {
     Route::get('/05/{projectId}', [pdfGenerateController::class, 'pdf05Generate'])->name('pdf05Generate');
     Route::get('/06/{projectId}', [pdfGenerateController::class, 'pdf06Generate'])->name('pdf06Generate');
     Route::get('/07/{projectId}', [pdfGenerateController::class, 'pdf07Generate'])->name('pdf07Generate');
+
+    Route::get('/03-score/{projectId}', [pdfGenerateController::class, 'pdf03ScoreGenerate'])->name('pdf03ScoreGenerate');
 });
 
 //test
@@ -368,10 +380,30 @@ Route::get('/test/{projectId}', function () {
 Route::get('/gen', [pdfGenerateController::class, 'generate']);
 //Route::get('show', [AdminController::class, 'show']);
 
-Route::get('Document/01/{id_project}', function ($id_project){
-    return view('detail-document.detail_document_01',compact('id_project'));
+Route::get('document/01/{id_project}/{id_document}', function ($id_project, $id_document) {
+    return view('detail-document.detail_document_01', compact('id_project', 'id_document'));
 })->name('detail_document_01');
 
-Route::get('Document/02/{id_project}', function ($id_project){
-    return view('detail-document.detail_document_02',compact('id_project'));
+// Route for Document Type 2
+Route::get('document/02/{id_project}/{id_document}', function ($id_project, $id_document) {
+    return view('detail-document.detail_document_02', compact('id_project', 'id_document'));
 })->name('detail_document_02');
+
+// Route for Document Type 3
+Route::get('document/03/{id_project}/{id_document}', function ($id_project, $id_document) {
+    return view('detail-document.detail_document_03', compact('id_project', 'id_document'));
+})->name('detail_document_03');
+
+// Route for Document Type 4
+Route::get('document/04/{id_project}/{id_document}', function ($id_project, $id_document) {
+    return view('detail-document.detail_document_04', compact('id_project', 'id_document'));
+})->name('detail_document_04');
+
+Route::get('document/05/{id_project}/{id_document}', function ($id_project, $id_document) {
+    return view('detail-document.detail_document_05', compact('id_project', 'id_document'));
+})->name('detail_document_05');
+
+
+
+
+Route::get('/pdf-stream', [Document03::class, 'score_calculate'])->name('pdf.stream');

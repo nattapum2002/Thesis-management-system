@@ -2,6 +2,7 @@
 
 namespace App\Livewire\DocumentDetail;
 
+
 use App\Models\Adviser;
 use App\Models\Comment;
 use App\Models\Confirm_student;
@@ -16,13 +17,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Document02 extends Component
+class Document05 extends Component
 {
     public $id_project,$id_document ,$teachers , $students ,$advisers;
     public $id_teacher = [];
     public $date , $time , $year , $term ,$place ,$building ,$faculty ;
     public $branch_head_approve , $branch_head_not_approve , $branch_head_comment ;
-    public function confirmDocument_02(){
+    public function confirmDocument_05(){
         DB::transaction(function () {
             $teacherIDs = collect($this->id_teacher)
             ->filter()
@@ -41,12 +42,12 @@ class Document02 extends Component
                 Director::create([
                     'id_teacher' => $teacherID,
                     'id_project' => $this->id_project,
-                    'id_document' => 3,
+                    'id_document' => 6,
                     'id_position' => $position,
                 ]);
                 Confirm_teacher::create([
                     'id_project' => $this->id_project,
-                    'id_document' => 3,
+                    'id_document' => 6,
                     'id_teacher' => $teacherID,
                     'id_position' => $position,
                     'confirm_status' => false,
@@ -57,7 +58,7 @@ class Document02 extends Component
                 foreach ($admin_teacher as $admin_teacher_items) {
                     $admin_teachers = Confirm_teacher::create([
                         'id_teacher' => $admin_teacher_items->id_teacher,
-                        'id_document' => 3,
+                        'id_document' => 6,
                         'id_project' => $this->id_project,
                         'id_position' => 3,
                         'confirm_status' => false,
@@ -67,7 +68,7 @@ class Document02 extends Component
                 $header_teacher = Teacher::where('user_type', 'Branch head')->first();
                 $headTeacher = Confirm_teacher::create([
                     'id_teacher' => $header_teacher->id_teacher,
-                    'id_document' => 3,
+                    'id_document' => 6,
                     'id_project' => $this->id_project,
                     'id_position' => 4,
                     'confirm_status' => false,
@@ -75,7 +76,7 @@ class Document02 extends Component
                 foreach ($this->students as $studentID) {
                     $student = Confirm_student::create([
                         'id_student' => $studentID,
-                        'id_document' => 3,
+                        'id_document' => 6,
                         'id_project' => $this->id_project,
                         'confirm_status' => true,
                     ]);
@@ -83,7 +84,7 @@ class Document02 extends Component
                 $main_teacher = Adviser::all()->where('id_project', $this->id_project)->where('id_position', 1)->where('id_project', $this->id_project);
                     Confirm_teacher::create([
                         'id_teacher' => $main_teacher->first()->id_teacher,
-                        'id_document' => 3,
+                        'id_document' => 6,
                         'id_project' => $this->id_project,
                         'id_position' => 1,
                         'confirm_status' => false,
@@ -98,7 +99,7 @@ class Document02 extends Component
                 'semester' => $this->term,
                 'id_project' => $this->id_project,
                 'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                'id_document' => 2,
+                'id_document' => 5,
             ]);
         });
     }
@@ -107,7 +108,7 @@ class Document02 extends Component
             if ($this->branch_head_approve) {
                 Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
                 ->where('id_project', $this->id_project)
-                ->where('id_document', 2)
+                ->where('id_document', 5)
                 ->update([
                     'confirm_status' => true
                 ]);
@@ -117,7 +118,7 @@ class Document02 extends Component
             else if($this->branch_head_not_approve){
                 Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
                 ->where('id_project', $this->id_project)
-                ->where('id_document', 2)
+                ->where('id_document', 5)
                 ->update([
                     'confirm_status' => false
                 ]);
@@ -125,7 +126,7 @@ class Document02 extends Component
                     Comment::create([
                         'comment' => $this->branch_head_comment,
                         'id_project' => $this->id_project,
-                        'id_document' => 2,
+                        'id_document' => 5,
                         'id_comment_list' => 2,
                         'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                         'id_position' => 4,
@@ -149,6 +150,6 @@ class Document02 extends Component
     public function render()
     {
         $this->teachers = Teacher::all();
-        return view('livewire.document-detail.document02');
+        return view('livewire.document-detail.document05');
     }
 }

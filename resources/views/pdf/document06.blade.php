@@ -580,14 +580,14 @@
                 </td>
             </tr>
             @if ($comments->isNotEmpty())
-            @foreach ($teachers as $teacher)
+            {{-- @foreach ($teachers as $teacher)
             @php
             $result = $comments->where('id_teacher', $teacher->id_teacher)->where('id_document',
             $documentId)->where('id_position', 3)->where('id_comment_list', 1)->first();
             $resultDetail = $comments->where('id_teacher', $teacher->id_teacher)->where('id_document',
             $documentId)->where('id_position', 3)->where('id_comment_list', 2)->first();
             @endphp
-            @endforeach
+            @endforeach --}}
             <tr>
                 <td style="width: 1.8em"></td>
                 <td colspan="9">

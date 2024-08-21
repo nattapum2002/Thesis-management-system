@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Teacher;
 use App\Models\Comment;
+use App\Models\Confirm_teacher;
 use App\Models\Director;
 use App\Models\Exam_schedule;
 use App\Models\Score;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 
 //ปัญหาไม่สามารถเลือกวันที่ได้
@@ -390,5 +394,30 @@ class pdfGenerateController extends Controller
             'directors' => $directors,
             'documentId' => $documentId
         ]);
+    }
+
+    public function pdf03ScoreGenerate($projectID)
+    {
+        $documentId = 3;
+        $project = Project::with([
+            'confirmStudents' => function ($query) {
+                $query->where('id_document', 3)
+                    ->where('id_project', 11);
+            },
+            'confirmStudents.student',
+            'confirmStudents.documents',
+            'confirmTeachers' => function ($query) {
+                $query->where('id_document', 3)
+                    ->where('id_project', 11);
+            },
+            'confirmTeachers.teacher',
+            'confirmTeachers.document'
+        ]) ->whereHas('confirmTeachers', function($query) {
+            $query->where('id_document', 3)->where('id_project', 11);
+        })
+            ->get();
+        // dd($project);
+        $pdf = Pdf::loadView('Livewire_pdf.document_03_score',['projects' => $project]);
+        return  $pdf->stream('test.pdf');
     }
 }

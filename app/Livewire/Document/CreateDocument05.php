@@ -7,11 +7,11 @@ use App\Models\Confirm_teacher;
 use App\Models\Member;
 use App\Models\Project;
 use App\Models\Teacher;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class CreateDocument02 extends Component
+class CreateDocument05 extends Component
 {
     public $selectProject, $members, $teachers , $project, $id_project = 'none';
     public function mount()
@@ -46,7 +46,7 @@ class CreateDocument02 extends Component
                 foreach ($admin_teacher as $admin_teacher_items) {
                     $admin_teachers = Confirm_teacher::create([
                         'id_teacher' => $admin_teacher_items->id_teacher,
-                        'id_document' => 2,
+                        'id_document' => 5,
                         'id_project' => $this->project->first()->id_project,
                         'id_position' => 3,
                         'confirm_status' => false,
@@ -56,7 +56,7 @@ class CreateDocument02 extends Component
                 $header_teacher = Teacher::where('user_type', 'Branch head')->first();
                 $headTeacher = Confirm_teacher::create([
                     'id_teacher' => $header_teacher->id_teacher,
-                    'id_document' => 2,
+                    'id_document' => 5,
                     'id_project' => $this->project->first()->id_project,
                     'id_position' => 4,
                     'confirm_status' => false,
@@ -66,7 +66,7 @@ class CreateDocument02 extends Component
                     $send_member = $member_Ids == Auth::guard('members')->user()->id_student ? true : false;
                     $student_document = Confirm_student::create([
                         'id_student' => $member_Ids,
-                        'id_document' => 2,
+                        'id_document' => 5,
                         'id_project' => $this->project->first()->id_project,
                         'confirm_status' => $send_member,
                     ]);
@@ -74,7 +74,7 @@ class CreateDocument02 extends Component
                 $main_teacher = $this->project->first()->teachers->where('pivot.id_position', 1);
                     Confirm_teacher::create([
                         'id_teacher' => $main_teacher->first()->id_teacher,
-                        'id_document' => 2,
+                        'id_document' => 5,
                         'id_project' => $this->project->first()->id_project,
                         'id_position' => 1,
                         'confirm_status' => false,
@@ -106,6 +106,6 @@ class CreateDocument02 extends Component
             $this->members = $this->project->first()->members;
             $this->teachers = $this->project->first()->teachers;
         }
-        return view('livewire.document.create-document02', ['project' => $this->project]);
+        return view('livewire.document.create-document05',['project' => $this->project]);
     }
 }

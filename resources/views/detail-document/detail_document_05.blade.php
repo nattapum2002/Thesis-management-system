@@ -4,5 +4,5 @@
 @endsection
 @section('content')
 <livewire:document-layout.document-head :id_project="$id_project" :id_document="$id_document" />
-@livewire('document-detail.document02',['id_project' => $id_project ,'id_document' => $id_document])
+@livewire('document-detail.document05',['id_project' => $id_project ,'id_document' => $id_document])
 @endsection
