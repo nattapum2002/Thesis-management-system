@@ -662,64 +662,6 @@
                     @endif
                 @endforeach
             @endforeach
-<<<<<<< HEAD
-
-=======
-            <div>
-                <form wire:submit.prevent="not_approve_confirmed">
-                    <div class="modal fade" id="not_approveModal" tabindex="-1" aria-labelledby="not_approveModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">ไม่อนุมัติ</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row text-center mb-3">
-                                        <div class="col-md-2">
-                                            <label for="documentInput" class="col-form-label">เอกสาร:</label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input type="text" class="form-control" id="documentInput"
-                                                value="{{ $not_approve_document->document }}" disabled>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="documentInput" class="col-form-label text-center">กลุ่ม:
-                                            </label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input type="text" class="form-control" id="documentInput"
-                                                value="{{ $not_approve_project->project_name_th }}" disabled>
-                                        </div>
-                                    </div>
-                                    {{-- <div class="row">
-                                        <div class="col">
-                                            <input type="checkbox" name=""
-                                            wire:model="not_approve_comment1"    id=""><span>มีวุฒิทางการศึกษาไม่เป็นไปตามเกณฑ์</span><br>
-                                            <input type="checkbox" name=""
-                                            wire:model="not_approve_comment2"    id=""><span>มีจำนวนนักศึกษาที่รับผิดชอบเกินเกณฑ์ที่กำหนดไว้</span><br>
-                                            <input type="checkbox" name="" id="other_comment"
-                                            wire:model="not_approve_comment3"    wire:click="$dispatch('toggleComment')"><span>อื่นๆ</span>
-                                        </div>
-                                    </div> --}}
-                                    <div class="mb-3" id="">
-                                        <label for="message-text" class="col-form-label">หมายเหตุ:</label>
-                                        <textarea class="form-control" wire:model="another_comment" id="message-text"></textarea>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-orange">Send message</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
->>>>>>> a9f5858884387371a3322b283745cd4bb3bf4feb
         </div>
     </div>
 </div>
@@ -731,15 +673,4 @@
             not_approveModal.show();
         });
     </script>
-<<<<<<< HEAD
 @endscript --}}
-=======
-@endscript
-// $wire.on('toggleComment', () => {
-// const comment = document.getElementById('comment');
-// const other_comment = document.getElementById('other_comment');
-// if(other_comment.checked == true){
-// alert(other_comment);
-// }
-// });
->>>>>>> a9f5858884387371a3322b283745cd4bb3bf4feb
