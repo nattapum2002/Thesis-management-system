@@ -355,7 +355,7 @@
                                             </div>
                                         </div>
                                     @break
-                                    
+
                                     @case(6)
                                         <div class="card-body">
                                             <div class="nomal-document">
@@ -662,9 +662,6 @@
                     @endif
                 @endforeach
             @endforeach
-<<<<<<< HEAD
-
-=======
             <div>
                 <form wire:submit.prevent="not_approve_confirmed">
                     <div class="modal fade" id="not_approveModal" tabindex="-1" aria-labelledby="not_approveModalLabel"
@@ -719,7 +716,6 @@
                     </div>
                 </form>
             </div>
->>>>>>> a9f5858884387371a3322b283745cd4bb3bf4feb
         </div>
     </div>
 </div>
@@ -731,9 +727,6 @@
             not_approveModal.show();
         });
     </script>
-<<<<<<< HEAD
-@endscript --}}
-=======
 @endscript
 // $wire.on('toggleComment', () => {
 // const comment = document.getElementById('comment');
@@ -742,4 +735,3 @@
 // alert(other_comment);
 // }
 // });
->>>>>>> a9f5858884387371a3322b283745cd4bb3bf4feb
