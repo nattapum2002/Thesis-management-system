@@ -218,6 +218,14 @@ Route::get('/branch-head', function () {
     return view('branch-head.dashboard');
 })->name('brand-head');
 
+Route::get('/branch-head/manage_project', function () {
+    return view('branch-head.manage_project');
+});
+
+Route::get('/branch-head/detail_project/{projectId}', function ($projectId) {
+    return view('branch-head.detail_project', compact('projectId'));
+});
+
 Route::get('/branch-head/edit_branch_head', function () {
     return view('branch-head.edit_branch_head');
 });
@@ -259,6 +267,18 @@ Route::get('/branch-head/approve_documents_branch_head', function () {
 Route::get('/teacher', function () {
     return view('teacher.dashboard');
 })->name('teacher');
+
+Route::get('/teacher/manage_project', function () {
+    return view('teacher.manage_project');
+});
+
+Route::get('/teacher/detail_project/{projectId}', function ($projectId) {
+    return view('teacher.detail_project', compact('projectId'));
+});
+
+Route::get('/teacher/manage_exam_schedule', function () {
+    return view('teacher.manage_exam_schedule');
+});
 
 Route::get('/teacher/edit_teacher', function () {
     return view('teacher.edit_teacher');

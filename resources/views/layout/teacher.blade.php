@@ -74,6 +74,13 @@
                 </ul>
             </li>
             <li class="sidebar-item">
+                <a class="sidebar-link {{ Request::is('teacher/manage_exam_schedule') ? 'active' : '' }}"
+                    href="/teacher/manage_exam_schedule">
+                    <i class='nav-icon bx bx-calendar-edit'></i>
+                    <span class="link-name">กำหนดการสอบ</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
                 <a class="sidebar-link {{ Request::is('teacher/edit_teacher') ? 'active' : '' }}"
                     href="/teacher/edit_teacher">
                     <i class='nav-icon bx bx-user'></i>

@@ -76,6 +76,38 @@
             <li class="sidebar-item">
                 <div class="sidebar-collapse">
                     <a href="#"
+                        class="sidebar-link has-dropdown collapsed{{ Request::is('admin/manage_exam_schedule') || Request::is('admin/manage_document_schedule') ? 'off active' : '' }}"
+                        data-bs-target="#manage_schedule" data-bs-toggle="collapse"
+                        aria-expanded="{{ Request::is('admin/manage_exam_schedule') || Request::is('admin/manage_document_schedule') ? 'true' : 'false' }}">
+                        <div>
+                            <i class='nav-icon bx bx-calendar-edit'></i>
+                            <span class="link-name">จัดการกำหนดการ</span>
+                        </div>
+                        <i class="bx bx-chevron-down arrow"></i>
+                    </a>
+                </div>
+                <ul id="manage_schedule"
+                    class="sidebar-dropdown list-unstyled collapse {{ Request::is('admin/manage_exam_schedule') || Request::is('admin/manage_document_schedule') ? 'show' : '' }}"
+                    data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link {{ Request::is('admin/manage_exam_schedule') ? 'active' : '' }}"
+                            href="/admin/manage_exam_schedule">
+                            <i class='nav-icon bx bx-circle'></i>
+                            <span class="link-name">กำหนดการสอบ</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link {{ Request::is('admin/manage_document_schedule') ? 'active' : '' }}"
+                            href="/admin/manage_document_schedule">
+                            <i class='nav-icon bx bx-circle'></i>
+                            <span class="link-name">จัดการกำหนดการเอกสาร</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <div class="sidebar-collapse">
+                    <a href="#"
                         class="sidebar-link has-dropdown collapsed{{ Request::is('admin/manage_teacher') || Request::is('admin/manage_member') || Request::is('admin/edit_admin') ? 'off active' : '' }}"
                         data-bs-target="#manage_user" data-bs-toggle="collapse"
                         aria-expanded="{{ Request::is('admin/manage_teacher') || Request::is('admin/manage_member') || Request::is('admin/edit_admin') ? 'true' : 'false' }}">
@@ -108,38 +140,6 @@
                             href="/admin/edit_admin">
                             <i class='nav-icon bx bx-circle'></i>
                             <span class="link-name">จัดการบัญชีผู้ดูแลระบบ</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="sidebar-item">
-                <div class="sidebar-collapse">
-                    <a href="#"
-                        class="sidebar-link has-dropdown collapsed{{ Request::is('admin/manage_exam_schedule') || Request::is('admin/manage_document_schedule') ? 'off active' : '' }}"
-                        data-bs-target="#manage_schedule" data-bs-toggle="collapse"
-                        aria-expanded="{{ Request::is('admin/manage_exam_schedule') || Request::is('admin/manage_document_schedule') ? 'true' : 'false' }}">
-                        <div>
-                            <i class='nav-icon bx bx-calendar-edit'></i>
-                            <span class="link-name">จัดการกำหนดการ</span>
-                        </div>
-                        <i class="bx bx-chevron-down arrow"></i>
-                    </a>
-                </div>
-                <ul id="manage_schedule"
-                    class="sidebar-dropdown list-unstyled collapse {{ Request::is('admin/manage_exam_schedule') || Request::is('admin/manage_document_schedule') ? 'show' : '' }}"
-                    data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a class="sidebar-link {{ Request::is('admin/manage_exam_schedule') ? 'active' : '' }}"
-                            href="/admin/manage_exam_schedule">
-                            <i class='nav-icon bx bx-circle'></i>
-                            <span class="link-name">กำหนดการสอบ</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link {{ Request::is('admin/manage_document_schedule') ? 'active' : '' }}"
-                            href="/admin/manage_document_schedule">
-                            <i class='nav-icon bx bx-circle'></i>
-                            <span class="link-name">จัดการกำหนดการเอกสาร</span>
                         </a>
                     </li>
                 </ul>

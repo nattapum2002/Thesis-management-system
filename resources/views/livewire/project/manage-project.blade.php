@@ -9,8 +9,10 @@
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="mb-2">
-                    <select class="form-select" wire:model.live.debounce.100ms="filterAdviser">
-                        <option value="all">ทั้งหมด</option>
+                    <select class="form-select" wire:model.live="filterAdviser">
+                        @if (Auth::guard('teachers')->user()->user_type == 'Admin')
+                            <option value="all">ทั้งหมด</option>
+                        @endif
                         <option value="adviserAll">ที่ปรึกษาทั้งหมด</option>
                         <option value="1">ที่ปรึกษาหลัก</option>
                         <option value="2">ที่ปรึกษาร่วม</option>
@@ -35,36 +37,14 @@
                         <table class="table text-nowrap table-striped">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <a wire:click="sortBy('id_project')">
-                                            <span>ID</span>
-                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a wire:click="sortBy('project_name_th')">
-                                            <span>ชื่อโปรเจค</span>
-                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a wire:click="sortBy('member.name')">
-                                            <span>ชื่อนักศึกษา</span>
-                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a wire:click="sortBy('teacher.name')">
-                                            <span>ชื่ออาจารย์ที่ปรึกษา</span>
-                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a wire:click="sortBy('project_status')">
-                                            <span>สถานะการดำเนินงาน</span>
-                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                        </a>
-                                    </th>
+                                    @foreach (['id_project' => 'ID', 'project_name_th' => 'ชื่อโปรเจค', 'member.name' => 'ชื่อนักศึกษา', 'teacher.name' => 'ชื่ออาจารย์ที่ปรึกษา', 'project_status' => 'สถานะการดำเนินงาน'] as $field => $label)
+                                        <th>
+                                            <a wire:click="sortBy('{{ $field }}')">
+                                                <span>{{ $label }}</span>
+                                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                            </a>
+                                        </th>
+                                    @endforeach
                                     <th></th>
                                 </tr>
                             </thead>
@@ -83,53 +63,45 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            @foreach ($project->advisers as $adviser)
-                                                @if ($adviser->id_position == 1)
-                                                    <p>{{ $adviser->teacher->prefix }} {{ $adviser->teacher->name }}
-                                                        {{ $adviser->teacher->surname }}</p>
-                                                @endif
+                                            @foreach ($project->advisers->where('id_position', 1) as $adviser)
+                                                <p>{{ $adviser->teacher->prefix }} {{ $adviser->teacher->name }}
+                                                    {{ $adviser->teacher->surname }}</p>
                                             @endforeach
-                                            @foreach ($project->advisers as $adviser)
-                                                @if ($adviser->id_position == 2)
-                                                    <small>{{ $adviser->teacher->prefix }}
-                                                        {{ $adviser->teacher->name }}
-                                                        {{ $adviser->teacher->surname }}</small><br>
-                                                @endif
+                                            @foreach ($project->advisers->where('id_position', 2) as $adviser)
+                                                <small>{{ $adviser->teacher->prefix }}
+                                                    {{ $adviser->teacher->name }}
+                                                    {{ $adviser->teacher->surname }}</small><br>
                                             @endforeach
                                         </td>
                                         <td>{{ $project->project_status }}</td>
                                         <td>
+                                            @php
+                                                $userType = Auth::guard('teachers')->user()->user_type;
+                                                $route = match ($userType) {
+                                                    'Admin' => 'admin',
+                                                    'Branch head' => 'branch-head',
+                                                    default => 'teacher',
+                                                };
+                                            @endphp
+
                                             <a class="btn btn-orange btn-sm" style="float: right;"
-                                                href="/admin/detail_project/{{ $project->id_project }}">รายละเอียด</a>
+                                                href="/{{ $route }}/detail_project/{{ $project->id_project }}">รายละเอียด</a>
+
                                             <div class="dropdown" style="float: right;">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class='bx bx-printer'></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item"
-                                                            href="/pdf/01/{{ $project->id_project }}"
-                                                            target="_blank">เอกสาร คกท.-คง.-01</a></li>
-                                                    <li><a class="dropdown-item"
-                                                            href="/pdf/02/{{ $project->id_project }}"
-                                                            target="_blank">เอกสาร คกท.-คง.-02</a></li>
-                                                    <li><a class="dropdown-item"
-                                                            href="/pdf/03/{{ $project->id_project }}"
-                                                            target="_blank">เอกสาร คกท.-คง.-03</a></li>
-                                                    <li><a class="dropdown-item"
-                                                            href="/pdf/04/{{ $project->id_project }}"
-                                                            target="_blank">เอกสาร คกท.-คง.-04</a></li>
-                                                    <li><a class="dropdown-item"
-                                                            href="/pdf/05/{{ $project->id_project }}"
-                                                            target="_blank">เอกสาร คกท.-คง.-05</a></li>
-                                                    <li><a class="dropdown-item"
-                                                            href="/pdf/06/{{ $project->id_project }}"
-                                                            target="_blank">เอกสาร คกท.-คง.-06</a></li>
-                                                    <li><a class="dropdown-item"
-                                                            href="/pdf/07/{{ $project->id_project }}"
-                                                            target="_blank">เอกสาร คกท.-คง.-07</a></li>
+                                                    @foreach (range(1, 7) as $num)
+                                                        <li><a class="dropdown-item"
+                                                                href="/pdf/{{ sprintf('%02d', $num) }}/{{ $project->id_project }}"
+                                                                target="_blank">เอกสาร
+                                                                คกท.-คง.-{{ sprintf('%02d', $num) }}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
+
                                         </td>
                                     </tr>
                                 @endforeach

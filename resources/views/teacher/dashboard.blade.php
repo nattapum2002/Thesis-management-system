@@ -1,7 +1,7 @@
 @extends('layout.teacher')
 @section('title')
-Dashboard
+    Dashboard
 @endsection
 @section('content')
-
+    @livewire('teacher.dashboard')
 @endsection
