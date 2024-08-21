@@ -12,7 +12,7 @@
         </div>
         <div class="card-body">
             @foreach ($projects as $projectItems)
-                @foreach ($projectItems->confirmteachers->groupBy('id_document') as  $confirm_teacher)
+                @foreach ($projectItems->confirmteachers->groupBy('id_document') as $confirm_teacher)
                     @php
                         // Filter the collection to get only those with the specified id_teacher
                         $filteredConfirmTeachers = $confirm_teacher
@@ -521,6 +521,7 @@
                                             </div>
                                         </div>
                                     @break
+
                                     @default
                                         <div class="card-body">
                                             <div class="nomal-document">
@@ -664,8 +665,8 @@
             @endforeach
             <div>
                 <form wire:submit.prevent="not_approve_confirmed">
-                    <div class="modal fade" id="not_approveModal" tabindex="-1" aria-labelledby="not_approveModalLabel"
-                        aria-hidden="true">
+                    <div class="modal fade" id="not_approveModal" tabindex="-1"
+                        aria-labelledby="not_approveModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -720,13 +721,13 @@
     </div>
 </div>
 {{-- @script
-    <script>
-        $wire.on('not_approve_comment', () => {
-            //
-            const not_approveModal = new bootstrap.Modal(document.getElementById('not_approveModal'));
-            not_approveModal.show();
-        });
-    </script>
+<script>
+    $wire.on('not_approve_comment', () => {
+        //
+        const not_approveModal = new bootstrap.Modal(document.getElementById('not_approveModal'));
+        not_approveModal.show();
+    });
+</script>
 @endscript
 // $wire.on('toggleComment', () => {
 // const comment = document.getElementById('comment');
