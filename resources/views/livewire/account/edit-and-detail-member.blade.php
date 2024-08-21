@@ -9,9 +9,9 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th style="width: 200px">หัวข้อ</th>
-                        <th style="width: 880px">รายละเอียด</th>
-                        <th></th>
+                        <th style="min-width: 160px">หัวข้อ</th>
+                        <th>รายละเอียด</th>
+                        <th style="min-width: 160px"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +47,7 @@
                             </td>
                             <td>
                                 <div class="button-container">
-                                    <button class="btn btn-primary" wire:click="edit('student_image')"><i
+                                    <button class="btn btn-orange" wire:click="edit('student_image')"><i
                                             class='bx bx-edit'></i></button>
                                 </div>
                             </td>
@@ -55,7 +55,8 @@
                     </tr>
                     <tr>
                         <th>รหัสนักศึกษา</th>
-                        <td colspan="2">{{ $student->id_student }}</td>
+                        <td>{{ $student->id_student }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>คำนำหน้าชื่อ</th>
@@ -87,7 +88,7 @@
                         @else
                             <td>{{ $student->prefix }}</td>
                             <td>
-                                <button class="btn btn-primary" wire:click="edit('prefix')"><i
+                                <button class="btn btn-orange" wire:click="edit('prefix')"><i
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif
@@ -113,7 +114,7 @@
                         @else
                             <td>{{ $student->name }}</td>
                             <td>
-                                <button class="btn btn-primary" wire:click="edit('name')"><i
+                                <button class="btn btn-orange" wire:click="edit('name')"><i
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif
@@ -139,7 +140,7 @@
                         @else
                             <td>{{ $student->surname }}</td>
                             <td>
-                                <button class="btn btn-primary" wire:click="edit('surname')"><i
+                                <button class="btn btn-orange" wire:click="edit('surname')"><i
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif
@@ -169,7 +170,7 @@
                         @else
                             <td>{{ $student->course->course }}</td>
                             <td>
-                                <button class="btn btn-primary" wire:click="edit('course')"><i
+                                <button class="btn btn-orange" wire:click="edit('course')"><i
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif
@@ -209,7 +210,7 @@
                         @else
                             <td>{{ $student->level->level }}</td>
                             <td>
-                                <button class="btn btn-primary" wire:click="edit('level')"><i
+                                <button class="btn btn-orange" wire:click="edit('level')"><i
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif
@@ -217,6 +218,7 @@
                     <tr>
                         <th>ภาค</th>
                         <td>{{ $student->level->sector }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>เบอร์โทรศัพท์</th>
@@ -239,7 +241,7 @@
                         @else
                             <td>{{ $student->tel }}</td>
                             <td>
-                                <button class="btn btn-primary" wire:click="edit('tel')"><i
+                                <button class="btn btn-orange" wire:click="edit('tel')"><i
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif
@@ -265,7 +267,7 @@
                         @else
                             <td>{{ $student->email }}</td>
                             <td>
-                                <button class="btn btn-primary" wire:click="edit('email')"><i
+                                <button class="btn btn-orange" wire:click="edit('email')"><i
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif
@@ -291,7 +293,7 @@
                         @else
                             <td>{{ $student->id_line }}</td>
                             <td>
-                                <button class="btn btn-primary" wire:click="edit('line_id')"><i
+                                <button class="btn btn-orange" wire:click="edit('line_id')"><i
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif
@@ -319,20 +321,21 @@
                                 {{ $student->password }}
                             </td>
                             <td>
-                                <button class="btn btn-primary" wire:click="edit('password')"><i
+                                <button class="btn btn-orange" wire:click="edit('password')"><i
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif
                     </tr>
                     <tr>
                         <th>สถานะบัญชี</th>
-                        <td colspan="2">
+                        <td>
                             @if ($student->account_status == '1')
                                 <p class="text-success">อนุมัติ</p>
                             @else
                                 <p class="text-danger">ถูกระงับ</p>
                             @endif
                         </td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>

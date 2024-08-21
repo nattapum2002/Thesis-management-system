@@ -14,25 +14,25 @@ class DocumentSeeder extends Seeder
     public function run(): void
     {
         DB::table('documents')->insert([
-            'document' => 'เอกสาร 01'
+            'document' => 'แบบขออนุมัติชื่อเรื่อง ปัญหาพิเศษ โครงการพิเศษ โครงงานปริญญานิพนธ์ และแต่งตั้งอาจารย์ที่ปรึกษา'
         ]);
         DB::table('documents')->insert([
-            'document' => 'เอกสาร 02'
+            'document' => 'แบบขอสอบหัวข้อและเค้าโครงของโครงงาน'
         ]);
         DB::table('documents')->insert([
-            'document' => 'เอกสาร 03'
+            'document' => 'แบบรายงานผลการสอบเค้าโครงของโครงงาน'
         ]);
         DB::table('documents')->insert([
-            'document' => 'เอกสาร 04'
+            'document' => 'แบบขอส่งเค้าโครงของโครงงาน'
         ]);
         DB::table('documents')->insert([
-            'document' => 'เอกสาร 05'
+            'document' => 'แบบขอสอบสิ้นสุดโครงงาน'
         ]);
         DB::table('documents')->insert([
-            'document' => 'เอกสาร 06'
+            'document' => 'แบบรายงานผลการสอบสิ้นสุดโครงงาน'
         ]);
         DB::table('documents')->insert([
-            'document' => 'เอกสาร 07'
+            'document' => 'แบบส่งโครงงานฉบับสมบูรณ์'
         ]);
     }
 }

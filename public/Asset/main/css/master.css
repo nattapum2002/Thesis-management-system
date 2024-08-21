@@ -95,6 +95,8 @@ h3 {
 }
 
 /* Input field styles */
+
+
 .input-fields {
     margin-bottom: 1rem;
 }
@@ -115,6 +117,13 @@ h3 {
 }
 
 /* Form Styles */
+.form {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
 .form-control, .form-select {
     border-radius: 20px;
     padding: 10px 15px;

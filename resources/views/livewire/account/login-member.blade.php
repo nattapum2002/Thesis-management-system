@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     @if (session()->has('message'))
     <div class="alert alert-danger">
         {{ session('message') }}
@@ -43,11 +43,56 @@
                         </div>
 
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
+                            <button type="submit" class="btn btn-orange">เข้าสู่ระบบ</button>
                         <p class="small fw-bold mt-2 pt-1 mb-0">ยังไม่มีบัญชี? <a href="/register"
                             class="link-danger">สมัครสมาชิก</a></p>
                         </div>
 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> --}}
+
+<div>
+    <section id="login-member">
+        <div class="container">
+            <div class="row justify-content-center">
+                @if (session('message'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('message') }}
+                    </div>
+                @endif
+                <div class="col-lg-6">
+                    <form wire:submit.prevent="login">
+                        <h3>เข้าสู่ระบบสำหรับนักศึกษา</h3>
+
+                        <!-- Username input -->
+                        <div class="input-group username">
+                            <label for="username" class="input-group-text">ชื่อผู้ใช้</label>
+                            <input type="text" wire:model="username" id="username" class="form-control">
+                        </div>
+                        @error('username')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+
+                        <!-- Password input -->
+                        <div class="input-group password">
+                            <label for="password" class="input-group-text">รหัสผ่าน</label>
+                            <input type="password" wire:model="password" id="password" class="form-control">
+                        </div>
+                        @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+
+                        <!-- button -->
+                        <div class="group">
+                            <button type="submit" class="btn btn-brand">เข้าสู่ระบบ</button>
+                            <button type="reset" class="btn" onclick="window.location.href='/'">ยกเลิก</button>
+                        </div>
+
+                        <p>ยังไม่มีบัญชี? <a href="/register">สมัครสมาชิก</a></p>
                     </form>
                 </div>
             </div>

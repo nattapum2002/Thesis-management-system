@@ -8,7 +8,7 @@
     <meta name="author" content="" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ระบบจัดการปริญานิพนธ์ | @yield('title')</title>
-    <!-- Favicon-->
+    {{-- <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap Icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -60,14 +60,18 @@
                 font-size: 3.5rem;
             }
         }
-    </style>
-</head>
+    </style> --}}
 
-@include('layout.css')
+    <!-- css -->
+    @include('layout.css')
+
+    <!-- welcome.css -->
+    <link href="{{ Asset('Asset/main/css/welcome2.css') }}" rel="stylesheet">
+</head>
 
 <body id="page-top">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed py-3" id="mainNav">
+    {{-- <nav class="navbar navbar-expand-lg navbar-light fixed py-3" id="mainNav">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" href="/">ระบบจัดการปริญญานิพนธ์</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
@@ -94,14 +98,71 @@
                 </ul>
             </div>
         </div>
+    </nav> --}}
+
+    <nav class="navbar navbar-expand-xl navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="/">ระบบจัดการปริญญานิพนธ์</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="navbar-item my-1"><a class="navbar-link {{ Request::is('menu_thesis') ? 'active' : '' }}"
+                            href="/menu_thesis">บทความปริญญานิพนธ์</a>
+                    </li>
+                    <li class="navbar-item my-1"><a class="navbar-link {{ Request::is('menu_news') ? 'active' : '' }}"
+                            href="/menu_news">ข่าวประชาสัมพันธ์</a></li>
+                    <li class="navbar-item my-1"><a href="https://computer.surin.rmuti.ac.th/computer/index.php"
+                            class="navbar-link" target="_blank">เกี่ยวกับสาขา</a></li>
+                    <li class="navbar-item my-1 dropdown">
+                        <a class="navbar-link dropdown-toggle {{ Request::is('login_member') ? 'active' : '' }} {{ Request::is('login_teacher') ? 'active' : '' }}"
+                            href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            เข้าสู่ระบบ
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/login_member">นักศึกษา</a></li>
+                            <li><a class="dropdown-item" href="/login_teacher">อาจารย์</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <a class="btn btn-brand ms-lg-3" href="/register">สมัครสมาชิก</a>
+            </div>
+        </div>
     </nav>
 
-    @yield('content')
+    <div class="content">
+        @yield('content')
+    </div>
 
     <!-- Footer-->
-    <footer class="bg-light py-5">
+    {{-- <footer class="bg-light py-5">
         <div class="container px-4 px-lg-5">
             <div class="small text-center text-muted">ระบบจัดการปริญญานิพนธ์ สาขาเทคโนโลยีคอมพิวเตอร์</div>
+        </div>
+    </footer> --}}
+
+    <footer class="bg-cover">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <a class="navbar-brand" href="#">ระบบจัดการปริญญานิพนธ์</a>
+                        <p>ระบบจัดการปริญญานิพนธ์ สาขาเทคโนโลยีคอมพิวเตอร์
+                            เป็นโครงงานปริญญานิพนธ์ที่นักศึกษาพัฒนาขึ้นมาเพื่อการเรียนรู้ในสาขางานของตนเอง</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <p class="mb-0">Copyright © 2022. All right reserved.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 

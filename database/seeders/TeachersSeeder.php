@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class TeachersSeeder extends Seeder
 {
@@ -14,6 +16,19 @@ class TeachersSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $filename = ['sakchan.jpg', 'tonglun.jpg', 'wiphasith.jpg', 'thongmee.jpg', 'anyawee.jpg', 'wathakan.jpg', 'atipat.jpg', 'jeeranun.jpg', 'boonlueo.jpg', 'nipon.jpg', 'narasuk.jpg', 'attapol.jpg', 'anutchai.jpg'];
+        foreach ($filename as $value) {
+            $source_path = public_path('Asset/main/img/teacher/' . $value);
+            $destination_path = 'teacher_image/' . $value;
+            if (File::exists($source_path)) {
+                Storage::disk('public')->put($destination_path, File::get($source_path));
+                $path_member_img[] = $destination_path;
+            } else {
+                echo "File not found: $source_path";
+            }
+        }
+
         DB::table('teachers')->insert([
             'prefix' => 'ผู้ช่วยศาสตราจารย์ ดร.',
             'name' => 'ศักดิ์ชาญ',
@@ -26,7 +41,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/TeEVioLD3lfrZVB8NiPa08o4YrBP01MHwHhJU1Vj.jpg',
+            'teacher_image' => $path_member_img[0] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'sakchan',
             'password' => Hash::make('password'),
@@ -49,7 +64,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/5KdbztGxxEMa1PWG4MzDiXc0aTT52RNBduTkGLQw.jpg',
+            'teacher_image' => $path_member_img[1] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'tongluan',
             'password' => Hash::make('password'),
@@ -72,7 +87,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/zHL0UDooglv28Omx3e9i3yQXIhOSl0TSCMXxPGEo.jpg',
+            'teacher_image' => $path_member_img[2] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'wiphasith',
             'password' => Hash::make('password'),
@@ -95,7 +110,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/fnBY33jl9LtoHb3f39bf9yN2ZQHptXSmDvb4tgf4.jpg',
+            'teacher_image' => $path_member_img[3] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'tongme',
             'password' => Hash::make('password'),
@@ -118,7 +133,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/rn4In0g21JPwjgBIUdbGv2yfscY5Mi1cdMTWFHHK.jpg',
+            'teacher_image' => $path_member_img[4] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'anyawee',
             'password' => Hash::make('password'),
@@ -141,7 +156,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/uWPX5bhDblQOgjXaZL2jZC2AIVqN7gpVSrVwQD3K.jpg',
+            'teacher_image' => $path_member_img[5] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'wathakan',
             'password' => Hash::make('password'),
@@ -164,7 +179,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/FEQw30fs5z5lEC9PGYuX5z2e0fFK5nkRpNZh9qlT.jpg',
+            'teacher_image' => $path_member_img[6] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'atipat',
             'password' => Hash::make('password'),
@@ -187,7 +202,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/AtPTT5dktyIW6rGuSaluLpLhLAAakU0UPJP71heZ.jpg',
+            'teacher_image' => $path_member_img[7] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'jeeranun',
             'password' => Hash::make('password'),
@@ -210,7 +225,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/HPS8UcivK5EzQWcb6LEN0jnzZ1qo6q8gR5d6CsY1.jpg',
+            'teacher_image' => $path_member_img[8] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'boonlueo',
             'password' => Hash::make('password'),
@@ -233,7 +248,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/905xtfzQGSnLbaCmFZdfhkJm3Uga8fXeE73wFZBV.jpg',
+            'teacher_image' => $path_member_img[9] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'nipon',
             'password' => Hash::make('password'),
@@ -256,7 +271,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/bn8NCMZjF1H3HHnqRKqOfSGLoyxEBcspuija4Y0F.jpg',
+            'teacher_image' => $path_member_img[10] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'narasuk',
             'password' => Hash::make('password'),
@@ -279,7 +294,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/gVr3PgZMuQYxQdAucLAQdy1yKw5quBLHYNnKNEMY.jpg',
+            'teacher_image' => $path_member_img[11] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'attapol',
             'password' => Hash::make('password'),
@@ -302,7 +317,7 @@ class TeachersSeeder extends Seeder
             'email_verified_at' => now(),
             'tel' => null,
             'id_line' => null,
-            'teacher_image' => 'teacher_image/aDxZkzpSjbrTLo7mSHyCclk3yy422PtD3lJ1FCTp.jpg',
+            'teacher_image' => $path_member_img[12] ?? null,
             'signature_image' => 'https://via.placeholder.com/50',
             'username' => 'anutchai',
             'password' => Hash::make('password'),

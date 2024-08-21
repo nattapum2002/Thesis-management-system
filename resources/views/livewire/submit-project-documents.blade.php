@@ -40,7 +40,7 @@
                         <td>หัวหน้าสาขา</td>
                         <td class="text-right">
                             <button class="btn btn-success btn-sm" href="#">ยืนยันเอกสาร</button>
-                            <button class="btn btn-primary btn-sm" href="#"><i class='bx bxs-printer'></i></button>
+                            <button class="btn btn-orange btn-sm" href="#"><i class='bx bxs-printer'></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -63,7 +63,7 @@
                         <td>หัวหน้าสาขา</td>
                         <td class="text-right">
                             <button class="btn btn-success btn-sm" href="#">ยืนยันเอกสาร</button>
-                            <button class="btn btn-primary btn-sm" href="#"><i class='bx bxs-printer'></i></button>
+                            <button class="btn btn-orange btn-sm" href="#"><i class='bx bxs-printer'></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -86,7 +86,7 @@
                         <td>หัวหน้าสาขา</td>
                         <td class="text-right">
                             <button class="btn btn-success btn-sm" href="#" disabled>ยืนยันเอกสาร</button>
-                            <button class="btn btn-primary btn-sm" href="#"><i class='bx bxs-printer'></i></button>
+                            <button class="btn btn-orange btn-sm" href="#"><i class='bx bxs-printer'></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -109,7 +109,7 @@
                         <td>หัวหน้าสาขา</td>
                         <td class="text-right">
                             <button class="btn btn-success btn-sm" href="#">ยืนยันเอกสาร</button>
-                            <button class="btn btn-primary btn-sm" href="#"><i class='bx bxs-printer'></i></button>
+                            <button class="btn btn-orange btn-sm" href="#"><i class='bx bxs-printer'></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -132,7 +132,7 @@
                         <td>หัวหน้าสาขา</td>
                         <td class="text-right">
                             <button class="btn btn-success btn-sm" href="#">ยืนยันเอกสาร</button>
-                            <button class="btn btn-primary btn-sm" href="#"><i class='bx bxs-printer'></i></button>
+                            <button class="btn btn-orange btn-sm" href="#"><i class='bx bxs-printer'></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -155,7 +155,7 @@
                         <td>หัวหน้าสาขา</td>
                         <td class="text-right">
                             <button class="btn btn-success btn-sm" href="#" disabled>ยืนยันเอกสาร</button>
-                            <button class="btn btn-primary btn-sm" href="#"><i class='bx bxs-printer'></i></button>
+                            <button class="btn btn-orange btn-sm" href="#"><i class='bx bxs-printer'></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -178,7 +178,7 @@
                         <td>หัวหน้าสาขา</td>
                         <td class="text-right">
                             <button class="btn btn-success btn-sm" href="#">ยืนยันเอกสาร</button>
-                            <button class="btn btn-primary btn-sm" href="#"><i class='bx bxs-printer'></i></button>
+                            <button class="btn btn-orange btn-sm" href="#"><i class='bx bxs-printer'></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -282,7 +282,8 @@
                             <label class="form-label">อาจารย์ที่ปรึกษาร่วมลำดับที่ 3</label>
                             <div class="input-field">
                                 <label class="form-label">คำนำหน้าชื่อ</label>
-                                <input class="form-input" type="text" placeholder="กรุณากรอกคำนำหน้าชื่อ" required>
+                                <input class="form-input" type="text" placeholder="กรุณากรอกคำนำหน้าชื่อ"
+                                    required>
                             </div>
                             <div class="input-field">
                                 <label class="form-label">ชื่อ</label>
@@ -294,15 +295,18 @@
                             </div>
                             <div class="input-field">
                                 <label class="form-label">ตำแหน่งทางวิชาการ</label>
-                                <input class="form-input" type="text" placeholder="กรุณากรอกตำแหน่งทางวิชาการ" required>
+                                <input class="form-input" type="text" placeholder="กรุณากรอกตำแหน่งทางวิชาการ"
+                                    required>
                             </div>
                             <div class="input-field">
                                 <label class="form-label">วุฒิการศึกษา</label>
-                                <input class="form-input" type="text" placeholder="กรุณากรอกวุฒิการศึกษา" required>
+                                <input class="form-input" type="text" placeholder="กรุณากรอกวุฒิการศึกษา"
+                                    required>
                             </div>
                             <div class="input-field">
                                 <label class="form-label">สาขาที่จบการศึกษา</label>
-                                <input class="form-input" type="text" placeholder="กรุณากรอกสาขาที่จบการศึกษา" required>
+                                <input class="form-input" type="text" placeholder="กรุณากรอกสาขาที่จบการศึกษา"
+                                    required>
                             </div>
                         </div>
                     </div>

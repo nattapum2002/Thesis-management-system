@@ -6,11 +6,12 @@
     @endif
     <div class="card">
         <div class="card-body table-responsive p-0">
-            <table class="table table-striped">
+            <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th style="width: 200px">หัวข้อ</th>
-                        <th style="width: 880px">รายละเอียด</th>
+                        <th style="min-width: 160px">หัวข้อ</th>
+                        <th>รายละเอียด</th>
+                        <th style="min-width: 160px"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,7 @@
                             <p>{{ $project->project_name_th }}</p>
                             <small>{{ $project->project_name_en }}</small>
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>ชื่อนักศึกษา</th>
@@ -28,6 +30,7 @@
                                 <p>{{ $member->prefix }} {{ $member->name }} {{ $member->surname }}</p>
                             @endforeach
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>ชื่ออาจารย์ที่ปรึกษาหลัก</th>
@@ -38,6 +41,7 @@
                                 @endif
                             @endforeach
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>ชื่ออาจารย์ที่ปรึกษาร่วม</th>
@@ -48,18 +52,20 @@
                                 @endif
                             @endforeach
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>สถานะการดำเนินงาน</th>
                         <td>
                             <p>{{ $project->project_status }}</p>
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>หมายเหตุ</th>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                <button class="btn btn-orange dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     <i class='bx bx-printer'></i>
                                 </button>
@@ -81,6 +87,7 @@
                                 </ul>
                             </div>
                         </td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>

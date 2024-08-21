@@ -1,0 +1,654 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    /* general */
+    --orange-color: #ff5c00; /* hover, active, button */
+    --grey-f0-color: #F0F0F0;
+    --grey-cc-color: #CCCCCC;
+    --grey-44-color: #444444;
+    --grey-1e-color: #1E1E1E;
+    --white-color: #fff;
+    --black-color: #000;
+    --green-color: #00a400;
+    --red-color: #ff0000;
+
+    --font: "kanit", "Montserrat", sans-serif;
+}
+
+body {
+    background-color: var(--white-color);
+    font-family: var(--font);
+    margin: 0;
+    padding: 0;
+    color: var(--grey-1e-color);
+    font-size: medium;
+}
+
+html {
+    scroll-behavior: smooth;
+    position: relative;
+    background-color: var(--white-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+}
+
+.bg-cover {
+    background-position: center !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+section {
+    padding: 70px 0px;
+}
+
+.content {
+    min-height: 600px;
+}
+
+/* navbar */
+
+nav.navbar {
+    background-color: var(--white-color);
+    color: var(--grey-44-color);
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    vertical-align: middle;
+}
+
+ul.dropdown-menu {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+li.navbar-item {
+    margin-right: 20px;
+}
+
+li.navbar-item:last-child {
+    margin-right: 0;
+}
+
+a.navbar-brand {
+    color: var(--grey-44-color);
+    font-weight: bold;
+    font-size: 26px;
+}
+
+a.navbar-brand:hover, a.navbar-brand:focus {
+    color: var(--orange-color);
+}
+
+a.navbar-link, a.dropdown-item {
+    color: var(--grey-44-color);
+}
+
+a.navbar-link:hover, a.active {
+    color: var(--orange-color);
+    border-bottom: var(--orange-color) 2px solid;
+}
+
+a.dropdown-item:hover {
+    color: var(--white-color);
+    background-color: var(--orange-color);
+}
+
+a.btn {
+    padding: 9px 24px;
+    border-width: 2px;
+}
+
+a.btn-brand {
+    color: var(--white-color);
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+a.btn-brand:hover, a.btn-brand:focus {
+    color: var(--orange-color);
+    background-color: var(--white-color);
+    border-color: var(--orange-color);
+}
+
+/* pagination */
+
+.pagination {
+    margin-top: 5px;
+    justify-content: center;
+}
+
+p.page-number {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination .page-item .page-link {
+    color: var(--orange-color);
+    border: 1px solid var(--grey-cc-color);
+    padding: 8px 16px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+    color: var(--white-color);
+}
+
+.pagination .page-item.active .page-link:hover {
+    background-color: var(--white-color);
+    border-color: var(--grey-cc-color);
+    color: var(--orange-color);
+}
+
+.pagination .page-item.disabled .page-link {
+    color: var(--grey-cc-color);
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #e9ecef;
+}
+
+
+/* --------------------------------------- welcome page --------------------------------------- */
+
+/* slider */
+
+#slider div.slide1 {
+    background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/2/5000/3333.jpg?hmac=_KDkqQVttXw_nM-RyJfLImIbafFrqLsuGO5YuHqD-qQ");
+}
+
+#slider div.slide2 {
+    background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/180/2400/1600.jpg?hmac=Ig-CXcpNdmh51k3kXpNqNqcDYTwXCIaonYiBOnLXBb8");
+}
+
+#slider div.slide3 {
+    background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/250/4928/3264.jpg?hmac=4oIwzXlpK4KU3wySTnATICCa4H6xwbSGifrxv7GafWU");
+}
+
+#sliders {
+    padding-bottom: 0px;
+}
+
+/* about */
+
+#about div.about-info {
+    display: flex;
+    align-items: center;
+    max-width: fit-content;
+}
+
+#about div.about-info:hover {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: scale(1.08);
+    transition: transform 0.3s ease-in-out;
+}
+
+#about div.about-info i {
+    color: var(--white-color);
+    background-color: var(--orange-color);
+    font-size: 80px;
+    padding: 10px;
+    margin-right: 14px;
+    margin-left: -10px;
+    border-radius: 10px;
+}
+
+#about div.about-info h4 {
+    margin-bottom: 5px;
+}
+
+#about div.about-img img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#about div.about-img img:hover {
+    transform: scale(1.08);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* milestones */
+
+#milestone {
+    background-image: linear-gradient(rgba(255, 94, 0, 0.3),rgba(255, 94, 0, 0.5)), url("https://fastly.picsum.photos/id/2/5000/3333.jpg?hmac=_KDkqQVttXw_nM-RyJfLImIbafFrqLsuGO5YuHqD-qQ");
+}
+
+#milestone div.item:hover {
+    transform: scale(1.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+#milestone div.display-4 {
+    font-weight: 700;
+}
+
+#milestone p, #milestone div.display-4 {
+    color: var(--white-color);
+}
+
+/* team */
+
+#team div.social-links a {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(204, 204, 204, 0.7);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white-color);
+    font-size: 30px;
+    border-radius: 100%;
+}
+
+#team div.social-links a:hover {
+    background-color: var(--white-color);
+    color: var(--orange-color);
+}
+
+#team div.team-member {
+    text-align: center;
+}
+
+#team div.team-member div.img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+#team div.team-member div.overlay {
+    position: absolute;
+    top: -10%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 94, 0, 0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+#team div.team-member:hover div.overlay {
+    opacity: 1;
+    top: 0;
+}
+
+#team div.team-member div.social-links {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+#team div.team-member:hover div.social-links {
+    opacity: 1;
+    top: 50%;
+}
+
+#team div.team-member h3 {
+    margin-top: 24px;
+}
+
+/* footer */
+
+footer {
+    padding-top: 80px;
+    padding-bottom: 40px;
+    color: var(--white-color);
+    text-align: center;
+    background-image: linear-gradient(rgba(9, 32, 50, 0.5), rgba(9, 32, 50, 0.8)), url("https://fastly.picsum.photos/id/26/4209/2769.jpg?hmac=vcInmowFvPCyKGtV7Vfh7zWcA_Z0kStrPDW3ppP0iGI");
+}
+
+footer a.navbar-brand {
+    color: var(--orange-color);
+}
+
+footer a.navbar-brand:hover {
+    color: var(--white-color);
+}
+
+footer p {
+    margin-top: 24px;
+}
+
+footer div.footer-top {
+    margin-bottom: 40px;
+}
+
+footer div.footer-bottom {
+    border-top: 1px solid var(--white-color);
+    padding-top: 20px;
+}
+
+/* --------------------------------------- end welcome page --------------------------------------- */
+
+/* --------------------------------------- menu-thesis, menu-news page --------------------------------------- */
+
+h2 {
+    margin: 20px 0;
+}
+
+div.post {
+    position: relative;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+div.post:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+div.post a {
+    text-decoration: none;
+    color: var(--grey-1e-color);
+}
+
+div.post img {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+div.post p.tag {
+    padding: 4px 12px;
+    background-color: var(--orange-color);
+    color: var(--white-color);
+    border-radius: 5px;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+}
+
+div.details {
+    padding: 10px 20px;
+}
+
+div.post small {
+    color: var(--orange-color);
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+div.post h4 {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+div.post p {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+/* --------------------------------------- end menu-thesis, menu-news page --------------------------------------- */
+
+/* --------------------------------------- detail-thesis page --------------------------------------- */
+
+#detail-thesis :where(div.img, h3, h5) {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+#detail-thesis div.img {
+    position: relative;
+}
+
+#detail-thesis img {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#detail-thesis p.tag {
+    padding: 4px 12px;
+    background-color: var(--orange-color);
+    color: var(--white-color);
+    border-radius: 5px;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+}
+
+#detail-thesis h3, h5 {
+    color: var(--orange-color);
+}
+
+#detail-thesis h4 {
+    margin-bottom: 5px;
+}
+
+#detail-thesis p {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+/* --------------------------------------- end detail-thesis page --------------------------------------- */
+
+/* --------------------------------------- detail-news page --------------------------------------- */
+
+#detail-news :where(div.img, h3, h5) {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+#detail-news div.img {
+    position: relative;
+}
+
+#detail-news img {
+    border-radius: 10px;
+    overflow: hidden;
+    max-height: 500px;
+}
+
+#detail-news p.tag {
+    padding: 4px 12px;
+    background-color: var(--orange-color);
+    color: var(--white-color);
+    border-radius: 5px;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+}
+
+#detail-news h3, h5 {
+    color: var(--orange-color);
+}
+
+#detail-news h4 {
+    margin-bottom: 5px;
+}
+
+#detail-news p {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+/* --------------------------------------- end detail-news page --------------------------------------- */
+
+
+/* --------------------------------------- register page --------------------------------------- */
+
+#register :where(h3, .row) {
+    padding-top: 10px;
+}
+
+#register img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 50px;
+}
+
+#register img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+#register label {
+    width: 120px;
+}
+
+#register .btn-success {
+    color: var(--white-color);
+    background-color: var(--green-color);
+    border: var(--green-color) solid 2px;
+}
+
+#register .btn-success:hover {
+    color: var(--green-color);
+    background-color: var(--white-color);
+}
+
+#register .btn-danger {
+    color: var(--white-color);
+    background-color: var(--red-color);
+    border: var(--red-color) solid 2px;
+}
+
+#register .btn-danger:hover {
+    color: var(--red-color);
+    background-color: var(--white-color);
+    border: var(--red-color) solid 2px;
+}
+
+#register span {
+    margin-left: 130px;
+    padding: 0;
+}
+
+/* --------------------------------------- eng register page --------------------------------------- */
+
+
+/* --------------------------------------- login-member page --------------------------------------- */
+
+#login-member .row {
+    margin-top: 10px;
+}
+
+#login-member :where(h3, p, .username, .password, .group) {
+    margin-top: 20px;
+    margin-bottom: 2px;
+}
+
+#login-member img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#login-member img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+#login-member button {
+    padding: 9px 24px;
+    border: solid 2px var(--orange-color);
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-member button.btn-brand {
+    color: var(--white-color);
+    background-color: var(--orange-color);
+}
+
+#login-member button.btn-brand:hover {
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-member button.btn-brand:hover {
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-member a {
+    color: var(--orange-color);
+}
+
+#login-member a:hover {
+    color: rgb(200, 77, 0);
+}
+
+#login-member label {
+    width: 85px;
+}
+
+#login-member span {
+    margin-left: 90px;
+    padding: 0;
+}
+
+/* --------------------------------------- eng login-member page --------------------------------------- */
+
+
+/* --------------------------------------- login-teacher page --------------------------------------- */
+
+#login-teacher .row {
+    margin-top: 10px;
+}
+
+#login-teacher :where(h3, .username, .password, .group) {
+    margin-top: 20px;
+    margin-bottom: 2px;
+}
+
+#login-teacher img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#login-teacher img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+#login-teacher button {
+    padding: 9px 24px;
+    border: solid 2px var(--orange-color);
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-teacher button.btn-brand {
+    color: var(--white-color);
+    background-color: var(--orange-color);
+}
+
+#login-teacher button.btn-brand:hover {
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-teacher button.btn-brand:hover {
+    color: var(--orange-color);
+    background-color: var(--white-color);
+}
+
+#login-teacher label {
+    width: 85px;
+}
+
+#login-teacher span {
+    margin-left: 90px;
+    padding: 0;
+}

@@ -49,8 +49,9 @@ class MenuNewsLogin extends Component
             ->when($this->filterDate == 'ข่าวล่าสุด', function ($query) {
                 $query->orderBy('created_at', 'desc');
             })
-            ->paginate(15);
+            ->paginate(8);
+        $types = News::select('type')->distinct()->get();
 
-        return view('livewire.news.menu-news-login', ['news' => $news]);
+        return view('livewire.news.menu-news-login', ['news' => $news, 'types' => $types]);
     }
 }

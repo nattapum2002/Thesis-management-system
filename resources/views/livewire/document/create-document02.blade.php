@@ -51,9 +51,14 @@
                     </div>
                 @endforeach
             </div>
+<<<<<<< HEAD
         </div>
             <button class="btn btn-primary" wire:click="create_document">สร้าง</button>
             <button class="btn btn-primary" wire:click="test">test</button>
+=======
+            <button class="btn btn-orange" wire:click="create_document">สร้าง</button>
+            <button class="btn btn-orange" wire:click="test">test</button>
+>>>>>>> a9f5858884387371a3322b283745cd4bb3bf4feb
         </div>
     </div>
 </div>

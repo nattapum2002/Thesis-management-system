@@ -6,7 +6,7 @@
             <div class="card-tools">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search">
-                    <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+                    <button class="btn btn-orange" type="submit"><i class='bx bx-search'></i></button>
                 </div>
             </div>
         </div>

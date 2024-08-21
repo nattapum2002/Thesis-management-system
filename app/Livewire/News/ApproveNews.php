@@ -13,6 +13,18 @@ class ApproveNews extends Component
     public $search = '';
     public $filterDate = 'ข่าวล่าสุด';
     public $filterType = 'ทุกประเภท';
+    public $sortField = 'id_news';
+    public $sortDirection = 'asc';
+
+    public function sortBy($field)
+    {
+        if ($this->sortField == $field) {
+            $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortField = $field;
+            $this->sortDirection = 'asc';
+        }
+    }
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -25,12 +37,14 @@ class ApproveNews extends Component
         News::where('id_news', $index)->update([
             'status' => '0'
         ]);
+        session()->flash('danger', 'ซ่อนข่าว ' . News::find($index)->title .  ' เรียบร้อยแล้ว');
     }
     public function hide($index)
     {
         News::where('id_news', $index)->update([
             'status' => '1'
         ]);
+        session()->flash('success', 'แสดงข่าว ' . News::find($index)->title .  ' เรียบร้อยแล้ว');
     }
 
     public function render()
@@ -41,15 +55,10 @@ class ApproveNews extends Component
             })
             ->when($this->filterType != 'ทุกประเภท', function ($query) {
                 $query->where('type', $this->filterType);
-            })
-            ->when($this->filterDate == 'ข่าวเก่าสุด', function ($query) {
-                $query->orderBy('created_at', 'asc');
-            })
-            ->when($this->filterDate == 'ข่าวล่าสุด', function ($query) {
-                $query->orderBy('created_at', 'desc');
-            })
+            })->orderBy($this->sortField, $this->sortDirection)
             ->paginate(15);
+        $types = News::select('type')->distinct()->get();
 
-        return view('livewire.news.approve-news', ['news' => $news]);
+        return view('livewire.news.approve-news', ['news' => $news, 'types' => $types]);
     }
 }

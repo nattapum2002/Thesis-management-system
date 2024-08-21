@@ -16,6 +16,7 @@ return new class extends Migration
             $table->time('time_submission');
             $table->date('date_submission');
             $table->year('year_submission');
+            $table->boolean('status')->default(true);
             $table->foreignId('id_document')->constrained(table: 'documents', column: 'id_document');
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
