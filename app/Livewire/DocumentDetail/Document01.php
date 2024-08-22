@@ -134,6 +134,7 @@ class Document01 extends Component
             return session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
         }
     }
+    
     public function render()
     {
         return view('livewire.document-detail.document01');

@@ -98,7 +98,7 @@ class Document02 extends Component
                 'semester' => $this->term,
                 'id_project' => $this->id_project,
                 'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                'id_document' => 2,
+                'id_document' => 3,
             ]);
         });
     }

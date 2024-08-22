@@ -1008,7 +1008,7 @@
         </div>
     </section>
 </div>
-
+{{-- 
 @script
     <script>
         const examCountdown = () => {
@@ -1041,4 +1041,4 @@
 
         setInterval(examCountdown, 1000);
     </script>
-@endscript
+@endscript --}}

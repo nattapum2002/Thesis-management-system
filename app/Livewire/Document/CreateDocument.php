@@ -15,6 +15,7 @@ use Livewire\Component;
 
 class CreateDocument extends Component
 {
+    public $memberCount = 0;
     public $id_members = [];
     public $id_teacher = [];
 
@@ -41,7 +42,17 @@ class CreateDocument extends Component
         $this->project_name_th;
         $this->project_name_eng;
     }
+    public function removeMember($index)
+    {
+        // Remove the specified member
+        unset($this->id_members[$index]);
 
+        // Reindex the array to ensure there are no gaps
+        $this->id_members = array_values($this->id_members);
+
+        // Adjust the memberCount accordingly
+        $this->memberCount = count($this->id_members);
+    }
     public function confirmDocument()
     {
         DB::transaction(function () {

@@ -23,9 +23,12 @@
                             </template>
                             <button class="btn btn-success" type="button"
                                 @click="if(memberCount < 4) memberCount++">เพิ่มนักศึกษา</button>
-                            <div x-show = "memberCount > 0">
+                            <div x-show="memberCount > 0">
                                 <button class="btn btn-danger" type="button"
-                                    @click="if(memberCount > 0) memberCount--">ลบนักศึกษา</button>
+                                    @click="if(memberCount > 0) {
+                                        $wire.removeMember(memberCount); 
+                                        memberCount--;
+                                    }">ลบนักศึกษา</button>
                             </div>
 
                         </div>
@@ -100,7 +103,10 @@
 
                         <div x-show="SubTeacherCount > 0 ">
                             <button class="btn btn-danger" type="button"
-                                @click="if(SubTeacherCount > 0)SubTeacherCount--">ลบอาจารย์ที่ปรึกษาร่วม</button>
+                            @click="if(SubTeacherCount > 0) {
+                                id_teacher[SubTeacherCount] = ''; // Clear the selected value
+                                SubTeacherCount--;
+                            }">ลบอาจารย์ที่ปรึกษาร่วม</button>
                         </div>
                     </div>
                     <div>

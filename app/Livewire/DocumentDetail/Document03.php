@@ -41,6 +41,7 @@ class Document03 extends Component
 
     public function score_calculate()
     {
+
         // $pdf = PDF::loadView('Livewire_pdf.document_03_score', $data);
         // return response()->streamDownload(function () use ($pdf) {
         //     echo $pdf->stream('test.pdf');
@@ -55,16 +56,36 @@ class Document03 extends Component
                 'scores' => $value
             ];
         }, array_keys($this->score_student), $this->score_student);
+        $skip_value = 22; // The ID value to skip
 
-        foreach ($transformedData as $value) {
-            Score::create([
-                'id_student' => $value['student_id'],
-                'id_document' => $this->id_document,
-                'score' => json_encode($value['scores']),
-                'id_comment_list' => 2,
-                'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                'id_position' => 3
-            ]);
+        foreach ($transformedData as $index => $value) {
+            // Reset comment list ID for each new student
+            $current_comment_list_id = 20;
+
+            foreach ($value['scores'] as $scoreIndex => $score) {
+                // Check if current ID needs to be skipped
+                if ($current_comment_list_id == $skip_value) {
+                    $current_comment_list_id++; // Skip the specific value
+                }
+
+                // Create a record for each score
+                Score::create([
+                    'id_student' => $value['student_id'],
+                    'id_document' => $this->id_document,
+                    'score' => $score,
+                    'id_comment_list' => $current_comment_list_id,
+                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                    'id_position' => 3
+                ]);
+
+                // Increment the comment list ID after creating a record
+                $current_comment_list_id++;
+
+                // Check again to skip the specific value if needed
+                if ($current_comment_list_id == $skip_value) {
+                    $current_comment_list_id++; // Skip the specific value
+                }
+            }
         }
         // dd($transformedData);
 
