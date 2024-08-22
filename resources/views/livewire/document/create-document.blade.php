@@ -294,7 +294,10 @@
                                 <button class="btn btn-success" type="button" x-show="memberCount < 4"
                                     @click="if(memberCount < 4) memberCount++">เพิ่มนักศึกษา</button>
                                 <button class="btn btn-danger" type="button" x-show="memberCount > 0"
-                                    @click="if(memberCount > 0) memberCount--">ลบนักศึกษา</button>
+                                    @click="if(memberCount > 0) {
+                                        $wire.removeMember(memberCount); 
+                                        memberCount--;
+                                    }">ลบนักศึกษา</button>
                             </div>
                         </div>
                     </fieldset>
@@ -341,7 +344,10 @@
                                 <button class="btn btn-success" type="button" x-show="SubTeacherCount < 3 "
                                     @click="if(SubTeacherCount < 3)SubTeacherCount++">เพิ่มอาจารย์</button>
                                 <button class="btn btn-danger" type="button" x-show="SubTeacherCount > 0 "
-                                    @click="if(SubTeacherCount > 0)SubTeacherCount--">ลบอาจารย์</button>
+                                    @click="if(SubTeacherCount > 0) {
+                                        id_teacher[SubTeacherCount] = ''; // Clear the selected value
+                                        SubTeacherCount--;
+                                    }">ลบอาจารย์</button>
                             </div>
                         </fieldset>
                     </div>
