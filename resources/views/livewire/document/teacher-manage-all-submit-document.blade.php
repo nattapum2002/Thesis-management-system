@@ -720,19 +720,3 @@
         </div>
     </div>
 </div>
-{{-- @script
-<script>
-    $wire.on('not_approve_comment', () => {
-        //
-        const not_approveModal = new bootstrap.Modal(document.getElementById('not_approveModal'));
-        not_approveModal.show();
-    });
-</script>
-@endscript
-// $wire.on('toggleComment', () => {
-// const comment = document.getElementById('comment');
-// const other_comment = document.getElementById('other_comment');
-// if(other_comment.checked == true){
-// alert(other_comment);
-// }
-// });

@@ -1009,7 +1009,7 @@
     </section>
 </div>
 
-@script
+{{-- @script
     <script>
         const examCountdown = () => {
             // ดึงข้อมูลจาก Blade
@@ -1041,4 +1041,4 @@
 
         setInterval(examCountdown, 1000);
     </script>
-@endscript
+@endscript --}}
