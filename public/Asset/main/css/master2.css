@@ -1224,6 +1224,88 @@ footer div.footer-bottom {
 
 /* end dashboard member */
 
+/* create document */
+#createDocument01 {
+
+    fieldset {
+        display: block;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid var(--grey-cc-color);
+        border-radius: 10px;
+    }
+
+    legend {
+        font-size: large;
+        font-weight: 500;
+        color: var(--grey-44-color);
+        display: block;
+        padding-left: 2px;
+        padding-right: 2px;
+        border: none;
+    }
+
+    .fields {
+        margin-bottom: 5px;
+    }
+
+    .projectName {
+
+        label {
+            width: 110px;
+        }
+
+        .text-error {
+            margin-left: 115px;
+            padding: 0;
+        }
+    }
+
+    .members label {
+        width: 35px;
+    }
+
+    .subAdvisor label {
+        width: 35px;
+    }
+
+    .outAdvisor label {
+        width: 155px;
+    }
+
+    .modal {
+        h5.modal-title, legend {
+            color: var(--orange-color);
+        }
+
+        b {
+            color: var(--red-color);
+            text-decoration: underline;
+        }
+
+        h5.modal-title {
+            display: flex;
+            align-items: center;
+            i {
+                font-size: 35px;
+                padding-right: 5px;
+            }
+        }
+
+        .input-group {
+            display: flex;
+            margin-bottom: 5px;
+            flex-wrap: nowrap;
+            span.input-group-text {
+                width: 100%;
+                overflow-x: auto;
+            }
+        }
+    }
+}
+
+/* end create document */
+
 @media (max-width: 970px) {
     .main .navbar .navbar-nav .navbar-item .navbar-link span {
         display: none;
@@ -1317,6 +1399,14 @@ footer div.footer-bottom {
 @media (max-width: 620px) {
     .main div.content #content-header ol.breadcrumb {
         display: none;
+    }
+
+    #createDocument01 {
+        .projectName {
+            .text-error {
+                margin-left: 0px;
+            }
+        }
     }
 }
 

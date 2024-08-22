@@ -380,7 +380,7 @@ Route::get('/member/create_document/05', function () {
 })->name('create_document_05');
 
 
-Route::get('/member/send-document', function () {
+Route::get('/member/manage_submit_document', function () {
     return view('member.manage_submit_document');
 })->name('submit_document');
 
