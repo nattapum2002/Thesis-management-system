@@ -854,7 +854,7 @@
                                                     @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
                                                         <div>
                                                             @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
-                                                                <p class="text-danger">{{ $comment->comment }}</p>
+                                                                <p>{{ $comment->comment }}</p>
                                                                 <p>โดย:
                                                                     {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
                                                                 </p>
@@ -867,24 +867,29 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 @php
-                                                    $teacherId = Auth::guard('teachers')->user()->id_teacher;
+                                                    $currentConfirmteacher = $projectItems->confirmTeachers->firstWhere(
+                                                        'id_teacher',
+                                                        Auth::guard('teachers')->user()->id_teacher,
+                                                    );
                                                     $confirmTeacher = $projectItems->confirmTeachers
-                                                        ->where('id_teacher', $teacherId)
+                                                        ->where(
+                                                            'id_teacher',
+                                                            Auth::guard('teachers')->user()->id_teacher,
+                                                        )
                                                         ->where('id_document', $documentId)
                                                         ->first();
                                                 @endphp
-
                                                 @if ($confirmTeacher?->confirm_status == 1)
                                                     <a class="btn btn-primary disabled" href="#" role="button"
                                                         aria-disabled="true" style="pointer-events: none;">อนุมัติแล้ว</a>
                                                 @else
                                                     <button class="btn btn-primary"
-                                                        wire:click="teacher_document({{ $confirmTeacher->id_document }}, {{ $projectItems->id_project }})"
+                                                        wire:click="teacher_document({{ $confirm_teachers->first()->id_document }}, {{ $projectItems->id_project }})"
                                                         role="button">อนุมัติ
                                                     </button>
                                                 @endif
 
-                                                @if (in_array($confirmTeacher?->id_position, [3, 4]))
+                                                @if ($currentConfirmteacher->id_position == 3 || $currentConfirmteacher?->id_position == 4)
                                                     <button class="btn btn-primary"
                                                         wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
                                                         ตรวจสอบ
@@ -1015,7 +1020,7 @@
                                                     @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
                                                         <div>
                                                             @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
-                                                                <p class="text-danger">{{ $comment->comment }}</p>
+                                                                <p>{{ $comment->comment }}</p>
                                                                 <p>โดย:
                                                                     {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
                                                                 </p>
@@ -1171,7 +1176,7 @@
                                                     @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
                                                         <div>
                                                             @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
-                                                                <p class="text-danger">{{ $comment->comment }}</p>
+                                                                <p>{{ $comment->comment }}</p>
                                                                 <p>โดย:
                                                                     {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
                                                                 </p>
@@ -1239,11 +1244,11 @@
                                                 <fieldset>
                                                     <legend>ที่ปรึกษาหลัก</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -1251,11 +1256,11 @@
                                                 <fieldset>
                                                     <legend>ที่ปรึกษาร่วม</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 2)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 2)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -1271,7 +1276,7 @@
                                                                     <li>
                                                                         {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                         <i
-                                                                            class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                            class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                                     </li>
                                                                 @endforeach
                                                             </ul>
@@ -1285,7 +1290,7 @@
                                                                     <li>
                                                                         {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                         <i
-                                                                            class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                            class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                                     </li>
                                                                 @endforeach
                                                             </ul>
@@ -1295,11 +1300,11 @@
                                             </div>
                                             <div class="col-12">
                                                 <fieldset>
-                                                    <legend class="text-danger">หมายเหตุ</legend>
+                                                    <legend>หมายเหตุ</legend>
                                                     @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
                                                         <div>
                                                             @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
-                                                                <p class="text-danger">{{ $comment->comment }}</p>
+                                                                <p>{{ $comment->comment }}</p>
                                                                 <p>โดย:
                                                                     {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
                                                                 </p>

@@ -214,812 +214,825 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="status">
                     <h4>สถานะโปรเจค</h4>
-                    <!-- status 01 -->
-                    <a href="pdf/01/{{ $projectActive->id_project }}" target="_blank">
-                        @php
-                            $studentConfirmed = $confirmStudents->where('id_document', 1)->first();
-                            $teacherConfirmed =
-                                $studentConfirmed &&
-                                $confirmTeachers
-                                    ->where(
-                                        'id_teacher',
-                                        optional($teachers->where('user_type', 'Branch head')->first())->id_teacher,
-                                    )
-                                    ->where('id_document', 1)
-                                    ->first();
-                        @endphp
+                    @if ($projectActive)
+                        <div>
+                            <!-- status 01 -->
+                            <a href="pdf/01/{{ $projectActive->id_project }}" target="_blank">
+                                @php
+                                    $studentConfirmed = $confirmStudents->where('id_document', 1)->first();
+                                    $teacherConfirmed =
+                                        $studentConfirmed &&
+                                        $confirmTeachers
+                                            ->where(
+                                                'id_teacher',
+                                                optional($teachers->where('user_type', 'Branch head')->first())
+                                                    ->id_teacher,
+                                            )
+                                            ->where('id_document', 1)
+                                            ->first();
+                                @endphp
 
-                        <div
-                            class="card {{ $teacherConfirmed ? 'completed' : ($studentConfirmed ? 'processing' : '') }}">
-                            <div class="card-body">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                <span>01</span>
-                                            </th>
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <span>สมาชิก</span>
-                                                        @foreach ($projectActive->members as $member)
-                                                            @if ($confirmStudents->where('id_student', $member->id_student)->where('id_document', 1)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $member->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $member->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ที่ปรึกษา</span>
-                                                        @foreach ($projectActive->advisers as $adviser)
-                                                            @if ($confirmTeachers->where('id_teacher', $adviser->id_teacher)->where('id_document', 1)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $adviser->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $adviser->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ประจำวิชา</span>
-                                                        @foreach ($teachers->where('user_type', 'Admin') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 1)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>หัวหน้าสาขา</span>
-                                                        @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 1)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                <div
+                                    class="card {{ $teacherConfirmed ? 'completed' : ($studentConfirmed ? 'processing' : '') }}">
+                                    <div class="card-body">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <span>01</span>
+                                                    </th>
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <span>สมาชิก</span>
+                                                                @foreach ($projectActive->members as $member)
+                                                                    @if ($confirmStudents->where('id_student', $member->id_student)->where('id_document', 1)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $member->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $member->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ที่ปรึกษา</span>
+                                                                @foreach ($projectActive->advisers as $adviser)
+                                                                    @if ($confirmTeachers->where('id_teacher', $adviser->id_teacher)->where('id_document', 1)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $adviser->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $adviser->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ประจำวิชา</span>
+                                                                @foreach ($teachers->where('user_type', 'Admin') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 1)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>หัวหน้าสาขา</span>
+                                                                @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 1)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- status 02 -->
+                            <a href="pdf/02/{{ $projectActive->id_project }}" target="_blank">
+                                @php
+                                    $studentConfirmed = $confirmStudents->where('id_document', 2)->first();
+                                    $teacherConfirmed =
+                                        $studentConfirmed &&
+                                        $confirmTeachers
+                                            ->where(
+                                                'id_teacher',
+                                                optional($teachers->where('user_type', 'Branch head')->first())
+                                                    ->id_teacher,
+                                            )
+                                            ->where('id_document', 2)
+                                            ->first();
+                                @endphp
+
+                                <div
+                                    class="card {{ $teacherConfirmed ? 'completed' : ($studentConfirmed ? 'processing' : '') }}">
+
+                                    <div class="card-body">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <span>02</span>
+                                                    </th>
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <span>สมาชิก</span>
+                                                                @foreach ($projectActive->members as $member)
+                                                                    @if ($confirmStudents->where('id_student', $member->id_student)->where('id_document', 2)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $member->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $member->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ที่ปรึกษา</span>
+                                                                @foreach ($projectActive->advisers->where('id_position', 1) as $adviser)
+                                                                    @if ($confirmTeachers->where('id_teacher', $adviser->id_teacher)->where('id_document', 2)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $adviser->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $adviser->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ประจำวิชา</span>
+                                                                @foreach ($teachers->where('user_type', 'Admin') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 2)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>หัวหน้าสาขา</span>
+                                                                @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 2)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- status 03 -->
+                            <a href="pdf/03/{{ $projectActive->id_project }}" target="_blank">
+                                @php
+                                    $directorConfirmed = $confirmTeachers
+                                        ->where('id_teacher', optional($directors->first())->id_teacher)
+                                        ->where('id_document', 3)
+                                        ->first();
+                                    $teacherConfirmed =
+                                        $directorConfirmed &&
+                                        $confirmTeachers
+                                            ->where(
+                                                'id_teacher',
+                                                optional($teachers->where('user_type', 'Branch head')->first())
+                                                    ->id_teacher,
+                                            )
+                                            ->where('id_document', 3)
+                                            ->first();
+                                @endphp
+                                <div
+                                    class="card {{ $teacherConfirmed ? 'completed' : ($directorConfirmed ? 'processing' : '') }}">
+                                    <div class="card-body">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <span>03</span>
+                                                    </th>
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <span>กรรมการ</span>
+                                                                @foreach ($directors->where('id_document', 3) as $director)
+                                                                    @if ($confirmTeachers->where('id_teacher', $director->id_teacher)->where('id_document', 3)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $director->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $director->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ประจำวิชา</span>
+                                                                @foreach ($teachers->where('user_type', 'Admin') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 3)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>หัวหน้าสาขา</span>
+                                                                @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 3)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- status 04 -->
+                            <a href="pdf/04/{{ $projectActive->id_project }}" target="_blank">
+                                @php
+                                    $studentConfirmed = $confirmStudents->where('id_document', 4)->first();
+                                    $teacherConfirmed =
+                                        $studentConfirmed &&
+                                        $confirmTeachers
+                                            ->where(
+                                                'id_teacher',
+                                                optional($teachers->where('user_type', 'Branch head')->first())
+                                                    ->id_teacher,
+                                            )
+                                            ->where('id_document', 4)
+                                            ->first();
+                                @endphp
+
+                                <div
+                                    class="card {{ $teacherConfirmed ? 'completed' : ($studentConfirmed ? 'processing' : '') }}">
+
+                                    <div class="card-body">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <span>04</span>
+                                                    </th>
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <span>สมาชิก</span>
+                                                                @foreach ($projectActive->members as $member)
+                                                                    @if ($confirmStudents->where('id_student', $member->id_student)->where('id_document', 4)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $member->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $member->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ที่ปรึกษา</span>
+                                                                @foreach ($projectActive->advisers as $adviser)
+                                                                    @if ($confirmTeachers->where('id_teacher', $adviser->id_teacher)->where('id_document', 4)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $adviser->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $adviser->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>กรรมการ</span>
+                                                                @foreach ($directors->where('id_document', 3) as $director)
+                                                                    @if ($confirmTeachers->where('id_teacher', $director->id_teacher)->where('id_document', 4)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $director->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $director->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ประจำวิชา</span>
+                                                                @foreach ($teachers->where('user_type', 'Admin') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 4)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>หัวหน้าสาขา</span>
+                                                                @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 4)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- status 05 -->
+                            <a href="pdf/05/{{ $projectActive->id_project }}" target="_blank">
+                                @php
+                                    $studentConfirmed = $confirmStudents->where('id_document', 5)->first();
+                                    $teacherConfirmed =
+                                        $studentConfirmed &&
+                                        $confirmTeachers
+                                            ->where(
+                                                'id_teacher',
+                                                optional($teachers->where('user_type', 'Branch head')->first())
+                                                    ->id_teacher,
+                                            )
+                                            ->where('id_document', 5)
+                                            ->first();
+                                @endphp
+
+                                <div
+                                    class="card {{ $teacherConfirmed ? 'completed' : ($studentConfirmed ? 'processing' : '') }}">
+
+                                    <div class="card-body">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <span>05</span>
+                                                    </th>
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <span>สมาชิก</span>
+                                                                @foreach ($projectActive->members as $member)
+                                                                    @if ($confirmStudents->where('id_student', $member->id_student)->where('id_document', 5)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $member->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $member->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ที่ปรึกษา</span>
+                                                                @foreach ($projectActive->advisers->where('id_position', 1) as $adviser)
+                                                                    @if ($confirmTeachers->where('id_teacher', $adviser->id_teacher)->where('id_document', 5)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $adviser->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $adviser->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ประจำวิชา</span>
+                                                                @foreach ($teachers->where('user_type', 'Admin') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 5)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>หัวหน้าสาขา</span>
+                                                                @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 5)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- status 06 -->
+                            <a href="pdf/06/{{ $projectActive->id_project }}" target="_blank">
+                                @php
+                                    $directorConfirmed = $confirmTeachers
+                                        ->where('id_teacher', optional($directors->first())->id_teacher)
+                                        ->where('id_document', 6)
+                                        ->first();
+                                    $teacherConfirmed =
+                                        $directorConfirmed &&
+                                        $confirmTeachers
+                                            ->where(
+                                                'id_teacher',
+                                                optional($teachers->where('user_type', 'Branch head')->first())
+                                                    ->id_teacher,
+                                            )
+                                            ->where('id_document', 6)
+                                            ->first();
+                                @endphp
+                                <div
+                                    class="card {{ $teacherConfirmed ? 'completed' : ($directorConfirmed ? 'processing' : '') }}">
+                                    <div class="card-body">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <span>06</span>
+                                                    </th>
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <span>กรรมการ</span>
+                                                                @foreach ($directors->where('id_document', 6) as $director)
+                                                                    @if ($confirmTeachers->where('id_teacher', $director->id_teacher)->where('id_document', 6)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $director->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $director->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ประจำวิชา</span>
+                                                                @foreach ($teachers->where('user_type', 'Admin') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 6)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>หัวหน้าสาขา</span>
+                                                                @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 6)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- status 07 -->
+                            <a href="pdf/07/{{ $projectActive->id_project }}" target="_blank">
+                                @php
+                                    $studentConfirmed = $confirmStudents->where('id_document', 7)->first();
+                                    $teacherConfirmed =
+                                        $studentConfirmed &&
+                                        $confirmTeachers
+                                            ->where(
+                                                'id_teacher',
+                                                optional($teachers->where('user_type', 'Branch head')->first())
+                                                    ->id_teacher,
+                                            )
+                                            ->where('id_document', 7)
+                                            ->first();
+                                @endphp
+
+                                <div
+                                    class="card {{ $teacherConfirmed ? 'completed' : ($studentConfirmed ? 'processing' : '') }}">
+
+                                    <div class="card-body">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <span>07</span>
+                                                    </th>
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <span>สมาชิก</span>
+                                                                @foreach ($projectActive->members as $member)
+                                                                    @if ($confirmStudents->where('id_student', $member->id_student)->where('id_document', 7)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $member->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $member->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ที่ปรึกษา</span>
+                                                                @foreach ($projectActive->advisers->where('id_position', 1) as $adviser)
+                                                                    @if ($confirmTeachers->where('id_teacher', $adviser->id_teacher)->where('id_document', 7)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $adviser->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $adviser->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>กรรมการ</span>
+                                                                @foreach ($directors->where('id_document', 7) as $director)
+                                                                    @if ($confirmTeachers->where('id_teacher', $director->id_teacher)->where('id_document', 7)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $director->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $director->teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>อาจารย์ประจำวิชา</span>
+                                                                @foreach ($teachers->where('user_type', 'Admin') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 7)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                            <li>
+                                                                <span>หัวหน้าสาขา</span>
+                                                                @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
+                                                                    @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 7)->first())
+                                                                        <div class="confirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="unconfirmed">
+                                                                            {{ $loop->iteration }}
+                                                                            <span class="tooltipText">
+                                                                                {{ $teacher->name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                    <!-- status 02 -->
-                    <a href="pdf/02/{{ $projectActive->id_project }}" target="_blank">
-                        @php
-                            $studentConfirmed = $confirmStudents->where('id_document', 2)->first();
-                            $teacherConfirmed =
-                                $studentConfirmed &&
-                                $confirmTeachers
-                                    ->where(
-                                        'id_teacher',
-                                        optional($teachers->where('user_type', 'Branch head')->first())->id_teacher,
-                                    )
-                                    ->where('id_document', 2)
-                                    ->first();
-                        @endphp
-
-                        <div
-                            class="card {{ $teacherConfirmed ? 'completed' : ($studentConfirmed ? 'processing' : '') }}">
-
-                            <div class="card-body">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                <span>02</span>
-                                            </th>
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <span>สมาชิก</span>
-                                                        @foreach ($projectActive->members as $member)
-                                                            @if ($confirmStudents->where('id_student', $member->id_student)->where('id_document', 2)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $member->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $member->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ที่ปรึกษา</span>
-                                                        @foreach ($projectActive->advisers->where('id_position', 1) as $adviser)
-                                                            @if ($confirmTeachers->where('id_teacher', $adviser->id_teacher)->where('id_document', 2)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $adviser->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $adviser->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ประจำวิชา</span>
-                                                        @foreach ($teachers->where('user_type', 'Admin') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 2)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>หัวหน้าสาขา</span>
-                                                        @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 2)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- status 03 -->
-                    <a href="pdf/03/{{ $projectActive->id_project }}" target="_blank">
-                        @php
-                            $directorConfirmed = $confirmTeachers
-                                ->where('id_teacher', optional($directors->first())->id_teacher)
-                                ->where('id_document', 3)
-                                ->first();
-                            $teacherConfirmed =
-                                $directorConfirmed &&
-                                $confirmTeachers
-                                    ->where(
-                                        'id_teacher',
-                                        optional($teachers->where('user_type', 'Branch head')->first())->id_teacher,
-                                    )
-                                    ->where('id_document', 3)
-                                    ->first();
-                        @endphp
-                        <div
-                            class="card {{ $teacherConfirmed ? 'completed' : ($directorConfirmed ? 'processing' : '') }}">
-                            <div class="card-body">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                <span>03</span>
-                                            </th>
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <span>กรรมการ</span>
-                                                        @foreach ($directors->where('id_document', 3) as $director)
-                                                            @if ($confirmTeachers->where('id_teacher', $director->id_teacher)->where('id_document', 3)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $director->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $director->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ประจำวิชา</span>
-                                                        @foreach ($teachers->where('user_type', 'Admin') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 3)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>หัวหน้าสาขา</span>
-                                                        @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 3)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- status 04 -->
-                    <a href="pdf/04/{{ $projectActive->id_project }}" target="_blank">
-                        @php
-                            $studentConfirmed = $confirmStudents->where('id_document', 4)->first();
-                            $teacherConfirmed =
-                                $studentConfirmed &&
-                                $confirmTeachers
-                                    ->where(
-                                        'id_teacher',
-                                        optional($teachers->where('user_type', 'Branch head')->first())->id_teacher,
-                                    )
-                                    ->where('id_document', 4)
-                                    ->first();
-                        @endphp
-
-                        <div
-                            class="card {{ $teacherConfirmed ? 'completed' : ($studentConfirmed ? 'processing' : '') }}">
-
-                            <div class="card-body">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                <span>04</span>
-                                            </th>
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <span>สมาชิก</span>
-                                                        @foreach ($projectActive->members as $member)
-                                                            @if ($confirmStudents->where('id_student', $member->id_student)->where('id_document', 4)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $member->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $member->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ที่ปรึกษา</span>
-                                                        @foreach ($projectActive->advisers as $adviser)
-                                                            @if ($confirmTeachers->where('id_teacher', $adviser->id_teacher)->where('id_document', 4)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $adviser->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $adviser->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>กรรมการ</span>
-                                                        @foreach ($directors->where('id_document', 3) as $director)
-                                                            @if ($confirmTeachers->where('id_teacher', $director->id_teacher)->where('id_document', 4)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $director->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $director->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ประจำวิชา</span>
-                                                        @foreach ($teachers->where('user_type', 'Admin') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 4)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>หัวหน้าสาขา</span>
-                                                        @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 4)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- status 05 -->
-                    <a href="pdf/05/{{ $projectActive->id_project }}" target="_blank">
-                        @php
-                            $studentConfirmed = $confirmStudents->where('id_document', 5)->first();
-                            $teacherConfirmed =
-                                $studentConfirmed &&
-                                $confirmTeachers
-                                    ->where(
-                                        'id_teacher',
-                                        optional($teachers->where('user_type', 'Branch head')->first())->id_teacher,
-                                    )
-                                    ->where('id_document', 5)
-                                    ->first();
-                        @endphp
-
-                        <div
-                            class="card {{ $teacherConfirmed ? 'completed' : ($studentConfirmed ? 'processing' : '') }}">
-
-                            <div class="card-body">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                <span>05</span>
-                                            </th>
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <span>สมาชิก</span>
-                                                        @foreach ($projectActive->members as $member)
-                                                            @if ($confirmStudents->where('id_student', $member->id_student)->where('id_document', 5)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $member->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $member->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ที่ปรึกษา</span>
-                                                        @foreach ($projectActive->advisers->where('id_position', 1) as $adviser)
-                                                            @if ($confirmTeachers->where('id_teacher', $adviser->id_teacher)->where('id_document', 5)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $adviser->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $adviser->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ประจำวิชา</span>
-                                                        @foreach ($teachers->where('user_type', 'Admin') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 5)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>หัวหน้าสาขา</span>
-                                                        @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 5)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- status 06 -->
-                    <a href="pdf/06/{{ $projectActive->id_project }}" target="_blank">
-                        @php
-                            $directorConfirmed = $confirmTeachers
-                                ->where('id_teacher', optional($directors->first())->id_teacher)
-                                ->where('id_document', 6)
-                                ->first();
-                            $teacherConfirmed =
-                                $directorConfirmed &&
-                                $confirmTeachers
-                                    ->where(
-                                        'id_teacher',
-                                        optional($teachers->where('user_type', 'Branch head')->first())->id_teacher,
-                                    )
-                                    ->where('id_document', 6)
-                                    ->first();
-                        @endphp
-                        <div
-                            class="card {{ $teacherConfirmed ? 'completed' : ($directorConfirmed ? 'processing' : '') }}">
-                            <div class="card-body">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                <span>06</span>
-                                            </th>
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <span>กรรมการ</span>
-                                                        @foreach ($directors->where('id_document', 6) as $director)
-                                                            @if ($confirmTeachers->where('id_teacher', $director->id_teacher)->where('id_document', 6)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $director->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $director->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ประจำวิชา</span>
-                                                        @foreach ($teachers->where('user_type', 'Admin') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 6)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>หัวหน้าสาขา</span>
-                                                        @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 6)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- status 07 -->
-                    <a href="pdf/07/{{ $projectActive->id_project }}" target="_blank">
-                        @php
-                            $studentConfirmed = $confirmStudents->where('id_document', 7)->first();
-                            $teacherConfirmed =
-                                $studentConfirmed &&
-                                $confirmTeachers
-                                    ->where(
-                                        'id_teacher',
-                                        optional($teachers->where('user_type', 'Branch head')->first())->id_teacher,
-                                    )
-                                    ->where('id_document', 7)
-                                    ->first();
-                        @endphp
-
-                        <div
-                            class="card {{ $teacherConfirmed ? 'completed' : ($studentConfirmed ? 'processing' : '') }}">
-
-                            <div class="card-body">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                <span>07</span>
-                                            </th>
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <span>สมาชิก</span>
-                                                        @foreach ($projectActive->members as $member)
-                                                            @if ($confirmStudents->where('id_student', $member->id_student)->where('id_document', 7)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $member->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $member->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ที่ปรึกษา</span>
-                                                        @foreach ($projectActive->advisers->where('id_position', 1) as $adviser)
-                                                            @if ($confirmTeachers->where('id_teacher', $adviser->id_teacher)->where('id_document', 7)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $adviser->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $adviser->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>กรรมการ</span>
-                                                        @foreach ($directors->where('id_document', 7) as $director)
-                                                            @if ($confirmTeachers->where('id_teacher', $director->id_teacher)->where('id_document', 7)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $director->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $director->teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>อาจารย์ประจำวิชา</span>
-                                                        @foreach ($teachers->where('user_type', 'Admin') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 7)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>หัวหน้าสาขา</span>
-                                                        @foreach ($teachers->where('user_type', 'Branch head') as $teacher)
-                                                            @if ($confirmTeachers->where('id_teacher', $teacher->id_teacher)->where('id_document', 7)->first())
-                                                                <div class="confirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @else
-                                                                <div class="unconfirmed">
-                                                                    {{ $loop->iteration }}
-                                                                    <span class="tooltipText">
-                                                                        {{ $teacher->name }}
-                                                                    </span>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </a>
+                    @else
+                        <p class="text-center">ไม่พบโปรเจค</p>
+                    @endif
                 </div>
             </div>
         </div>

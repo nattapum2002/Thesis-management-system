@@ -127,7 +127,7 @@
                                             <small>{{ $examSchedule->project->project_name_en }}</small>
                                         </td>
                                         <td>{{ $examSchedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}</td>
-                                        <td>{{ $directors->where('id_project', $examSchedule->id_project)->where('id_document', $examSchedule->id_document)->first()->position->position }}
+                                        {{-- <td>{{ $directors->where('id_project', $examSchedule->id_project)->where('id_document', $examSchedule->id_document)->first()->position->position }} --}}
                                         </td>
                                         <td></td>
                                     </tr>

@@ -1241,7 +1241,7 @@ footer div.footer-bottom {
             legend {
                 font-size: large;
                 font-weight: 500;
-                color: var(--grey-44-color);
+                color: var(--orange-color);
                 display: block;
                 padding-left: 2px;
                 padding-right: 2px;
@@ -1294,7 +1294,7 @@ footer div.footer-bottom {
             legend {
                 font-size: large;
                 font-weight: 500;
-                color: var(--grey-44-color);
+                color: var(--orange-color);
                 display: block;
                 padding-left: 2px;
                 padding-right: 2px;
@@ -1405,6 +1405,67 @@ footer div.footer-bottom {
             span.input-group-text {
                 width: 100%;
                 overflow-x: auto;
+            }
+        }
+    }
+}
+
+#document-head {
+    .card {
+        .card-body {
+            padding: 0px 15px;
+
+            fieldset {
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            legend {
+                font-size: large;
+                font-weight: 500;
+                color: var(--orange-color);
+                display: block;
+                padding-left: 2px;
+                padding-right: 2px;
+                margin-bottom: 2px;
+                border: none;
+            }
+
+            ul {
+                padding-left: 12px;
+                margin: 0;
+            }
+        }
+    }
+}
+
+#document-detail-01 {
+    .card {
+        .card-body {
+            padding: 0px 15px;
+
+            fieldset {
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            legend {
+                font-size: large;
+                font-weight: 500;
+                color: var(--orange-color);
+                display: block;
+                padding-left: 2px;
+                padding-right: 2px;
+                margin-bottom: 2px;
+                border: none;
+            }
+
+            ul {
+                padding-left: 12px;
+                margin: 0;
+
             }
         }
     }
