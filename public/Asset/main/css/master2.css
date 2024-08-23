@@ -1225,6 +1225,112 @@ footer div.footer-bottom {
 /* end dashboard member */
 
 /* create document */
+#member-manage-document {
+    .card {
+        border: 1px solid var(--grey-cc-color);
+
+        .card-body {
+            padding: 15px;
+
+            fieldset {
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            legend {
+                font-size: large;
+                font-weight: 500;
+                color: var(--grey-44-color);
+                display: block;
+                padding-left: 2px;
+                padding-right: 2px;
+                margin-bottom: 2px;
+                border: none;
+            }
+
+            ul {
+
+                padding-left: 12px;
+                margin: 0;
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    margin-bottom: 5px;
+
+                    i {
+                        font-size: 24px;
+                        padding-left: 2px;
+                    }
+
+                    .bxs-check-circle {
+                        color: var(--green-color);
+                    }
+
+                    .bxs-x-circle {
+                        color: var(--red-color);
+                    }
+                }
+            }
+        }
+    }
+}
+
+#teacher-manage-document {
+    .card {
+        border: 1px solid var(--grey-cc-color);
+
+        .card-body {
+            padding: 15px;
+
+            fieldset {
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            legend {
+                font-size: large;
+                font-weight: 500;
+                color: var(--grey-44-color);
+                display: block;
+                padding-left: 2px;
+                padding-right: 2px;
+                margin-bottom: 2px;
+                border: none;
+            }
+
+            ul {
+
+                padding-left: 12px;
+                margin: 0;
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    margin-bottom: 5px;
+
+                    i {
+                        font-size: 24px;
+                        padding-left: 2px;
+                    }
+
+                    .bxs-check-circle {
+                        color: var(--green-color);
+                    }
+
+                    .bxs-x-circle {
+                        color: var(--red-color);
+                    }
+                }
+            }
+        }
+    }
+}
+
 #createDocument01 {
 
     fieldset {

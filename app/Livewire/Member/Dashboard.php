@@ -50,7 +50,6 @@ class Dashboard extends Component
 
         $examCountDates = $examSchedules->where('exam_day', '>=', now())->Where('exam_time', '>', now())->first();
 
-
         $members = Member::with(['level', 'course', 'projects'])->get();
 
         $thesis = Dissertation_article::with(['project'])->get();

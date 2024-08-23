@@ -26,7 +26,7 @@
                             <div x-show="memberCount > 0">
                                 <button class="btn btn-danger" type="button"
                                     @click="if(memberCount > 0) {
-                                        $wire.removeMember(memberCount); 
+                                        $wire.removeMember(memberCount);
                                         memberCount--;
                                     }">ลบนักศึกษา</button>
                             </div>
@@ -295,7 +295,7 @@
                                     @click="if(memberCount < 4) memberCount++">เพิ่มนักศึกษา</button>
                                 <button class="btn btn-danger" type="button" x-show="memberCount > 0"
                                     @click="if(memberCount > 0) {
-                                        $wire.removeMember(memberCount); 
+                                        $wire.removeMember(memberCount);
                                         memberCount--;
                                     }">ลบนักศึกษา</button>
                             </div>
@@ -473,10 +473,10 @@
                                     </fieldset>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger"
-                                        data-bs-dismiss="modal">ยกเลิก</button>
                                     <button type="button" class="btn btn-success" data-bs-target="#alertModal"
                                         data-bs-toggle="modal" data-bs-dismiss="modal">ยืนยัน</button>
+                                    <button type="button" class="btn btn-danger"
+                                        data-bs-dismiss="modal">ยกเลิก</button>
                                 </div>
                             </div>
                         </div>
@@ -499,10 +499,10 @@
                                     และจะ<b>ไม่สามารถ</b>ย้อนกลับมาแก้ไขได้
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-danger" data-bs-target="#confirmModal"
-                                        data-bs-toggle="modal" data-bs-dismiss="modal">ยกเลิก</button>
                                     <button type="button" wire:click.prevent="confirmDocument"
                                         class="btn btn-success">ยืนยัน</button>
+                                    <button class="btn btn-danger" data-bs-target="#confirmModal"
+                                        data-bs-toggle="modal" data-bs-dismiss="modal">ยกเลิก</button>
                                 </div>
                             </div>
                         </div>
