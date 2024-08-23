@@ -416,8 +416,34 @@ class pdfGenerateController extends Controller
             $query->where('id_document', 3)->where('id_project', 11);
         })
             ->get();
+
+        $scores = Score::with([
+                'student',
+                'document',
+                'commentList',
+                'teacher',
+                'position'
+            ])->where('id_document', $documentId)
+                ->where('id_position', 3)->get();
+        $comments = Comment::with([
+                    'project',
+                    'document',
+                    'commentList',
+                    'teacher',
+                    'position'
+        ])->where('id_project', $projectID)->where('id_document', $documentId)->orderBy('created_at', 'asc')->get();
+
+        $projectscore = Project::with([
+            'members.course',
+            'members.level',
+            'teachers',
+            'confirmStudents.student',
+            'confirmStudents.documents',
+            'confirmTeachers.teacher',
+            'confirmTeachers.document'
+        ])->find($projectID);
         // dd($project);
-        $pdf = Pdf::loadView('Livewire_pdf.document_03_score',['projects' => $project]);
+        $pdf = Pdf::loadView('pdf.document03_score',['projects' => $project,'scores' => $scores,'comments' => $comments,'projectscore' => $projectscore]);
         return  $pdf->stream('test.pdf');
     }
 }

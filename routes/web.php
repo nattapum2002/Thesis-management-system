@@ -436,7 +436,11 @@ Route::get('document/05/{id_project}/{id_document}', function ($id_project, $id_
     return view('detail-document.detail_document_05', compact('id_project', 'id_document'));
 })->name('detail_document_05');
 
+Route::get('document/06/{id_project}/{id_document}', function ($id_project, $id_document) {
+    return view('detail-document.detail_document_06', compact('id_project', 'id_document'));
+})->name('detail_document_06');
 
 
 
-Route::get('/pdf-stream', [Document03::class, 'score_calculate'])->name('pdf.stream');
+
+Route::get('/pdf-stream', [Document03::class, 'print'])->name('pdf.stream');

@@ -68,6 +68,8 @@ class TeacherManageAllSubmitDocument extends Component
                 return redirect()->route('detail_document_04',['id_project' => $id_project , 'id_document' => $id_document]);
             case 5:
                 return redirect()->route('detail_document_05',['id_project' => $id_project , 'id_document' => $id_document]);
+            case 6:
+                return redirect()->route('detail_document_06',['id_project' => $id_project , 'id_document' => $id_document]);
 
             default:
                 // Redirect to a fallback route or handle the case where id_document is not recognized
