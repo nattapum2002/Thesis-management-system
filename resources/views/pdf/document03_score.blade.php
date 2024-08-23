@@ -100,7 +100,7 @@
                         <td>
                             <div>
                                 <span class="dotted">
-                                    {{$project->project_name_eng}}
+                                    {{$project->project_name_en}}
                                 </span>
                             </div>
                         </td>
@@ -110,38 +110,520 @@
             <div>
                 <div>2. ผลการสอบสิ้นสุดโครงงาน</div>
                 <table class="solid">
+                    @if ($scores->isNotEmpty())
                     <tr>
-                        <td style="width: 60%; text-align: left;">หัวข้อพิจารณา</td>
-                        <td style="width: 10%;">คะแนน</td>
-                        <td style="width: 10%;">คนที่ 1</td>
-                        <td style="width: 10%;">คนที่ 2</td>
-                        <td style="width: 10%;">คนที่ 3</td>
+                        <td>
+                            <div>หัวข้อพิจารณา</div>
+                        </td>
+                        <td>
+                            <div>คะแนน</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        <td>
+                            <div>คนที่ {{$loop->iteration}}</div>
+                        </td>
+                        @endforeach
                     </tr>
-                    {{-- @foreach ($criterias as $index => $criterion)
-                <tr>
-                    <td>{!! $criterion['name'] !!}</td>
-                    <td>{{ $criterion['score'] }}</td>
-                    <td>{{ $score_director_1[$index] ?? '' }}</td>
-                    <td>{{ $score_director_2[$index] ?? '' }}</td>
-                    <td>{{ $score_director_3[$index] ?? '' }}</td>
-                </tr>
-                @endforeach --}}
-                    {{-- <tr>
-                    <td style="text-align: right;">รวม</td>
-                    <td>100</td>
-                    <td>{{ $total_score_director_1 }}</td>
-                    <td>{{ $total_score_director_2 }}</td>
-                    <td>{{ $total_score_director_3 }}</td>
-                </tr> --}}
+                    <tr>
+                        <td>
+                            <div style="text-align: left;">1. บุคลิก ท่าทาง การวางตัวและความเชื่อมั่นในตนเอง</div>
+                        </td>
+                        <td>
+                            <div>5</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 20) as $score)
+                        <td>
+                            <div>{{$score->score != null ? $score->score : 0 }}</div>
+                        </td>
+                        @endforeach
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align: left;">2. การนำเสนอผลงาน</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        <td>
+                            <div> </div>
+                        </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">2.1 ไฟล์นำเสนอมีความสมบูรณ์</div>
+                        </td>
+                        <td>
+                            <div>10</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 21) as $score)
+                        <td>
+                            <div>{{$score->score != null ? $score->score : 0 }}</div>
+                        </td>
+                        @endforeach
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">2.2 ทักษะการใช้ภาษาเพื่อการสื่อสาร</div>
+                        </td>
+                        <td>
+                            <div>5</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 23) as $score)
+                        <td>
+                            <div>{{$score->score != null ? $score->score : 0 }}</div>
+                        </td>
+                        @endforeach
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align: left;">3. การตอบคำถาม ความรู้ ความเข้าใจในโครงงาน</div>
+                        </td>
+                        <td>
+                            <div>20</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 24) as $score)
+                        <td>
+                            <div>{{$score->score != null ? $score->score : 0 }}</div>
+                        </td>
+                        @endforeach
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align: left;">4. ความสมบูณ์ของเอกสารโครงงานฉบับร่าง</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        <td>
+                            <div> </div>
+                        </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">4.1 รูปแบบถูกต้องตามคู่มือจัดทำโครงงาน</div>
+                        </td>
+                        <td>
+                            <div>10</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 25) as $score)
+                        <td>
+                            <div>{{$score->score != null ? $score->score : 0 }}</div>
+                        </td>
+                        @endforeach
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">4.2 เนื้อหาครบถ้วน</div>
+                        </td>
+                        <td>
+                            <div>10</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 26) as $score)
+                        <td>
+                            <div>{{$score->score != null ? $score->score : 0 }}</div>
+                        </td>
+                        @endforeach
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align: left;">5. ความสำเร็จของโครงงานตาม</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        <td>
+                            <div> </div>
+                        </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">5.1 วัตถุประสงค์ของโครงงาน</div>
+                        </td>
+                        <td>
+                            <div>20</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 27) as $score)
+                        <td>
+                            <div>{{$score->score != null ? $score->score : 0 }}</div>
+                        </td>
+                        @endforeach
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">5.2 ขอบเขตของโครงงาน</div>
+                        </td>
+                        <td>
+                            <div>10</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 28) as $score)
+                        <td>
+                            <div>{{$score->score != null ? $score->score : 0 }}</div>
+                        </td>
+                        @endforeach
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">6. ความตรงต่อเวลา</div>
+                        </td>
+                        <td>
+                            <div>10</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 29) as $score)
+                        <td>
+                            <div>{{$score->score != null ? $score->score : 0 }}</div>
+                        </td>
+                        @endforeach
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>รวม</div>
+                        </td>
+                        <td>
+                            <div>100</div>
+                        </td>
+                        @foreach ($projectscore->members as $member)
+                        @php
+                        $sum = 0; // Initialize sum for each member
+                        @endphp
+                        @foreach ($scores->where('id_student', $member->id_student) as $score)
+                        @php
+                        $sum += $score->score;
+                        @endphp
+                        @endforeach
+                        <td>
+                            <div>{{ $sum != 0 ? $sum : ' ' }}</div>
+                        </td>
+                        @endforeach
+        
+                    </tr>
+                    @else
+                    <tr>
+                        <td>
+                            <div>หัวข้อพิจารณา</div>
+                        </td>
+                        <td>
+                            <div>คะแนน</div>
+                        </td>
+                        <td>
+                            <div>คนที่ 1</div>
+                        </td>
+                        <td>
+                            <div>คนที่ 2</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align: left;">1. บุคลิก ท่าทาง การวางตัวและความเชื่อมั่นในตนเอง</div>
+                        </td>
+                        <td>
+                            <div>5</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align: left;">2. การนำเสนอผลงาน</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">2.1 ไฟล์นำเสนอมีความสมบูรณ์</div>
+                        </td>
+                        <td>
+                            <div>5</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">
+                                2.2 สัดส่วนของเนื้อหาที่นำเสนอ
+                                <br>(ควรเน้นผลการทดลองและการอภิปรายผล)
+                            </div>
+                        </td>
+                        <td>
+                            <div>10</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">2.3 ทักษะการใช้ภาษาเพื่อการสื่อสาร</div>
+                        </td>
+                        <td>
+                            <div>5</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align: left;">3. การตอบคำถาม ความรู้ ความเข้าใจในโครงงาน</div>
+                        </td>
+                        <td>
+                            <div>20</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align: left;">4. ความสมบูณ์ของเอกสารโครงงานฉบับร่าง</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">4.1 รูปแบบถูกต้องตามคู่มือจัดทำโครงงาน</div>
+                        </td>
+                        <td>
+                            <div>10</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">4.2 เนื้อหาครบถ้วน</div>
+                        </td>
+                        <td>
+                            <div>10</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align: left;">5. ความสำเร็จของโครงงานตาม</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">5.1 วัตถุประสงค์ของโครงงาน</div>
+                        </td>
+                        <td>
+                            <div>20</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">5.2 ขอบเขตของโครงงาน</div>
+                        </td>
+                        <td>
+                            <div>10</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding-left: 1.8em; text-align: left;">6. ความตรงต่อเวลา</div>
+                        </td>
+                        <td>
+                            <div>10</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>รวม</div>
+                        </td>
+                        <td>
+                            <div>100</div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                        <td>
+                            <div> </div>
+                        </td>
+                    </tr>
+                    @endif
                 </table>
+                
             </div>
-            <div>
+            <div class="section">
                 <table>
                     <tr>
                         <td colspan="10">
                             <div>3. สรุปผลการสอบ</div>
                         </td>
                     </tr>
+                    @if ($comments->isNotEmpty())
+                    {{-- @foreach ($teachers as $teacher)
+                    @php
+                    $result = $comments->where('id_teacher', $teacher->id_teacher)->where('id_document',
+                    $documentId)->where('id_position', 3)->where('id_comment_list', 1)->first();
+                    $resultDetail = $comments->where('id_teacher', $teacher->id_teacher)->where('id_document',
+                    $documentId)->where('id_position', 3)->where('id_comment_list', 2)->first();
+                    @endphp
+                    @endforeach --}}
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td colspan="9">
+                            <div>
+                                <input type="checkbox" {{ isset($result) && $result->comment == 'ผ่าน' ?
+                                'checked' : '' }}>
+                                <label> ผ่าน</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="9">
+                            <div>
+                                <input type="checkbox" {{ isset($result) && $result->comment == 'ผ่าน/ แก้ไขใหม่'
+                                ?
+                                'checked' : '' }}>
+                                <label> ผ่าน/ แก้ไขใหม่</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="width: 1.8em"></td>
+                        <td colspan="2">
+                            <div>แก้ไข ดังนี้</div>
+                        </td>
+                        <td colspan="6">
+                            <div>
+                                @if (isset($resultDetail) && $result->comment == 'ผ่าน/ แก้ไขใหม่')
+                                <span class="dotted"> {{ $resultDetail->comment }} </span>
+                                @else
+                                .........................................................................................................................
+                                <br>.........................................................................................................................
+                                <br>.........................................................................................................................
+                                <br>.........................................................................................................................
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="9">
+                            <div>
+                                <input type="checkbox" {{ isset($result) && $result->comment == 'ไม่ผ่าน' ?
+                                'checked' : '' }}>
+                                <label> ไม่ผ่าน</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="width: 1.8em"></td>
+                        <td colspan="2">
+                            <div>เนื่องจาก</div>
+                        </td>
+                        <td colspan="6">
+                            <div>
+                                @if (isset($resultDetail) && $result->comment == 'ไม่ผ่าน')
+                                <span class="dotted"> {{ $resultDetail->comment }} </span>
+                                @else
+                                .........................................................................................................................
+                                <br>.........................................................................................................................
+                                <br>.........................................................................................................................
+                                <br>.........................................................................................................................
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    @else
                     <tr>
                         <td style="width: 1.8em"></td>
                         <td colspan="9">
@@ -199,68 +681,78 @@
                             </div>
                         </td>
                     </tr>
+                    @endif
                 </table>
             </div>
             <div>
                 <table>
-                    @foreach ( $project->confirmStudents as $teacher)
-                    
-                    <tr>
-                        <td colspan="2">
-                            <div>4. ลงชื่อคณะกรรมการสอบ</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="8">
-                            <div>
-                                ลงชื่อ ......................................... ประธานกรรมการ
-                                <br>( ............................................................. )
-                                <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="8">
-                            <div>
-                                ลงชื่อ ......................................... กรรมการ
-                                <br>( ............................................................. )
-                                <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="8">
-                            <div>
-                                ลงชื่อ ......................................... กรรมการ
-                                <br>( ............................................................. )
-                                <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="8">
-                            <div>
-                                ลงชื่อ ......................................... กรรมการและเลขานุการ (อาจารย์ที่ปรึกษา)
-                                <br>( ............................................................. )
-                                <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="width: 1.8em"></td>
-                        <td>
-                            <div class="signature">
-                                ลงชื่อ ......................................... อาจารย์ประจำวิชา
-                                <br>( ............................................................. )
-                                <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                            </div>
-                        </td>
-                    </tr>
-                        
-                    @endforeach
+                    @php
+                        $teachers = $project->confirmTeachers->unique('id_teacher')->where('confirm_status', 1)->first();
+                    @endphp
+                    @if ($teachers)
+                        <tr>
+                            <td colspan="2">
+                                <div>4. ลงชื่อคณะกรรมการสอบ</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <div>
+                                    ลงชื่อ
+                                    {{ $teachers->where('id_position', 5)->first()->teacher->name . ' ' . $teachers->where('id_position', 5)->first()->teacher->surname }}
+                                    ประธานกรรมการ
+                                    <br><span class="dotted">(
+                                        {{ $teachers->where('id_position', 5)->first()->teacher->prefix . ' ' . $teachers->where('id_position', 5)->first()->teacher->name . ' ' . $teachers->where('id_position', 5)->first()->teacher->surname }}
+                                        )</span>
+                                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                </div>
+                            </td>
+                        </tr>
+                        @foreach ($project->confirmTeachers->where('id_position', 6)->where('confirm_status', 1) as $directors)
+                            <tr>
+                                <td colspan="8">
+                                    <div>
+                                        ลงชื่อ {{ $directors->teacher->name . ' ' . $directors->teacher->surname }}
+                                        กรรมการ
+                                        <br>(<span
+                                            class="dotted">{{ $directors->teacher->prefix . ' ' . $directors->teacher->name . ' ' . $directors->teacher->surname }}</span>
+                                        )
+                                        <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td colspan="8">
+                                <div>
+                                    ลงชื่อ
+                                    {{ $teachers->where('id_position', 7)->first()->teacher->name . ' ' . $teachers->where('id_position', 7)->first()->teacher->surname }}
+                                    กรรมการและเลขานุการ (อาจารย์ที่ปรึกษา)
+                                    <br><span class="dotted">(
+                                        {{ $teachers->where('id_position', 7)->first()->teacher->prefix . ' ' . $teachers->where('id_position', 7)->first()->teacher->name . ' ' . $teachers->where('id_position', 5)->first()->teacher->surname }}
+                                        )</span>
+                                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="width: 2.8em"></td>
+                            <td>
+                                <div class="signature">
+                                    ลงชื่อ
+                                    {{ $teachers->where('id_position', 3)->first()->teacher->name . ' ' . $teachers->where('id_position', 3)->first()->teacher->surname }}
+                                    อาจารย์ประจำวิชา
+                                    <br>(<span
+                                        class="dotted">{{ $teachers->where('id_position', 3)->first()->teacher->name . ' ' . $teachers->where('id_position', 3)->first()->teacher->surname }}</span>
+                                    )
+                                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                </div>
+                            </td>
+                        </tr>
+                    @endif
                 </table>
             </div>
         @endforeach

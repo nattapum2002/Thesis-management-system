@@ -5,7 +5,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">ข้อที่</th>
+                        <th scope="col"></th>
                         <th scope="col">หัวข้อพิจารณา</th>
                         <th scope="col">คะแนน</th>
                         {{-- @dd($projects->confirmStudents) --}}
@@ -20,7 +20,7 @@
                 <tbody>
                     @foreach ($criterias as $key => $criterion)
                         <tr>
-                            <th scope="row">{{ $key + 1 }}</th>
+                            <th scope="row"></th>
                             <td>{!! $criterion['name'] !!}</td>
                             <td>{{ $criterion['score'] }}</td>
 
@@ -45,6 +45,27 @@
                             @endif
                         </tr>
                     @endforeach
+                    <tr>
+                        <td colspan="2">รวม</td>
+                        <td></td>
+                        @foreach ($this->score_student as $id_student => $scores)
+                            @php
+                                // กรองเอาคีย์ที่ต้องการข้ามออก
+                                $filteredScores = array_filter(
+                                    $scores,
+                                    function ($value, $key) {
+                                        return !in_array($key + 1, [2, 6, 9]); // ข้ามแถวที่ไม่ต้องการ
+                                    },
+                                    ARRAY_FILTER_USE_BOTH,
+                                );
+                                $numericScores = array_map('intval', $filteredScores);
+
+                                // รวมคะแนนที่เหลือหลังจากการแปลงเป็นตัวเลข
+                                $total = array_sum($numericScores);
+                            @endphp
+                            <td>{{ $total }}</td>
+                        @endforeach
+                    </tr>
                 </tbody>
             </table>
             <div>
@@ -75,7 +96,7 @@
             </div>
             <button class="btn btn-primary" type="submit">บันทึก</button>
             {{-- <a href="{{ route('pdf.stream') }}" target="_blank">View PDF</a> --}}
-            
+
         </form>
     </div>
 </div>
