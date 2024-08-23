@@ -49,15 +49,26 @@
                                     <h4>อาจารย์ที่ปรึกษา</h4>
                                     <div>
                                         @if ($projectActive)
-                                            @foreach ($projectActive->teachers as $teacher)
-                                                @if ($advisers->where('id_position', 1)->first()->id_teacher == $teacher->id_teacher)
-                                                    <p class="main-adviser">
-                                                        {{ $teacher->prefix . ' ' . $teacher->name . ' ' . $teacher->surname }}
-                                                    </p>
-                                                @else
-                                                    <p>{{ $teacher->prefix . ' ' . $teacher->name . ' ' . $teacher->surname }}
-                                                    </p>
-                                                @endif
+                                            @php
+                                                // จัดเรียง teachers ตาม id_position ใน advisers
+                                                $sortedTeachers = $projectActive->teachers->sortBy(function (
+                                                    $teacher,
+                                                ) use ($advisers) {
+                                                    return $advisers->firstWhere('id_teacher', $teacher->id_teacher)
+                                                        ->id_position ?? PHP_INT_MAX;
+                                                });
+                                            @endphp
+
+                                            @foreach ($sortedTeachers as $teacher)
+                                                @php
+                                                    $position =
+                                                        $advisers->firstWhere('id_teacher', $teacher->id_teacher)
+                                                            ->id_position ?? null;
+                                                @endphp
+
+                                                <p class="{{ $position == 1 ? 'main-adviser' : '' }}">
+                                                    {{ $teacher->prefix . ' ' . $teacher->name . ' ' . $teacher->surname }}
+                                                </p>
                                             @endforeach
                                         @else
                                             <p>ไม่พบอาจารย์ที่ปรึกษา</p>
@@ -112,82 +123,88 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4>กำหนดการสอบ</h4>
-                                    <div class="row gy-2 justify-content-center">
-                                        <div class="col-lg-2 col-md-6 col-sm-4">
-                                            <div class="examCountdown">
-                                                <span>
-                                                    <p id="days">0</p> วัน
-                                                </span>
+                                    @if ($examCountDates)
+                                        <div class="row gy-2 justify-content-center">
+                                            <div class="col-lg-2 col-md-6 col-sm-4">
+                                                <div class="examCountdown">
+                                                    <span>
+                                                        <p id="days">0</p> วัน
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-sm-4">
+                                                <div class="examCountdown">
+                                                    <span>
+                                                        <p id="hours">0</p> ชั่วโมง
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-sm-4">
+                                                <div class="examCountdown">
+                                                    <span>
+                                                        <p id="minutes">0</p> นาที
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-sm-4">
+                                                <div class="examCountdown">
+                                                    <span>
+                                                        <p id="seconds">0</p> วินาที
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2 col-md-6 col-sm-4">
-                                            <div class="examCountdown">
-                                                <span>
-                                                    <p id="hours">0</p> ชั่วโมง
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 col-md-6 col-sm-4">
-                                            <div class="examCountdown">
-                                                <span>
-                                                    <p id="minutes">0</p> นาที
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 col-md-6 col-sm-4">
-                                            <div class="examCountdown">
-                                                <span>
-                                                    <p id="seconds">0</p> วินาที
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <div class="col-12">
-                                            <div class="card card-table">
-                                                <div class="card-body table-responsive p-0">
-                                                    <table class="table text-nowrap">
-                                                        <tbody>
-                                                            @foreach ($examSchedules as $examSchedule)
+                                        <div class="row justify-content-center">
+                                            <div class="col-12">
+                                                <div class="card card-table">
+                                                    <div class="card-body table-responsive p-0">
+                                                        <table class="table text-nowrap">
+                                                            <tbody>
                                                                 <tr>
                                                                     <th>วันที่</th>
-                                                                    <td>{{ thaidate('j M Y', $examSchedule->exam_day) }}
+                                                                    <td>{{ thaidate('j M Y', $examCountDates->exam_day) }}
                                                                     </td>
                                                                     <th>เวลา</th>
                                                                     <td>
-                                                                        {{ thaidate('H:i น.', $examSchedule->exam_time) }}
+                                                                        {{ thaidate('H:i น.', $examCountDates->exam_time) }}
                                                                     </td>
                                                                     <td></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>ประเภท</th>
-                                                                    <td>{{ $examSchedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}
+                                                                    <td>{{ $examCountDates->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}
                                                                     </td>
                                                                     <th>ห้องสอบ</th>
-                                                                    <td>{{ $examSchedule->exam_room }}</td>
+                                                                    <td>{{ $examCountDates->exam_room }}</td>
                                                                     <td></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>อาคาร</th>
-                                                                    <td>{{ $examSchedule->exam_building }}</td>
+                                                                    <td>{{ $examCountDates->exam_building }}</td>
                                                                     <th>คณะ</th>
-                                                                    <td>{{ $examSchedule->exam_group }}</td>
+                                                                    <td>{{ $examCountDates->exam_group }}</td>
                                                                     <td></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>ปีการศึกษา</th>
-                                                                    <td>{{ $examSchedule->year_published }}</td>
+                                                                    <td>{{ $examCountDates->year_published }}</td>
                                                                     <th>ภาคเรียน</th>
-                                                                    <td>{{ $examSchedule->semester }}</td>
+                                                                    <td>{{ $examCountDates->semester }}</td>
                                                                     <td></td>
                                                                 </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @else
+                                        <div class="row justify-content-center">
+                                            <div class="col-12">
+                                                <p class="text-center">ไม่มีกำหนดการสอบ</p>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -1008,13 +1025,14 @@
         </div>
     </section>
 </div>
-{{-- 
+
 @script
     <script>
         const examCountdown = () => {
             // ดึงข้อมูลจาก Blade
-            const examDay = "{{ $examCountDates->exam_day }}"; // รูปแบบ YYYY-MM-DD
-            const examTime = "{{ $examCountDates->exam_time }}"; // รูปแบบ HH:MM:SS
+            const examDay =
+                "{{ $examCountDates->exam_day ?? now()->addMonth()->startOfMonth()->format('Y-m-d') }}"; // รูปแบบ YYYY-MM-DD
+            const examTime = "{{ $examCountDates->exam_time ?? '00:00:00' }}"; // รูปแบบ HH:MM:SS
 
             // สร้าง Date object โดยรวม examDay และ examTime เข้าด้วยกัน
             const countDateStr = `${examDay}T${examTime}Z`;
@@ -1041,4 +1059,4 @@
 
         setInterval(examCountdown, 1000);
     </script>
-@endscript --}}
+@endscript

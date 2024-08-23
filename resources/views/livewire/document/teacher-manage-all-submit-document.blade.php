@@ -1,5 +1,4 @@
-<div>
-    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
+{{-- <div>
     <div class="card">
         <div class="card-header">
             <h3 class="card-title"></h3>
@@ -45,11 +44,11 @@
                                                                 <li>
                                                                     {{ $confirmStudent->student->name }}
                                                                     {{ $confirmStudent->student->surname }}
-                                                                    {{-- @if ($confirmStudent->confirm_status == false)
+                                                                    @if ($confirmStudent->confirm_status == false)
                                                                 <span class="badge bg-danger">ยังไม่ตอบรับ</span>
                                                             @else
                                                                 <span class="badge bg-success">ตอบรับแล้ว</span>
-                                                            @endif --}}
+                                                            @endif
                                                                 </li>
                                                             @endforeach
                                                         </ul>
@@ -211,11 +210,11 @@
                                                                 <li>
                                                                     {{ $confirmStudent->student->name }}
                                                                     {{ $confirmStudent->student->surname }}
-                                                                    {{-- @if ($confirmStudent->confirm_status == false)
+                                                                     @if ($confirmStudent->confirm_status == false)
                                                                 <span class="badge bg-danger">ยังไม่ตอบรับ</span>
                                                             @else
                                                                 <span class="badge bg-success">ตอบรับแล้ว</span>
-                                                            @endif --}}
+                                                            @endif
                                                                 </li>
                                                             @endforeach
                                                         </ul>
@@ -308,7 +307,7 @@
                                                             @endforeach
                                                         </ul>
                                                     </div>
-                                                    {{-- <div class="col-md-3">
+                                                     <div class="col-md-3">
                                                 <label class="text-danger">หมายเหตุ : </label>
                                                 @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
                                                     <div>
@@ -320,7 +319,7 @@
                                                         @endforeach
                                                     </div>
                                                 @endforeach
-                                            </div> --}}
+                                            </div>
                                                     <div class="">
                                                         @php
                                                             $currentConfirmteacher = $projectItems->confirmTeachers->firstWhere(
@@ -374,11 +373,11 @@
                                                                 <li>
                                                                     {{ $confirmStudent->student->name }}
                                                                     {{ $confirmStudent->student->surname }}
-                                                                    {{-- @if ($confirmStudent->confirm_status == false)
+                                                                    @if ($confirmStudent->confirm_status == false)
                                                                 <span class="badge bg-danger">ยังไม่ตอบรับ</span>
                                                             @else
                                                                 <span class="badge bg-success">ตอบรับแล้ว</span>
-                                                            @endif --}}
+                                                            @endif
                                                                 </li>
                                                             @endforeach
                                                         </ul>
@@ -692,7 +691,7 @@
                                                 value="{{ $not_approve_project->project_name_th }}" disabled>
                                         </div>
                                     </div>
-                                    {{-- <div class="row">
+                                    <div class="row">
                                         <div class="col">
                                             <input type="checkbox" name=""
                                             wire:model="not_approve_comment1"    id=""><span>มีวุฒิทางการศึกษาไม่เป็นไปตามเกณฑ์</span><br>
@@ -701,7 +700,7 @@
                                             <input type="checkbox" name="" id="other_comment"
                                             wire:model="not_approve_comment3"    wire:click="$dispatch('toggleComment')"><span>อื่นๆ</span>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="mb-3" id="">
                                         <label for="message-text" class="col-form-label">หมายเหตุ:</label>
                                         <textarea class="form-control" wire:model="another_comment" id="message-text"></textarea>
@@ -719,4 +718,683 @@
             </div>
         </div>
     </div>
+</div> --}}
+
+<div>
+    <section id="teacher-manage-document">
+        @if (session('message'))
+            <div class="alert alert-success" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
+        <div class="row">
+            <div class="col-12 mb-2">
+                <input type="text" class="form-control" placeholder="ค้นหาบทความ..."
+                    wire:model.live.debounce.150ms="search">
+            </div>
+        </div>
+        @foreach ($projects as $projectItems)
+            @foreach ($projectItems->confirmteachers->groupBy('id_document') as $confirm_teacher)
+                @php
+                    // Filter the collection to get only those with the specified id_teacher
+                    $filteredConfirmTeachers = $confirm_teacher
+                        ->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                        ->groupBy('id_document')
+                        ->map(function ($teachers) {
+                            // Return the first teacher in each group
+                            return $teachers->first();
+                        });
+                @endphp
+                @if ($filteredConfirmTeachers->isNotEmpty())
+                    @foreach ($filteredConfirmTeachers as $documentId => $confirm_teachers)
+                        <div class="card">
+                            @switch($documentId)
+                                @case(3)
+                                    <div class="card-header">
+                                        <h5>
+                                            {{ 'คกท.-คง.-0' . $confirm_teachers->document->id_document . ' | ' . $confirm_teachers->document->document }}
+                                        </h5>
+                                        <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>สมาชิก</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmStudents->where('id_document', $documentId) as $confirmStudent)
+                                                            <li>
+                                                                {{ $confirmStudent->student->name . ' ' . $confirmStudent->student->surname }}
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>ที่ปรึกษาหลัก</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>ประธานกรรมการ</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 5)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>กรรมการ</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 6)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>กรรมการและเลขานุการ</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 7)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>หัวหน้าสาขา</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 4)->where('id_document', $documentId) as $confirmTeacher)
+                                                            <li>
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>อาจารย์ประจำวิชา</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 3)->where('id_document', $documentId) as $confirmTeacher)
+                                                            <li>
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12">
+                                                <fieldset>
+                                                    <legend>หมายเหตุ</legend>
+                                                    @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
+                                                        <div>
+                                                            @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
+                                                                <p class="text-danger">{{ $comment->comment }}</p>
+                                                                <p>โดย:
+                                                                    {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                                </p>
+                                                            @endforeach
+                                                        </div>
+                                                    @endforeach
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                @php
+                                                    $teacherId = Auth::guard('teachers')->user()->id_teacher;
+                                                    $confirmTeacher = $projectItems->confirmTeachers
+                                                        ->where('id_teacher', $teacherId)
+                                                        ->where('id_document', $documentId)
+                                                        ->first();
+                                                @endphp
+
+                                                @if ($confirmTeacher?->confirm_status == 1)
+                                                    <a class="btn btn-primary disabled" href="#" role="button"
+                                                        aria-disabled="true" style="pointer-events: none;">อนุมัติแล้ว</a>
+                                                @else
+                                                    <button class="btn btn-primary"
+                                                        wire:click="teacher_document({{ $confirmTeacher->id_document }}, {{ $projectItems->id_project }})"
+                                                        role="button">อนุมัติ
+                                                    </button>
+                                                @endif
+
+                                                @if (in_array($confirmTeacher?->id_position, [3, 4]))
+                                                    <button class="btn btn-primary"
+                                                        wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
+                                                        ตรวจสอบ
+                                                    </button>
+                                                @endif
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                @break
+
+                                @case(4)
+                                    <div class="card-header">
+                                        <h5>
+                                            {{ 'คกท.-คง.-0' . $confirm_teachers->document->id_document . ' | ' . $confirm_teachers->document->document }}
+                                        </h5>
+                                        <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>สมาชิก</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmStudents->where('id_document', $documentId) as $confirmStudent)
+                                                            <li>
+                                                                {{ $confirmStudent->student->name . ' ' . $confirmStudent->student->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $confirmStudent->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>ที่ปรึกษาหลัก</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>ที่ปรึกษาร่วม</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 2)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>ประธานกรรมการ</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 5)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>กรรมการ</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 6)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>กรรมการและเลขานุการ</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 7)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>หัวหน้าสาขา</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 4)->where('id_document', $documentId) as $confirmTeacher)
+                                                            <li>
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>อาจารย์ประจำวิชา</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 3)->where('id_document', $documentId) as $confirmTeacher)
+                                                            <li>
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12">
+                                                <fieldset>
+                                                    <legend>หมายเหตุ</legend>
+                                                    @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
+                                                        <div>
+                                                            @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
+                                                                <p class="text-danger">{{ $comment->comment }}</p>
+                                                                <p>โดย:
+                                                                    {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                                </p>
+                                                            @endforeach
+                                                        </div>
+                                                    @endforeach
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                @php
+                                                    $currentConfirmteacher = $projectItems->confirmTeachers->firstWhere(
+                                                        'id_teacher',
+                                                        Auth::guard('teachers')->user()->id_teacher,
+                                                    );
+                                                    $confirmTeacherStatus = $projectItems->confirmTeachers
+                                                        ->where(
+                                                            'id_teacher',
+                                                            Auth::guard('teachers')->user()->id_teacher,
+                                                        )
+                                                        ->where('id_document', $documentId)
+                                                        ->first()?->confirm_status;
+                                                @endphp
+
+                                                @if ($currentConfirmteacher)
+                                                    @if ($confirmTeacherStatus)
+                                                        <a class="btn btn-primary disabled" href="#" role="button"
+                                                            aria-disabled="true" style="pointer-events: none;">อนุมัติแล้ว</a>
+                                                    @else
+                                                        <button class="btn btn-primary"
+                                                            wire:click="teacher_document({{ $documentId }}, {{ $projectItems->id_project }})"
+                                                            role="button">อนุมัติ</button>
+                                                    @endif
+
+                                                    @if (in_array($currentConfirmteacher->id_position, [3, 4]))
+                                                        <button class="btn btn-primary"
+                                                            wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
+                                                            ตรวจสอบ
+                                                        </button>
+                                                        <button class="btn btn-danger"
+                                                            wire:click="not_approve({{ $documentId }}, {{ $projectItems->id_project }}, {{ $currentConfirmteacher->id_teacher }}, {{ $currentConfirmteacher->id_position }})"
+                                                            role="button">ไม่อนุมัติ</button>
+                                                    @endif
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @break
+
+                                @case(6)
+                                    <div class="card-header">
+                                        <h5>
+                                            {{ 'คกท.-คง.-0' . $confirm_teachers->document->id_document . ' | ' . $confirm_teachers->document->document }}
+                                        </h5>
+                                        <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>สมาชิก</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmStudents->where('id_document', $documentId) as $confirmStudent)
+                                                            <li>
+                                                                {{ $confirmStudent->student->name . ' ' . $confirmStudent->student->surname }}
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>ที่ปรึกษาหลัก</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>ประธานกรรมการ</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 5)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>กรรมการ</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 6)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>กรรมการและเลขานุการ</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 7)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>หัวหน้าสาขา</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 4)->where('id_document', $documentId) as $confirmTeacher)
+                                                            <li>
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>อาจารย์ประจำวิชา</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 3)->where('id_document', $documentId) as $confirmTeacher)
+                                                            <li>
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12">
+                                                <fieldset>
+                                                    <legend>หมายเหตุ</legend>
+                                                    @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
+                                                        <div>
+                                                            @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
+                                                                <p class="text-danger">{{ $comment->comment }}</p>
+                                                                <p>โดย:
+                                                                    {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                                </p>
+                                                            @endforeach
+                                                        </div>
+                                                    @endforeach
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                @php
+                                                    $teacherId = Auth::guard('teachers')->user()->id_teacher;
+                                                    $confirmTeacher = $projectItems->confirmTeachers
+                                                        ->where('id_teacher', $teacherId)
+                                                        ->where('id_document', $documentId)
+                                                        ->first();
+                                                @endphp
+
+                                                @if ($confirmTeacher?->confirm_status == 1)
+                                                    <a class="btn btn-primary disabled" href="#" role="button"
+                                                        aria-disabled="true" style="pointer-events: none;">อนุมัติแล้ว</a>
+                                                @else
+                                                    <button class="btn btn-primary"
+                                                        wire:click="teacher_document({{ $confirmTeacher?->id_document }}, {{ $projectItems->id_project }})"
+                                                        role="button">อนุมัติ
+                                                    </button>
+                                                @endif
+
+                                                @if (in_array($confirmTeacher?->id_position, [3, 4]))
+                                                    <button class="btn btn-primary"
+                                                        wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
+                                                        ตรวจสอบ
+                                                    </button>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @break
+
+                                @default
+                                    <div class="card-header">
+                                        <h5>
+                                            {{ 'คกท.-คง.-0' . $confirm_teachers->document->id_document . ' | ' . $confirm_teachers->document->document }}
+                                        </h5>
+                                        <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>สมาชิก</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmStudents->where('id_document', $documentId) as $confirmStudent)
+                                                            <li>
+                                                                {{ $confirmStudent->student->name . ' ' . $confirmStudent->student->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $confirmStudent->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <legend>ที่ปรึกษาหลัก</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>ที่ปรึกษาร่วม</legend>
+                                                    <ul>
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 2)->where('id_document', $documentId) as $teacherItems)
+                                                            <li>
+                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                <i
+                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-6 col-sm-12">
+                                                        <fieldset>
+                                                            <legend>หัวหน้าสาขา</legend>
+                                                            <ul>
+                                                                @foreach ($projectItems->confirmTeachers->where('id_position', 4)->where('id_document', $documentId) as $confirmTeacher)
+                                                                    <li>
+                                                                        {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                        <i
+                                                                            class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-6 col-sm-12">
+                                                        <fieldset>
+                                                            <legend>อาจารย์ประจำวิชา</legend>
+                                                            <ul>
+                                                                @foreach ($projectItems->confirmTeachers->where('id_position', 3)->where('id_document', $documentId) as $confirmTeacher)
+                                                                    <li>
+                                                                        {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                        <i
+                                                                            class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <fieldset>
+                                                    <legend class="text-danger">หมายเหตุ</legend>
+                                                    @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
+                                                        <div>
+                                                            @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
+                                                                <p class="text-danger">{{ $comment->comment }}</p>
+                                                                <p>โดย:
+                                                                    {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                                </p>
+                                                            @endforeach
+                                                        </div>
+                                                    @endforeach
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                @php
+                                                    $teacherId = Auth::guard('teachers')->user()->id_teacher;
+                                                    $confirmTeacher = $projectItems->confirmTeachers
+                                                        ->where('id_teacher', $teacherId)
+                                                        ->where('id_document', $documentId)
+                                                        ->first();
+                                                @endphp
+
+                                                @if ($confirmTeacher?->confirm_status == 1)
+                                                    <a class="btn btn-primary disabled" href="#" role="button"
+                                                        aria-disabled="true" style="pointer-events: none;">อนุมัติแล้ว</a>
+                                                @else
+                                                    <button class="btn btn-success"
+                                                        wire:click="teacher_document({{ $confirmTeacher->id_document }}, {{ $projectItems->id_project }})"
+                                                        role="button">อนุมัติ
+                                                    </button>
+                                                @endif
+
+                                                @if (in_array($confirmTeacher?->id_position, [3, 4]))
+                                                    <button class="btn btn-primary"
+                                                        wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
+                                                        ตรวจสอบ
+                                                    </button>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                            @endswitch
+                        </div>
+                    @endforeach
+                @endif
+            @endforeach
+        @endforeach
+        {{-- <form wire:submit.prevent="not_approve_confirmed">
+            <div class="modal fade" id="not_approveModal" tabindex="-1" aria-labelledby="not_approveModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">ไม่อนุมัติ</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row text-center mb-3">
+                                <div class="col-md-2">
+                                    <label for="documentInput" class="col-form-label">เอกสาร:</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="documentInput"
+                                        value="{{ $not_approve_document->document }}" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="documentInput" class="col-form-label text-center">กลุ่ม:
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="documentInput"
+                                        value="{{ $not_approve_project->project_name_th }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="checkbox" name="" wire:model="not_approve_comment1"
+                                        id=""><span>มีวุฒิทางการศึกษาไม่เป็นไปตามเกณฑ์</span><br>
+                                    <input type="checkbox" name="" wire:model="not_approve_comment2"
+                                        id=""><span>มีจำนวนนักศึกษาที่รับผิดชอบเกินเกณฑ์ที่กำหนดไว้</span><br>
+                                    <input type="checkbox" name="" id="other_comment"
+                                        wire:model="not_approve_comment3"
+                                        wire:click="$dispatch('toggleComment')"><span>อื่นๆ</span>
+                                </div>
+                            </div>
+                            <div class="mb-3" id="">
+                                <label for="message-text" class="col-form-label">หมายเหตุ:</label>
+                                <textarea class="form-control" wire:model="another_comment" id="message-text"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-orange">Send message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form> --}}
+    </section>
 </div>
