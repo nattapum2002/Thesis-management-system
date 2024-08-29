@@ -82,15 +82,15 @@
                 @foreach ($other_articles as $item)
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post">
-                            {{-- <a href="/detail_thesis/{{ $item->id_dissertation_article }}"> --}}
                             @if ($users->user_type == 'Admin')
-                                <a href="/admin/detail_thesis_login/{{ $item->id_dissertation_article }}">
+                                <a href="{{ route('admin.detail.thesis', $item->id_dissertation_article) }}">
                                 @elseif ($users->user_type == 'Branch head')
-                                    <a href="/branch-head/detail_thesis_login/{{ $item->id_dissertation_article }}">
+                                    <a href="{{ route('branch-head.detail.thesis', $item->id_dissertation_article) }}">
                                     @elseif ($users->user_type == 'Teacher')
-                                        <a href="/teacher/detail_thesis_login/{{ $item->id_dissertation_article }}">
+                                        <a href="{{ route('teacher.detail.thesis', $item->id_dissertation_article) }}">
                                         @else
-                                            <a href="/member/detail_thesis_login/{{ $item->id_dissertation_article }}">
+                                            <a
+                                                href="{{ route('member.detail.thesis', $item->id_dissertation_article) }}">
                             @endif
                             <p class="tag">{{ $item->type }}</p>
                             @if ($item->thesis_image == null)

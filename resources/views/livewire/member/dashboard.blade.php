@@ -9,12 +9,12 @@
                                 <div class="card-body">
                                     <h4>โปรเจคของนักศึกษา</h4>
                                     <div>
-                                        @if ($projectActive)
-                                            <p>{{ $projectActive->project_name_th }}</p>
-                                            <small>{{ $projectActive->project_name_en }}</small>
-                                        @else
-                                            <p>ไม่พบโปรเจค</p>
-                                            <a href="#" class="btn btn-orange mt-2">เพิ่มโปรเจค</a>
+                                        <p>{{ $projectActive->project_name_th ?? 'ไม่พบโปรเจค' }}</p>
+                                        <small>{{ $projectActive->project_name_en ?? '' }}</small>
+
+                                        @if (!$projectActive)
+                                            <a href="{{ route('member.create.document-01') }}"
+                                                class="btn btn-orange mt-2">เพิ่มโปรเจค</a>
                                         @endif
                                     </div>
                                 </div>
@@ -29,14 +29,13 @@
                                 <div class="card-body">
                                     <h4>สมาชิก</h4>
                                     <div>
-                                        @if ($projectActive)
-                                            @foreach ($projectActive->members as $member)
-                                                <p>{{ $member->prefix . ' ' . $member->name . ' ' . $member->surname }}
-                                                </p>
-                                            @endforeach
-                                        @else
-                                            <p>ไม่พบสมาชิก</p>
-                                        @endif
+                                        <p>
+                                            @forelse ($projectActive->members as $member)
+                                                {{ $member->prefix . ' ' . $member->name . ' ' . $member->surname }}<br>
+                                            @empty
+                                                ไม่พบสมาชิก
+                                            @endforelse
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +121,7 @@
                         <div class="exam">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4>กำหนดการสอบ</h4>
+                                    <h4>ตารางการสอบ</h4>
                                     @if ($examCountDates)
                                         <div class="row gy-2 justify-content-center">
                                             <div class="col-lg-2 col-md-6 col-sm-4">
@@ -201,7 +200,7 @@
                                     @else
                                         <div class="row justify-content-center">
                                             <div class="col-12">
-                                                <p class="text-center">ไม่มีกำหนดการสอบ</p>
+                                                <p class="text-center">ไม่มีการสอบ</p>
                                             </div>
                                         </div>
                                     @endif
@@ -217,7 +216,7 @@
                     @if ($projectActive)
                         <div>
                             <!-- status 01 -->
-                            <a href="pdf/01/{{ $projectActive->id_project }}" target="_blank">
+                            <a href="{{ route('pdf01Generate', $projectActive->id_project) }}" target="_blank">
                                 @php
                                     $studentConfirmed = $confirmStudents->where('id_document', 1)->first();
                                     $teacherConfirmed =
@@ -332,7 +331,7 @@
                                 </div>
                             </a>
                             <!-- status 02 -->
-                            <a href="pdf/02/{{ $projectActive->id_project }}" target="_blank">
+                            <a href="{{ route('pdf02Generate', $projectActive->id_project) }}" target="_blank">
                                 @php
                                     $studentConfirmed = $confirmStudents->where('id_document', 2)->first();
                                     $teacherConfirmed =
@@ -448,7 +447,7 @@
                                 </div>
                             </a>
                             <!-- status 03 -->
-                            <a href="pdf/03/{{ $projectActive->id_project }}" target="_blank">
+                            <a href="{{ route('pdf03Generate', $projectActive->id_project) }}" target="_blank">
                                 @php
                                     $directorConfirmed = $confirmTeachers
                                         ->where('id_teacher', optional($directors->first())->id_teacher)
@@ -545,7 +544,7 @@
                                 </div>
                             </a>
                             <!-- status 04 -->
-                            <a href="pdf/04/{{ $projectActive->id_project }}" target="_blank">
+                            <a href="{{ route('pdf04Generate', $projectActive->id_project) }}" target="_blank">
                                 @php
                                     $studentConfirmed = $confirmStudents->where('id_document', 4)->first();
                                     $teacherConfirmed =
@@ -681,7 +680,7 @@
                                 </div>
                             </a>
                             <!-- status 05 -->
-                            <a href="pdf/05/{{ $projectActive->id_project }}" target="_blank">
+                            <a href="{{ route('pdf05Generate', $projectActive->id_project) }}" target="_blank">
                                 @php
                                     $studentConfirmed = $confirmStudents->where('id_document', 5)->first();
                                     $teacherConfirmed =
@@ -797,7 +796,7 @@
                                 </div>
                             </a>
                             <!-- status 06 -->
-                            <a href="pdf/06/{{ $projectActive->id_project }}" target="_blank">
+                            <a href="{{ route('pdf06Generate', $projectActive->id_project) }}" target="_blank">
                                 @php
                                     $directorConfirmed = $confirmTeachers
                                         ->where('id_teacher', optional($directors->first())->id_teacher)
@@ -894,7 +893,7 @@
                                 </div>
                             </a>
                             <!-- status 07 -->
-                            <a href="pdf/07/{{ $projectActive->id_project }}" target="_blank">
+                            <a href="{{ route('pdf07Generate', $projectActive->id_project) }}" target="_blank">
                                 @php
                                     $studentConfirmed = $confirmStudents->where('id_document', 7)->first();
                                     $teacherConfirmed =

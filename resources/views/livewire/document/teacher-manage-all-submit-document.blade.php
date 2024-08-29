@@ -774,11 +774,11 @@
                                                 <fieldset>
                                                     <legend>ที่ปรึกษาหลัก</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -788,11 +788,11 @@
                                                 <fieldset>
                                                     <legend>ประธานกรรมการ</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 5)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 5)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -800,11 +800,11 @@
                                                 <fieldset>
                                                     <legend>กรรมการ</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 6)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 6)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -812,11 +812,11 @@
                                                 <fieldset>
                                                     <legend>กรรมการและเลขานุการ</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 7)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 7)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -830,7 +830,7 @@
                                                             <li>
                                                                 {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -842,7 +842,7 @@
                                                             <li>
                                                                 {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -851,16 +851,17 @@
                                             <div class="col-12">
                                                 <fieldset>
                                                     <legend>หมายเหตุ</legend>
-                                                    @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
-                                                        <div>
+                                                    <ul>
+                                                        @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
                                                             @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
-                                                                <p>{{ $comment->comment }}</p>
-                                                                <p>โดย:
-                                                                    {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
-                                                                </p>
+                                                                <li>
+                                                                    <span>
+                                                                        {{ $comment->comment . ' โดย ' . $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                                    </span>
+                                                                </li>
                                                             @endforeach
-                                                        </div>
-                                                    @endforeach
+                                                        @endforeach
+                                                    </ul>
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -928,11 +929,11 @@
                                                 <fieldset>
                                                     <legend>ที่ปรึกษาหลัก</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -940,11 +941,11 @@
                                                 <fieldset>
                                                     <legend>ที่ปรึกษาร่วม</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 2)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 2)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -954,11 +955,11 @@
                                                 <fieldset>
                                                     <legend>ประธานกรรมการ</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 5)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 5)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -966,11 +967,11 @@
                                                 <fieldset>
                                                     <legend>กรรมการ</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 6)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 6)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -978,11 +979,11 @@
                                                 <fieldset>
                                                     <legend>กรรมการและเลขานุการ</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 7)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 7)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -996,7 +997,7 @@
                                                             <li>
                                                                 {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -1008,7 +1009,7 @@
                                                             <li>
                                                                 {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -1017,16 +1018,17 @@
                                             <div class="col-12">
                                                 <fieldset>
                                                     <legend>หมายเหตุ</legend>
-                                                    @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
-                                                        <div>
+                                                    <ul>
+                                                        @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
                                                             @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
-                                                                <p>{{ $comment->comment }}</p>
-                                                                <p>โดย:
-                                                                    {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
-                                                                </p>
+                                                                <li>
+                                                                    <span>
+                                                                        {{ $comment->comment . ' โดย ' . $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                                    </span>
+                                                                </li>
                                                             @endforeach
-                                                        </div>
-                                                    @endforeach
+                                                        @endforeach
+                                                    </ul>
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -1051,7 +1053,7 @@
                                                         <a class="btn btn-primary disabled" href="#" role="button"
                                                             aria-disabled="true" style="pointer-events: none;">อนุมัติแล้ว</a>
                                                     @else
-                                                        <button class="btn btn-primary"
+                                                        <button class="btn btn-success"
                                                             wire:click="teacher_document({{ $documentId }}, {{ $projectItems->id_project }})"
                                                             role="button">อนุมัติ</button>
                                                     @endif
@@ -1096,11 +1098,11 @@
                                                 <fieldset>
                                                     <legend>ที่ปรึกษาหลัก</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -1110,11 +1112,11 @@
                                                 <fieldset>
                                                     <legend>ประธานกรรมการ</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 5)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 5)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -1122,11 +1124,11 @@
                                                 <fieldset>
                                                     <legend>กรรมการ</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 6)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 6)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -1134,11 +1136,11 @@
                                                 <fieldset>
                                                     <legend>กรรมการและเลขานุการ</legend>
                                                     <ul>
-                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 7)->where('id_document', $documentId) as $teacherItems)
+                                                        @foreach ($projectItems->confirmTeachers->where('id_position', 7)->where('id_document', $documentId) as $confirmTeacher)
                                                             <li>
-                                                                {{ $teacherItems->teacher->name . ' ' . $teacherItems->teacher->surname }}
+                                                                {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -1152,7 +1154,7 @@
                                                             <li>
                                                                 {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -1164,7 +1166,7 @@
                                                             <li>
                                                                 {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
                                                                 <i
-                                                                    class="bx bxs-{{ $teacherItems->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -1173,16 +1175,17 @@
                                             <div class="col-12">
                                                 <fieldset>
                                                     <legend>หมายเหตุ</legend>
-                                                    @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
-                                                        <div>
+                                                    <ul>
+                                                        @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
                                                             @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
-                                                                <p>{{ $comment->comment }}</p>
-                                                                <p>โดย:
-                                                                    {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
-                                                                </p>
+                                                                <li>
+                                                                    <span>
+                                                                        {{ $comment->comment . ' โดย ' . $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                                    </span>
+                                                                </li>
                                                             @endforeach
-                                                        </div>
-                                                    @endforeach
+                                                        @endforeach
+                                                    </ul>
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -1301,16 +1304,17 @@
                                             <div class="col-12">
                                                 <fieldset>
                                                     <legend>หมายเหตุ</legend>
-                                                    @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
-                                                        <div>
+                                                    <ul>
+                                                        @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
                                                             @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
-                                                                <p>{{ $comment->comment }}</p>
-                                                                <p>โดย:
-                                                                    {{ $comment->teacher->name . ' ' . $comment->teacher->surname }}
-                                                                </p>
+                                                                <li>
+                                                                    <span>
+                                                                        {{ $comment->comment . ' โดย ' . $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                                    </span>
+                                                                </li>
                                                             @endforeach
-                                                        </div>
-                                                    @endforeach
+                                                        @endforeach
+                                                    </ul>
                                                 </fieldset>
                                             </div>
                                         </div>

@@ -1228,6 +1228,7 @@ footer div.footer-bottom {
 #member-manage-document {
     .card {
         border: 1px solid var(--grey-cc-color);
+        margin-bottom: 5px;
 
         .card-body {
             padding: 15px;
@@ -1276,11 +1277,16 @@ footer div.footer-bottom {
             }
         }
     }
+
+    .card:last-child {
+        margin-bottom: 0;
+    }
 }
 
 #teacher-manage-document {
     .card {
         border: 1px solid var(--grey-cc-color);
+        margin-bottom: 5px;
 
         .card-body {
             padding: 15px;
@@ -1328,6 +1334,10 @@ footer div.footer-bottom {
                 }
             }
         }
+    }
+
+    .card:last-child {
+        margin-bottom: 0;
     }
 }
 
@@ -1449,6 +1459,158 @@ footer div.footer-bottom {
                 display: block;
                 padding: 10px;
                 border-radius: 10px;
+
+                .row {
+                    margin-bottom: 10px;
+                }
+            }
+
+            legend {
+                font-size: large;
+                font-weight: 500;
+                color: var(--orange-color);
+                display: block;
+                padding-left: 2px;
+                padding-right: 2px;
+                margin-bottom: 2px;
+                border: none;
+            }
+
+            ul {
+                padding-left: 12px;
+                margin: 0;
+
+            }
+        }
+    }
+}
+
+#document-detail-02 {
+    .card {
+        .card-body {
+            padding: 0px 15px;
+
+            fieldset {
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+
+                .row {
+                    padding-left: 12px;
+                    .input-group {
+                        margin-bottom: 5px;
+                    }
+                    margin-bottom: 5px;
+                }
+            }
+
+            legend {
+                font-size: large;
+                font-weight: 500;
+                color: var(--orange-color);
+                display: block;
+                padding-left: 2px;
+                padding-right: 2px;
+                margin-bottom: 2px;
+                border: none;
+            }
+
+            ul {
+                padding-left: 12px;
+                margin: 0;
+
+            }
+        }
+    }
+}
+
+#document-detail-03 {
+    .card {
+        .card-body {
+            padding: 0px 15px;
+
+            fieldset {
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+
+                .row {
+                    margin-bottom: 10px;
+                }
+            }
+
+            legend {
+                font-size: large;
+                font-weight: 500;
+                color: var(--orange-color);
+                display: block;
+                padding-left: 2px;
+                padding-right: 2px;
+                margin-bottom: 2px;
+                border: none;
+            }
+
+            ul {
+                padding-left: 12px;
+                margin: 0;
+
+            }
+        }
+    }
+}
+
+#document-detail-04 {
+    .card {
+        .card-body {
+            padding: 0px 15px;
+
+            fieldset {
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+
+                .row {
+                    margin-bottom: 10px;
+                }
+            }
+
+            legend {
+                font-size: large;
+                font-weight: 500;
+                color: var(--orange-color);
+                display: block;
+                padding-left: 2px;
+                padding-right: 2px;
+                margin-bottom: 2px;
+                border: none;
+            }
+
+            ul {
+                padding-left: 12px;
+                margin: 0;
+
+            }
+        }
+    }
+}
+
+#document-detail-05 {
+    .card {
+        .card-body {
+            padding: 0px 15px;
+
+            fieldset {
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+
+                .row {
+                    padding-left: 12px;
+                    .input-group {
+                        margin-bottom: 5px;
+                    }
+                    margin-bottom: 5px;
+                }
             }
 
             legend {

@@ -25,10 +25,10 @@ class TeacherManageAllSubmitDocument extends Component
                 'confirm_status' => true
             ]);
         Adviser::where('id_teacher', $id_teacher)
-        ->where('id_project', $id_project)
-        ->update([
-            'adviser_status' => 'active'
-        ]);
+            ->where('id_project', $id_project)
+            ->update([
+                'adviser_status' => 'active'
+            ]);
     }
     public function not_approve($id_document, $id_project, $id_teacher, $id_position)
     {
@@ -54,28 +54,29 @@ class TeacherManageAllSubmitDocument extends Component
             ->update([
                 'confirm_status' => false
             ]);
-        return redirect()->route('admin_approve_documents');
+        return redirect()->route('admin.approve.documents');
     }
-     public function document($id_document ,$id_project) {
+    public function document($id_document, $id_project)
+    {
         switch ($id_document) {
             case 1:
-                return redirect()->route('detail_document_01',['id_project' => $id_project , 'id_document' => $id_document]);
+                return redirect()->route('detail_document_01', ['id_project' => $id_project, 'id_document' => $id_document]);
             case 2:
-                return redirect()->route('detail_document_02',['id_project' => $id_project , 'id_document' => $id_document]);
+                return redirect()->route('detail_document_02', ['id_project' => $id_project, 'id_document' => $id_document]);
             case 3:
-                return redirect()->route('detail_document_03',['id_project' => $id_project , 'id_document' => $id_document]);
+                return redirect()->route('detail_document_03', ['id_project' => $id_project, 'id_document' => $id_document]);
             case 4:
-                return redirect()->route('detail_document_04',['id_project' => $id_project , 'id_document' => $id_document]);
+                return redirect()->route('detail_document_04', ['id_project' => $id_project, 'id_document' => $id_document]);
             case 5:
-                return redirect()->route('detail_document_05',['id_project' => $id_project , 'id_document' => $id_document]);
+                return redirect()->route('detail_document_05', ['id_project' => $id_project, 'id_document' => $id_document]);
             case 6:
-                return redirect()->route('detail_document_06',['id_project' => $id_project , 'id_document' => $id_document]);
+                return redirect()->route('detail_document_06', ['id_project' => $id_project, 'id_document' => $id_document]);
 
             default:
                 // Redirect to a fallback route or handle the case where id_document is not recognized
                 return dd(5555);
         }
-     }
+    }
     public function mount()
     {
         $this->not_approve_document = new Document(); // กำหนดค่าเริ่มต้น
@@ -95,7 +96,7 @@ class TeacherManageAllSubmitDocument extends Component
                 $query->where('id_teacher', Auth::guard('teachers')->user()->id_teacher);
             })
             ->get();
-            //  dd($projects);
+        //  dd($projects);
         return view('livewire.document.teacher-manage-all-submit-document', ['projects' => $projects]);
     }
 }

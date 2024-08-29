@@ -88,7 +88,7 @@ class CreateDocument extends Component
                     'confirm_status' => false,
                 ]);
             }
-           
+
             $header_teacher = Teacher::where('user_type', 'Branch head')->first();
             $headTeacher = Confirm_teacher::create([
                 'id_teacher' => $header_teacher->id_teacher,
@@ -132,7 +132,7 @@ class CreateDocument extends Component
 
         // session()->flash('message', 'Document created successfully!');
 
-        return redirect()->route('manage_document');
+        return redirect()->route('member.manage.document');
     }
 
     public function confirmTeacherDocument()

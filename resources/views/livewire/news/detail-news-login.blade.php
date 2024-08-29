@@ -58,15 +58,14 @@
                 @foreach ($other_news as $item)
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post">
-                            {{-- <a href="/detail_news/{{ $item->id_news }}"> --}}
                             @if ($users->user_type == 'Admin')
-                                <a href="/admin/detail_news_login/{{ $item->id_news }}">
+                                <a href="{{ route('admin.detail.news', $item->id_news) }}">
                                 @elseif ($users->user_type == 'Branch head')
-                                    <a href="/branch-head/detail_news_login/{{ $item->id_news }}">
+                                    <a href="{{ route('branch-head.detail.news', $item->id_news) }}">
                                     @elseif ($users->user_type == 'Teacher')
-                                        <a href="/teacher/detail_news_login/{{ $item->id_news }}">
+                                        <a href="{{ route('teacher.detail.news', $item->id_news) }}">
                                         @else
-                                            <a href="/member/detail_news_login/{{ $item->id_news }}">
+                                            <a href="{{ route('member.detail.news', $item->id_news) }}">
                             @endif
                             <p class="tag">{{ $item->type }}</p>
                             @if ($item->news_image == null)

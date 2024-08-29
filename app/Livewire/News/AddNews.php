@@ -144,9 +144,9 @@ class AddNews extends Component
     {
         $this->reset();
         $routes = [
-            'Branch head' => 'branchHeadManageNews',
-            'Admin' => 'adminManageNews',
-            'default' => 'teacherManageNews',
+            'Branch head' => 'branch-head.manage.news',
+            'Admin' => 'admin.manage.news',
+            'default' => 'teacher.manage.news',
         ];
         return redirect()->route($routes[Auth::guard('teachers')->user()->user_type] ?? $routes['default']);
     }

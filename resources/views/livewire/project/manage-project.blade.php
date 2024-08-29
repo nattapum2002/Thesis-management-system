@@ -78,14 +78,14 @@
                                             @php
                                                 $userType = Auth::guard('teachers')->user()->user_type;
                                                 $route = match ($userType) {
-                                                    'Admin' => 'admin',
-                                                    'Branch head' => 'branch-head',
-                                                    default => 'teacher',
+                                                    'Admin' => 'admin.detail.project',
+                                                    'Branch head' => 'branch-head.detail.project',
+                                                    default => 'teacher.detail.project',
                                                 };
                                             @endphp
 
                                             <a class="btn btn-orange btn-sm" style="float: right;"
-                                                href="/{{ $route }}/detail_project/{{ $project->id_project }}">รายละเอียด</a>
+                                                href="{{ route($route, $project->id_project) }}">รายละเอียด</a>
 
                                             <div class="dropdown" style="float: right;">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -97,7 +97,8 @@
                                                         <li><a class="dropdown-item"
                                                                 href="/pdf/{{ sprintf('%02d', $num) }}/{{ $project->id_project }}"
                                                                 target="_blank">เอกสาร
-                                                                คกท.-คง.-{{ sprintf('%02d', $num) }}</a></li>
+                                                                คกท.-คง.-{{ sprintf('%02d', $num) }}</a>
+                                                        </li>
                                                     @endforeach
                                                 </ul>
                                             </div>

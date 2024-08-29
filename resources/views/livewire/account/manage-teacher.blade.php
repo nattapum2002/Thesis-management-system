@@ -21,7 +21,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end">
-                        <a href="/admin/add_teacher" class="btn btn-success">เพิ่มบัญชีอาจารย์</a>
+                        <a href="{{ route('admin.add.teacher') }}" class="btn btn-success">เพิ่มบัญชีอาจารย์</a>
                     </div>
                 </div>
                 <div class="card-body table-responsive p-0">
@@ -94,7 +94,7 @@
                                             </a>
                                         @endif
 
-                                        <a href="/admin/approve_teacher/{{ $teacher->id_teacher }}"
+                                        <a href="{{ route('admin.approve.teacher', $teacher->id_teacher) }}"
                                             class="btn btn-orange"><i class='bx bx-detail'></i></a>
                                     </td>
                                 </tr>

@@ -10,7 +10,7 @@
                     <div class="icon">
                         <i class='bx bx-book'></i>
                     </div>
-                    <a href="/admin/manage_project" class="small-box-footer">
+                    <a href="{{ route('admin.manage.project') }}" class="small-box-footer">
                         รายละเอียดเพิ่มเติม
                         <i class='bx bxs-right-arrow'></i>
                     </a>
@@ -25,7 +25,7 @@
                     <div class="icon">
                         <i class='bx bx-loader'></i>
                     </div>
-                    <a href="/admin/manage_project" class="small-box-footer">
+                    <a href="{{ route('admin.manage.project') }}" class="small-box-footer">
                         รายละเอียดเพิ่มเติม
                         <i class='bx bxs-right-arrow'></i>
                     </a>
@@ -40,7 +40,7 @@
                     <div class="icon">
                         <i class='bx bx-check-circle'></i>
                     </div>
-                    <a href="/admin/manage_project" class="small-box-footer">
+                    <a href="{{ route('admin.manage.project') }}" class="small-box-footer">
                         รายละเอียดเพิ่มเติม
                         <i class='bx bxs-right-arrow'></i>
                     </a>
@@ -55,7 +55,7 @@
                     <div class="icon">
                         <i class='bx bx-x-circle'></i>
                     </div>
-                    <a href="/admin/manage_project" class="small-box-footer">
+                    <a href="{{ route('admin.manage.project') }}" class="small-box-footer">
                         รายละเอียดเพิ่มเติม
                         <i class='bx bxs-right-arrow'></i>
                     </a>
@@ -73,7 +73,7 @@
                             บัญชีสมาชิก
                         </div>
                         <div class="card-tools">
-                            <a class="tools-link" href="/admin/manage_member">
+                            <a class="tools-link" href="{{ route('admin.manage.member') }}">
                                 <span>จัดการบัญชีสมาชิก</span>
                                 <i class='bx bxs-right-arrow'></i>
                             </a>
@@ -95,7 +95,7 @@
                                     บทความปริญญานิพนธ์
                                 </div>
                                 <div class="card-tools">
-                                    <a class="tools-link" href="/admin/approve_thesis">
+                                    <a class="tools-link" href="{{ route('admin.approve.thesis') }}">
                                         <span>จัดการ...</span>
                                         <i class='bx bxs-right-arrow'></i>
                                     </a>
@@ -117,7 +117,7 @@
                                     ข่าวประชาสัมพันธ์
                                 </div>
                                 <div class="card-tools">
-                                    <a class="tools-link" href="/admin/approve_news">
+                                    <a class="tools-link" href="{{ route('admin.approve.news') }}">
                                         <span>จัดการ...</span>
                                         <i class='bx bxs-right-arrow'></i>
                                     </a>
@@ -141,7 +141,7 @@
                             บัญชีอาจารย์
                         </div>
                         <div class="card-tools">
-                            <a class="tools-link" href="/admin/manage_teacher">
+                            <a class="tools-link" href="{{ route('admin.manage.teacher') }}">
                                 <span>จัดการบัญชีอาจารย์</span>
                                 <i class='bx bxs-right-arrow'></i>
                             </a>
@@ -162,7 +162,7 @@
                             พิจารณาเอกสาร
                         </div>
                         <div class="card-tools">
-                            <a class="tools-link" href="/admin/approve_documents">
+                            <a class="tools-link" href="{{ route('admin.approve.documents') }}">
                                 <span>อนุมัติเอกสาร</span>
                                 <i class='bx bxs-right-arrow'></i>
                             </a>
@@ -226,11 +226,11 @@
                     <div class="card-header">
                         <div class="card-title">
                             <i class='bx bxs-calendar'></i>
-                            กำหนดการสอบ
+                            ตารางสอบ
                         </div>
                         <div class="card-tools">
-                            <a class="tools-link" href="/admin/manage_exam_schedule">
-                                <span>จัดการกำหนดการสอบ</span>
+                            <a class="tools-link" href="{{ route('admin.manage.exam.schedule') }}">
+                                <span>รายละเอียดตารางสอบ</span>
                                 <i class='bx bxs-right-arrow'></i>
                             </a>
                         </div>
@@ -284,7 +284,7 @@
                             กำหนดการเอกสาร
                         </div>
                         <div class="card-tools">
-                            <a class="tools-link" href="/admin/manage_document_schedule">
+                            <a class="tools-link" href="{{ route('admin.manage.document.schedule') }}">
                                 <span>จัดการกำหนดการเอกสาร</span>
                                 <i class='bx bxs-right-arrow'></i>
                             </a>
@@ -303,7 +303,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($documentSchedules as $documentSchedule)
-                                    <tr onclick="window.location.href='/admin/edit_and_detail_document_schedule/{{ $documentSchedule->id_submission }}'"
+                                    <tr onclick="window.location.href='{{ route('admin.edit.detail.document.schedule', $documentSchedule->id_submission) }}'"
                                         style="cursor:pointer;">
                                         <td></td>
                                         <td>{{ thaidate('j M Y', $documentSchedule->date_submission) }}</td>

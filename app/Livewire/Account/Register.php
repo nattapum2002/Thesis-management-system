@@ -60,7 +60,7 @@
 
 //         session()->flash('message', 'สมัครสมาชิกสำเร็จ!');
 
-//         return redirect()->route('login_member');
+//         return redirect()->route('login.member');
 //     }
 
 //     public function render()
@@ -166,7 +166,7 @@ class Register extends Component
 
         session()->flash('message', 'สมัครสมาชิกสำเร็จ!');
 
-        return redirect()->route('login_member');
+        return redirect()->route('login.member');
     }
 
     public function render()

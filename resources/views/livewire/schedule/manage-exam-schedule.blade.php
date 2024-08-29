@@ -3,15 +3,18 @@
         <div class="row">
             <div class="col-lg-6 col-md-12">
                 <div class="mb-2">
-                    <input type="text" class="form-control" placeholder="ค้นหากำหนดการสอบ..."
+                    <input type="text" class="form-control" placeholder="ค้นหาการสอบ..."
                         wire:model.live.debounce.150ms="search">
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="mb-2">
-                    <select class="form-select" wire:model.live.debounce.100ms="filterAdviser">
-                        <option value="ทั้งหมด">ทั้งหมด</option>
-                        <option value="1">ที่ปรึกษา</option>
+                    <select class="form-select" wire:model.live.debounce.100ms="filterDirector">
+                        @if (Auth::guard('teachers')->user()->user_type == 'Admin')
+                            <option value="ทั้งหมด">ทั้งหมด</option>
+                        @endif
+                        <option value="กรรมการ">เป็นกรรมการ</option>
+                        <option value="1">เป็นที่ปรึกษา</option>
                     </select>
                 </div>
             </div>
@@ -83,16 +86,17 @@
                                             <small>{{ $exam_schedule->project->project_name_en }}</small>
                                         </td>
                                         <td>
-
                                             @foreach ($directors->where('id_project', $exam_schedule->id_project)->sortBy('id_position') as $director)
-                                                @if ($director->id_position == 5)
-                                                    <p>{{ $director->teacher->prefix . ' ' . $director->teacher->name . ' ' . $director->teacher->surname }}
-                                                    </p>
-                                                @else
-                                                    <small>{{ $director->teacher->prefix . ' ' . $director->teacher->name . ' ' . $director->teacher->surname }}</small><br>
-                                                @endif
+                                                @php
+                                                    $name =
+                                                        $director->teacher->prefix .
+                                                        ' ' .
+                                                        $director->teacher->name .
+                                                        ' ' .
+                                                        $director->teacher->surname;
+                                                @endphp
+                                                {!! $director->id_position == 5 ? "<p>$name</p>" : "<small>$name</small><br>" !!}
                                             @endforeach
-
                                         </td>
                                         <td>
                                             <p>{{ $exam_schedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}</p>

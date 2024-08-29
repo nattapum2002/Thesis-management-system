@@ -79,7 +79,7 @@
                                                 class="btn btn-danger swalDefaultError"><i
                                                     class='bx bx-user-x'></i></button>
                                         @endif
-                                        <a href="/admin/approve_member/{{ $member->id_student }}"
+                                        <a href="{{ route('admin.approve.member', $member->id_student) }}"
                                             class="btn btn-orange"><i class='bx bx-detail'></i></a>
                                     </td>
                                 </tr>

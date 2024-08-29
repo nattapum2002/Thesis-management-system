@@ -155,7 +155,7 @@
 
     <div class="card">
         <div class="card-header d-flex justify-content-end">
-            <a href="/member/add_thesis" class="btn btn-success">เพิ่มบทความ</a>
+            <a href="{{ route('member.add.thesis') }}" class="btn btn-success">เพิ่มบทความ</a>
         </div>
         <div class="card-body table-responsive p-0">
             <table class="table text-nowrap table-striped">
@@ -187,7 +187,7 @@
                                     class="btn btn-{{ $thesis_detail->status == 1 ? 'success' : 'danger' }}">
                                     <i class='bx bxs-{{ $thesis_detail->status == 1 ? 'show' : 'hide' }}'></i>
                                 </a>
-                                <a href="/member/edit_and_detail_thesis/{{ $thesis_detail->id_dissertation_article }}"
+                                <a href="{{ route('member.edit.detail.thesis', $thesis_detail->id_dissertation_article) }}"
                                     class="btn btn-orange">
                                     <i class='bx bx-detail'></i>
                                 </a>

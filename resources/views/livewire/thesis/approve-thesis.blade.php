@@ -60,7 +60,7 @@
                                             <i
                                                 class='bx {{ $thesis_detail->status == '1' ? 'bxs-show' : 'bxs-hide' }}'></i>
                                         </a>
-                                        <a href="/admin/detail_approve_thesis/{{ $thesis_detail->id_dissertation_article }}"
+                                        <a href="{{ route('admin.detail.approve.thesis', $thesis_detail->id_dissertation_article) }}"
                                             class="btn btn-orange"><i class='bx bx-detail'></i></a>
                                     </td>
                                 </tr>

@@ -77,7 +77,7 @@
                 @foreach ($articles as $item)
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post">
-                            <a href="/detail_thesis/{{ $item->id_dissertation_article }}">
+                            <a href="{{ route('welcome.thesis.detail', $item->id_dissertation_article) }}">
                                 <p class="tag">{{ $item->type }}</p>
                                 @if ($item->thesis_image == null)
                                     <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"

@@ -89,10 +89,11 @@
                         <!-- button -->
                         <div class="group">
                             <button type="submit" class="btn btn-brand">เข้าสู่ระบบ</button>
-                            <button type="reset" class="btn" onclick="window.location.href='/'">ยกเลิก</button>
+                            <button type="reset" class="btn"
+                                onclick="window.location.href='{{ route('welcome') }}'">ยกเลิก</button>
                         </div>
 
-                        <p>ยังไม่มีบัญชี? <a href="/register">สมัครสมาชิก</a></p>
+                        <p>ยังไม่มีบัญชี? <a href="{{ route('register') }}">สมัครสมาชิก</a></p>
                     </form>
                 </div>
             </div>

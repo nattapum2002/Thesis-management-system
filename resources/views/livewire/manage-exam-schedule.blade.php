@@ -279,10 +279,9 @@
         </div>
     </div>
 
-    {{-- กำหนดการสอบ --}}
     <div class="card">
         <div class="container">
-            <h3>กำหนดการสอบ</h3>
+            <h3>ตารางสอบ</h3>
         </div>
         <div class="card-body">
             <table class="table">

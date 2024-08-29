@@ -14,7 +14,7 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-logo">
-                <a href="/branch-head">
+                <a href="{{ route('branch-head.dashboard') }}">
                     <div>
                         <img src="{{ asset('Asset/main/img/logo/RMUTI.png') }}" alt="RMUTI.png">
                     </div>
@@ -23,7 +23,7 @@
             </div>
             <hr>
             <div class="sidebar-user">
-                <a href="/branch-head/edit_branch_head">
+                <a href="{{ route('branch-head.edit.branch-head') }}">
                     <div class="image">
                         @if (Auth::guard('teachers')->user()->teacher_image == null)
                             <img src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}" alt="UserImage">
@@ -44,9 +44,9 @@
             <li class="sidebar-item">
                 <div class="sidebar-collapse">
                     <a href="#"
-                        class="sidebar-link has-dropdown collapsed{{ Request::is('branch-head/manage_project') || Request::is('branch-head/approve_documents_branch_head') ? 'off active' : '' }}"
+                        class="sidebar-link has-dropdown collapsed{{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Request::is('branch-head/approve_documents_branch_head') ? 'off active' : '' }}"
                         data-bs-target="#project" data-bs-toggle="collapse"
-                        aria-expanded="{{ Request::is('branch-head/manage_project') || Request::is('branch-head/approve_documents_branch_head') ? 'true' : 'false' }}">
+                        aria-expanded="{{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Request::is('branch-head/approve_documents_branch_head') ? 'true' : 'false' }}">
                         <div>
                             <i class='nav-icon bx bx-book'></i>
                             <span class="link-name">โปรเจค</span>
@@ -55,18 +55,18 @@
                     </a>
                 </div>
                 <ul id="project"
-                    class="sidebar-dropdown list-unstyled collapse {{ Request::is('branch-head/manage_project') || Request::is('branch-head/approve_documents_branch_head') ? 'show' : '' }}"
+                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Route::is('branch-head.approve.documents.branch-head') ? 'show' : '' }}"
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a class="sidebar-link {{ Request::is('branch-head/manage_project') ? 'active' : '' }}"
-                            href="/branch-head/manage_project">
+                        <a class="sidebar-link {{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') ? 'active' : '' }}"
+                            href="{{ route('branch-head.manage.project') }}">
                             <i class='nav-icon bx bx-circle'></i>
                             <span class="link-name">จัดการโปรเจค</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link {{ Request::is('branch-head/approve_documents_branch_head') ? 'active' : '' }}"
-                            href="/branch-head/approve_documents_branch_head">
+                        <a class="sidebar-link {{ Route::is('branch-head.approve.documents.branch-head') ? 'active' : '' }}"
+                            href="{{ route('branch-head.approve.documents.branch-head') }}">
                             <i class='nav-icon bx bx-circle'></i>
                             <span class="link-name">อนุมัติเอกสาร</span>
                         </a>
@@ -74,15 +74,22 @@
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link {{ Request::is('branch-head/edit_branch_head') ? 'active' : '' }}"
-                    href="/branch-head/edit_branch_head">
+                <a class="sidebar-link {{ Route::is('branch-head.manage.exam.schedule') ? 'active' : '' }}"
+                    href="{{ route('branch-head.manage.exam.schedule') }}">
+                    <i class='nav-icon bx bx-calendar-edit'></i>
+                    <span class="link-name">ตารางสอบ</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link {{ Route::is('branch-head.edit.branch-head') ? 'active' : '' }}"
+                    href="{{ route('branch-head.edit.branch-head') }}">
                     <i class='nav-icon bx bx-user'></i>
                     <span class="link-name">จัดการบัญชีผู้ใช้</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link {{ Request::is('branch-head/manage_news') ? 'active' : '' }}"
-                    href="/branch-head/manage_news">
+                <a class="sidebar-link {{ Route::is('branch-head.manage.news') || Route::is('branch-head.add.news') || Route::is('branch-head.edit.detail.news') ? 'active' : '' }}"
+                    href="{{ route('branch-head.manage.news') }}">
                     <i class='nav-icon bx bx-news'></i>
                     <span class="link-name">จัดการข่าวประชาสัมพันธ์</span>
                 </a>
@@ -99,15 +106,15 @@
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav ms-auto my-2 my-lg-0">
             <li class="navbar-item my-1">
-                <a href="/branch-head/menu_thesis_login"
-                    class="navbar-link {{ Request::is('branch-head/menu_thesis_login') ? 'active' : '' }}">
+                <a href="{{ route('branch-head.menu.thesis') }}"
+                    class="navbar-link {{ Route::is('branch-head.menu.thesis') || Route::is('branch-head.detail.thesis') ? 'active' : '' }}">
                     <i class='nav-icon bx bx-bookmarks'></i>
                     <span>บทความปริญญานิพนธ์</span>
                 </a>
             </li>
             <li class="navbar-item my-1">
-                <a href="/branch-head/menu_news_login"
-                    class="navbar-link {{ Request::is('branch-head/menu_news_login') ? 'active' : '' }}">
+                <a href="{{ route('branch-head.menu.news') }}"
+                    class="navbar-link {{ Route::is('branch-head.menu.news') || Route::is('branch-head.detail.news') ? 'active' : '' }}">
                     <i class='nav-icon bx bx-news'></i>
                     <span>ข่าวประชาสัมพันธ์</span>
                 </a>

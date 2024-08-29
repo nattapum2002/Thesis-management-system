@@ -13,7 +13,7 @@ use Livewire\Component;
 
 class CreateDocument04 extends Component
 {
-    public $selectProject, $members, $teachers , $project, $id_project = 'none';
+    public $selectProject, $members, $teachers, $project, $id_project = 'none';
 
     public function mount()
     {
@@ -35,14 +35,14 @@ class CreateDocument04 extends Component
                         return Member::firstOrCreate(['id_student' => $id_student])->id_student;
                     })
                     ->toArray();
-              
+
                 // $teacherIds = collect($this->teachers->pluck('id_teacher'))
                 //     ->filter() // กรองค่าที่ไม่ใช่ null
                 //     ->map(function ($id_teacher) {
                 //         return Teacher::firstOrCreate(['id_teacher' => $id_teacher])->id_teacher;
                 //     })
                 //     ->toArray();
-                
+
                 $admin_teacher = Teacher::where('user_type', 'Admin')->get();
                 foreach ($admin_teacher as $admin_teacher_items) {
                     $admin_teachers = Confirm_teacher::create([
@@ -73,13 +73,13 @@ class CreateDocument04 extends Component
                     ]);
                 }
                 $main_adviser = $this->project->first()->teachers->where('pivot.id_position', 1);
-                    Confirm_teacher::create([
-                        'id_teacher' => $main_adviser->first()->id_teacher,
-                        'id_document' => 4,
-                        'id_project' => $this->project->first()->id_project,
-                        'id_position' => 1,
-                        'confirm_status' => false,
-                    ]);
+                Confirm_teacher::create([
+                    'id_teacher' => $main_adviser->first()->id_teacher,
+                    'id_document' => 4,
+                    'id_project' => $this->project->first()->id_project,
+                    'id_position' => 1,
+                    'confirm_status' => false,
+                ]);
 
                 $sub_adviser = $this->project->first()->teachers->where('pivot.id_position', 2);
                 foreach ($sub_adviser as $sub_adviser_items) {
@@ -91,15 +91,15 @@ class CreateDocument04 extends Component
                         'confirm_status' => false,
                     ]);
                 }
-                
+
                 $main_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 5)->get();
-                    Confirm_teacher::create([
-                        'id_teacher' => $main_director->first()->id_teacher,
-                        'id_document' => 4,
-                        'id_project' => $this->project->first()->id_project,
-                        'id_position' => 5,
-                        'confirm_status' => false,
-                    ]);
+                Confirm_teacher::create([
+                    'id_teacher' => $main_director->first()->id_teacher ?? 8,
+                    'id_document' => 4,
+                    'id_project' => $this->project->first()->id_project,
+                    'id_position' => 5,
+                    'confirm_status' => false,
+                ]);
 
                 $sub_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 6)->get();
                 foreach ($sub_director as $sub_director_items) {
@@ -114,7 +114,7 @@ class CreateDocument04 extends Component
 
                 $sub_teacher = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 7)->get();
                 Confirm_teacher::create([
-                    'id_teacher' => $sub_teacher->first()->id_teacher,
+                    'id_teacher' => $sub_teacher->first()->id_teacher ?? 8,
                     'id_document' => 4,
                     'id_project' => $this->project->first()->id_project,
                     'id_position' => 7,
@@ -122,11 +122,10 @@ class CreateDocument04 extends Component
                 ]);
                 // dd($sub_teacher);
             });
-            return redirect()->route('manage_document');
-        }else{
+            return redirect()->route('member.manage.document');
+        } else {
             session()->flash('message', 'กรุณาเลือกโครงการก่อนกดปุ่มสร้าง');
         }
-       
     }
     function test()
     {
@@ -148,6 +147,6 @@ class CreateDocument04 extends Component
             $this->members = $this->project->first()->members;
             $this->teachers = $this->project->first()->teachers;
         }
-        return view('livewire.document.create-document04',['project' => $this->project]);
+        return view('livewire.document.create-document04', ['project' => $this->project]);
     }
 }

@@ -44,7 +44,7 @@
                             รายละเอียดที่ปรึกษา
                         </div>
                         <div class="card-tools">
-                            <a class="tools-link" href="/teacher/manage_project">
+                            <a class="tools-link" href="{{ route('teacher.manage.project') }}">
                                 <span>จัดการรายละเอียดที่ปรึกษา</span>
                                 <i class='bx bxs-right-arrow'></i>
                             </a>
@@ -94,11 +94,11 @@
                     <div class="card-header">
                         <div class="card-title">
                             <i class='bx bxs-calendar'></i>
-                            กำหนดการสอบ
+                            ตารางสอบ
                         </div>
                         <div class="card-tools">
-                            <a class="tools-link" href="/teacher/manage_exam_schedule">
-                                <span>จัดการกำหนดการสอบ</span>
+                            <a class="tools-link" href="{{ route('teacher.manage.exam.schedule') }}">
+                                <span>รายละเอียดตารางสอบ</span>
                                 <i class='bx bxs-right-arrow'></i>
                             </a>
                         </div>
@@ -127,7 +127,8 @@
                                             <small>{{ $examSchedule->project->project_name_en }}</small>
                                         </td>
                                         <td>{{ $examSchedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}</td>
-                                        {{-- <td>{{ $directors->where('id_project', $examSchedule->id_project)->where('id_document', $examSchedule->id_document)->first()->position->position }} --}}
+                                        <td>
+                                            {{ $directors->where('id_project', $examSchedule->id_project)->where('id_document', $examSchedule->id_document)->first()->position->position ?? '' }}
                                         </td>
                                         <td></td>
                                     </tr>

@@ -56,7 +56,7 @@
                                             <i
                                                 class='bx {{ $news_detail->status == '1' ? 'bxs-show' : 'bxs-hide' }}'></i>
                                         </a>
-                                        <a href="/admin/detail_approve_news/{{ $news_detail->id_news }}"
+                                        <a href="{{ route('admin.detail.approve.news', $news_detail->id_news) }}"
                                             class="btn btn-orange"><i class='bx bx-detail'></i></a>
                                     </td>
                                 </tr>

@@ -22,7 +22,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-end">
-                            <a href="/admin/add_document_schedule" class="btn btn-success">เพิ่มกำหนดการ</a>
+                            <a href="{{ route('admin.add.document.schedule') }}"
+                                class="btn btn-success">เพิ่มกำหนดการ</a>
                         </div>
                     </div>
                     <div class="card-body table-responsive p-0">
@@ -87,7 +88,7 @@
                                                     class="btn btn-danger"><i class='bx bxs-hide'></i></a>
                                             @endif
                                             <a class="btn btn-orange btn-sm"
-                                                href="/admin/edit_and_detail_document_schedule/{{ $document_schedule->id_submission }}">
+                                                href="{{ route('admin.edit.detail.document.schedule', $document_schedule->id_submission) }}">
                                                 <i class="bx bx-detail"></i>
                                             </a>
                                         </td>

@@ -6,7 +6,7 @@
                     <h3>รายละเอียดกลุ่มปริญญานิพนธ์</h3>
                 </div>
                 <div class="col-sm-5">
-                    <a class="btn btn-success" href="">เพิ่มเอกสาร 01</a>
+                    <a class="btn btn-success" href="{{ route('member.create.document-01') }}">เพิ่มเอกสาร 01</a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,8 @@
                             <td>{{ $projectItems->project_name_th }} <br> {{ $projectItems->project_name_en }}</td>
                             <td>
                                 @foreach ($projectItems->members as $memberItems)
-                                    {{ $memberItems->name }} {{ $memberItems->surname }} {{ $memberItems->course->course}}<br>
+                                    {{ $memberItems->name }} {{ $memberItems->surname }}
+                                    {{ $memberItems->course->course }}<br>
                                 @endforeach
                             </td>
                             <td>
