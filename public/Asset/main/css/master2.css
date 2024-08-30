@@ -656,80 +656,14 @@ p.page-number {
 }
 /* end section-small-boxs */
 
-/* section-admin-chart */
+/* section-admin-chart และ section-teacher-chart */
 
-#admin-chart {
-    padding: 10px 0px;
-}
-
-#admin-chart .card {
-    border-radius: 5px;
-    border: none;
-    container-type: inline-size;
-    container-name: container-chart;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#admin-chart .card .card-header {
-    border: none;
-    display: flex;
-    background-color: transparent;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#admin-chart .card .card-header .card-title {
-    font-weight: 500;
-    font-size: 20px;
-    color: var(--grey-1e-color);
-    margin: 0px;
-    color: var(--orange-color);
-    display: flex;
-    align-items: center;
-}
-
-#admin-chart .card .card-header .card-title i {
-    padding-right: 5px;
-}
-
-#admin-chart .card .card-header .card-tools a.tools-link {
-    color: var(--grey-1e-color);
-    display: flex;
-    align-items: center;
-}
-
-#admin-chart .card .card-header .card-tools a.tools-link:hover {
-    color: var(--orange-color);
-    border-bottom: var(--orange-color) 2px solid;
-}
-
-#admin-chart .card .card-header .card-tools i {
-    padding-left: 5px;
-}
-
-#admin-chart .card .card-body {
-    padding: 0px;
-}
-
-#memberChart {
-    max-height: 450px;
-    min-height: 450px;
-    padding: 10px;
-}
-
-#thesisChart, #newsChart, #teacherChart, #confirmChart {
-    max-height: 300px;
-    padding: 10px;
-}
-
-/* end section-admin-chart */
-
-/* section-teacher-chart */
-
+#admin-chart,
 #teacher-chart {
     padding: 10px 0px;
 }
 
+#admin-chart .card,
 #teacher-chart .card {
     border-radius: 5px;
     border: none;
@@ -738,6 +672,7 @@ p.page-number {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+#admin-chart .card .card-header,
 #teacher-chart .card .card-header {
     border: none;
     display: flex;
@@ -746,45 +681,55 @@ p.page-number {
     justify-content: space-between;
 }
 
+#admin-chart .card .card-header .card-title,
 #teacher-chart .card .card-header .card-title {
     font-weight: 500;
     font-size: 20px;
-    color: var(--grey-1e-color);
-    margin: 0px;
     color: var(--orange-color);
+    margin: 0px;
     display: flex;
     align-items: center;
 }
 
+#admin-chart .card .card-header .card-title i,
 #teacher-chart .card .card-header .card-title i {
     padding-right: 5px;
 }
 
+#admin-chart .card .card-header .card-tools a.tools-link,
 #teacher-chart .card .card-header .card-tools a.tools-link {
     color: var(--grey-1e-color);
     display: flex;
     align-items: center;
 }
 
+#admin-chart .card .card-header .card-tools a.tools-link:hover,
 #teacher-chart .card .card-header .card-tools a.tools-link:hover {
     color: var(--orange-color);
     border-bottom: var(--orange-color) 2px solid;
 }
 
+#admin-chart .card .card-header .card-tools i,
 #teacher-chart .card .card-header .card-tools i {
     padding-left: 5px;
 }
 
+#admin-chart .card .card-body,
 #teacher-chart .card .card-body {
     padding: 0px;
 }
 
+#memberChart,
 #adviserChart {
     max-height: 450px;
     min-height: 450px;
     padding: 10px;
 }
 
+#thesisChart,
+#newsChart,
+#teacherChart,
+#confirmChart,
 #directorChart {
     max-height: 300px;
     padding: 10px;

@@ -300,12 +300,15 @@
                         @endif
                     </tr>
                     <tr>
-                        <th>ไอดีไลน์</th>
+                        <th>LINE UserID</th>
                         @if ($toggle['id_line'])
                             <td>
                                 <div class="input-field">
-                                    <input class="form-input" wire:model="id_line" type="text"
-                                        placeholder="กรุณากรอกไอดีไลน์" required>
+                                    {{-- <input class="form-input" wire:model="id_line" type="text"
+                                        placeholder="กรุณากรอกไอดีไลน์" required> --}}
+                                    <a href="{{ route('line.login') }}" class="btn btn-success">
+                                        LINE Login
+                                    </a>
                                     @error('id_line')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -313,7 +316,7 @@
                             </td>
                             <td>
                                 <div class="button-container">
-                                    <button class="btn btn-success" wire:click="save('id_line')">บันทึก</button>
+                                    {{-- <button class="btn btn-success" wire:click="save('id_line')">บันทึก</button> --}}
                                     <button class="btn btn-danger" wire:click="cancel('id_line')">ยกเลิก</button>
                                 </div>
                             </td>

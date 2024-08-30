@@ -142,7 +142,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 
-class EditAnddetailThesis extends Component
+class EditAndDetailThesis extends Component
 {
     use WithFileUploads;
 

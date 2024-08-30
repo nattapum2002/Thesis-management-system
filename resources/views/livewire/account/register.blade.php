@@ -291,7 +291,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row justify-content-center">
+                    {{-- <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <div class="input-group">
                                 <label class="input-group-text" for="id_line">ID Line</label>
@@ -302,7 +302,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <div class="input-group">

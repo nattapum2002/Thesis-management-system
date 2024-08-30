@@ -55,7 +55,7 @@
                     </a>
                 </div>
                 <ul id="project"
-                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Route::is('branch-head.approve.documents.branch-head') ? 'show' : '' }}"
+                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Route::is('branch-head.approve.documents') ? 'show' : '' }}"
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item">
                         <a class="sidebar-link {{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') ? 'active' : '' }}"
@@ -65,8 +65,8 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link {{ Route::is('branch-head.approve.documents.branch-head') ? 'active' : '' }}"
-                            href="{{ route('branch-head.approve.documents.branch-head') }}">
+                        <a class="sidebar-link {{ Route::is('branch-head.approve.documents') ? 'active' : '' }}"
+                            href="{{ route('branch-head.approve.documents') }}">
                             <i class='nav-icon bx bx-circle'></i>
                             <span class="link-name">อนุมัติเอกสาร</span>
                         </a>

@@ -45,7 +45,7 @@ class MembersSeeder extends Seeder
                 'email' => 'student' . $i . '@example.com',
                 'email_verified_at' => now(),
                 'tel' => '081234567' . str_pad($i, 2, '0', STR_PAD_LEFT),
-                'id_line' => 'line' . $i,
+                'id_line' => null,
                 'student_image' => $path_member_img,
                 'id_level' => $level,
                 'id_course' => $course,

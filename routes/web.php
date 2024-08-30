@@ -22,6 +22,7 @@ use App\Http\Controllers\DocumentSubmissionScheduleController;
 use App\Http\Controllers\ExamScheduleController;
 use App\Http\Controllers\pdfGenerateController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\LineController;
 use App\Livewire\DocumentDetail\Document03;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,11 @@ Route::resource('directors', DirectorController::class);
 Route::resource('document-submission-schedules', DocumentSubmissionScheduleController::class);
 Route::resource('exam-schedules', ExamScheduleController::class);
 Route::resource('scores', ScoreController::class);
+
+Route::get('/Line/Login', [LineController::class, 'redirectToLineLogin'])->name('line.login');
+Route::get('/Line/Callback', [LineController::class, 'handleLineCallback'])->name('line.callback');
+Route::get('/Line/Send-Message/{userId}/{message}', [LineController::class, 'sendMessage'])->name('send.message');
+
 
 //Welcome
 
@@ -285,7 +291,7 @@ Route::prefix('Branch-head')->group(function () {
     Route::view('/Manage-project', 'branch-head.manage_project')->name('branch-head.manage.project');
     Route::view('/Manage-project/{projectId}', 'branch-head.detail_project')->name('branch-head.detail.project');
 
-    Route::view('/Approve-documents', 'branch-head.approve_documents_branch_head')->name('branch-head.approve.documents.branch-head');
+    Route::view('/Approve-documents', 'branch-head.approve_documents_branch_head')->name('branch-head.approve.documents');
 
     Route::view('/Exam-schedule', 'branch-head.manage_exam_schedule')->name('branch-head.manage.exam.schedule');
 

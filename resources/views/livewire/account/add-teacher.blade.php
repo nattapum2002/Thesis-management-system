@@ -155,7 +155,7 @@
                         </td>
                         <td></td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <th>ไอดีไลน์</th>
                         <td>
                             <div class="input-field">
@@ -167,7 +167,7 @@
                             @enderror
                         </td>
                         <td></td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th>ชื่อผู้ใช้</th>
                         <td>

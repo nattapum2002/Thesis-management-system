@@ -21,7 +21,6 @@ class MemberManageDocument extends Component
     }
     public function render()
     {
-
         $projects = Project::with([
             'confirmStudents.student',
             'confirmStudents.documents',

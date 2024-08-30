@@ -111,7 +111,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class EditAnddetailNews extends Component
+class EditAndDetailNews extends Component
 {
     use WithFileUploads;
 

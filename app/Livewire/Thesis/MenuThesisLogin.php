@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\thesis;
+namespace App\Livewire\Thesis;
 
 use App\Models\Dissertation_article;
 use App\Models\Member;
@@ -10,7 +10,7 @@ use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
-class MenuthesisLogin extends Component
+class MenuThesisLogin extends Component
 {
     use WithPagination;
 
