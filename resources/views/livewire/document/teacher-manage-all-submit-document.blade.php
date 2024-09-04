@@ -1215,6 +1215,9 @@
                                                         ตรวจสอบ
                                                     </button>
                                                 @endif
+                                                    <button class="btn btn-primary" wire:click="create_document_07({{$projectItems->id_project}})">
+                                                        สร้างเอกสาร 07 
+                                                    </button>
                                             </div>
                                         </div>
                                     </div>

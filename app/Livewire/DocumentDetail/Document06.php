@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Score;
 use App\Models\Student_project;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Document06 extends Component
@@ -29,34 +30,41 @@ class Document06 extends Component
     ];
     public function score_calculate()
     {
-        $transformedData = array_map(function ($key, $value) {
-            return [
-                'student_id' => $key,
-                'scores' => $value
-            ];
-        }, array_keys($this->score_student), $this->score_student);
-
-        foreach ($transformedData as $index => $value) {
-            // Reset comment list ID for each new student
-            $current_comment_list_id = 20;
-
-            foreach ($value['scores'] as $scoreIndex => $score) {
+        DB::transaction(function () {
+            $transformedData = array_map(function ($key, $value) {
+                $filteredScores = array_filter($value, function ($score) {
+                    return !is_null($score); // Keep only non-null values
+                });
+            
+                return [
+                    'student_id' => $key,
+                    'scores' => $filteredScores
+                ];
+            }, array_keys($this->score_student), $this->score_student);
     
-                // Create a record for each score
-                Score::create([
-                    'id_student' => $value['student_id'],
-                    'id_document' => $this->id_document,
-                    'score' => $score,
-                    'id_comment_list' => $current_comment_list_id,
-                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                    'id_position' => 3
-                ]);
-
-                // Increment the comment list ID after creating a record
-                $current_comment_list_id++;
-
+            foreach ($transformedData as $index => $value) {
+                // Reset comment list ID for each new student
+                $current_comment_list_id = 20;
+    
+                foreach ($value['scores'] as $scoreIndex => $score) {
+        
+                    // Create a record for each score
+                    Score::create([
+                        'id_student' => $value['student_id'],
+                        'id_document' => $this->id_document,
+                        'score' => $score,
+                        'id_comment_list' => $current_comment_list_id,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_position' => 3
+                    ]);
+    
+                    // Increment the comment list ID after creating a record
+                    $current_comment_list_id++;
+    
+                }
             }
-        }
+        });
+       
         // dd($transformedData);
 
         // dd(json_encode($transformedData, JSON_PRETTY_PRINT));
@@ -67,6 +75,37 @@ class Document06 extends Component
         $this->id_project = $id_project;
         $this->students = Student_project::where('id_project', $this->id_project)->pluck('id_student');
         $this->advisers = Adviser::all()->where('id_project', $this->id_project);
+
+        $this->project = Project::with([
+            'confirmStudents' => function ($query) {
+                $query->where('id_document', $this->id_document)
+                    ->where('id_project', $this->id_project);
+            },
+            'confirmStudents.student',
+            'confirmStudents.documents',
+            'confirmTeachers' => function ($query) {
+                $query->where('id_document', $this->id_document)
+                    ->where('id_project', $this->id_project);
+            },
+            'confirmTeachers.teacher',
+            'confirmTeachers.document'
+        ])->whereHas('confirmTeachers', function ($query) {
+            $query->where('id_document', $this->id_document)->where('id_project', $this->id_project);
+        })
+            ->get();
+
+            $skipIndices = [1, 6, 9]; // Indices to skip
+
+            foreach ($this->project as $ProjectItems) {
+                foreach ($ProjectItems->confirmStudents as $Student) {
+                    $this->score_student[$Student->student->id_student] = array_map(
+                        function ($index) use ($skipIndices) {
+                            return in_array($index, $skipIndices) ? null : 0;
+                        },
+                        array_keys(array_fill(0, count($this->criterias), 0))
+                    );
+                }
+            }
     }
     public function render()
     {

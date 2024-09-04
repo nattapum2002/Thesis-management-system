@@ -312,7 +312,7 @@
                                         <td>{!! $criterion['name'] !!}</td>
                                         <td>{{ $criterion['score'] }}</td>
 
-                                        @if (!in_array($key + 1, [2, 6, 9]))
+                                        @if (!in_array($key+1, [2, 6, 9]))
                                             <!-- Skip rows 2, 6, 9 -->
                                             @foreach ($projects as $ProjectItems)
                                                 @foreach ($ProjectItems->confirmStudents as $index => $Student)
@@ -320,7 +320,8 @@
                                                         <input type="number"
                                                             wire:model.live="score_student.{{ $Student->student->id_student }}.{{ $key }}"
                                                             class="form-control" placeholder="" aria-label=""
-                                                            aria-describedby="basic-addon1">
+                                                            aria-describedby="basic-addon1"
+                                                            value="{{ $score_student[$Student->student->id_student][$key] ?? 0 }}">
                                                     </td>
                                                 @endforeach
                                             @endforeach
