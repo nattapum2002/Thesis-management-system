@@ -25,15 +25,17 @@
             <div class="sidebar-user">
                 <a href="{{ route('member.edit.member') }}">
                     <div class="image">
-                        @if (Auth::guard('members')->user()->student_image == null)
-                            <img src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}" alt="UserImage">
-                        @else
-                            <img src="{{ asset('storage/' . Auth::guard('members')->user()->student_image) }}"
-                                alt="UserImage">
-                        @endif
+                        @php
+                            $userImage = optional(Auth::guard('members')->user())->student_image;
+                            $imagePath = $userImage
+                                ? asset('storage/' . $userImage)
+                                : asset('Asset/dist/img/avatar' . rand(1, 5) . '.png');
+                        @endphp
+
+                        <img src="{{ $imagePath }}" alt="UserImage">
                     </div>
                     <div class="info">
-                        {{ Auth::guard('members')->user()->name }} {{ Auth::guard('members')->user()->surname }}
+                        {{ Auth::guard('members')->user()->name . ' ' . Auth::guard('members')->user()->surname }}
                         <small>นักศึกษา</small>
                     </div>
                 </a>
