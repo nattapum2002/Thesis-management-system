@@ -1,4 +1,13 @@
-@extends('layout.admin')
+@php
+    $layout = match (Auth::guard('teachers')->user()->user_type) {
+        'Branch head' => 'layout.branch-head',
+        'Admin' => 'layout.admin',
+        default => 'layout.default', // Provide a default layout if needed
+    };
+@endphp
+
+@extends($layout)
+
 @section('title')
 รายละเอียดเอกสาร
 @endsection

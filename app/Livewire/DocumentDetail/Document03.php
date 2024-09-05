@@ -7,6 +7,7 @@ use App\Models\Adviser;
 use App\Models\Project;
 use App\Models\Score;
 use App\Models\Student_project;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\App;
@@ -34,7 +35,8 @@ class Document03 extends Component
         ['name' => '6. ความพร้อมและตรงต่อเวลา', 'score' => 10],
     ];
 
-    public function print(){
+    public function print()
+    {
         $pdf = PDF::loadView('Livewire_pdf.document_03_score');
         // return response()->streamDownload(function () use ($pdf) {
         //     echo $pdf->stream('test.pdf');
@@ -46,57 +48,84 @@ class Document03 extends Component
     }
     public function score_calculate()
     {
+        DB::transaction(function () {
+            $transformedData = array_map(function ($key, $value) {
+                $filteredScores = array_filter($value, function ($score) {
+                    return !is_null($score); // Keep only non-null values
+                });
 
-        $transformedData = array_map(function ($key, $value) {
-            return [
-                'student_id' => $key,
-                'scores' => $value
-            ];
-        }, array_keys($this->score_student), $this->score_student);
-        $skip_value = 22; // The ID value to skip
+                return [
+                    'student_id' => $key,
+                    'scores' => $filteredScores
+                ];
+            }, array_keys($this->score_student), $this->score_student);
+            // dd($transformedData);
+            $skip_value = 22; // ค่า ID ที่ต้องการข้าม
 
-        foreach ($transformedData as $index => $value) {
-            // Reset comment list ID for each new student
-            $current_comment_list_id = 20;
+            foreach ($transformedData as $index => $value) {
+                // Reset comment list ID สำหรับนักเรียนแต่ละคน
+                $current_comment_list_id = 20;
 
-            foreach ($value['scores'] as $scoreIndex => $score) {
-                // Check if current ID needs to be skipped
-                if ($current_comment_list_id == $skip_value) {
-                    $current_comment_list_id++; // Skip the specific value
-                }
+                foreach ($value['scores'] as $scoreIndex => $score) {
+                    // ตรวจสอบว่าต้องข้ามค่า ID หรือไม่
+                    if ($current_comment_list_id == $skip_value) {
+                        $current_comment_list_id++; // ข้ามค่า ID ที่กำหนด
+                    }
 
-                // Create a record for each score
-                Score::create([
-                    'id_student' => $value['student_id'],
-                    'id_document' => $this->id_document,
-                    'score' => $score,
-                    'id_comment_list' => $current_comment_list_id,
-                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                    'id_position' => 3
-                ]);
+                    // บันทึกข้อมูลคะแนน
+                    Score::create([
+                        'id_student' => $value['student_id'],
+                        'id_document' => $this->id_document,
+                        'score' => $score,
+                        'id_comment_list' => $current_comment_list_id,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_position' => 3
+                    ]);
 
-                // Increment the comment list ID after creating a record
-                $current_comment_list_id++;
-
-                // Check again to skip the specific value if needed
-                if ($current_comment_list_id == $skip_value) {
-                    $current_comment_list_id++; // Skip the specific value
+                    // เพิ่มค่า ID ของ comment list
+                    $current_comment_list_id++;
                 }
             }
-        }
-        // dd($transformedData);
+        });
+    }
 
-        // dd(json_encode($transformedData, JSON_PRETTY_PRINT));
-    }
-    public function test()
-    {
-        
-    }
+    public function test() {}
     public function mount($id_project, $id_document)
     {
         $this->id_document = $id_document;
         $this->id_project = $id_project;
         $this->advisers = Adviser::all()->where('id_project', $this->id_project);
+
+        $this->project = Project::with([
+            'confirmStudents' => function ($query) {
+                $query->where('id_document', $this->id_document)
+                    ->where('id_project', $this->id_project);
+            },
+            'confirmStudents.student',
+            'confirmStudents.documents',
+            'confirmTeachers' => function ($query) {
+                $query->where('id_document', $this->id_document)
+                    ->where('id_project', $this->id_project);
+            },
+            'confirmTeachers.teacher',
+            'confirmTeachers.document'
+        ])->whereHas('confirmTeachers', function ($query) {
+            $query->where('id_document', $this->id_document)->where('id_project', $this->id_project);
+        })
+            ->get();
+
+        $skipIndices = [1, 5, 8]; // Indices to skip
+
+        foreach ($this->project as $ProjectItems) {
+            foreach ($ProjectItems->confirmStudents as $Student) {
+                $this->score_student[$Student->student->id_student] = array_map(
+                    function ($index) use ($skipIndices) {
+                        return in_array($index, $skipIndices) ? null : 0;
+                    },
+                    array_keys(array_fill(0, count($this->criterias), 0))
+                );
+            }
+        }
     }
     public function render()
     {
@@ -118,7 +147,6 @@ class Document03 extends Component
             $query->where('id_document', $this->id_document)->where('id_project', $this->id_project);
         })
             ->get();
-
 
         // dd($this->project);
         return view('livewire.document-detail.document03', ['projects' => $this->project]);
