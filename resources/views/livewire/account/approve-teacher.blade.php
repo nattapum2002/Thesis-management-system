@@ -18,9 +18,16 @@
                     <tr>
                         <th>รูปภาพอาจารย์</th>
                         <td>
-                            <img wire:live src="{{ asset('storage/' . $teacher->teacher_image) }}"
-                                alt="{{ $teacher->name }}"
-                                style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            @if ($teacher->teacher_image)
+                                {{-- Thesis-management-system/storage/app/public/ --}}
+                                <img wire:live src="{{ asset('storage/' . $teacher->teacher_image) }}"
+                                    alt="{{ $teacher->name }}"
+                                    style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            @else
+                                <img wire:live src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}"
+                                    alt="{{ $teacher->name }}"
+                                    style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            @endif
                         </td>
                         <td></td>
                     </tr>
@@ -41,7 +48,15 @@
                     </tr>
                     <tr>
                         <th>รูปภาพลายเซ็น</th>
-                        <td><img src="{{ asset('storage/' . $teacher->signature_image) }}" alt="{{ $teacher->name }}">
+                        <td>
+                            @if ($teacher->signature_image)
+                                {{-- Thesis-management-system/storage/app/public/ --}}
+                                <img wire:live src="{{ asset('storage/' . $teacher->signature_image) }}"
+                                    alt="{{ $teacher->name }}"
+                                    style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            @else
+                                <span class="text-danger">ไมมีการลงบันทึกข้อมูล</span>
+                            @endif
                         </td>
                         <td></td>
                     </tr>

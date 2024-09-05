@@ -171,13 +171,13 @@ class AddThesis extends Component
         ]);
 
         session()->flash('message', 'เพิ่มข้อมูลเรียบร้อยแล้ว');
-        return redirect()->route('manage_thesis');
+        return redirect()->route('member.add.thesis');
     }
 
     public function cancel()
     {
         $this->reset();
-        return redirect()->route('manage_thesis');
+        return redirect()->route('member.add.thesis');
     }
 
     public function render()

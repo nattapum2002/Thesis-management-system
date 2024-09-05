@@ -53,11 +53,11 @@ class EditAndDetailMember extends Component
     {
         if ($index == 'student_image') {
             $this->path_student_image = $this->student_image->store('student_image', 'public');
-            DB::table('members')->where('id_student', $this->studentId)->update([$index => $this->path_student_image], ['updated_at' => now()]);
+            Member::where('id_student', $this->studentId)->update([$index => $this->path_student_image], ['updated_at' => now()]);
         } else if ($this->prefix == 'อื่นๆ') {
-            DB::table('members')->where('id_student', $this->studentId)->update([$index => $this->other_prefix], ['updated_at' => now()]);
+            Member::where('id_student', $this->studentId)->update([$index => $this->other_prefix], ['updated_at' => now()]);
         } else {
-            DB::table('members')->where('id_student', $this->studentId)->update([$index => $this->$index], ['updated_at' => now()]);
+            Member::where('id_student', $this->studentId)->update([$index => $this->$index], ['updated_at' => now()]);
         }
         session()->flash('message', 'บันทึกข้อมูลเรียบร้อยแล้ว');
         $this->cancel($index);

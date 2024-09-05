@@ -35,6 +35,7 @@
                             </td>
                         @else
                             <td>
+                                {{-- Thesis-management-system/storage/app/public/ --}}
                                 <img wire:live src="{{ asset('storage/' . $teacher->teacher_image) }}"
                                     alt="{{ $teacher->name }}"
                                     style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
@@ -153,7 +154,16 @@
                                 </div>
                             </td>
                         @else
-                            <td><img src="{{ $teacher->signature_image }}" alt=""></td>
+                            <td>
+                                @if ($teacher->signature_image)
+                                    {{-- Thesis-management-system/storage/app/public/ --}}
+                                    <img wire:live src="{{ asset('storage/' . $teacher->signature_image) }}"
+                                        alt="{{ $teacher->name }}"
+                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                @else
+                                    <span class="text-danger">ไมมีการลงบันทึกข้อมูล</span>
+                                @endif
+                            </td>
                             <td>
                                 <button class="btn btn-orange" wire:click="edit('signature_image')"><i
                                         class='bx bx-edit'></i></button>

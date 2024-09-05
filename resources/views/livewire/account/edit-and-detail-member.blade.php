@@ -35,12 +35,13 @@
                             </td>
                         @else
                             <td>
-                                @if ($student->student_image == null)
-                                    <img wire:live src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}"
+                                @if ($student->student_image)
+                                    {{-- Thesis-management-system/storage/app/public/ --}}
+                                    <img wire:live src="{{ asset('storage/' . $student->student_image) }}"
                                         alt="{{ $student->name }}"
                                         style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                 @else
-                                    <img wire:live src="{{ asset('storage/' . $student->student_image) }}"
+                                    <img wire:live src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}"
                                         alt="{{ $student->name }}"
                                         style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                 @endif

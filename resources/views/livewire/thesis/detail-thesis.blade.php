@@ -19,13 +19,19 @@
                 <div class="col-lg-3">
                     <div class="img">
                         <p class="tag">{{ $articles->type }}</p>
-                        <img wire:live
-                            src="{{ $articles->thesis_image ? asset('storage/' . $articles->thesis_image) : 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
-                            alt="{{ $articles->title }}">
+                        @if ($articles->thesis_image)
+                            {{-- Thesis-management-system/storage/app/public/ --}}
+                            <img wire:live src="{{ asset('storage/' . $articles->thesis_image) }}"
+                                alt="{{ $articles->title }}">
+                        @else
+                            <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                alt="{{ $articles->title }}">
+                        @endif
                     </div>
                     <h5>เผยแพร่เมื่อ</h5>
                     <p>{{ $articles->created_at->thaidate('วันที่ j F พ.ศ.Y เวลา H:i') }}</p>
                     <h5>เอกสาร</h5>
+                    {{-- Thesis-management-system/storage/app/public/ --}}
                     <a href="{{ url('storage/' . $articles->file_dissertation) }}" target="_blank">PDF</a>
                 </div>
                 <div class="col-lg-6">
@@ -67,9 +73,14 @@
                         <div class="post">
                             <a href="{{ route('welcome.thesis.detail', $item->id_dissertation_article) }}">
                                 <p class="tag">{{ $item->type }}</p>
-                                <img wire:live
-                                    src="{{ $item->thesis_image ? asset('storage/' . $item->thesis_image) : 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
-                                    alt="{{ $item->title }}">
+                                @if ($item->thesis_image)
+                                    {{-- Thesis-management-system/storage/app/public/ --}}
+                                    <img wire:live src="{{ asset('storage/' . $item->thesis_image) }}"
+                                        alt="{{ $item->title }}">
+                                @else
+                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                        alt="{{ $item->title }}">
+                                @endif
                                 <div class="details">
                                     <small>{{ $item->created_at->thaidate('วันที่ j F พ.ศ.Y') }}</small>
                                     <h4>{{ $item->title }}</h4>

@@ -30,11 +30,13 @@
                                     <h4>สมาชิก</h4>
                                     <div>
                                         <p>
-                                            @forelse ($projectActive->members as $member)
-                                                {{ $member->prefix . ' ' . $member->name . ' ' . $member->surname }}<br>
-                                            @empty
+                                            @if ($projectActive)
+                                                @foreach ($projectActive->members as $member)
+                                                    {{ $member->prefix . ' ' . $member->name . ' ' . $member->surname }}<br>
+                                                @endforeach
+                                            @else
                                                 ไม่พบสมาชิก
-                                            @endforelse
+                                            @endif
                                         </p>
                                     </div>
                                 </div>
@@ -84,33 +86,38 @@
                             <div class="card">
                                 <div class="card-body table-responsive p-0">
                                     <h4>กำหนดการเอกสาร</h4>
-                                    <table class="table text-nowrap table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>วันที่</th>
-                                                <th>เวลา</th>
-                                                <th>ชื่อเอกสาร</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($documentSchedules as $documentSchedule)
+                                    @if ($documentSchedules->count() > 0)
+                                        <table class="table text-nowrap table-striped">
+                                            <thead>
                                                 <tr>
-                                                    <td></td>
-                                                    <td>{{ thaidate('j M Y', $documentSchedule->date_submission) }}</td>
-                                                    <td>{{ thaidate('H:i น.', $documentSchedule->time_submission) }}
-                                                    </td>
-                                                    <td>
-                                                        <p>{{ 'เอกสาร คกท.-คง.-0' . $documentSchedule->id_document }}
-                                                        </p>
-                                                        <small>{{ $documentSchedule->document->document }}</small>
-                                                    </td>
-                                                    <td></td>
+                                                    <th></th>
+                                                    <th>วันที่</th>
+                                                    <th>เวลา</th>
+                                                    <th>ชื่อเอกสาร</th>
+                                                    <th></th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($documentSchedules as $documentSchedule)
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>{{ thaidate('j M Y', $documentSchedule->date_submission) }}
+                                                        </td>
+                                                        <td>{{ thaidate('H:i น.', $documentSchedule->time_submission) }}
+                                                        </td>
+                                                        <td>
+                                                            <p>{{ 'เอกสาร คกท.-คง.-0' . $documentSchedule->id_document }}
+                                                            </p>
+                                                            <small>{{ $documentSchedule->document->document }}</small>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    @else
+                                        <p>ไม่พบกำหนดการเอกสาร</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -200,7 +207,7 @@
                                     @else
                                         <div class="row justify-content-center">
                                             <div class="col-12">
-                                                <p class="text-center">ไม่มีการสอบ</p>
+                                                <p>ไม่มีการสอบ</p>
                                             </div>
                                         </div>
                                     @endif
@@ -447,7 +454,7 @@
                                 </div>
                             </a>
                             <!-- status 03 -->
-                            <a href="{{ route('pdf03Generate', $projectActive->id_project) }}" target="_blank">
+                            <a href="#">
                                 @php
                                     $directorConfirmed = $confirmTeachers
                                         ->where('id_teacher', optional($directors->first())->id_teacher)
@@ -796,7 +803,7 @@
                                 </div>
                             </a>
                             <!-- status 06 -->
-                            <a href="{{ route('pdf06Generate', $projectActive->id_project) }}" target="_blank">
+                            <a href="#">
                                 @php
                                     $directorConfirmed = $confirmTeachers
                                         ->where('id_teacher', optional($directors->first())->id_teacher)
@@ -1030,7 +1037,7 @@
                             </a>
                         </div>
                     @else
-                        <p class="text-center">ไม่พบโปรเจค</p>
+                        <p>ไม่พบโปรเจค</p>
                     @endif
                 </div>
             </div>

@@ -25,13 +25,13 @@ class AddDocumentSchedule extends Component
             'updated_at' => now()
         ]);
         session()->flash('success', 'เพิ่มกำหนดการส่งเอกสารเรียบร้อยแล้ว');
-        return redirect()->route('manage_document_schedule');
+        return redirect()->route('admin.manage.document.schedule');
     }
 
     public function cancel()
     {
         $this->reset();
-        return redirect()->route('manage_document_schedule');
+        return redirect()->route('admin.manage.document.schedule');
     }
 
     public function render()

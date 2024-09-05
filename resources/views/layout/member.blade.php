@@ -25,14 +25,13 @@
             <div class="sidebar-user">
                 <a href="{{ route('member.edit.member') }}">
                     <div class="image">
-                        @php
-                            $userImage = optional(Auth::guard('members')->user())->student_image;
-                            $imagePath = $userImage
-                                ? asset('storage/' . $userImage)
-                                : asset('Asset/dist/img/avatar' . rand(1, 5) . '.png');
-                        @endphp
-
-                        <img src="{{ $imagePath }}" alt="UserImage">
+                        @if (Auth::guard('members')->user()->student_image)
+                            {{-- Thesis-management-system/storage/app/public/ --}}
+                            <img src="{{ asset('storage/' . Auth::guard('members')->user()->student_image) }}"
+                                alt="UserImage">
+                        @else
+                            <img src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}" alt="UserImage">
+                        @endif
                     </div>
                     <div class="info">
                         {{ Auth::guard('members')->user()->name . ' ' . Auth::guard('members')->user()->surname }}
@@ -71,6 +70,38 @@
                             href="{{ route('member.manage.document') }}">
                             <i class='nav-icon bx bx-circle'></i>
                             <span class="link-name">จัดการเอกสาร</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <div class="sidebar-collapse">
+                    <a href="#"
+                        class="sidebar-link has-dropdown collapsed{{ Route::is('member.manage.exam.schedule') || Route::is('member.manage.document.schedule') || Route::is('member.add.document.schedule') || Route::is('member.edit.detail.document.schedule') ? 'off active' : '' }}"
+                        data-bs-target="#manage_schedule" data-bs-toggle="collapse"
+                        aria-expanded="{{ Route::is('member.manage.exam.schedule') || Route::is('member.manage.document.schedule') || Route::is('member.add.document.schedule') || Route::is('member.edit.detail.document.schedule') ? 'true' : 'false' }}">
+                        <div>
+                            <i class='nav-icon bx bx-calendar-edit'></i>
+                            <span class="link-name">ตารางกำหนดการ</span>
+                        </div>
+                        <i class="bx bx-chevron-down arrow"></i>
+                    </a>
+                </div>
+                <ul id="manage_schedule"
+                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('member.manage.exam.schedule') || Route::is('member.manage.document.schedule') || Route::is('member.add.document.schedule') || Route::is('member.edit.detail.document.schedule') ? 'show' : '' }}"
+                    data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link {{ Route::is('member.manage.exam.schedule') ? 'active' : '' }}"
+                            href="{{ route('member.manage.exam.schedule') }}">
+                            <i class='nav-icon bx bx-circle'></i>
+                            <span class="link-name">ตารางสอบ</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link {{ Route::is('member.manage.document.schedule') || Route::is('member.add.document.schedule') || Route::is('member.edit.detail.document.schedule') ? 'active' : '' }}"
+                            href="{{ route('member.manage.document.schedule') }}">
+                            <i class='nav-icon bx bx-circle'></i>
+                            <span class="link-name">ตารางการส่งเอกสาร</span>
                         </a>
                     </li>
                 </ul>

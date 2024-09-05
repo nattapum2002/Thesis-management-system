@@ -167,6 +167,9 @@ Route::prefix('Branch-head')->group(function () {
 
     Route::view('/Exam-schedule', 'branch-head.manage_exam_schedule')->name('branch-head.manage.exam.schedule');
 
+    Route::view('/Document-schedule', 'branch-head.manage_document_schedule')->name('branch-head.manage.document.schedule');
+    Route::view('/Document-schedule/{scheduleId}', 'branch-head.edit_and_detail_document_schedule')->name('branch-head.edit.detail.document.schedule');
+
     Route::view('/Edit-account', 'branch-head.edit_branch_head')->name('branch-head.edit.branch-head');
 
     Route::view('/Manage-news', 'branch-head.manage_news')->name('branch-head.manage.news');
@@ -190,6 +193,9 @@ Route::prefix('Teacher')->group(function () {
 
     Route::view('/Exam-schedule', 'teacher.manage_exam_schedule')->name('teacher.manage.exam.schedule');
 
+    Route::view('/Document-schedule', 'teacher.manage_document_schedule')->name('teacher.manage.document.schedule');
+    Route::view('/Document-schedule/{scheduleId}', 'teacher.edit_and_detail_document_schedule')->name('teacher.edit.detail.document.schedule');
+
     Route::view('/Manage-news', 'teacher.manage_news')->name('teacher.manage.news');
     Route::view('/Manage-news/Add', 'teacher.add_news')->name('teacher.add.news');
     Route::view('/Manage-news/Edit/{newsId}', 'teacher.edit_and_detail_news')->name('teacher.edit.detail.news');
@@ -211,6 +217,11 @@ Route::prefix('Member')->group(function () {
     Route::view('/', 'member.dashboard')->name('member.dashboard');
 
     Route::view('/Submit-project-documents', 'member.submit_project_documents')->name('member.submit.project.documents');
+
+    Route::view('/Exam-schedule', 'member.manage_exam_schedule')->name('member.manage.exam.schedule');
+
+    Route::view('/Document-schedule', 'member.manage_document_schedule')->name('member.manage.document.schedule');
+    Route::view('/Document-schedule/{scheduleId}', 'member.edit_and_detail_document_schedule')->name('member.edit.detail.document.schedule');
 
     Route::view('/Edit-account', 'member.edit_member')->name('member.edit.member');
 

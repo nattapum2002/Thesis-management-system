@@ -5,7 +5,6 @@ namespace App\Livewire\Account;
 use Livewire\Component;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
 
 class EditAndDetailTeacher extends Component
@@ -52,14 +51,14 @@ class EditAndDetailTeacher extends Component
     {
         if ($index == 'teacher_image') {
             $this->path_teacher_image = $this->teacher_image->store('teacher_image', 'public');
-            DB::table('teachers')->where('id_teacher', $this->teacherId)->update([$index => $this->path_teacher_image], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
+            Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->path_teacher_image], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         } else if ($index == 'signature_image') {
             $this->path_signature_image = $this->signature_image->store('signature_image', 'public');
-            DB::table('teachers')->where('id_teacher', $this->teacherId)->update([$index => $this->path_signature_image], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
+            Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->path_signature_image], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         } else if ($this->prefix == 'อื่นๆ') {
-            DB::table('teachers')->where('id_teacher', $this->teacherId)->update([$index => $this->other_prefix], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
+            Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->other_prefix], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         } else {
-            DB::table('teachers')->where('id_teacher', $this->teacherId)->update([$index => $this->$index], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
+            Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->$index], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         }
         session()->flash('message', 'บันทึกข้อมูลเรียบร้อยแล้ว');
         $this->cancel($index);

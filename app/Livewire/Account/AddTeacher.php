@@ -220,13 +220,13 @@ class AddTeacher extends Component
         ]);
 
         session()->flash('message', 'เพิ่ม ' . $this->add_prefix . ' ' . $this->add_name . ' ' . $this->add_surname . ' เรียบร้อยแล้ว');
-        return redirect()->route('manage_teacher');
+        return redirect()->route('admin.manage.teacher');
     }
 
     public function cancel()
     {
         $this->reset();
-        return redirect()->route('manage_teacher');
+        return redirect()->route('admin.manage.teacher');
     }
 
     public function render()
