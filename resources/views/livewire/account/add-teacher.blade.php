@@ -19,7 +19,7 @@
                         <th>รูปภาพอาจารย์</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_teacher_image" type="file"
+                                <input class="form-control" wire:model="add_teacher_image" type="file"
                                     placeholder="เลือกไฟล์">
                             </div>
                             @error('add_teacher_image')
@@ -40,7 +40,7 @@
                                     <option value="อื่นๆ">อื่นๆ</option>
                                 </select>
                                 @if ($this->add_prefix == 'อื่นๆ')
-                                    <input class="form-input" wire:model="add_other_prefix" type="text"
+                                    <input class="form-control" wire:model="add_other_prefix" type="text"
                                         placeholder="คำนำหน้าชื่อ">
                                 @endif
                             </div>
@@ -57,7 +57,7 @@
                         <th>ชื่อ</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_name" type="text"
+                                <input class="form-control" wire:model="add_name" type="text"
                                     placeholder="กรุณากรอกชื่อ">
                             </div>
                             @error('add_name')
@@ -70,7 +70,7 @@
                         <th>นามสกุล</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_surname" type="text"
+                                <input class="form-control" wire:model="add_surname" type="text"
                                     placeholder="กรุณากรอกนามสกุล">
                             </div>
                             @error('add_surname')
@@ -83,7 +83,7 @@
                         <th>รูปภาพลายเซ็น</th>
                         <td>
                             <div class="input-field"></div>
-                            <input class="form-input" wire:model="add_signature_image" type="file"
+                            <input class="form-control" wire:model="add_signature_image" type="file"
                                 placeholder="เลือกไฟล์">
                             @error('add_signature_image')
                                 <span class="text-danger">{{ $message }}</span>
@@ -95,7 +95,7 @@
                         <th>ตำแหน่งทางวิชาการ</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_academic_position" type="text"
+                                <input class="form-control" wire:model="add_academic_position" type="text"
                                     placeholder="กรุณากรอกตำแหน่งทางวิชาการ">
                             </div>
                             @error('add_academic_position')
@@ -108,7 +108,7 @@
                         <th>วุฒิการศึกษา</th>
                         <td>
                             <div class="input-field">
-                                <textarea class="form-input" wire:model="add_educational_qualification" type="text"
+                                <textarea class="form-control" wire:model="add_educational_qualification" type="text"
                                     placeholder="กรุณากรอกวุฒิการศึกษา"></textarea>
                             </div>
                             @error('add_educational_qualification')
@@ -121,7 +121,7 @@
                         <th>สาขาที่จบการศึกษา</th>
                         <td>
                             <div class="input-field">
-                                <textarea class="form-input" wire:model="add_branch" type="text" placeholder="กรุณากรอกสาขาที่จบการศึกษา"></textarea>
+                                <textarea class="form-control" wire:model="add_branch" type="text" placeholder="กรุณากรอกสาขาที่จบการศึกษา"></textarea>
                             </div>
                             @error('add_branch')
                                 <span class="text-danger">{{ $message }}</span>
@@ -133,7 +133,7 @@
                         <th>เบอร์โทรศัพท์</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_tel" type="tel"
+                                <input class="form-control" wire:model="add_tel" type="tel"
                                     placeholder="กรุณากรอกเบอร์โทร" maxlength="10" minlength="10">
                             </div>
                             @error('add_tel')
@@ -146,7 +146,7 @@
                         <th>อีเมล</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_email" type="email"
+                                <input class="form-control" wire:model="add_email" type="email"
                                     placeholder="กรุณากรอกอีเมล">
                             </div>
                             @error('add_email')
@@ -159,7 +159,7 @@
                         <th>ไอดีไลน์</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_id_line" type="text"
+                                <input class="form-control" wire:model="add_id_line" type="text"
                                     placeholder="กรุณากรอกไอดีไลน์">
                             </div>
                             @error('add_id_line')
@@ -172,7 +172,7 @@
                         <th>ชื่อผู้ใช้</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_username" type="text"
+                                <input class="form-control" wire:model="add_username" type="text"
                                     placeholder="กรุณากรอกชื่อผู้ใช้" minlength="8">
                             </div>
                             @error('add_username')
@@ -185,7 +185,7 @@
                         <th>รหัสผ่าน</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_password" type="password"
+                                <input class="form-control" wire:model="add_password" type="password"
                                     placeholder="กรุณากรอกรหัสผ่าน" minlength="8">
                             </div>
                             @error('add_password')
@@ -198,7 +198,7 @@
                         <th>ยืนยันรหัสผ่าน</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_password_confirmation" type="password"
+                                <input class="form-control" wire:model="add_password_confirmation" type="password"
                                     placeholder="กรุณากรอกรหัสผ่านอีกครั้ง" minlength="8">
                             </div>
                             @error('add_password_confirmation')

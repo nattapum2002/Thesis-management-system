@@ -127,13 +127,29 @@ class EditAndDetailNews extends Component
 
     protected function rules()
     {
-        return [
-            'title' => 'required',
-            'details' => 'required',
-            // 'news_image' => 'required',
-            'type' => 'required',
-            'status' => 'required',
-        ];
+        $rules = [];
+
+        if ($this->toggle['news_image']) {
+            $rules['news_image'] = 'required|image|max:2048';
+        }
+
+        if ($this->toggle['title']) {
+            $rules['title'] = 'required';
+        }
+
+        if ($this->toggle['details']) {
+            $rules['details'] = 'required';
+        }
+
+        if ($this->toggle['type']) {
+            $rules['type'] = 'required';
+        }
+
+        if ($this->toggle['status']) {
+            $rules['status'] = 'required';
+        }
+
+        return $rules;
     }
 
     protected function messages()
@@ -142,6 +158,8 @@ class EditAndDetailNews extends Component
             'title.required' => 'กรุณากรอกข้อมูลให้ครบ',
             'details.required' => 'กรุณากรอกข้อมูลให้ครบ',
             'news_image.required' => 'กรุณาเลือกไฟล์ภาพ',
+            'news_image.image' => 'กรุณาเลือกไฟล์รูปภาพ',
+            'news_image.max' => 'ไฟล์รูปภาพต้องไม่เกิน 2 MB',
             'type.required' => 'กรุณาเลือกประเภท',
             'status.required' => 'กรุณาเลือกสถานะ',
         ];
@@ -155,22 +173,19 @@ class EditAndDetailNews extends Component
     public function save($index)
     {
         $this->validate();
-        $data = $index == 'news_image'
-            ? ['news_image' => $this->news_image->store('news_image', 'public')]
-            : [$index => $this->$index];
-
-        DB::table('news')->where('id_news', $this->newsId)
-            ->update(array_merge($data, [
-                'updated_by' => Auth::guard('teachers')->id(),
-                'updated_at' => now()
-            ]));
-
+        if ($index == 'news_image') {
+            $this->path_news_image = $this->news_image->store('news_image', 'public');
+            DB::table('news')->where('id_news', $this->newsId)->update([$index => $this->path_news_image], ['updated_by' => Auth::guard('teachers')->user()->id_teacher], ['updated_at' => now()]);
+        } else {
+            DB::table('news')->where('id_news', $this->newsId)->update([$index => $this->$index], ['updated_by' => Auth::guard('teachers')->user()->id_teacher], ['updated_at' => now()]);
+        }
         session()->flash('message', 'บันทึกข้อมูลเรียบร้อยแล้ว');
         $this->cancel($index);
     }
 
     public function cancel($index)
     {
+        $this->reset('title', 'details', 'news_image', 'type', 'status');
         $this->toggle[$index] = !$this->toggle[$index];
         $this->mount($this->newsId);
     }

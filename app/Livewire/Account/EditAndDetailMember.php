@@ -8,6 +8,7 @@ use App\Models\Level;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
 
 class EditAndDetailMember extends Component
@@ -25,7 +26,6 @@ class EditAndDetailMember extends Component
         'tel' => false,
         'line_id' => false,
         'password' => false,
-        'account_status' => false
     ];
     public $student;
     public $studentId;
@@ -42,7 +42,86 @@ class EditAndDetailMember extends Component
     public $email;
     public $tel;
     public $line_id;
-    public $password;
+    public $old_password, $new_password, $new_password_confirmation;
+
+    protected function rules()
+    {
+        $rules = [];
+
+        if ($this->toggle['student_image']) {
+            $rules['student_image'] = 'required|image|max:2048';
+        }
+
+        if ($this->toggle['prefix']) {
+            $rules['prefix'] = 'required';
+            $rules['other_prefix'] = 'required_if:prefix,อื่นๆ';
+        }
+
+        if ($this->toggle['name']) {
+            $rules['name'] = 'required';
+        }
+
+        if ($this->toggle['surname']) {
+            $rules['surname'] = 'required';
+        }
+
+        if ($this->toggle['course']) {
+            $rules['course'] = 'required';
+        }
+
+        if ($this->toggle['level']) {
+            $rules['level'] = 'required';
+        }
+
+        if ($this->toggle['email']) {
+            $rules['email'] = 'required|email';
+        }
+
+        if ($this->toggle['tel']) {
+            $rules['tel'] = 'required|numeric|digits:10';
+        }
+
+        if ($this->toggle['password']) {
+            $rules['old_password'] = 'required|min:8';
+            $rules['new_password'] = 'required|min:8|confirmed';
+            $rules['new_password_confirmation'] = 'nullable|required_with:new_password';
+        }
+
+        return $rules;
+    }
+
+    protected function messages()
+    {
+        return [
+            'student_image.required' => 'กรุณาอัปโหลดรูปภาพนักเรียน',
+            'student_image.image' => 'ไฟล์ที่อัปโหลดต้องเป็นรูปภาพ',
+            'student_image.max' => 'ไฟล์รูปภาพต้องไม่เกิน 2MB',
+
+            'prefix.required' => 'กรุณาเลือกคํานําหน้า',
+            'other_prefix.required_if' => 'กรุณากรอกคํานําหน้า',
+
+            'name.required' => 'กรุณากรอกชื่อ',
+            'surname.required' => 'กรุณากรอกนามสกุล',
+            'course.required' => 'กรุณาเลือกหลักสูตร',
+            'level.required' => 'กรุณาเลือกชั้นปี',
+
+            'email.required' => 'กรุณากรอกอีเมล',
+            'email.email' => 'กรุณากรอกอีเมลให้ถูกต้อง',
+
+            'tel.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+            'tel.numeric' => 'กรุณากรอกเบอร์โทรศัพท์เป็นตัวเลข',
+            'tel.digits' => 'กรุณากรอกเบอร์โทรศัพท์ 10 หลัก',
+
+            'old_password.required' => 'กรุณากรอกรหัสผ่านปัจจุบัน',
+            'old_password.min' => 'รหัสผ่านปัจจุบันต้องมีอย่างน้อย 8 ตัวอักษร',
+
+            'new_password.required' => 'กรุณากรอกรหัสผ่านใหม่',
+            'new_password.min' => 'รหัสผ่านใหม่ต้องมีอย่างน้อย 8 ตัวอักษร',
+            'new_password.confirmed' => 'รหัสผ่านใหม่ไม่ตรงกัน',
+            'new_password_confirmation.required_with' => 'กรุณากรอกรหัสผ่านใหม่อีกครั้ง',
+        ];
+    }
+
 
     public function edit($index)
     {
@@ -51,10 +130,21 @@ class EditAndDetailMember extends Component
 
     public function save($index)
     {
-        if ($index == 'student_image') {
+        $this->validate();
+
+        if ($index == 'password') {
+
+            if (!Hash::check($this->old_password, $this->student->password)) {
+                session()->flash('error', 'รหัสผ่านปัจจุบันไม่ถูกต้อง');
+                return;
+            }
+
+            $this->student->password = Hash::make($this->new_password);
+            $this->student->save();
+        } else if ($index == 'student_image') {
             $this->path_student_image = $this->student_image->store('student_image', 'public');
             Member::where('id_student', $this->studentId)->update([$index => $this->path_student_image], ['updated_at' => now()]);
-        } else if ($this->prefix == 'อื่นๆ') {
+        } else if ($index == 'prefix' && $this->prefix == 'อื่นๆ') {
             Member::where('id_student', $this->studentId)->update([$index => $this->other_prefix], ['updated_at' => now()]);
         } else {
             Member::where('id_student', $this->studentId)->update([$index => $this->$index], ['updated_at' => now()]);
@@ -65,7 +155,7 @@ class EditAndDetailMember extends Component
 
     public function cancel($index)
     {
-        $this->reset('course', 'level');
+        $this->reset('prefix', 'student_image', 'other_prefix', 'name', 'surname', 'course', 'level', 'email', 'tel', 'line_id', 'old_password', 'new_password', 'new_password_confirmation');
         $this->toggle[$index] = !$this->toggle[$index];
         $this->mount();
     }
@@ -85,7 +175,9 @@ class EditAndDetailMember extends Component
         $this->email = $this->student->email;
         $this->tel = $this->student->tel;
         $this->line_id = $this->student->line_id;
-        $this->password = $this->student->password;
+        $this->old_password = null;
+        $this->new_password = null;
+        $this->new_password_confirmation = null;
     }
 
     public function render()

@@ -9,9 +9,9 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th style="min-width: 160px">หัวข้อ</th>
+                        <th style="width: 160px">หัวข้อ</th>
                         <th>รายละเอียด</th>
-                        <th style="min-width: 160px"></th>
+                        <th style="width: 160px"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,7 +20,7 @@
                         @if ($toggle['student_image'])
                             <td>
                                 <div class="input-field">
-                                    <input class="form-input" wire:model="student_image" type="file"
+                                    <input class="form-control" wire:model="student_image" type="file"
                                         placeholder="เลือกไฟล์" required>
                                     @error('student_image')
                                         <span class="text-danger">{{ $message }}</span>
@@ -72,7 +72,7 @@
                                         <option value="อื่นๆ">อื่นๆ</option>
                                     </select>
                                     @if ($this->prefix == 'อื่นๆ')
-                                        <input class="form-input" wire:model="other_prefix" type="text"
+                                        <input class="form-control" wire:model="other_prefix" type="text"
                                             placeholder="คำนำหน้าชื่อ" required>
                                     @endif
                                     @error('prefix')
@@ -99,7 +99,7 @@
                         @if ($toggle['name'])
                             <td>
                                 <div class="input-field">
-                                    <input class="form-input" wire:model="name" type="text"
+                                    <input class="form-control" wire:model="name" type="text"
                                         placeholder="กรุณากรอกชื่อ" required>
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
@@ -125,7 +125,7 @@
                         @if ($toggle['surname'])
                             <td>
                                 <div class="input-field">
-                                    <input class="form-input" wire:model="surname" type="text"
+                                    <input class="form-control" wire:model="surname" type="text"
                                         placeholder="กรุณากรอกชื่อ" required>
                                     @error('surname')
                                         <span class="text-danger">{{ $message }}</span>
@@ -226,7 +226,7 @@
                         @if ($toggle['tel'])
                             <td>
                                 <div class="input-field">
-                                    <input class="form-input" wire:model="tel" type="tel"
+                                    <input class="form-control" wire:model="tel" type="tel"
                                         placeholder="กรุณากรอกเบอร์โทร" maxlength="10" minlength="10" required>
                                     @error('tel')
                                         <span class="text-danger">{{ $message }}</span>
@@ -252,7 +252,7 @@
                         @if ($toggle['email'])
                             <td>
                                 <div class="input-field">
-                                    <input class="form-input" wire:model="email" type="email"
+                                    <input class="form-control" wire:model="email" type="email"
                                         placeholder="กรุณากรอกอีเมล" required>
                                     @error('email')
                                         <span class="text-danger">{{ $message }}</span>
@@ -278,7 +278,7 @@
                         @if ($toggle['line_id'])
                             <td>
                                 <div class="input-field">
-                                    {{-- <input class="form-input" wire:model="line_id" type="text"
+                                    {{-- <input class="form-control" wire:model="line_id" type="text"
                                         placeholder="กรุณากรอกไอดีไลน์" required> --}}
                                     <a href="{{ route('line.login') }}" class="btn btn-success">
                                         LINE Login
@@ -295,7 +295,16 @@
                                 </div>
                             </td>
                         @else
-                            <td>{{ $student->id_line }}</td>
+                            <td>
+                                @if ($student->line_id)
+                                    <p class="text-success">ลงทะเบียน Line userID แล้ว กรุณาสแกน QR Code ด้านล่าง
+                                        เพื่อรับการแจ้งเตือน</p>
+                                    <img src="{{ asset('/Asset/main/img/TMS-Line-bot.png') }}" alt="TMS-Line-bot"
+                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                @else
+                                    <p class="text-danger">ยังไม่ลงทะเบียน</p>
+                                @endif
+                            </td>
                             <td>
                                 <button class="btn btn-orange" wire:click="edit('line_id')"><i
                                         class='bx bx-edit'></i></button>
@@ -307,12 +316,28 @@
                         @if ($toggle['password'])
                             <td>
                                 <div class="input-field">
-                                    <input class="form-input" wire:model="password" type="password"
-                                        placeholder="กรุณากรอกรหัสผ่าน" minlength="8" required>
-                                    @error('password')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <p>หากต้องการเปลี่ยนรหัสผ่านกรุณากรอกรหัสผ่านเดิม</p>
+                                    <input class="form-control" wire:model="old_password" type="password"
+                                        placeholder="กรุณากรอกรหัสผ่านเดิม" minlength="8" required>
                                 </div>
+                                <span class="text-danger">{{ session('error') }}</span>
+                                @error('old_password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                <div class="input-field">
+                                    <input class="form-control mt-1" wire:model="new_password" type="password"
+                                        placeholder="กรุณากรอกรหัสผ่านใหม่" minlength="8" required>
+                                </div>
+                                @error('new_password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                <div class="input-field">
+                                    <input class="form-control mt-1" wire:model="new_password_confirmation"
+                                        type="password" placeholder="กรุณากรอกรหัสผ่านใหม่อีกครั้ง" minlength="8">
+                                </div>
+                                @error('new_password_confirmation')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </td>
                             <td>
                                 <div class="button-container">
@@ -321,9 +346,7 @@
                                 </div>
                             </td>
                         @else
-                            <td>
-                                {{ $student->password }}
-                            </td>
+                            <td></td>
                             <td>
                                 <button class="btn btn-orange" wire:click="edit('password')"><i
                                         class='bx bx-edit'></i></button>

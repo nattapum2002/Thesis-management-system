@@ -9,9 +9,9 @@
             <table class="table text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th style="min-width: 160px">หัวข้อ</th>
+                        <th style="width: 160px">หัวข้อ</th>
                         <th>รายละเอียด</th>
-                        <th style="min-width: 160px"></th>
+                        <th style="width: 160px"></th>
                     </tr>
                 </thead>
                 <tbody>

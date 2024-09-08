@@ -21,7 +21,7 @@
                             @if ($toggle['thesis_image'])
                                 <td>
                                     <div class="input-field">
-                                        <input class="form-input" wire:model="thesis_image" type="file"
+                                        <input class="form-control" wire:model="thesis_image" type="file"
                                             placeholder="เลือกไฟล์" required>
                                     </div>
                                     @error('thesis_image')
@@ -94,7 +94,7 @@
                             @if ($toggle['details'])
                                 <td>
                                     <div class="input-field">
-                                        <textarea class="form-input" wire:model="details" type="text" placeholder="บทคัดย่อ" required></textarea>
+                                        <textarea class="form-control" wire:model="details" type="text" placeholder="บทคัดย่อ" required></textarea>
                                     </div>
                                     @error('details')
                                         <span class="text-danger">{{ $message }}</span>
@@ -192,7 +192,7 @@
                             @if ($toggle['file_dissertation'])
                                 <td>
                                     <div class="input-field">
-                                        <input class="form-input" wire:model="file_dissertation" type="file"
+                                        <input class="form-control" wire:model="file_dissertation" type="file"
                                             placeholder="เลือกไฟล์" required>
                                     </div>
                                     @error('file_dissertation')

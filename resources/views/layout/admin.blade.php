@@ -27,8 +27,7 @@
                     <div class="image">
                         @if (Auth::guard('teachers')->user()->teacher_image)
                             {{-- Thesis-management-system/storage/app/public/ --}}
-                            <img src="{{ asset('storage/' . Auth::guard('teachers')->user()->teacher_image) }}"
-                                alt="UserImage">
+                            <img src=" . Auth::guard('teachers')->user()->teacher_image) }}" alt="UserImage">
                         @else
                             <img src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}" alt="UserImage">
                         @endif

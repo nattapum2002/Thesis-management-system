@@ -32,7 +32,7 @@
                         <div class="input-field">
                             <input type="checkbox" id="reject-other" value="reject-other">
                             <label>อื่นๆ </label>
-                            <input class="form-input" type="text" wire:model.defer="rejectReason"
+                            <input class="form-control" type="text" wire:model.defer="rejectReason"
                                 placeholder="กรุณากรอกข้อมูล">
                         </div>
                     </div>

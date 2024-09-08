@@ -145,7 +145,7 @@ class AddTeacher extends Component
     protected function rules()
     {
         return [
-            'add_teacher_image' => 'required|image|max:1024',
+            'add_teacher_image' => 'required|image|max:2048',
             'add_prefix' => 'required',
             'add_other_prefix' => 'required_if:add_prefix,อื่นๆ',
             'add_name' => 'required',
@@ -160,7 +160,7 @@ class AddTeacher extends Component
             'add_password_confirmation' => 'nullable|required_with:add_password',
             'add_user_type' => 'required',
             'add_account_status' => 'required',
-            'add_signature_image' => 'nullable|image|max:1024',
+            'add_signature_image' => 'nullable|image|max:2048',
         ];
     }
 
@@ -171,8 +171,8 @@ class AddTeacher extends Component
             'add_signature_image.required' => 'กรุณาเลือกไฟล์ภาพ',
             'add_teacher_image.image' => 'กรุณาเลือกไฟล์ภาพให้ถูกต้อง',
             'add_signature_image.image' => 'กรุณาเลือกไฟล์ภาพให้ถูกต้อง',
-            'add_teacher_image.max' => 'ไฟล์ภาพต้องมีขนาดไม่เกิน 1 MB',
-            'add_signature_image.max' => 'ไฟล์ภาพต้องมีขนาดไม่เกิน 1 MB',
+            'add_teacher_image.max' => 'ไฟล์ภาพต้องมีขนาดไม่เกิน 2 MB',
+            'add_signature_image.max' => 'ไฟล์ภาพต้องมีขนาดไม่เกิน 2 MB',
             'add_prefix.required' => 'กรุณาเลือกคํานําหน้า',
             'add_other_prefix.required_if' => 'กรุณากรอกคํานําหน้า',
             'add_name.required' => 'กรุณากรอกชื่อ',
@@ -210,7 +210,7 @@ class AddTeacher extends Component
             'branch' => $this->add_branch,
             'email' => $this->add_email,
             'tel' => $this->add_tel,
-            'id_line' => $this->add_id_line ? $this->add_id_line : null,
+            'id_line' => null,
             'username' => $this->add_username,
             'password' => Hash::make($this->add_password),
             'user_type' => $this->add_user_type,

@@ -63,7 +63,7 @@
                                             @if ($toggle['time_submission'])
                                                 <td>
                                                     <div class="input-field">
-                                                        <input class="form-input" type="time"
+                                                        <input class="form-control" type="time"
                                                             wire:model='time_submission' placeholder="กรุณากรอกเวลาสอบ"
                                                             required>
                                                         @error('edit_time')
@@ -93,7 +93,7 @@
                                             @if ($toggle['date_submission'])
                                                 <td>
                                                     <div class="input-field">
-                                                        <input class="form-input" type="date"
+                                                        <input class="form-control" type="date"
                                                             wire:model='date_submission'
                                                             placeholder="กรุณากรอกวันที่สอบ" required>
                                                         @error('edit_date')
