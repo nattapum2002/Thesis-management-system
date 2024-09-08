@@ -100,20 +100,6 @@ Route::get('/Logout', function () {
     }
 })->name('logout');
 
-
-Route::get('/Logouts', function () {
-    if (Auth::guard('members')->check()) {
-        Auth::guard('members')->logout();
-        session()->invalidate();
-        session()->regenerateToken();
-        return redirect(route('login.member'));
-    } else if (Auth::guard('teachers')->check()) {
-        Auth::guard('teachers')->logout();
-        session()->invalidate();
-        session()->regenerateToken();
-        return redirect(route('login.teacher'));
-    }
-})->name('logouts');
 //Admin Route
 
 Route::prefix('Admin')->group(function () {
