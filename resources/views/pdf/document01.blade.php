@@ -584,14 +584,14 @@
                         <td>
                             <div>
                                 <input type="checkbox"
-                                    {{ $branchHeadComments->first() == 'อนุมัติ' ? 'checked' : '' }}>
+                                    {{ $branchHeadComments->first()->comment == 'อนุมัติ' ? 'checked' : '' }}>
                                 <label> อนุมัติ</label>
                             </div>
                             <div>
                                 <input type="checkbox"
-                                    {{ $branchHeadComments->first() == 'ไม่อนุมัติ' ? 'checked' : '' }}>
+                                    {{ $branchHeadComments->first()->comment == 'ไม่อนุมัติ' ? 'checked' : '' }}>
                                 <label> ไม่อนุมัติ</label>
-                                @if ($branchHeadComments->first() == 'ไม่อนุมัติ')
+                                @if ($branchHeadComments->first()->comment == 'ไม่อนุมัติ')
                                     เนื่องจาก<span class="dotted"> {{ $branchHeadOtherComment->first()->comment }}
                                     </span>
                                 @else
