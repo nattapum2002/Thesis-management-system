@@ -103,16 +103,10 @@ class Document02 extends Component
                 'id_document' => 3,
             ]);
 
-            Confirm_teacher::updateOrCreate(
-                [
-                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                    'id_project' => $this->id_project,
-                    'id_document' => 2
-                ],
-                [
-                    'confirm_status' => true
-                ]
-            );
+            Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                    ->where('id_project', $this->id_project)
+                    ->where('id_document', 2)
+                    ->update(['confirm_status' => true]);
         });
 
         $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Branch head')->pluck('id_teacher')->toArray())

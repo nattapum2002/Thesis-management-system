@@ -31,12 +31,12 @@ class Document01 extends Component
     {
         if ($this->approve_project_name || $this->admin_not_approve) {
             $exitComment = Comment::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
-            ->where('id_project', $this->id_project)
-            ->where('id_document', 1);
+                ->where('id_project', $this->id_project)
+                ->where('id_document', 1);
             if ($exitComment) {
                 $exitComment->delete();
             }
-            
+
             // สร้างคอมเมนต์ใหม่หากมี approve_project_name
             if ($this->approve_project_name) {
                 Comment::create([
@@ -48,7 +48,7 @@ class Document01 extends Component
                     'id_position' => 3,
                 ]);
             }
-            
+
             // สร้างคอมเมนต์ใหม่หากมี approve_teacher
             if ($this->approve_teacher) {
                 Comment::create([
@@ -60,21 +60,15 @@ class Document01 extends Component
                     'id_position' => 3,
                 ]);
             }
-            
+
             // อัปเดตสถานะ confirm_status เป็น true ถ้ามี approve_project_name หรือ approve_teacher
             if ($this->approve_project_name || $this->approve_teacher) {
-                Confirm_teacher::updateOrCreate(
-                    [
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_project' => $this->id_project,
-                        'id_document' => 1
-                    ],
-                    [
-                        'confirm_status' => true
-                    ]
-                );
+                Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                    ->where('id_project', $this->id_project)
+                    ->where('id_document', 1)
+                    ->update(['confirm_status' => true]);
             }
-            
+
             if ($this->admin_not_approve) {
                 Comment::create([
                     'comment' => $this->admin_not_approve[0],

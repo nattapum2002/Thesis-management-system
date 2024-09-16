@@ -4,6 +4,7 @@
         <div class="card">
             <div class="card-body">
                 @if (Auth::guard('teachers')->user()->user_type == 'Admin')
+                <form wire:submit="admin_comment">
                     <legend>ความเห็นของอาจารย์ประจำวิชา</legend>
                     <div x-data="{ admin_approve_fix: false, admin_approve: false }">
                         @if (session()->has('error'))
@@ -31,8 +32,11 @@
                                 </div>
                             </div>
                         </div>
+                        <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
                     </div>
+                </form>
                 @elseif (Auth::guard('teachers')->user()->user_type == 'Branch head')
+                <form wire:submit="branch_head_comment">
                     <legend>ความเห็นของหัวหน้าสาขา</legend>
                     <div x-data="{ branch_head_approve_fix: false, branch_head_approve: false }">
                         @if (session()->has('error'))
@@ -42,12 +46,12 @@
                         @endif
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-12">
-                                <input wire:model="branch-head_approve" type="checkbox" id="branch-head_approve"
-                                    x-model="branch-head_approve" x-bind:disabled="branch_head_approve_fix">
+                                <input wire:model="branch_head_approve" type="checkbox" id="branch_head_approve"
+                                    x-model="branch_head_approve" x-bind:disabled="branch_head_approve_fix">
                                 <label for="branch-head_approve">อนุมัติ</label>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <input wire:model="branch-head_approve_fix" type="checkbox" id="branch_head_approve_fix"
+                                <input wire:model="branch_head_approve_fix" type="checkbox" id="branch_head_approve_fix"
                                     x-model="branch_head_approve_fix" x-bind:disabled="branch_head_approve">
                                 <label for="branch-head_approve_fix">ให้แก้ไขอีกครั้ง</label>
                             </div>
@@ -56,11 +60,13 @@
                             <div class="col-12">
                                 <div x-show="branch_head_approve_fix">
                                     <label for="">เนื่องจาก</label>
-                                    <textarea class="form-control" wire:model="branch-head_approve_fix_comment" id="branch-head_approve_fix_comment"></textarea>
+                                    <textarea class="form-control" wire:model="branch_head_approve_fix_comment" id="branch-head_approve_fix_comment"></textarea>
                                 </div>
                             </div>
                         </div>
+                        <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
                     </div>
+                </form>
                 @endif
             </fieldset>
             </div>

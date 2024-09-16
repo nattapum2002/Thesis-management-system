@@ -104,16 +104,10 @@ class Document05 extends Component
                 'id_document' => 5,
             ]);
 
-            Confirm_teacher::updateOrCreate(
-                [
-                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                    'id_project' => $this->id_project,
-                    'id_document' => 5
-                ],
-                [
-                    'confirm_status' => true
-                ]
-            );
+            Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                    ->where('id_project', $this->id_project)
+                    ->where('id_document', 5)
+                    ->update(['confirm_status' => true]);
             return redirect()->route('admin.approve.documents');
         });
 

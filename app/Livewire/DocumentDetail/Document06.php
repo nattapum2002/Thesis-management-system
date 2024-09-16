@@ -16,6 +16,7 @@ class Document06 extends Component
 {
     public $id_project, $id_document, $students, $project, $advisers, $approve, $approve_fix, $not_approve, $approve_fix_comment, $not_approve_comment;
     public $admin_approve , $admin_approve_fix  , $admin_approve_fix_comment ;
+    public $branch_head_approve , $branch_head_approve_fix  , $branch_head_approve_fix_comment ;
     public $score_student = [];
     public $criterias = [
         ['name' => '1. บุคลิก ท่าทาง การวางตัวและความเชื่อมั่นในตนเอง', 'score' => 5],
@@ -182,6 +183,10 @@ class Document06 extends Component
                         'comment' => 'อนุมัติ'
                     ]
                 );
+                Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                    ->where('id_project', $this->id_project)
+                    ->where('id_document', 6)
+                    ->update(['confirm_status' => true]);
             }elseif($this->admin_approve_fix){
                 Comment::updateOrCreate(
                     [
@@ -203,6 +208,55 @@ class Document06 extends Component
                             'id_position' => 3
                         ],[
                             'comment' => $this->admin_approve_fix_comment
+                        ]
+                        );
+            }
+            
+           }
+       });
+    }
+    public function branch_head_comment()
+    {
+       DB::transaction(function () {
+           if($this->branch_head_approve||$this->branch_head_approve_fix){
+            if($this->branch_head_approve){
+                Comment::updateOrCreate(
+                    [
+                        'id_document' => $this->id_document,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_project' => $this->id_project,
+                        'id_comment_list' => 1,
+                        'id_position' => 3
+                    ],
+                    [
+                        'comment' => 'อนุมัติ'
+                    ]
+                );
+                Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                    ->where('id_project', $this->id_project)
+                    ->where('id_document', 6)
+                    ->update(['confirm_status' => true]);
+            }elseif($this->branch_head_approve_fix){
+                Comment::updateOrCreate(
+                    [
+                        'id_document' => $this->id_document,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_project' => $this->id_project,
+                        'id_comment_list' => 1,
+                        'id_position' => 3
+                    ],[
+                        'comment' => 'ควรปรับผลการประเมิน เป็น'
+                    ]
+                    );
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 2,
+                            'id_position' => 3
+                        ],[
+                            'comment' => $this->branch_head_approve_fix_comment
                         ]
                         );
             }
