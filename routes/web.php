@@ -280,6 +280,9 @@ Route::get('document/06/{id_project}/{id_document}', function ($id_project, $id_
     return view('detail-document.detail_document_06', compact('id_project', 'id_document'));
 })->name('detail_document_06');
 
+Route::get('document/07/{id_project}/{id_document}', function ($id_project, $id_document) {
+    return view('detail-document.detail_document_07', compact('id_project', 'id_document'));
+})->name('detail_document_07');
 
 
 

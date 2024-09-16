@@ -3,6 +3,8 @@
 namespace App\Livewire\DocumentDetail;
 
 use App\Models\Adviser;
+use App\Models\Comment;
+use App\Models\Confirm_teacher;
 use App\Models\Project;
 use App\Models\Score;
 use App\Models\Student_project;
@@ -12,7 +14,8 @@ use Livewire\Component;
 
 class Document06 extends Component
 {
-    public $id_project,$id_document, $students ,$project,$advisers, $approve, $approve_fix, $not_approve, $approve_fix_comment, $not_approve_comment ;
+    public $id_project, $id_document, $students, $project, $advisers, $approve, $approve_fix, $not_approve, $approve_fix_comment, $not_approve_comment;
+    public $admin_approve , $admin_approve_fix  , $admin_approve_fix_comment ;
     public $score_student = [];
     public $criterias = [
         ['name' => '1. บุคลิก ท่าทาง การวางตัวและความเชื่อมั่นในตนเอง', 'score' => 5],
@@ -35,41 +38,179 @@ class Document06 extends Component
                 $filteredScores = array_filter($value, function ($score) {
                     return !is_null($score); // Keep only non-null values
                 });
-            
+
                 return [
                     'student_id' => $key,
                     'scores' => $filteredScores
                 ];
             }, array_keys($this->score_student), $this->score_student);
-    
+
             foreach ($transformedData as $index => $value) {
                 // Reset comment list ID for each new student
                 $current_comment_list_id = 20;
-    
+
                 foreach ($value['scores'] as $scoreIndex => $score) {
-        
+
                     // Create a record for each score
-                    Score::create([
+                    Score::updateOrCreate([
                         'id_student' => $value['student_id'],
                         'id_document' => $this->id_document,
-                        'score' => $score,
                         'id_comment_list' => $current_comment_list_id,
                         'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                         'id_position' => 3
+                    ], [
+                        'score' => $score,
                     ]);
-    
+
                     // Increment the comment list ID after creating a record
                     $current_comment_list_id++;
-    
                 }
             }
         });
-       
+
         // dd($transformedData);
 
         // dd(json_encode($transformedData, JSON_PRETTY_PRINT));
     }
-    public function mount($id_project,$id_document)
+    public function test_summary()
+    {
+        DB::transaction(function () {
+            if ($this->approve || $this->approve_fix || $this->not_approve) {
+                if ($this->approve) {
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 1,
+                            'id_position' => 6,
+                        ],
+                        [
+                            'comment' => 'ผ่าน'
+                        ]
+                    );
+                    Confirm_teacher::updateOrCreate([
+                        'id_document' => $this->id_document,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_project' => $this->id_project,
+                    ], [
+                        'confirm_status' => true
+                    ]);
+                } else if ($this->approve_fix) {
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 1,
+                            'id_position' => 6
+                        ],
+                        [
+                            'comment' => 'ผ่าน/แก้ไขใหม่'
+                        ]
+                    );
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 2,
+                            'id_position' => 6
+                        ],
+                        [
+                            'comment' => $this->approve_fix_comment
+                        ]
+                    );
+                    Confirm_teacher::updateOrCreate([
+                        'id_document' => $this->id_document,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_project' => $this->id_project,
+                    ], [
+                        'confirm_status' => true
+                    ]);
+                } else if ($this->not_approve) {
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 1,
+                            'id_position' => 6
+                        ],
+                        [
+                            'comment' => 'ไม่ผ่าน'
+                        ]
+                    );
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 2,
+                            'id_position' => 6
+                        ],
+                        [
+                            'comment' => $this->not_approve_comment
+                        ]
+                    );
+
+                    Confirm_teacher::updateOrCreate([
+                        'id_document' => $this->id_document,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_project' => $this->id_project,
+                    ], [
+                        'confirm_status' => false
+                    ]);
+                }
+            }
+        });
+    }
+    public function admin_comment()
+    {
+       DB::transaction(function () {
+           if($this->admin_approve||$this->admin_approve_fix){
+            if($this->admin_approve){
+                Comment::updateOrCreate(
+                    [
+                        'id_document' => $this->id_document,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_project' => $this->id_project,
+                        'id_comment_list' => 1,
+                        'id_position' => 3
+                    ],
+                    [
+                        'comment' => 'อนุมัติ'
+                    ]
+                );
+            }elseif($this->admin_approve_fix){
+                Comment::updateOrCreate(
+                    [
+                        'id_document' => $this->id_document,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_project' => $this->id_project,
+                        'id_comment_list' => 1,
+                        'id_position' => 3
+                    ],[
+                        'comment' => 'ควรปรับผลการประเมิน เป็น'
+                    ]
+                    );
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 2,
+                            'id_position' => 3
+                        ],[
+                            'comment' => $this->admin_approve_fix_comment
+                        ]
+                        );
+            }
+            
+           }
+       });
+    }
+    public function mount($id_project, $id_document)
     {
         $this->id_document = $id_document;
         $this->id_project = $id_project;
@@ -94,18 +235,18 @@ class Document06 extends Component
         })
             ->get();
 
-            $skipIndices = [1, 6, 9]; // Indices to skip
+        $skipIndices = [1, 6, 9]; // Indices to skip
 
-            foreach ($this->project as $ProjectItems) {
-                foreach ($ProjectItems->confirmStudents as $Student) {
-                    $this->score_student[$Student->student->id_student] = array_map(
-                        function ($index) use ($skipIndices) {
-                            return in_array($index, $skipIndices) ? null : 0;
-                        },
-                        array_keys(array_fill(0, count($this->criterias), 0))
-                    );
-                }
+        foreach ($this->project as $ProjectItems) {
+            foreach ($ProjectItems->confirmStudents as $Student) {
+                $this->score_student[$Student->student->id_student] = array_map(
+                    function ($index) use ($skipIndices) {
+                        return in_array($index, $skipIndices) ? null : 0;
+                    },
+                    array_keys(array_fill(0, count($this->criterias), 0))
+                );
             }
+        }
     }
     public function render()
     {

@@ -81,7 +81,7 @@ class pdfGenerateController extends Controller
             'teacher',
             'position'
         ])->where('id_project', $projectID)
-            ->where('id_document', $documentId)->get();
+            ->where('id_document', 3)->get();
 
         $comments = Comment::with([
             'project',
@@ -403,14 +403,14 @@ class pdfGenerateController extends Controller
             },
             'confirmStudents.student',
             'confirmStudents.documents',
-            'confirmTeachers' => function ($query) {
+            'confirmTeachers' => function ($query) use ($projectID) {
                 $query->where('id_document', 3)
-                    ->where('id_project', 11);
+                    ->where('id_project', $projectID);
             },
             'confirmTeachers.teacher',
             'confirmTeachers.document'
-        ])->whereHas('confirmTeachers', function ($query) {
-            $query->where('id_document', 3)->where('id_project', 11);
+        ])->whereHas('confirmTeachers', function ($query) use ($projectID)  {
+            $query->where('id_document', 3)->where('id_project', $projectID);
         })
             ->get();
 
@@ -429,7 +429,6 @@ class pdfGenerateController extends Controller
             'teacher',
             'position'
         ])->where('id_project', $projectID)->where('id_document', $documentId)->orderBy('created_at', 'asc')->get();
-
         $projectscore = Project::with([
             'members.course',
             'members.level',

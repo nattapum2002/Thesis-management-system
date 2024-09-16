@@ -4,6 +4,8 @@ namespace App\Livewire\DocumentDetail;
 
 
 use App\Models\Adviser;
+use App\Models\Comment;
+use App\Models\Confirm_teacher;
 use App\Models\Project;
 use App\Models\Score;
 use App\Models\Student_project;
@@ -73,14 +75,18 @@ class Document03 extends Component
                     }
 
                     // บันทึกข้อมูลคะแนน
-                    Score::create([
-                        'id_student' => $value['student_id'],
-                        'id_document' => $this->id_document,
-                        'score' => $score,
-                        'id_comment_list' => $current_comment_list_id,
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_position' => 3
-                    ]);
+                    Score::updateOrCreate(
+                        [
+                            'id_student' => $value['student_id'],
+                            'id_document' => $this->id_document,
+                            'id_comment_list' => $current_comment_list_id,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        ],
+                        [
+                            'score' => $score,
+                            'id_position' => 3
+                        ]
+                    );
 
                     // เพิ่มค่า ID ของ comment list
                     $current_comment_list_id++;
@@ -89,7 +95,97 @@ class Document03 extends Component
         });
     }
 
-    public function test() {}
+    public function test_progress()
+    {
+        DB::transaction(function () {
+            if ($this->approve || $this->approve_fix || $this->not_approve) {
+                if ($this->approve) {
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 1,
+                            'id_position' => 3
+                        ],
+                        [
+                            'comment' => 'ผ่าน'
+                        ]
+                    );
+                    Confirm_teacher::updateOrCreate([
+                        'id_document' => $this->id_document,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_project' => $this->id_project,
+                        ],[
+                        'confirm_status' => true
+                    ]);
+                } else if ($this->approve_fix) {
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 1,
+                            'id_position' => 3
+                        ],
+                        [
+                            'comment' => 'ผ่าน/แก้ไขใหม่'
+                        ]
+                    );
+                    Comment::updateOrCreate([
+                        'id_document' => $this->id_document,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_project' => $this->id_project,
+                        'id_comment_list' => 2,
+                        'id_position' => 3
+                    ],[
+                        'comment' => $this->approve_fix_comment
+                    ]
+                );
+                Confirm_teacher::updateOrCreate([
+                    'id_document' => $this->id_document,
+                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                    'id_project' => $this->id_project,
+                    ],[
+                    'confirm_status' => true
+                ]);
+                
+                }else if ($this->not_approve) {
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 1,
+                            'id_position' => 3
+                        ],
+                        [
+                            'comment' => 'ไม่ผ่าน'
+                        ]
+                    );
+                    Comment::updateOrCreate([
+                        'id_document' => $this->id_document,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_project' => $this->id_project,
+                        'id_comment_list' => 2,
+                        'id_position' => 3
+                    ],[
+                        'comment' => $this->not_approve_comment
+                    ]
+                );
+    
+                Confirm_teacher::updateOrCreate([
+                    'id_document' => $this->id_document,
+                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                    'id_project' => $this->id_project,
+                    ],[
+                    'confirm_status' => false
+                ]);
+                }
+            }
+        });
+        
+    }
     public function mount($id_project, $id_document)
     {
         $this->id_document = $id_document;

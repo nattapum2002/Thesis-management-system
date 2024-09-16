@@ -703,6 +703,7 @@
                     @endphp
                     @if ($teachers)
                         <tr>
+                            {{-- @dd($teachers) --}}
                             <td colspan="2">
                                 <div>4. ลงชื่อคณะกรรมการสอบ</div>
                             </td>

@@ -17,7 +17,7 @@ use Livewire\Component;
 
 class TeacherManageAllSubmitDocument extends Component
 {
-    public $not_approve_document, $not_approve_project, $id_teacher, $id_position, $another_comment;
+    public $not_approve_document, $not_approve_project, $id_teacher, $id_position, $another_comment ,$members, $teachers ,$project;
     public function teacher_document($id_document, $id_project)
     {
         $id_teacher = Auth::guard('teachers')->user()->id_teacher;
@@ -63,6 +63,7 @@ class TeacherManageAllSubmitDocument extends Component
     }
 
     public function create_document_07($id_project){
+
         if ($id_project !== 'none') {
             DB::transaction(function () use ($id_project) {
                 $memberIds = collect($this->members->pluck('id_student'))
@@ -100,12 +101,11 @@ class TeacherManageAllSubmitDocument extends Component
                 ]);
 
                 foreach ($memberIds as $member_Ids) {
-                    $send_member = $member_Ids == Auth::guard('members')->user()->id_student ? true : false;
                     $student_document = Confirm_student::create([
                         'id_student' => $member_Ids,
                         'id_document' => 7,
                         'id_project' => $id_project,
-                        'confirm_status' => $send_member,
+                        'confirm_status' => false,
                     ]);
                 }
                 $main_adviser = $this->project->first()->teachers->where('pivot.id_position', 1);
@@ -128,7 +128,8 @@ class TeacherManageAllSubmitDocument extends Component
                     ]);
                 }
 
-                $main_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 5)->get();
+                $main_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)
+                ->where('id_document', 6)->where('id_position', 5)->get();
                 Confirm_teacher::create([
                     'id_teacher' => $main_director->first()->id_teacher ?? 8,
                     'id_document' => 7,
@@ -137,7 +138,8 @@ class TeacherManageAllSubmitDocument extends Component
                     'confirm_status' => false,
                 ]);
 
-                $sub_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 6)->get();
+                $sub_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)
+                ->where('id_document', 6)->where('id_position', 6)->get();
                 foreach ($sub_director as $sub_director_items) {
                     Confirm_teacher::create([
                         'id_teacher' => $sub_director_items->id_teacher,
@@ -148,7 +150,9 @@ class TeacherManageAllSubmitDocument extends Component
                     ]);
                 }
 
-                $sub_teacher = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 7)->get();
+                $sub_teacher = Confirm_teacher::where('id_project', $this->project->first()->id_project)
+                ->where('id_position', 7)
+                ->where('id_document', 6)->get();
                 Confirm_teacher::create([
                     'id_teacher' => $sub_teacher->first()->id_teacher ?? 8,
                     'id_document' => 7,
@@ -156,7 +160,6 @@ class TeacherManageAllSubmitDocument extends Component
                     'id_position' => 7,
                     'confirm_status' => false,
                 ]);
-                dd($sub_teacher);
             });
         }
     }
@@ -175,7 +178,8 @@ class TeacherManageAllSubmitDocument extends Component
                 return redirect()->route('detail_document_05', ['id_project' => $id_project, 'id_document' => $id_document]);
             case 6:
                 return redirect()->route('detail_document_06', ['id_project' => $id_project, 'id_document' => $id_document]);
-
+            case 7:
+                return redirect()->route('detail_document_07', ['id_project' => $id_project, 'id_document' => $id_document]);
             default:
                 // Redirect to a fallback route or handle the case where id_document is not recognized
                 return dd(5555);
@@ -188,7 +192,7 @@ class TeacherManageAllSubmitDocument extends Component
     }
     public function render()
     {
-        $projects = Project::with([
+        $this->project = Project::with([
             'confirmStudents.student',
             'confirmStudents.documents',
             'confirmTeachers.teacher',
@@ -200,7 +204,11 @@ class TeacherManageAllSubmitDocument extends Component
                 $query->where('id_teacher', Auth::guard('teachers')->user()->id_teacher);
             })
             ->get();
+
+            $this->members = $this->project->first()->members;
+            $this->teachers = $this->project->first()->teachers;
+           
         //  dd($projects);
-        return view('livewire.document.teacher-manage-all-submit-document', ['projects' => $projects]);
+        return view('livewire.document.teacher-manage-all-submit-document', ['projects' => $this->project]);
     }
 }

@@ -359,7 +359,10 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <button class="btn btn-success m-3" type="submit">บันทึกคะแนน</button>
                     </fieldset>
+                </form>
+                <form wire:submit="test_progress">
                     <fieldset>
                         <legend>สรุปผลการสอบ</legend>
                         <div x-data="{ approve_fix: false, not_approve: false, approve: false }">
@@ -387,7 +390,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-success" type="submit">บันทึก</button>
+                        <button class="btn btn-success m-3" type="submit">บันทึกผลการสอบ</button>
                         {{-- <a href="{{ route('pdf.stream') }}" target="_blank">View PDF</a> --}}
                     </fieldset>
                 </form>
