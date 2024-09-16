@@ -19,13 +19,14 @@ class Document04 extends Component
     {
         DB::transaction(function () {
             if ($this->admin_approve == true) {
-                Comment::create([
-                    'comment' => 'เห็นชอบ',
+                Comment::updateOrCreate([
                     'id_project' => $this->id_project,
                     'id_document' => $this->id_document,
                     'id_comment_list' => 1,
                     'id_teacher' => auth()->guard('teachers')->user()->id_teacher,
                     'id_position' => 3,
+                ],[
+                    'comment' => 'เห็นชอบ',
                 ]);
 
                 Confirm_teacher::where(function ($query) {
@@ -36,22 +37,24 @@ class Document04 extends Component
                     'confirm_status' => true
                 ]);
             } else if ($this->admin_approve_fix == true) {
-                Comment::create([
-                    'comment' => 'เห็นชอบแต่ให้มีการแก้ไขเพิ่มเติม',
+                Comment::updateOrCreate([
                     'id_project' => $this->id_project,
                     'id_document' => $this->id_document,
                     'id_comment_list' => 1,
                     'id_teacher' => auth()->guard('teachers')->user()->id_teacher,
                     'id_position' => 3,
+                ],[
+                    'comment' => 'เห็นชอบแต่ให้มีการแก้ไขเพิ่มเติม',
                 ]);
 
-                Comment::create([
-                    'comment' => $this->admin_comment_fix,
+                Comment::updateOrCreate([
                     'id_project' => $this->id_project,
                     'id_document' => $this->id_document,
                     'id_comment_list' => 2,
                     'id_teacher' => auth()->guard('teachers')->user()->id_teacher,
                     'id_position' => 3,
+                ],[
+                    'comment' => $this->admin_comment_fix,
                 ]);
 
                 Confirm_teacher::where(function ($query) {
@@ -93,13 +96,14 @@ class Document04 extends Component
     {
         DB::transaction(function () {
             if ($this->branch_head_approve == true) {
-                Comment::create([
-                    'comment' => 'เห็นชอบ',
+                Comment::updateOrCreate([
                     'id_project' => $this->id_project,
                     'id_document' => $this->id_document,
                     'id_comment_list' => 1,
                     'id_teacher' => auth()->guard('teachers')->user()->id_teacher,
                     'id_position' => 4,
+                ],[
+                    'comment' => 'เห็นชอบ',
                 ]);
 
                 Confirm_teacher::where(function ($query) {
@@ -110,22 +114,24 @@ class Document04 extends Component
                     'confirm_status' => true
                 ]);
             } else if ($this->branch_head_approve_fix == true) {
-                Comment::create([
-                    'comment' => 'เห็นชอบแต่ให้มีการแก้ไขเพิ่มเติม',
+                Comment::updateOrCreate([
                     'id_project' => $this->id_project,
                     'id_document' => $this->id_document,
                     'id_comment_list' => 1,
                     'id_teacher' => auth()->guard('teachers')->user()->id_teacher,
                     'id_position' => 4,
+                ],[
+                    'comment' => 'เห็นชอบแต่ให้มีการแก้ไขเพิ่มเติม',
                 ]);
 
-                Comment::create([
-                    'comment' => $this->branch_head_comment_fix,
+                Comment::updateOrCreate([
                     'id_project' => $this->id_project,
                     'id_document' => $this->id_document,
                     'id_comment_list' => 2,
                     'id_teacher' => auth()->guard('teachers')->user()->id_teacher,
                     'id_position' => 4,
+                ],[
+                    'comment' => $this->branch_head_comment_fix,
                 ]);
 
                 Confirm_teacher::where(function ($query) {

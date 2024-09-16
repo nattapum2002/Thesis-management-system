@@ -102,6 +102,17 @@ class Document02 extends Component
                 'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                 'id_document' => 3,
             ]);
+
+            Confirm_teacher::updateOrCreate(
+                [
+                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                    'id_project' => $this->id_project,
+                    'id_document' => 2
+                ],
+                [
+                    'confirm_status' => true
+                ]
+            );
         });
 
         $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Branch head')->pluck('id_teacher')->toArray())
@@ -127,67 +138,162 @@ class Document02 extends Component
                     }
                 }
             }
+
+            return redirect()->route('admin.approve.documents');
         }
     }
     public function Brance_head_approve()
     {
-        if ($this->branch_head_approve || $this->branch_head_not_approve) {
-            if ($this->branch_head_approve) {
-                Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+        DB::transaction(function () {
+            if ($this->branch_head_approve || $this->branch_head_not_approve) {
+                $existingConfirm = Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
                     ->where('id_project', $this->id_project)
                     ->where('id_document', 2)
-                    ->update([
-                        'confirm_status' => true
-                    ]);
-            } else if ($this->branch_head_not_approve) {
-                Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
-                    ->where('id_project', $this->id_project)
-                    ->where('id_document', 2)
-                    ->update([
-                        'confirm_status' => false
-                    ]);
-                if ($this->branch_head_comment) {
-                    Comment::create([
-                        'comment' => $this->branch_head_comment,
-                        'id_project' => $this->id_project,
-                        'id_document' => 2,
-                        'id_comment_list' => 2,
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_position' => 4,
-                    ]);
-                }
-            }
-
-            $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Admin')->pluck('id_teacher')->toArray())
-                ->where('id_project', $this->id_project)
-                ->where('id_document', 2)
-                ->where('confirm_status', true)
-                ->exists();
-
-            if ($confirmed) {
-                $project = Project::with(['members', 'teachers', 'advisers'])
-                    ->where('id_project', $this->id_project)
                     ->first();
-
-                $message = 'เอกสาร คกท.-คง.-02 ได้รับการอนุมัติ กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
-
-                foreach ($project->members as $member) {
-                    if (!empty($member->id_line)) { // ตรวจสอบว่ามีค่า id_line
-                        $userId = $member->id_line;
-
-                        // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
-                        if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
-                            LineMessageService::sendMessage($userId, $message);
+                $exitComment = Comment::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                    ->where('id_project', $this->id_project)
+                    ->where('id_document', 2)
+                    ->first();
+                if ($this->branch_head_approve) {
+                    if ($existingConfirm) {
+                        // Update if exists
+                        $existingConfirm->update([
+                            'confirm_status' => true
+                        ]);
+                    } else {
+                        // Create if not exists
+                        Confirm_teacher::create([
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_document' => 2,
+                            'confirm_status' => true
+                        ]);
+                    }
+                    if ($exitComment) {
+                        $exitComment->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                            ->where('id_project', $this->id_project)
+                            ->where('id_document', 2)
+                            ->where('id_comment_list', 1)->update([
+                                'comment' => 'อนุมัติ',
+                            ]);
+                    } else {
+                        Comment::create([
+                            'comment' => 'อนุมัติ',
+                            'id_project' => $this->id_project,
+                            'id_document' => 2,
+                            'id_comment_list' => 1,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_position' => 4,
+                        ]);
+                    }
+                } else if ($this->branch_head_not_approve) {
+                    if ($existingConfirm) {
+                        // Update if exists
+                        $existingConfirm->update([
+                            'confirm_status' => false
+                        ]);
+                    } else {
+                        // Create if not exists
+                        Confirm_teacher::create([
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_document' => 2,
+                            'confirm_status' => false
+                        ]);
+                    }
+    
+    
+                    if ($exitComment) {
+                        // Update the first comment if it exists
+                        $exitComment->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                            ->where('id_project', $this->id_project)
+                            ->where('id_document', 2)
+                            ->where('id_comment_list', 1)
+                            ->update([
+                                'comment' => 'ไม่อนุมัติ',
+                            ]);
+    
+                        // Check if a second comment with id_comment_list 2 exists
+                        $secondComment = Comment::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                            ->where('id_project', $this->id_project)
+                            ->where('id_document', 2)
+                            ->where('id_comment_list', 2)
+                            ->first();
+    
+                        if ($secondComment) {
+                            // Update second comment if it exists
+                            $secondComment->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                                ->where('id_project', $this->id_project)
+                                ->where('id_document', 2)
+                                ->where('id_comment_list', 2)
+                                ->update([
+                                    'comment' => $this->branch_head_comment,
+                                ]);
+                        } else {
+                            // Create second comment if not exists
+                            Comment::create([
+                                'comment' => $this->branch_head_comment,
+                                'id_project' => $this->id_project,
+                                'id_document' => 2,
+                                'id_comment_list' => 2,
+                                'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                                'id_position' => 4,
+                            ]);
+                        }
+                    } else {
+                        // Create both comments if none exist
+                        Comment::create([
+                            'comment' => 'ไม่อนุมัติ',
+                            'id_project' => $this->id_project,
+                            'id_document' => 2,
+                            'id_comment_list' => 1,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_position' => 4,
+                        ]);
+    
+                        Comment::create([
+                            'comment' => $this->branch_head_comment,
+                            'id_project' => $this->id_project,
+                            'id_document' => 2,
+                            'id_comment_list' => 2,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_position' => 4,
+                        ]);
+                    }
+                }
+    
+                $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Admin')->pluck('id_teacher')->toArray())
+                    ->where('id_project', $this->id_project)
+                    ->where('id_document', 2)
+                    ->where('confirm_status', true)
+                    ->exists();
+    
+                if ($confirmed) {
+                    $project = Project::with(['members', 'teachers', 'advisers'])
+                        ->where('id_project', $this->id_project)
+                        ->first();
+    
+                    $message = 'เอกสาร คกท.-คง.-02 ได้รับการอนุมัติ กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+    
+                    foreach ($project->members as $member) {
+                        if (!empty($member->id_line)) { // ตรวจสอบว่ามีค่า id_line
+                            $userId = $member->id_line;
+    
+                            // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
+                            if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
+                                LineMessageService::sendMessage($userId, $message);
+                            }
                         }
                     }
                 }
+    
+                return redirect()->route('branch-head.approve.documents');
+            } else {
+                session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
+                return;
             }
-
-            return redirect()->route('branch-head.approve.documents');
-        } else {
-            session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
-            return;
-        }
+        });
+       
     }
     public function mount($id_project, $id_document)
     {

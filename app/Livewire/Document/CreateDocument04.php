@@ -92,7 +92,8 @@ class CreateDocument04 extends Component
                     ]);
                 }
 
-                $main_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 5)->get();
+                $main_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)
+                ->where('id_document', 3)->where('id_position', 5)->get();
                 Confirm_teacher::create([
                     'id_teacher' => $main_director->first()->id_teacher ?? 8,
                     'id_document' => 4,
@@ -101,7 +102,8 @@ class CreateDocument04 extends Component
                     'confirm_status' => false,
                 ]);
 
-                $sub_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 6)->get();
+                $sub_director = Confirm_teacher::where('id_project', $this->project->first()->id_project)
+                ->where('id_document', 3)->where('id_position', 6)->get();
                 foreach ($sub_director as $sub_director_items) {
                     Confirm_teacher::create([
                         'id_teacher' => $sub_director_items->id_teacher,
@@ -112,7 +114,9 @@ class CreateDocument04 extends Component
                     ]);
                 }
 
-                $sub_teacher = Confirm_teacher::where('id_project', $this->project->first()->id_project)->where('id_position', 7)->get();
+                $sub_teacher = Confirm_teacher::where('id_project', $this->project->first()->id_project)
+                ->where('id_position', 7)
+                ->where('id_document', 3)->get();
                 Confirm_teacher::create([
                     'id_teacher' => $sub_teacher->first()->id_teacher ?? 8,
                     'id_document' => 4,
@@ -120,7 +124,7 @@ class CreateDocument04 extends Component
                     'id_position' => 7,
                     'confirm_status' => false,
                 ]);
-                // dd($sub_teacher);
+                // dd($main_director);
             });
             return redirect()->route('member.manage.document');
         } else {

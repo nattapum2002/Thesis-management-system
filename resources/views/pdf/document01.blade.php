@@ -558,6 +558,7 @@
                 </td>
             </tr>
             @foreach ($branchHeads as $branchHead)
+           
                 @php
                     $branchHeadComments = $comments
                         ->where('id_teacher', $branchHead->id_teacher)
@@ -578,6 +579,7 @@
                 @endphp
                 @if ($branchHeadComments->isNotEmpty() || $branchHeadOtherComment->isNotEmpty() || $confirm)
                 @break
+               
             @endif
         @endforeach
         @if ($branchHeadComments->isNotEmpty())
@@ -585,14 +587,14 @@
                 <td style="width: 1.8em"></td>
                 <td>
                     <div>
-                        <input type="checkbox" {{ $branchHeadComments->first() == 'อนุมัติ' ? 'checked' : '' }}>
+                        <input type="checkbox" {{ $branchHeadComments->where('comment', 'อนุมัติ')->isNotEmpty() ? 'checked' : '' }}>
                         <label> อนุมัติ</label>
                     </div>
                     <div>
                         <input type="checkbox"
-                            {{ $branchHeadComments->first() == 'ไม่อนุมัติ' ? 'checked' : '' }}>
+                        {{ $branchHeadComments->where('comment', 'ไม่อนุมัติ')->isNotEmpty() ? 'checked' : '' }}>
                         <label> ไม่อนุมัติ</label>
-                        @if ($branchHeadComments->first() == 'ไม่อนุมัติ')
+                        @if ($branchHeadComments->where('comment', 'ไม่อนุมัติ')->isNotEmpty())
                             เนื่องจาก<span class="dotted"> {{ $branchHeadOtherComment->first()->comment }} </span>
                         @else
                             เนื่องจาก

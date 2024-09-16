@@ -25,14 +25,13 @@
             <div class="sidebar-user">
                 <a href="{{ route('teacher.edit.teacher') }}">
                     <div class="image">
-                        @php
-                            $userImage = optional(Auth::guard('teachers')->user()->teacher_image);
-                            $imagePath = $userImage
-                                ? asset('storage/' . $userImage)
-                                : asset('Asset/dist/img/avatar' . rand(1, 5) . '.png');
-                        @endphp
-
-                        <img src="{{ $imagePath }}" alt="UserImage">
+                        @if (Auth::guard('teachers')->user()->teacher_image)
+                            {{-- <img src="{{ asset('Thesis-management-system/storage/app/public/' . Auth::guard('teachers')->user()->teacher_image) }}" alt="UserImage"> --}}
+                            <img src="{{ asset('storage/' . Auth::guard('teachers')->user()->teacher_image) }}"
+                                alt="UserImage">
+                        @else
+                            <img src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}" alt="UserImage">
+                        @endif
 
                     </div>
                     <div class="info">

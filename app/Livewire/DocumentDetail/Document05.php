@@ -103,6 +103,18 @@ class Document05 extends Component
                 'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                 'id_document' => 5,
             ]);
+
+            Confirm_teacher::updateOrCreate(
+                [
+                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                    'id_project' => $this->id_project,
+                    'id_document' => 5
+                ],
+                [
+                    'confirm_status' => true
+                ]
+            );
+            return redirect()->route('admin.approve.documents');
         });
 
         $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Branch head')->pluck('id_teacher')->toArray())
@@ -140,6 +152,15 @@ class Document05 extends Component
                     ->update([
                         'confirm_status' => true
                     ]);
+                    Comment::updateOrCreate([
+                        'id_project' => $this->id_project,
+                        'id_document' => 5,
+                        'id_comment_list' => 1,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_position' => 4,
+                    ],[
+                        'comment' => 'อนุมัติ', 
+                    ]);
             } else if ($this->branch_head_not_approve) {
                 Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
                     ->where('id_project', $this->id_project)
@@ -147,14 +168,24 @@ class Document05 extends Component
                     ->update([
                         'confirm_status' => false
                     ]);
+                    Comment::updateOrCreate([
+                        'id_project' => $this->id_project,
+                        'id_document' => 5,
+                        'id_comment_list' => 1 ,
+                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                        'id_position' => 4,
+                    ],[
+                        'comment' => 'ไม่อนุมัติ เนื่องจาก', 
+                    ]);
                 if ($this->branch_head_comment) {
-                    Comment::create([
-                        'comment' => $this->branch_head_comment,
+                    Comment::updateOrCreate([
                         'id_project' => $this->id_project,
                         'id_document' => 5,
                         'id_comment_list' => 2,
                         'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                         'id_position' => 4,
+                    ],[
+                        'comment' => $this->branch_head_comment,
                     ]);
                 }
             }

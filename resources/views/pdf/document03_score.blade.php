@@ -558,7 +558,7 @@
                         <td style="width: 1.8em"></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox" {{ isset($result) && $result->comment == 'ผ่าน' ?
+                                <input type="checkbox" {{ $comments[0]->comment == 'ผ่าน' ?
                                 'checked' : '' }}>
                                 <label> ผ่าน</label>
                             </div>
@@ -568,10 +568,10 @@
                         <td></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox" {{ isset($result) && $result->comment == 'ผ่าน/ แก้ไขใหม่'
+                                <input type="checkbox" {{ $comments[0]->comment == 'ผ่าน/แก้ไขใหม่'
                                 ?
                                 'checked' : '' }}>
-                                <label> ผ่าน/ แก้ไขใหม่</label>
+                                <label> ผ่าน/แก้ไขใหม่</label>
                             </div>
                         </td>
                     </tr>
@@ -583,8 +583,8 @@
                         </td>
                         <td colspan="6">
                             <div>
-                                @if (isset($resultDetail) && $result->comment == 'ผ่าน/ แก้ไขใหม่')
-                                <span class="dotted"> {{ $resultDetail->comment }} </span>
+                                @if ($comments[0]->comment == 'ผ่าน/แก้ไขใหม่')
+                                <span class="dotted"> {{ $comments[1]->comment }} </span>
                                 @else
                                 .........................................................................................................................
                                 <br>.........................................................................................................................
@@ -598,7 +598,7 @@
                         <td></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox" {{ isset($result) && $result->comment == 'ไม่ผ่าน' ?
+                                <input type="checkbox" {{ $comments[0]->comment == 'ไม่ผ่าน' ?
                                 'checked' : '' }}>
                                 <label> ไม่ผ่าน</label>
                             </div>
@@ -612,8 +612,8 @@
                         </td>
                         <td colspan="6">
                             <div>
-                                @if (isset($resultDetail) && $result->comment == 'ไม่ผ่าน')
-                                <span class="dotted"> {{ $resultDetail->comment }} </span>
+                                @if ($comments[0]->comment == 'ไม่ผ่าน')
+                                <span class="dotted"> {{ $comments[1]->comment }} </span>
                                 @else
                                 .........................................................................................................................
                                 <br>.........................................................................................................................
@@ -687,10 +687,11 @@
             <div>
                 <table>
                     @php
-                        $teachers = $project->confirmTeachers->unique('id_teacher')->where('confirm_status', 1)->first();
+                        $teachers = $project->confirmTeachers->unique('id_teacher')->where('confirm_status', 1);
                     @endphp
                     @if ($teachers)
                         <tr>
+                            {{-- @dd($teachers) --}}
                             <td colspan="2">
                                 <div>4. ลงชื่อคณะกรรมการสอบ</div>
                             </td>
