@@ -19,7 +19,7 @@
                         <th>รูปภาพบทความ</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_thesis_image" type="file"
+                                <input class="form-control" wire:model="add_thesis_image" type="file"
                                     placeholder="เลือกไฟล์">
                             </div>
                             @error('add_thesis_image')
@@ -51,7 +51,7 @@
                         <th>บทคัดย่อ</th>
                         <td>
                             <div class="input-field">
-                                <textarea class="form-input" wire:model="add_detail" type="text" placeholder="กรุณากรอกรายละเอียด"></textarea>
+                                <textarea class="form-control" wire:model="add_detail" type="text" placeholder="กรุณากรอกรายละเอียด"></textarea>
                             </div>
                             @error('add_detail')
                                 <span class="text-danger">{{ $message }}</span>
@@ -108,7 +108,7 @@
                         <th>ไฟล์บทความ</th>
                         <td>
                             <div class="input-field">
-                                <input class="form-input" wire:model="add_thesis_file" type="file"
+                                <input class="form-control" wire:model="add_thesis_file" type="file"
                                     placeholder="เลือกไฟล์">
                             </div>
                             @error('add_thesis_file')

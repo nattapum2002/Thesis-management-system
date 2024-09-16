@@ -19,10 +19,16 @@
                         <tr>
                             <th>รูปภาพ</th>
                             <td>
-                                <img wire:live
-                                    src="{{ $thesis->thesis_image ? asset('storage/' . $thesis->thesis_image) : 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
-                                    alt="{{ $thesis->thesis_image ? $thesis->title : '' }}"
-                                    style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                @if ($thesis->thesis_image)
+                                    {{-- Thesis-management-system/storage/app/public/ --}}
+                                    <img wire:live src="{{ asset('storage/' . $thesis->thesis_image) }}"
+                                        alt="{{ $thesis->title }}"
+                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                @else
+                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                        alt=""
+                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                @endif
                             </td>
                             <td></td>
                         </tr>

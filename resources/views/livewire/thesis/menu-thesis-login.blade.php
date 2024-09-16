@@ -144,9 +144,14 @@
                                         <a href="{{ route('member.detail.thesis', $item->id_dissertation_article) }}">
                         @endif
                         <p class="tag">{{ $item->type }}</p>
-                        <img wire:live
-                            src="{{ $item->thesis_image ? asset('storage/' . $item->thesis_image) : 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
-                            alt="{{ $item->title }}">
+                        @if ($item->thesis_image)
+                            {{-- Thesis-management-system/storage/app/public/ --}}
+                            <img wire:live src="{{ asset('storage/' . $item->thesis_image) }}"
+                                alt="{{ $item->title }}">
+                        @else
+                            <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                alt="{{ $item->title }}">
+                        @endif
                         <div class="details">
                             <small>{{ $item->created_at->thaidate('วันที่ j F พ.ศ.Y') }}</small>
                             <h4>{{ $item->title }}</h4>

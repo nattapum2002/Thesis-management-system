@@ -124,7 +124,7 @@ class AddThesis extends Component
             'add_type' => 'required',
             'add_other_type' => 'required_if:add_type,อื่นๆ',
             'add_status' => 'required',
-            'add_thesis_image' => 'required',
+            'add_thesis_image' => 'required|image|max:2048',
             'add_thesis_file' => 'required|mimes:pdf',
         ];
     }
@@ -139,6 +139,8 @@ class AddThesis extends Component
             'add_other_type.required_if' => 'กรุณากรอกประเภท',
             'add_status.required' => 'กรุณาเลือกสถานะ',
             'add_thesis_image.required' => 'กรุณาเลือกไฟล์ภาพ',
+            'add_thesis_image.image' => 'กรุณาเลือกไฟล์ภาพ',
+            'add_thesis_image.max' => 'กรุณาเลือกไฟล์ภาพไม่เกิน 2MB',
             'add_thesis_file.required' => 'กรุณาเลือกไฟล์',
             'add_thesis_file.mimes' => 'กรุณาเลือกไฟล์ pdf',
         ];
@@ -171,13 +173,13 @@ class AddThesis extends Component
         ]);
 
         session()->flash('message', 'เพิ่มข้อมูลเรียบร้อยแล้ว');
-        return redirect()->route('manage_thesis');
+        $this->cancel();
     }
 
     public function cancel()
     {
         $this->reset();
-        return redirect()->route('manage_thesis');
+        return redirect()->route('member.manage.thesis');
     }
 
     public function render()

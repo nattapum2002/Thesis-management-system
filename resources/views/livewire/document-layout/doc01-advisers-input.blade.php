@@ -38,27 +38,27 @@
                 <div class="fields-external-co-advisor mt-2">
                     <div class="input-fields">
                         <label class="form-label">คำนำหน้าชื่อ</label>
-                        <input wire:model="externalCoAdvisors.{{ $index }}.prefix" class="form-input"
+                        <input wire:model="externalCoAdvisors.{{ $index }}.prefix" class="form-control"
                             type="text" placeholder="กรุณากรอกคำนำหน้าชื่อ" required>
                         <br>
                         <label class="form-label">ชื่อ</label>
-                        <input wire:model="externalCoAdvisors.{{ $index }}.name" class="form-input"
+                        <input wire:model="externalCoAdvisors.{{ $index }}.name" class="form-control"
                             type="text" placeholder="กรุณากรอกชื่อ" required>
                         <br>
                         <label class="form-label">นามสกุล</label>
-                        <input wire:model="externalCoAdvisors.{{ $index }}.surname" class="form-input"
+                        <input wire:model="externalCoAdvisors.{{ $index }}.surname" class="form-control"
                             type="text" placeholder="กรุณากรอกนามสกุล" required>
                         <br>
                         <label class="form-label">ตำแหน่งทางวิชาการ</label>
-                        <input wire:model="externalCoAdvisors.{{ $index }}.academic_position" class="form-input"
-                            type="text" placeholder="กรุณากรอกตำแหน่งทางวิชาการ" required>
+                        <input wire:model="externalCoAdvisors.{{ $index }}.academic_position"
+                            class="form-control" type="text" placeholder="กรุณากรอกตำแหน่งทางวิชาการ" required>
                         <br>
                         <label class="form-label">วุฒิการศึกษา</label>
-                        <input wire:model="externalCoAdvisors.{{ $index }}.education_degree" class="form-input"
-                            type="text" placeholder="กรุณากรอกวุฒิการศึกษา" required>
+                        <input wire:model="externalCoAdvisors.{{ $index }}.education_degree"
+                            class="form-control" type="text" placeholder="กรุณากรอกวุฒิการศึกษา" required>
                         <br>
                         <label class="form-label">สาขาที่จบการศึกษา</label>
-                        <input wire:model="externalCoAdvisors.{{ $index }}.graduated_major" class="form-input"
+                        <input wire:model="externalCoAdvisors.{{ $index }}.graduated_major" class="form-control"
                             type="text" placeholder="กรุณากรอกสาขาที่จบการศึกษา" required>
                     </div>
                     <button wire:click="removeExternalCoAdvisor({{ $index }})"

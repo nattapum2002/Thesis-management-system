@@ -11,6 +11,7 @@
 <body>
     <header>
         <div class="documentId">คกท.-คง.-03</div>
+        {{-- <img class="documentLogo" src="data:image/png;base64,{{ base64_encode(file_get_contents('/home/vol4_2/infinityfree.com/if0_37229336/htdocs/Asset/main/img/logo/RMUTI.png')) }}" alt="University Logo"> --}}
         <img class="documentLogo" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public\Asset\main\img\logo\RMUTI.png'))); ?>" alt="University Logo">
         <div class="documentHead">
             คณะเกษตรศาสตร์และเทคโนโลยี

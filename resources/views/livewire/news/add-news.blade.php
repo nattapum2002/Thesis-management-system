@@ -20,7 +20,7 @@
                             <th>รูปภาพข่าว</th>
                             <td>
                                 <div class="input-field">
-                                    <input class="form-input" wire:model="add_news_image" type="file"
+                                    <input class="form-control" wire:model="add_news_image" type="file"
                                         placeholder="เลือกไฟล์">
                                 </div>
                                 @error('add_news_image')
@@ -33,7 +33,7 @@
                             <th>หัวข้อ</th>
                             <td>
                                 <div class="input-field">
-                                    <input class="form-input" wire:model="add_title" type="text"
+                                    <input class="form-control" wire:model="add_title" type="text"
                                         placeholder="กรุณากรอกหัวข้อข่าว">
                                 </div>
                                 @error('add_title')
@@ -46,7 +46,7 @@
                             <th>รายละเอียด</th>
                             <td>
                                 <div class="input-field">
-                                    <textarea class="form-input" wire:model="add_detail" type="text" placeholder="กรุณากรอกรายละเอียด"></textarea>
+                                    <textarea class="form-control" wire:model="add_detail" type="text" placeholder="กรุณากรอกรายละเอียด"></textarea>
                                 </div>
                                 @error('add_detail')
                                     <span class="text-danger">{{ $message }}</span>

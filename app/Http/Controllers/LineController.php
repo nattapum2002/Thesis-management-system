@@ -95,8 +95,8 @@ class LineController extends Controller
 
     public function redirectToLineLogin()
     {
-        $client_id = config('services.line.client_id');
-        $redirect_uri = urlencode(config('services.line.redirect_uri'));
+        $client_id = env('LINE_CLIENT_ID');
+        $redirect_uri = urlencode(env('LINE_REDIRECT_URI'));
         $state = Str::random(40);
 
         session(['state' => $state]);
@@ -130,9 +130,9 @@ class LineController extends Controller
             'form_params' => [
                 'grant_type' => 'authorization_code',
                 'code' => $code,
-                'redirect_uri' => config('services.line.redirect_uri'),
-                'client_id' => config('services.line.client_id'),
-                'client_secret' => config('services.line.client_secret'),
+                'redirect_uri' => env('LINE_REDIRECT_URI'),
+                'client_id' => env('LINE_CLIENT_ID'),
+                'client_secret' => env('LINE_CLIENT_SECRET'),
             ],
         ]);
 

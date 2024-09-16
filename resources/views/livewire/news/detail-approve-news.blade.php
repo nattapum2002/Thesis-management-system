@@ -19,13 +19,14 @@
                         <tr>
                             <th>รูปภาพ</th>
                             <td>
-                                @if ($news->news_image == null)
-                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
-                                        alt=""
-                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                @else
+                                @if ($news->news_image)
+                                    {{-- Thesis-management-system/storage/app/public/ --}}
                                     <img wire:live src="{{ asset('storage/' . $news->news_image) }}"
                                         alt="{{ $news->title }}"
+                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                @else
+                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                        alt=""
                                         style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                 @endif
                             </td>

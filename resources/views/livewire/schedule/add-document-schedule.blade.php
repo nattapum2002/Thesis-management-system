@@ -41,7 +41,7 @@
                                     <th>กำหนดส่ง(เวลา)</th>
                                     <td>
                                         <div class="input-field">
-                                            <input class="form-input" type="time" wire:model='add_time'
+                                            <input class="form-control" type="time" wire:model='add_time'
                                                 placeholder="กรุณากรอกเวลาสอบ" required>
                                             @error('#')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -54,7 +54,7 @@
                                     <th>กำหนดส่ง(วันที่)</th>
                                     <td>
                                         <div class="input-field">
-                                            <input class="form-input" type="date" wire:model='add_date'
+                                            <input class="form-control" type="date" wire:model='add_date'
                                                 placeholder="กรุณากรอกวันที่สอบ" required>
                                             @error('#')
                                                 <span class="text-danger">{{ $message }}</span>

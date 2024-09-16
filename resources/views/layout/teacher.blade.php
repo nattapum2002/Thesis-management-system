@@ -26,17 +26,12 @@
                 <a href="{{ route('teacher.edit.teacher') }}">
                     <div class="image">
                         @if (Auth::guard('teachers')->user()->teacher_image)
-                            {{-- <img src="{{ asset('Thesis-management-system/storage/app/public/' . Auth::guard('teachers')->user()->teacher_image) }}" alt="UserImage"> --}}
+                            {{-- Thesis-management-system/storage/app/public/ --}}
                             <img src="{{ asset('storage/' . Auth::guard('teachers')->user()->teacher_image) }}"
                                 alt="UserImage">
                         @else
                             <img src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}" alt="UserImage">
                         @endif
-
-                    </div>
-                    <div class="info">
-                        <span>{{ Auth::guard('teachers')->user()->name . ' ' . Auth::guard('teachers')->user()->surname }}</span>
-                        <small>อาจารย์</small>
                     </div>
                 </a>
             </div>
@@ -76,11 +71,36 @@
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link {{ Route::is('teacher.manage.exam.schedule') ? 'active' : '' }}"
-                    href="{{ route('teacher.manage.exam.schedule') }}">
-                    <i class='nav-icon bx bx-calendar-edit'></i>
-                    <span class="link-name">ตารางสอบ</span>
-                </a>
+                <div class="sidebar-collapse">
+                    <a href="#"
+                        class="sidebar-link has-dropdown collapsed{{ Route::is('teacher.manage.exam.schedule') || Route::is('teacher.manage.document.schedule') || Route::is('teacher.add.document.schedule') || Route::is('teacher.edit.detail.document.schedule') ? 'off active' : '' }}"
+                        data-bs-target="#manage_schedule" data-bs-toggle="collapse"
+                        aria-expanded="{{ Route::is('teacher.manage.exam.schedule') || Route::is('teacher.manage.document.schedule') || Route::is('teacher.add.document.schedule') || Route::is('teacher.edit.detail.document.schedule') ? 'true' : 'false' }}">
+                        <div>
+                            <i class='nav-icon bx bx-calendar-edit'></i>
+                            <span class="link-name">ตารางกำหนดการ</span>
+                        </div>
+                        <i class="bx bx-chevron-down arrow"></i>
+                    </a>
+                </div>
+                <ul id="manage_schedule"
+                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('teacher.manage.exam.schedule') || Route::is('teacher.manage.document.schedule') || Route::is('teacher.add.document.schedule') || Route::is('teacher.edit.detail.document.schedule') ? 'show' : '' }}"
+                    data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link {{ Route::is('teacher.manage.exam.schedule') ? 'active' : '' }}"
+                            href="{{ route('teacher.manage.exam.schedule') }}">
+                            <i class='nav-icon bx bx-circle'></i>
+                            <span class="link-name">ตารางสอบ</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link {{ Route::is('teacher.manage.document.schedule') || Route::is('teacher.add.document.schedule') || Route::is('teacher.edit.detail.document.schedule') ? 'active' : '' }}"
+                            href="{{ route('teacher.manage.document.schedule') }}">
+                            <i class='nav-icon bx bx-circle'></i>
+                            <span class="link-name">ตารางการส่งเอกสาร</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link {{ Route::is('teacher.edit.teacher') ? 'active' : '' }}"

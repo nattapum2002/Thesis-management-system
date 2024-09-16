@@ -139,11 +139,12 @@
                                         <a href="{{ route('member.detail.news', $item->id_news) }}">
                         @endif
                         <p class="tag">{{ $item->type }}</p>
-                        @if ($item->news_image == null)
+                        @if ($item->news_image)
+                            {{-- Thesis-management-system/storage/app/public/ --}}
+                            <img wire:live src="{{ asset('storage/' . $item->news_image) }}" alt="{{ $item->title }}">
+                        @else
                             <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
                                 alt="{{ $item->title }}">
-                        @else
-                            <img wire:live src="{{ asset('storage/' . $item->news_image) }}" alt="{{ $item->title }}">
                         @endif
                         <div class="details">
                             <small>{{ $item->created_at->thaidate('วันที่ j F พ.ศ.Y') }}</small>

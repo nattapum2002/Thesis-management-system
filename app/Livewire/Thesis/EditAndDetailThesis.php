@@ -176,22 +176,47 @@ class EditAndDetailThesis extends Component
 
     protected function rules()
     {
-        return [
-            // 'thesis_image' => 'required',
-            'title' => 'required',
-            'details' => 'required',
-            'year_published' => 'required',
-            'type' => 'required',
-            'other_type' => 'required_if:type,อื่นๆ',
-            'status' => 'required',
-            // 'file_dissertation' => 'required|mimes:pdf',
-        ];
+        $rules = [];
+
+        if ($this->toggle['thesis_image']) {
+            $rules['thesis_image'] = 'required|image|max:2048';
+        }
+
+        if ($this->toggle['title']) {
+            $rules['title'] = 'required';
+        }
+
+        if ($this->toggle['details']) {
+            $rules['details'] = 'required';
+        }
+
+        if ($this->toggle['year_published']) {
+            $rules['year_published'] = 'required';
+        }
+
+        if ($this->toggle['type']) {
+            $rules['type'] = 'required';
+            $rules['other_type'] = 'required_if:type,อื่นๆ';
+        }
+
+        if ($this->toggle['status']) {
+            $rules['status'] = 'required';
+        }
+
+        if ($this->toggle['file_dissertation']) {
+            $rules['file_dissertation'] = 'required|mimes:pdf';
+        }
+
+        return $rules;
     }
+
 
     public function messages()
     {
         return [
             'thesis_image.required' => 'กรุณาเลือกรูปภาพ',
+            'thesis_image.image' => 'กรุณาเลือกรูปภาพ',
+            'thesis_image.max' => 'กรุณาเลือกรูปภาพไม่เกิน 2MB',
             'title.required' => 'กรุณาเลือกโครงงาน',
             'details.required' => 'กรุณากรอกบทคัดย่อ',
             'year_published.required' => 'กรุณาเลือกปีที่ต้องการ',
@@ -226,6 +251,7 @@ class EditAndDetailThesis extends Component
 
     public function cancel($index)
     {
+        $this->reset('title', 'details', 'year_published', 'type', 'other_type', 'status', 'thesis_image', 'file_dissertation');
         $this->toggle[$index] = !$this->toggle[$index];
         $this->mount($this->thesisId);
     }

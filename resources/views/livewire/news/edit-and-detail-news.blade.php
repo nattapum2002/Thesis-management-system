@@ -21,7 +21,7 @@
                             @if ($toggle['news_image'])
                                 <td>
                                     <div class="input-field">
-                                        <input class="form-input" wire:model="news_image" type="file"
+                                        <input class="form-control" wire:model="news_image" type="file"
                                             placeholder="เลือกไฟล์" required>
                                     </div>
                                     @error('news_image')
@@ -36,13 +36,14 @@
                                 </td>
                             @else
                                 <td>
-                                    @if ($news->news_image == null)
-                                        <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
-                                            alt=""
-                                            style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                    @else
+                                    @if ($news->news_image)
+                                        {{-- Thesis-management-system/storage/app/public/ --}}
                                         <img wire:live src="{{ asset('storage/' . $news->news_image) }}"
                                             alt="{{ $news->title }}"
+                                            style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                    @else
+                                        <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                            alt=""
                                             style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                     @endif
                                 </td>
@@ -59,8 +60,8 @@
                             @if ($toggle['title'])
                                 <td>
                                     <div class="input-field">
-                                        <input class="form-input" wire:model="title" type="text" placeholder="หัวข้อ"
-                                            required>
+                                        <input class="form-control" wire:model="title" type="text"
+                                            placeholder="หัวข้อ" required>
                                     </div>
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
@@ -85,7 +86,7 @@
                             @if ($toggle['details'])
                                 <td>
                                     <div class="input-field">
-                                        <textarea class="form-input" wire:model="details" type="text" placeholder="รายละเอียด" required></textarea>
+                                        <textarea class="form-control" wire:model="details" type="text" placeholder="รายละเอียด" required></textarea>
                                     </div>
                                     @error('details')
                                         <span class="text-danger">{{ $message }}</span>
