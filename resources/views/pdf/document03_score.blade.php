@@ -710,9 +710,7 @@
                         <tr>
                             <td colspan="8">
                                 <div>
-                                    ลงชื่อ
-                                    {{ $teachers->where('id_position', 5)->first()->teacher->name . ' ' . $teachers->where('id_position', 5)->first()->teacher->surname }}
-                                    ประธานกรรมการ
+                                    ลงชื่อ ......................................... ประธานกรรมการ
                                     <br><span class="dotted">(
                                         {{ $teachers->where('id_position', 5)->first()->teacher->prefix . ' ' . $teachers->where('id_position', 5)->first()->teacher->name . ' ' . $teachers->where('id_position', 5)->first()->teacher->surname }}
                                         )</span>
@@ -724,8 +722,7 @@
                             <tr>
                                 <td colspan="8">
                                     <div>
-                                        ลงชื่อ {{ $directors->teacher->name . ' ' . $directors->teacher->surname }}
-                                        กรรมการ
+                                        ลงชื่อ ......................................... กรรมการ
                                         <br>(<span
                                             class="dotted">{{ $directors->teacher->prefix . ' ' . $directors->teacher->name . ' ' . $directors->teacher->surname }}</span>
                                         )
@@ -737,9 +734,8 @@
                         <tr>
                             <td colspan="8">
                                 <div>
-                                    ลงชื่อ
-                                    {{ $teachers->where('id_position', 7)->first()->teacher->name . ' ' . $teachers->where('id_position', 7)->first()->teacher->surname }}
-                                    กรรมการและเลขานุการ (อาจารย์ที่ปรึกษา)
+                                    ลงชื่อ ......................................... กรรมการและเลขานุการ
+                                    (อาจารย์ที่ปรึกษา)
                                     <br><span class="dotted">(
                                         {{ $teachers->where('id_position', 7)->first()->teacher->prefix . ' ' . $teachers->where('id_position', 7)->first()->teacher->name . ' ' . $teachers->where('id_position', 5)->first()->teacher->surname }}
                                         )</span>
@@ -754,9 +750,7 @@
                             <td style="width: 2.8em"></td>
                             <td>
                                 <div class="signature">
-                                    ลงชื่อ
-                                    {{ $teachers->where('id_position', 3)->first()->teacher->name . ' ' . $teachers->where('id_position', 3)->first()->teacher->surname }}
-                                    อาจารย์ประจำวิชา
+                                    ลงชื่อ ......................................... อาจารย์ประจำวิชา
                                     <br>(<span
                                         class="dotted">{{ $teachers->where('id_position', 3)->first()->teacher->name . ' ' . $teachers->where('id_position', 3)->first()->teacher->surname }}</span>
                                     )

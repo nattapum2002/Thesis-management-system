@@ -30,7 +30,7 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            @error('#')
+                                            @error('add_document')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -43,7 +43,7 @@
                                         <div class="input-field">
                                             <input class="form-control" type="time" wire:model='add_time'
                                                 placeholder="กรุณากรอกเวลาสอบ" required>
-                                            @error('#')
+                                            @error('add_time')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -56,7 +56,7 @@
                                         <div class="input-field">
                                             <input class="form-control" type="date" wire:model='add_date'
                                                 placeholder="กรุณากรอกวันที่สอบ" required>
-                                            @error('#')
+                                            @error('add_date')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -76,7 +76,7 @@
                                                     {{ now()->subYear()->thaidate('Y') }}
                                                 </option>
                                             </select>
-                                            @error('#')
+                                            @error('add_year')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>

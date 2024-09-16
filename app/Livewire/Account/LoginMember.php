@@ -37,11 +37,11 @@ class LoginMember extends Component
                 return redirect()->route('member.dashboard');
             } else {
                 Auth::guard('members')->logout();
-                session()->flash('message', 'รอการอนุมัติจากอาจารย์ประจำวิชา');
+                session()->flash('messageInfo', 'รอการอนุมัติจากอาจารย์ประจำวิชา');
             }
         } else {
             // Check if the username exists first to provide a specific error message
-            session()->flash('message', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+            session()->flash('messageDanger', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
         }
     }
 
