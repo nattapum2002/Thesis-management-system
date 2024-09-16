@@ -296,7 +296,7 @@
                             </td>
                         @else
                             <td>
-                                @if ($student->line_id)
+                                @if ($student->id_line)
                                     <p class="text-success">ลงทะเบียน Line userID แล้ว กรุณาสแกน QR Code ด้านล่าง
                                         เพื่อรับการแจ้งเตือน</p>
                                     <img src="{{ asset('/Asset/main/img/TMS-Line-bot.png') }}" alt="TMS-Line-bot"

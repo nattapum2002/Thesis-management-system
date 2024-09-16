@@ -133,6 +133,7 @@ Route::prefix('Admin')->group(function () {
     Route::view('/Manage-project/{projectId}', 'admin.detail_project')->name('admin.detail.project');
 
     Route::view('/Exam-schedule', 'admin.manage_exam_schedule')->name('admin.manage.exam.schedule');
+    Route::view('/Exam-schedule/Edit/{scheduleId}', 'admin.edit_and_detail_exam_schedule')->name('admin.edit.detail.exam.schedule');
 
     Route::view('/Manage-document-schedule', 'admin.manage_document_schedule')->name('admin.manage.document.schedule');
     Route::view('/Manage-document-schedule/Add', 'admin.add_document_schedule')->name('admin.add.document.schedule');

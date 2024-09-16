@@ -110,7 +110,14 @@
                                                 <p>{{ $exam_schedule->exam_room }}</p>
                                                 <small>{{ $exam_schedule->exam_building . ' ' . $exam_schedule->exam_group }}</small>
                                             </td>
-                                            <td></td>
+                                            <td>
+                                                @if (Auth::guard('teachers')->user()->user_type == 'Admin')
+                                                    <a class="btn btn-orange btn-sm"
+                                                        href="{{ route('admin.edit.detail.exam.schedule', $exam_schedule->id_exam_schedule) }}">
+                                                        <i class="bx bx-detail"></i>
+                                                    </a>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

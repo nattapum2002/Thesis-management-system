@@ -332,10 +332,13 @@
                             </td>
                         @else
                             <td>
-                                @if ($teacher->id_line == null)
-                                    <p class="text-danger">ไมมีการลงบันทึกข้อมูล</p>
+                                @if ($teacher->id_line)
+                                    <p class="text-success">ลงทะเบียน Line userID แล้ว กรุณาสแกน QR Code ด้านล่าง
+                                        เพื่อรับการแจ้งเตือน</p>
+                                    <img src="{{ asset('/Asset/main/img/TMS-Line-bot.png') }}" alt="TMS-Line-bot"
+                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                 @else
-                                    {{ $teacher->id_line }}
+                                    <p class="text-danger">ยังไม่ลงทะเบียน</p>
                                 @endif
                             </td>
                             <td>

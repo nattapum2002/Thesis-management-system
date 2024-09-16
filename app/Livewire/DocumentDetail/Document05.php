@@ -24,8 +24,52 @@ class Document05 extends Component
     public $id_teacher = [];
     public $date, $time, $year, $term, $place, $building, $faculty;
     public $branch_head_approve, $branch_head_not_approve, $branch_head_comment;
+
+    protected function rules()
+    {
+        $rules = [
+            'date' => 'required|date|after_or_equal:' . now()->toDateString(),
+            'year' => 'required',
+            'term' => 'required',
+            'place' => 'required',
+            'building' => 'required',
+            'faculty' => 'required',
+        ];
+
+        if ($this->date <= now()->toDateString()) {
+            $rules['time'] = 'required|date_format:H:i|after_or_equal:' . now()->toTimeString();
+        } else {
+            $rules['time'] = 'required|date_format:H:i';
+        }
+
+        return $rules;
+    }
+
+    protected function messages()
+    {
+        return [
+            'date.required' => 'กรุณาเลือกวันที่',
+            'date.date' => 'รูปแบบวันที่ไม่ถูกต้อง',
+            'date.after_or_equal' => 'ไม่สามารถกรอกวันที่ ที่ผ่านไปแล้วได้',
+
+            'time.required' => 'กรุณาเลือกเวลา',
+            'time.date_format' => 'รูปแบบเวลาไม่ถูกต้อง',
+            'time.after_or_equal' => 'ไม่สามารถกรอกเวลา ที่ผ่านไปแล้วได้ ถ้ายังไม่ผ่านกรุณาตรวจสอบวันที่ก่อน',
+
+            'year.required' => 'กรุณาเลือกปีการศึกษา',
+            'term.required' => 'กรุณาเลือกภาคการศึกษา',
+
+            'place.required' => 'กรุณากรอกสถานที่',
+
+            'building.required' => 'กรุณาเลือกอาคาร',
+
+            'faculty.required' => 'กรุณาเลือกคณะ',
+        ];
+    }
+
     public function confirmDocument_05()
     {
+        $this->validate();
         DB::transaction(function () {
             $teacherIDs = collect($this->id_teacher)
                 ->filter()

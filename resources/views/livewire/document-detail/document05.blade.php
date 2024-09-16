@@ -237,6 +237,9 @@
                                         <input type="date" class="form-control" name="date" id="date"
                                             wire:model="date">
                                     </div>
+                                    @error('date')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="input-group">
@@ -244,6 +247,9 @@
                                         <input type="time" class="form-control" name="time" id="time"
                                             wire:model="time">
                                     </div>
+                                    @error('time')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row">
@@ -260,6 +266,9 @@
                                             </option>
                                         </select>
                                     </div>
+                                    @error('year')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="input-group">
@@ -271,6 +280,9 @@
                                             <option value="3">ภาคฤดูร้อน</option>
                                         </select>
                                     </div>
+                                    @error('term')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row">
@@ -280,6 +292,9 @@
                                         <input type="text" class="form-control" name="place" id="place"
                                             wire:model="place">
                                     </div>
+                                    @error('place')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="input-group">
@@ -287,6 +302,9 @@
                                         <input type="text" class="form-control" name="building" id="building"
                                             wire:model="building">
                                     </div>
+                                    @error('building')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="input-group">
@@ -317,8 +335,9 @@
                                     <div class="col-lg-2 col-md-2 col-sm-6">
                                         <ul>
                                             <li>
-                                                <input type="checkbox" wire:model="branch_head_approve" value="อนุมัติ"
-                                                    x-model="not_approve" x-bind:disabled="approve">
+                                                <input type="checkbox" wire:model="branch_head_approve"
+                                                    value="อนุมัติ" x-model="not_approve"
+                                                    x-bind:disabled="approve">
                                                 <label for="">อนุมัติ</label>
                                             </li>
                                         </ul>

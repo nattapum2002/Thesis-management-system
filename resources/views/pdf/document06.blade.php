@@ -740,8 +740,8 @@
                         <td>
                             <div class="signature">
                                 @if ($confirm)
-                                    ลงชื่อ<span class="dotted"> {{ $director->teacher->name }}
-                                    </span>{{ $director->id_position == 7
+                                    ลงชื่อ .........................................
+                                    {{ $director->id_position == 7
                                         ? $director->position->position . ' (อาจารย์ที่ปรึกษา)'
                                         : $director->position->position }}
                                     <br>(<span class="dotted">
@@ -887,8 +887,7 @@
                 <td class="signature" colspan="4">
                     <div>
                         @if ($confirm)
-                            ลงชื่อ<span class="dotted"> {{ $confirm->teacher->name }}
-                            </span>อาจารย์ผู้รับผิดชอบรายวิชา
+                            ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
                             <br>(<span class="dotted">
                                 {{ $confirm->teacher->prefix . ' ' . $confirm->teacher->name . ' ' . $confirm->teacher->surname }}
                             </span>)
@@ -976,124 +975,120 @@
             @endphp
 
             @if ($branchHeadComments->isNotEmpty() || $branchHeadOtherComment->isNotEmpty() || $confirm)
-            @break
-        @endif
-    @endforeach
-
-    @if ($branchHeadComments->isNotEmpty())
-        <tr>
-            <td style="width: 1.8em"></td>
-            <td>
-                <div>
-                    <input type="checkbox"
-                        {{ $branchHeadComments->first()->comment == 'อนุมัติ' ? 'checked' : '' }}>
-                    <label> อนุมัติ</label>
-                </div>
-            </td>
-            <td colspan="3">
-                <div>
-                    <input type="checkbox"
-                        {{ $branchHeadComments->first()->comment != 'อนุมัติ' ? 'checked' : '' }}>
-                    <label> ควรปรับผลการประเมิน</label>
-                    @if ($branchHeadComments->first()->comment != 'อนุมัติ')
-                        เป็น<span class="dotted"> {{ $branchHeadComments->first()->comment }} </span>
-                    @else
-                        เป็น ............................................................
-                    @endif
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <div>เนืองจาก</div>
-            </td>
-            <td colspan="3">
-                <div>
-                    @if ($branchHeadOtherComment->first()->comment != 'อนุมัติ')
-                        <span class="dotted"> {{ $branchHeadOtherComment->first()->comment }} </span>
-                    @else
-                        .........................................................................................................................
-                        <br>.........................................................................................................................
-                        <br>.........................................................................................................................
-                        <br>.........................................................................................................................
-                    @endif
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td colspan="4">
-                <div>
-                    และอนุมัติให้ทำการศึกษาได้ ตั้งแต่วันที่<span class="dotted">
-                        {{ $confirm->created_at->thaidate('j') }} </span>
-                    เดือน<span class="dotted">{{ $confirm->created_at->thaidate('F') }} </span>
-                    พ.ศ.<span class="dotted">{{ $confirm->created_at->thaidate('Y') }} </span>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="signature" colspan="4">
-                <div>
-                    @if ($confirm)
-                        ลงชื่อ<span class="dotted"> {{ $confirm->teacher->name }} </span>หัวหน้าสาขาวิชา
-                        <br>(<span class="dotted">
-                            {{ $confirm->teacher->prefix . ' ' . $confirm->teacher->name . ' ' . $confirm->teacher->surname }}
-                        </span>)
-                        <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
-                        </span>เดือน<span class="dotted">
-                            {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
-                            {{ $confirm->created_at->thaidate('Y') }} </span>
-                    @else
+                <tr>
+                    <td style="width: 1.8em"></td>
+                    <td>
+                        <div>
+                            <input type="checkbox"
+                                {{ $branchHeadComments->first()->comment == 'อนุมัติ' ? 'checked' : '' }}>
+                            <label> อนุมัติ</label>
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div>
+                            <input type="checkbox"
+                                {{ $branchHeadComments->first()->comment != 'อนุมัติ' ? 'checked' : '' }}>
+                            <label> ควรปรับผลการประเมิน</label>
+                            @if ($branchHeadComments->first()->comment != 'อนุมัติ')
+                                เป็น<span class="dotted"> {{ $branchHeadComments->first()->comment }} </span>
+                            @else
+                                เป็น ............................................................
+                            @endif
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div>เนืองจาก</div>
+                    </td>
+                    <td colspan="3">
+                        <div>
+                            @if ($branchHeadOtherComment->first()->comment != 'อนุมัติ')
+                                <span class="dotted"> {{ $branchHeadOtherComment->first()->comment }} </span>
+                            @else
+                                .........................................................................................................................
+                                <br>.........................................................................................................................
+                                <br>.........................................................................................................................
+                                <br>.........................................................................................................................
+                            @endif
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4">
+                        <div>
+                            และอนุมัติให้ทำการศึกษาได้ ตั้งแต่วันที่<span class="dotted">
+                                {{ $confirm->created_at->thaidate('j') }} </span>
+                            เดือน<span class="dotted">{{ $confirm->created_at->thaidate('F') }} </span>
+                            พ.ศ.<span class="dotted">{{ $confirm->created_at->thaidate('Y') }} </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="signature" colspan="4">
+                        <div>
+                            @if ($confirm)
+                                ลงชื่อ ......................................... หัวหน้าสาขาวิชา
+                                <br>(<span class="dotted">
+                                    {{ $confirm->teacher->prefix . ' ' . $confirm->teacher->name . ' ' . $confirm->teacher->surname }}
+                                </span>)
+                                <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
+                                </span>เดือน<span class="dotted">
+                                    {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
+                                    {{ $confirm->created_at->thaidate('Y') }} </span>
+                            @else
+                                ลงชื่อ ......................................... หัวหน้าสาขาวิชา
+                                <br>( ............................................................. )
+                                <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                            @endif
+                        </div>
+                    </td>
+                </tr>
+            @else
+                <tr>
+                    <td style="width: 1.8em"></td>
+                    <td>
+                        <div>
+                            <input type="checkbox">
+                            <label> อนุมัติ</label>
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div style="padding-left: 1em">
+                            <input type="checkbox">
+                            <label> ควรปรับผลการประเมิน</label>
+                            เป็น ............................................................
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div>เนืองจาก</div>
+                    </td>
+                    <td colspan="3">
+                        <div>
+                            .........................................................................................................................
+                            <br>.........................................................................................................................
+                            <br>.........................................................................................................................
+                            <br>.........................................................................................................................
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="signature" colspan="4">
                         ลงชื่อ ......................................... หัวหน้าสาขาวิชา
                         <br>( ............................................................. )
                         <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                    @endif
-                </div>
-            </td>
-        </tr>
-    @else
-        <tr>
-            <td style="width: 1.8em"></td>
-            <td>
-                <div>
-                    <input type="checkbox">
-                    <label> อนุมัติ</label>
-                </div>
-            </td>
-            <td colspan="3">
-                <div style="padding-left: 1em">
-                    <input type="checkbox">
-                    <label> ควรปรับผลการประเมิน</label>
-                    เป็น ............................................................
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <div>เนืองจาก</div>
-            </td>
-            <td colspan="3">
-                <div>
-                    .........................................................................................................................
-                    <br>.........................................................................................................................
-                    <br>.........................................................................................................................
-                    <br>.........................................................................................................................
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="signature" colspan="4">
-                ลงชื่อ ......................................... หัวหน้าสาขาวิชา
-                <br>( ............................................................. )
-                <br>วันที่ ....... เดือน ............... พ.ศ. ............
-            </td>
-        </tr>
-    @endif
-</table>
+                    </td>
+                </tr>
+            @endif
+        @endforeach
+    </table>
 </div>
 </body>
 

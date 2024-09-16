@@ -33,7 +33,7 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        @error('edit_document')
+                                                        @error('id_document')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -66,7 +66,7 @@
                                                         <input class="form-control" type="time"
                                                             wire:model='time_submission' placeholder="กรุณากรอกเวลาสอบ"
                                                             required>
-                                                        @error('edit_time')
+                                                        @error('time_submission')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -96,7 +96,7 @@
                                                         <input class="form-control" type="date"
                                                             wire:model='date_submission'
                                                             placeholder="กรุณากรอกวันที่สอบ" required>
-                                                        @error('edit_date')
+                                                        @error('date_submission')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -134,7 +134,7 @@
                                                                 {{ now()->subYear()->thaidate('Y') }}
                                                             </option>
                                                         </select>
-                                                        @error('edit_year')
+                                                        @error('year_submission')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
