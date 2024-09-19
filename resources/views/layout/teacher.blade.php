@@ -14,7 +14,7 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-logo">
-                <a href="/teacher">
+                <a href="{{ route('teacher.dashboard') }}">
                     <div>
                         <img src="{{ asset('Asset/main/img/logo/RMUTI.png') }}" alt="RMUTI.png">
                     </div>
@@ -23,18 +23,15 @@
             </div>
             <hr>
             <div class="sidebar-user">
-                <a href="/teacher/edit_teacher">
+                <a href="{{ route('teacher.edit.teacher') }}">
                     <div class="image">
-                        @if (Auth::guard('teachers')->user()->teacher_image == null)
-                            <img src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}" alt="UserImage">
-                        @else
+                        @if (Auth::guard('teachers')->user()->teacher_image)
+                            {{-- Thesis-management-system/storage/app/public/ --}}
                             <img src="{{ asset('storage/' . Auth::guard('teachers')->user()->teacher_image) }}"
                                 alt="UserImage">
+                        @else
+                            <img src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}" alt="UserImage">
                         @endif
-                    </div>
-                    <div class="info">
-                        <span>{{ Auth::guard('teachers')->user()->name . ' ' . Auth::guard('teachers')->user()->surname }}</span>
-                        <small>อาจารย์</small>
                     </div>
                 </a>
             </div>
@@ -44,9 +41,9 @@
             <li class="sidebar-item">
                 <div class="sidebar-collapse">
                     <a href="#"
-                        class="sidebar-link has-dropdown collapsed{{ Request::is('teacher/manage_project') || Request::is('admin/approve_documents_teacher') ? 'off active' : '' }}"
+                        class="sidebar-link has-dropdown collapsed{{ Route::is('teacher.manage.project') || Route::is('teacher.detail.project') || Route::is('teacher.approve.documents.teacher') ? 'off active' : '' }}"
                         data-bs-target="#project" data-bs-toggle="collapse"
-                        aria-expanded="{{ Request::is('teacher/manage_project') || Request::is('teacher/approve_documents_teacher') ? 'true' : 'false' }}">
+                        aria-expanded="{{ Route::is('teacher.manage.project') || Route::is('teacher.detail.project') || Route::is('teacher.approve.documents.teacher') ? 'true' : 'false' }}">
                         <div>
                             <i class='nav-icon bx bx-book'></i>
                             <span class="link-name">โปรเจค</span>
@@ -55,18 +52,18 @@
                     </a>
                 </div>
                 <ul id="project"
-                    class="sidebar-dropdown list-unstyled collapse {{ Request::is('teacher/manage_project') || Request::is('teacher/approve_documents_teacher') ? 'show' : '' }}"
+                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('teacher.manage.project') || Route::is('teacher.detail.project') || Route::is('teacher.approve.documents.teacher') ? 'show' : '' }}"
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a class="sidebar-link {{ Request::is('teacher/manage_project') ? 'active' : '' }}"
-                            href="/teacher/manage_project">
+                        <a class="sidebar-link {{ Route::is('teacher.manage.project') || Route::is('teacher.detail.project') ? 'active' : '' }}"
+                            href="{{ route('teacher.manage.project') }}">
                             <i class='nav-icon bx bx-circle'></i>
                             <span class="link-name">จัดการโปรเจค</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link {{ Request::is('teacher/approve_documents_teacher') ? 'active' : '' }}"
-                            href="/teacher/approve_documents_teacher">
+                        <a class="sidebar-link {{ Route::is('teacher.approve.documents.teacher') ? 'active' : '' }}"
+                            href="{{ route('teacher.approve.documents.teacher') }}">
                             <i class='nav-icon bx bx-circle'></i>
                             <span class="link-name">อนุมัติเอกสาร</span>
                         </a>
@@ -74,15 +71,47 @@
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link {{ Request::is('teacher/edit_teacher') ? 'active' : '' }}"
-                    href="/teacher/edit_teacher">
+                <div class="sidebar-collapse">
+                    <a href="#"
+                        class="sidebar-link has-dropdown collapsed{{ Route::is('teacher.manage.exam.schedule') || Route::is('teacher.manage.document.schedule') || Route::is('teacher.add.document.schedule') || Route::is('teacher.edit.detail.document.schedule') ? 'off active' : '' }}"
+                        data-bs-target="#manage_schedule" data-bs-toggle="collapse"
+                        aria-expanded="{{ Route::is('teacher.manage.exam.schedule') || Route::is('teacher.manage.document.schedule') || Route::is('teacher.add.document.schedule') || Route::is('teacher.edit.detail.document.schedule') ? 'true' : 'false' }}">
+                        <div>
+                            <i class='nav-icon bx bx-calendar-edit'></i>
+                            <span class="link-name">ตารางกำหนดการ</span>
+                        </div>
+                        <i class="bx bx-chevron-down arrow"></i>
+                    </a>
+                </div>
+                <ul id="manage_schedule"
+                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('teacher.manage.exam.schedule') || Route::is('teacher.manage.document.schedule') || Route::is('teacher.add.document.schedule') || Route::is('teacher.edit.detail.document.schedule') ? 'show' : '' }}"
+                    data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link {{ Route::is('teacher.manage.exam.schedule') ? 'active' : '' }}"
+                            href="{{ route('teacher.manage.exam.schedule') }}">
+                            <i class='nav-icon bx bx-circle'></i>
+                            <span class="link-name">ตารางสอบ</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link {{ Route::is('teacher.manage.document.schedule') || Route::is('teacher.add.document.schedule') || Route::is('teacher.edit.detail.document.schedule') ? 'active' : '' }}"
+                            href="{{ route('teacher.manage.document.schedule') }}">
+                            <i class='nav-icon bx bx-circle'></i>
+                            <span class="link-name">ตารางการส่งเอกสาร</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link {{ Route::is('teacher.edit.teacher') ? 'active' : '' }}"
+                    href="{{ route('teacher.edit.teacher') }}">
                     <i class='nav-icon bx bx-user'></i>
                     <span class="link-name">จัดการบัญชีผู้ใช้</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link {{ Request::is('teacher/manage_news') ? 'active' : '' }}"
-                    href="/teacher/manage_news">
+                <a class="sidebar-link {{ Route::is('teacher.manage.news') || Route::is('teacher.add.news') || Route::is('teacher.edit.detail.news') ? 'active' : '' }}"
+                    href="{{ route('teacher.manage.news') }}">
                     <i class='nav-icon bx bx-news'></i>
                     <span class="link-name">จัดการข่าวประชาสัมพันธ์</span>
                 </a>
@@ -99,15 +128,15 @@
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav ms-auto my-2 my-lg-0">
             <li class="navbar-item my-1">
-                <a href="/teacher/menu_thesis_login"
-                    class="navbar-link {{ Request::is('teacher/menu_thesis_login') ? 'active' : '' }}">
+                <a href="{{ route('teacher.menu.thesis') }}"
+                    class="navbar-link {{ Route::is('teacher.menu.thesis') || Route::is('teacher.detail.thesis') ? 'active' : '' }}">
                     <i class='nav-icon bx bx-bookmarks'></i>
                     <span>บทความปริญญานิพนธ์</span>
                 </a>
             </li>
             <li class="navbar-item my-1">
-                <a href="/teacher/menu_news_login"
-                    class="navbar-link {{ Request::is('teacher/menu_news_login') ? 'active' : '' }}">
+                <a href="{{ route('teacher.menu.news') }}"
+                    class="navbar-link {{ Route::is('teacher.menu.news') || Route::is('teacher.detail.news') ? 'active' : '' }}">
                     <i class='nav-icon bx bx-news'></i>
                     <span>ข่าวประชาสัมพันธ์</span>
                 </a>

@@ -36,11 +36,11 @@ class LoginTeacher extends Component
         if (Auth::guard('teachers')->attempt(['username' => $this->username, 'password' => $this->password])) {
             if (Auth::guard('teachers')->user()->account_status == true) {
                 if (Auth::guard('teachers')->user()->user_type == 'Teacher') {
-                    return redirect()->route('teacher');
+                    return redirect()->route('teacher.dashboard');
                 } else if (Auth::guard('teachers')->user()->user_type == 'Admin') {
-                    return redirect()->route('admin');
+                    return redirect()->route('admin.dashboard');
                 } elseif (Auth::guard('teachers')->user()->user_type == 'Branch head') {
-                    return redirect()->route('brand-head');
+                    return redirect()->route('branch-head.dashboard');
                 }
             } else {
                 Auth::guard('teachers')->logout();

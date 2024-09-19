@@ -41,11 +41,11 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-end">
                             @if ($users->user_type == 'Admin')
-                                <a href="/admin/add_news" class="btn btn-success">เพิ่มข่าว</a>
+                                <a href="{{ route('admin.add.news') }}" class="btn btn-success">เพิ่มข่าว</a>
                             @elseif ($users->user_type == 'Branch head')
-                                <a href="/branch-head/add_news" class="btn btn-success">เพิ่มข่าว</a>
+                                <a href="{{ route('branch-head.add.news') }}" class="btn btn-success">เพิ่มข่าว</a>
                             @elseif ($users->user_type == 'Teacher')
-                                <a href="/teacher/add_news" class="btn btn-success">เพิ่มข่าว</a>
+                                <a href="{{ route('teacher.add.news') }}" class="btn btn-success">เพิ่มข่าว</a>
                             @endif
                         </div>
                     </div>
@@ -111,13 +111,13 @@
                                                     class="btn btn-danger"><i class='bx bxs-hide'></i></a>
                                             @endif
                                             @if ($users->user_type == 'Admin')
-                                                <a href="/admin/edit_and_detail_news/{{ $news_detail->id_news }}"
+                                                <a href="{{ route('admin.edit.detail.news', $news_detail->id_news) }}"
                                                     class="btn btn-orange"><i class='bx bx-detail'></i></a>
                                             @elseif ($users->user_type == 'Branch head')
-                                                <a href="/branch-head/edit_and_detail_news/{{ $news_detail->id_news }}"
+                                                <a href="{{ route('branch-head.edit.detail.news', $news_detail->id_news) }}"
                                                     class="btn btn-orange"><i class='bx bx-detail'></i></a>
                                             @elseif ($users->user_type == 'Teacher')
-                                                <a href="/teacher/edit_and_detail_news/{{ $news_detail->id_news }}"
+                                                <a href="{{ route('teacher.edit.detail.news', $news_detail->id_news) }}"
                                                     class="btn btn-orange"><i class='bx bx-detail'></i></a>
                                             @endif
                                         </td>

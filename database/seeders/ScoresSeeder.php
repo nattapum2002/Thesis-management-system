@@ -18,33 +18,33 @@ class ScoresSeeder extends Seeder
      */
     public function run(): void
     {
-        $students = Member::all();
-        $documents = Document::whereIn('id_document', [3, 6])->get();
-        $commentLists = Comment_list::whereBetween('id_comment_list', [20, 28])->get();
-        $teachers = Teacher::all();
-        $positions = Position::where('id_position', 3)->get();
-        $now = Carbon::now();
+        // $students = Member::all();
+        // $documents = Document::whereIn('id_document', [3, 6])->get();
+        // $commentLists = Comment_list::whereBetween('id_comment_list', [20, 28])->get();
+        // $teachers = Teacher::all();
+        // $positions = Position::where('id_position', 3)->get();
+        // $now = Carbon::now();
 
-        foreach ($documents as $document) {
-            foreach ($students as $student) {
-                foreach ($commentLists as $commentList) {
-                    $teacher = $teachers->random();
-                    $position = $positions->random();
-                    $score = $this->determineScore($commentList->id_comment_list);
+        // foreach ($documents as $document) {
+        //     foreach ($students as $student) {
+        //         foreach ($commentLists as $commentList) {
+        //             $teacher = $teachers->random();
+        //             $position = $positions->random();
+        //             $score = $this->determineScore($commentList->id_comment_list);
 
-                    DB::table('scores')->insert([
-                        'score' => $score,
-                        'id_student' => $student->id_student,
-                        'id_document' => $document->id_document,
-                        'id_comment_list' => $commentList->id_comment_list,
-                        'id_teacher' => $teacher->id_teacher,
-                        'id_position' => $position->id_position,
-                        'created_at' => $now,
-                        'updated_at' => $now,
-                    ]);
-                }
-            }
-        }
+        //             DB::table('scores')->insert([
+        //                 'score' => $score,
+        //                 'id_student' => $student->id_student,
+        //                 'id_document' => $document->id_document,
+        //                 'id_comment_list' => $commentList->id_comment_list,
+        //                 'id_teacher' => $teacher->id_teacher,
+        //                 'id_position' => $position->id_position,
+        //                 'created_at' => $now,
+        //                 'updated_at' => $now,
+        //             ]);
+        //         }
+        //     }
+        // }
     }
 
     /**

@@ -21,12 +21,12 @@
                             @if ($toggle['thesis_image'])
                                 <td>
                                     <div class="input-field">
-                                        <input class="form-input" wire:model="thesis_image" type="file"
+                                        <input class="form-control" wire:model="thesis_image" type="file"
                                             placeholder="เลือกไฟล์" required>
-                                        @error('thesis_image')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('thesis_image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -38,13 +38,14 @@
                                 </td>
                             @else
                                 <td>
-                                    @if ($thesis->thesis_image == null)
-                                        <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
-                                            alt=""
-                                            style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                    @else
+                                    @if ($thesis->thesis_image)
+                                        {{-- thesis-management-system/storage/app/public/ --}}
                                         <img wire:live src="{{ asset('storage/' . $thesis->thesis_image) }}"
                                             alt="{{ $thesis->title }}"
+                                            style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                    @else
+                                        <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                            alt=""
                                             style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                     @endif
                                 </td>
@@ -61,7 +62,7 @@
                             @if ($toggle['title'])
                                 <td>
                                     <div class="input-field">
-                                        <select class="form-select" wire:model.live="title">
+                                        <select class="form-select" wire:model="title">
                                             <option selected>ชี่อบทความ</option>
                                             @foreach ($projects as $project)
                                                 <option value="{{ $project->id_project }}">
@@ -69,10 +70,10 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                        @error('title')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -93,11 +94,11 @@
                             @if ($toggle['details'])
                                 <td>
                                     <div class="input-field">
-                                        <textarea class="form-input" wire:model="details" type="text" placeholder="รายละเอียด" required></textarea>
-                                        @error('details')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <textarea class="form-control" wire:model="details" type="text" placeholder="บทคัดย่อ" required></textarea>
                                     </div>
+                                    @error('details')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -127,10 +128,10 @@
                                                 {{ now()->subYear()->thaidate('Y') }}
                                             </option>
                                         </select>
-                                        @error('year_published')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('year_published')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -152,16 +153,25 @@
                             <th>ประเภทบทความ</th>
                             @if ($toggle['type'])
                                 <td>
-                                    <div class="input-field">
+                                    <div class="input-group">
                                         <select class="form-select" wire:model.live="type">
                                             <option selected>ประเภทบทความ</option>
-                                            <option value="Software">Software</option>
-                                            <option value="Hardware">Hardware</option>
+                                            @foreach ($types as $type)
+                                                <option value="{{ $type->type }}">{{ $type->type }}</option>
+                                            @endforeach
+                                            <option value="อื่นๆ">อื่นๆ</option>
                                         </select>
-                                        @error('type')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        @if ($this->type == 'อื่นๆ')
+                                            <input class="form-control" wire:model="other_type" type="text"
+                                                placeholder="กรุณากรอกประเภทบทความ">
+                                        @endif
                                     </div>
+                                    @error('type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    @error('other_type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -182,12 +192,12 @@
                             @if ($toggle['file_dissertation'])
                                 <td>
                                     <div class="input-field">
-                                        <input class="form-input" wire:model="file_dissertation" type="file"
+                                        <input class="form-control" wire:model="file_dissertation" type="file"
                                             placeholder="เลือกไฟล์" required>
-                                        @error('file_dissertation')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('file_dissertation')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -199,15 +209,17 @@
                                 </td>
                             @else
                                 <td>
-                                    @if ($thesis->file_dissertation == null)
-                                        <p class="text-danger">ไม่มีไฟล์</p>
+                                    @if ($thesis->file_dissertation)
+                                        {{-- Thesis-management-system/storage/app/public/ --}}
+                                        <a href="{{ url('storage/' . $thesis->file_dissertation) }}"
+                                            target="_blank">{{ basename($thesis->file_dissertation) }}</a>
                                     @else
-                                        {{ $thesis->file_dissertation }}
+                                        <p class="text-danger">ไม่มีไฟล์</p>
                                     @endif
                                 </td>
                                 <td>
                                     <div class="button-container">
-                                        <button class="btn btn-orange" wire:click="edit('thesis_image')"><i
+                                        <button class="btn btn-orange" wire:click="edit('file_dissertation')"><i
                                                 class='bx bx-edit'></i></button>
                                     </div>
                                 </td>
@@ -228,15 +240,15 @@
                             @if ($toggle['status'])
                                 <td>
                                     <div class="input-field">
-                                        <select class="form-select" wire:model.live="status">
+                                        <select class="form-select" wire:model="status">
                                             <option selected>สถานะบทความ</option>
                                             <option value="1">แสดง</option>
                                             <option value="0">ซ่อน</option>
                                         </select>
-                                        @error('status')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('status')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">

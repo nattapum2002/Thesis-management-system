@@ -88,13 +88,14 @@
                 @foreach ($news as $item)
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post">
-                            <a href="/detail_news/{{ $item->id_news }}">
+                            <a href="{{ route('welcome.news.detail', $item->id_news) }}">
                                 <p class="tag">{{ $item->type }}</p>
-                                @if ($item->news_image == null)
-                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                @if ($item->news_image)
+                                    {{-- Thesis-management-system/storage/app/public/ --}}
+                                    <img wire:live src="{{ asset('storage/' . $item->news_image) }}"
                                         alt="{{ $item->title }}">
                                 @else
-                                    <img wire:live src="{{ asset('storage/' . $item->news_image) }}"
+                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
                                         alt="{{ $item->title }}">
                                 @endif
                                 <div class="details">

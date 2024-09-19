@@ -72,14 +72,12 @@
                                     <td>
                                         @if ($member->account_status == '1')
                                             <button wire:click='show("{{ $member->id_student }}")'
-                                                class="btn btn-success swalDefaultSuccess"><i
-                                                    class='bx bx-user-check'></i></button>
+                                                class="btn btn-success"><i class='bx bx-user-check'></i></button>
                                         @else
                                             <button wire:click='hide("{{ $member->id_student }}")'
-                                                class="btn btn-danger swalDefaultError"><i
-                                                    class='bx bx-user-x'></i></button>
+                                                class="btn btn-danger"><i class='bx bx-user-x'></i></button>
                                         @endif
-                                        <a href="/admin/approve_member/{{ $member->id_student }}"
+                                        <a href="{{ route('admin.approve.member', $member->id_student) }}"
                                             class="btn btn-orange"><i class='bx bx-detail'></i></a>
                                     </td>
                                 </tr>

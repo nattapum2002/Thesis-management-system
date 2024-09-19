@@ -9,12 +9,12 @@
                     <div class="fields">
                         <div class="input-fields">
                             <label class="form-label">ภาษาไทย</label>
-                            <input wire:model="projectNameThai" class="form-input" type="text"
+                            <input wire:model="projectNameThai" class="form-control" type="text"
                                 placeholder="กรุณากรอกชื่อโครงงาน" required>
                         </div>
                         <div class="input-fields">
                             <label class="form-label">ภาษาอังกฤษ</label>
-                            <input wire:model="projectNameEnglish" class="form-input" type="text"
+                            <input wire:model="projectNameEnglish" class="form-control" type="text"
                                 placeholder="กรุณากรอกชื่อโครงงาน" required>
                         </div>
                     </div>

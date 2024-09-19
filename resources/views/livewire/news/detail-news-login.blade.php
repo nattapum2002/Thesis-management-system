@@ -25,11 +25,12 @@
                 <div class="col-12">
                     <div class="img">
                         <p class="tag">{{ $news->type }}</p>
-                        @if ($news->news_image == null)
+                        @if ($news->news_image)
+                            {{-- Thesis-management-system/storage/app/public/ --}}
+                            <img wire:live src="{{ asset('storage/' . $news->news_image) }}" alt="{{ $news->title }}">
+                        @else
                             <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/500' }}"
                                 alt="{{ $news->title }}">
-                        @else
-                            <img wire:live src="{{ asset('storage/' . $news->news_image) }}" alt="{{ $news->title }}">
                         @endif
                     </div>
                 </div>
@@ -58,22 +59,22 @@
                 @foreach ($other_news as $item)
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post">
-                            {{-- <a href="/detail_news/{{ $item->id_news }}"> --}}
                             @if ($users->user_type == 'Admin')
-                                <a href="/admin/detail_news_login/{{ $item->id_news }}">
+                                <a href="{{ route('admin.detail.news', $item->id_news) }}">
                                 @elseif ($users->user_type == 'Branch head')
-                                    <a href="/branch-head/detail_news_login/{{ $item->id_news }}">
+                                    <a href="{{ route('branch-head.detail.news', $item->id_news) }}">
                                     @elseif ($users->user_type == 'Teacher')
-                                        <a href="/teacher/detail_news_login/{{ $item->id_news }}">
+                                        <a href="{{ route('teacher.detail.news', $item->id_news) }}">
                                         @else
-                                            <a href="/member/detail_news_login/{{ $item->id_news }}">
+                                            <a href="{{ route('member.detail.news', $item->id_news) }}">
                             @endif
                             <p class="tag">{{ $item->type }}</p>
-                            @if ($item->news_image == null)
-                                <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                            @if ($item->news_image)
+                                {{-- Thesis-management-system/storage/app/public/ --}}
+                                <img wire:live src="{{ asset('storage/' . $item->news_image) }}"
                                     alt="{{ $item->title }}">
                             @else
-                                <img wire:live src="{{ asset('storage/' . $item->news_image) }}"
+                                <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
                                     alt="{{ $item->title }}">
                             @endif
                             <div class="details">

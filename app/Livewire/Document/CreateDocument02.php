@@ -35,12 +35,12 @@ class CreateDocument02 extends Component
                     })
                     ->toArray();
 
-                $teacherIds = collect($this->teachers->pluck('id_teacher'))
-                    ->filter() // กรองค่าที่ไม่ใช่ null
-                    ->map(function ($id_teacher) {
-                        return Teacher::firstOrCreate(['id_teacher' => $id_teacher])->id_teacher;
-                    })
-                    ->toArray();
+                // $teacherIds = collect($this->teachers->pluck('id_teacher'))
+                //     ->filter() // กรองค่าที่ไม่ใช่ null
+                //     ->map(function ($id_teacher) {
+                //         return Teacher::firstOrCreate(['id_teacher' => $id_teacher])->id_teacher;
+                //     })
+                //     ->toArray();
 
                 $admin_teacher = Teacher::where('user_type', 'Admin')->get();
                 foreach ($admin_teacher as $admin_teacher_items) {
@@ -71,22 +71,19 @@ class CreateDocument02 extends Component
                         'confirm_status' => $send_member,
                     ]);
                 }
-                foreach ($teacherIds as $index => $teacherId) {
-                    $position = $index == 0 ? 1 : 2; // กำหนด position โดยที่ปรึกษาหลักคือ index 0, ที่ปรึกษาร่วมคือ index อื่นๆ
-                    Confirm_teacher::create([
-                        'id_teacher' => $teacherId,
-                        'id_document' => 2,
-                        'id_project' => $this->project->first()->id_project,
-                        'id_position' => $position,
-                        'confirm_status' => false,
-                    ]);
-                }
+                $main_teacher = $this->project->first()->teachers->where('pivot.id_position', 1);
+                Confirm_teacher::create([
+                    'id_teacher' => $main_teacher->first()->id_teacher,
+                    'id_document' => 2,
+                    'id_project' => $this->project->first()->id_project,
+                    'id_position' => 1,
+                    'confirm_status' => false,
+                ]);
             });
-            return redirect()->route('manage_document');
-        }else{
+            return redirect()->route('member.manage.document');
+        } else {
             session()->flash('message', 'กรุณาเลือกโครงการก่อนกดปุ่มสร้าง');
         }
-       
     }
     function test()
     {

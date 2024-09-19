@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Director;
 use App\Models\Exam_schedule;
 use App\Models\Score;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\App;
 
 //ปัญหาไม่สามารถเลือกวันที่ได้
@@ -80,7 +81,7 @@ class pdfGenerateController extends Controller
             'teacher',
             'position'
         ])->where('id_project', $projectID)
-            ->where('id_document', $documentId)->get();
+            ->where('id_document', 3)->get();
 
         $comments = Comment::with([
             'project',
@@ -390,5 +391,55 @@ class pdfGenerateController extends Controller
             'directors' => $directors,
             'documentId' => $documentId
         ]);
+    }
+
+    public function pdf03ScoreGenerate($projectID)
+    {
+        $documentId = 3;
+        $project = Project::with([
+            'confirmStudents' => function ($query) {
+                $query->where('id_document', 3)
+                    ->where('id_project', 11);
+            },
+            'confirmStudents.student',
+            'confirmStudents.documents',
+            'confirmTeachers' => function ($query) use ($projectID) {
+                $query->where('id_document', 3)
+                    ->where('id_project', $projectID);
+            },
+            'confirmTeachers.teacher',
+            'confirmTeachers.document'
+        ])->whereHas('confirmTeachers', function ($query) use ($projectID)  {
+            $query->where('id_document', 3)->where('id_project', $projectID);
+        })
+            ->get();
+
+        $scores = Score::with([
+            'student',
+            'document',
+            'commentList',
+            'teacher',
+            'position'
+        ])->where('id_document', $documentId)
+            ->where('id_position', 3)->get();
+        $comments = Comment::with([
+            'project',
+            'document',
+            'commentList',
+            'teacher',
+            'position'
+        ])->where('id_project', $projectID)->where('id_document', $documentId)->orderBy('created_at', 'asc')->get();
+        $projectscore = Project::with([
+            'members.course',
+            'members.level',
+            'teachers',
+            'confirmStudents.student',
+            'confirmStudents.documents',
+            'confirmTeachers.teacher',
+            'confirmTeachers.document'
+        ])->find($projectID);
+        // dd($project);
+        $pdf = Pdf::loadView('pdf.document03_score', ['projects' => $project, 'scores' => $scores, 'comments' => $comments, 'projectscore' => $projectscore]);
+        return  $pdf->stream('test.pdf');
     }
 }

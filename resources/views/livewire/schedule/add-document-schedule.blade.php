@@ -30,7 +30,7 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            @error('#')
+                                            @error('add_document')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -41,9 +41,9 @@
                                     <th>กำหนดส่ง(เวลา)</th>
                                     <td>
                                         <div class="input-field">
-                                            <input class="form-input" type="time" wire:model='add_time'
+                                            <input class="form-control" type="time" wire:model='add_time'
                                                 placeholder="กรุณากรอกเวลาสอบ" required>
-                                            @error('#')
+                                            @error('add_time')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -54,9 +54,9 @@
                                     <th>กำหนดส่ง(วันที่)</th>
                                     <td>
                                         <div class="input-field">
-                                            <input class="form-input" type="date" wire:model='add_date'
+                                            <input class="form-control" type="date" wire:model='add_date'
                                                 placeholder="กรุณากรอกวันที่สอบ" required>
-                                            @error('#')
+                                            @error('add_date')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -76,7 +76,7 @@
                                                     {{ now()->subYear()->thaidate('Y') }}
                                                 </option>
                                             </select>
-                                            @error('#')
+                                            @error('add_year')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>

@@ -6,7 +6,7 @@
                     <h3>จัดการเอกสาร 01 ยื่นอนุมัติหัวข้อ</h3>
                 </div>
                 <div class="col-sm-5">
-                    <a class="btn btn-success" href="/member/create_document">เพิ่มเอกสาร 01</a>
+                    <a class="btn btn-success" href="{{ route('member.create.document-01') }}">เพิ่มเอกสาร 01</a>
                 </div>
             </div>
         </div>

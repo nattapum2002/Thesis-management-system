@@ -19,18 +19,20 @@
                 <div class="col-lg-3">
                     <div class="img">
                         <p class="tag">{{ $articles->type }}</p>
-                        @if ($articles->thesis_image == null)
-                            <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                        @if ($articles->thesis_image)
+                            {{-- Thesis-management-system/storage/app/public/ --}}
+                            <img wire:live src="{{ asset('storage/' . $articles->thesis_image) }}"
                                 alt="{{ $articles->title }}">
                         @else
-                            <img wire:live src="{{ asset('storage/' . $articles->thesis_image) }}"
+                            <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
                                 alt="{{ $articles->title }}">
                         @endif
                     </div>
                     <h5>เผยแพร่เมื่อ</h5>
                     <p>{{ $articles->created_at->thaidate('วันที่ j F พ.ศ.Y เวลา H:i') }}</p>
                     <h5>เอกสาร</h5>
-                    <a href="#">{{ $articles->file_dissertation }}</a>
+                    {{-- Thesis-management-system/storage/app/public/ --}}
+                    <a href="{{ url('storage/' . $articles->file_dissertation) }}" target="_blank">PDF</a>
                 </div>
                 <div class="col-lg-6">
                     <h3>{{ $projects->project_name_th }}</h3>
@@ -69,13 +71,14 @@
                 @foreach ($other_articles as $item)
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post">
-                            <a href="/detail_thesis/{{ $item->id_dissertation_article }}">
+                            <a href="{{ route('welcome.thesis.detail', $item->id_dissertation_article) }}">
                                 <p class="tag">{{ $item->type }}</p>
-                                @if ($item->thesis_image == null)
-                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                @if ($item->thesis_image)
+                                    {{-- Thesis-management-system/storage/app/public/ --}}
+                                    <img wire:live src="{{ asset('storage/' . $item->thesis_image) }}"
                                         alt="{{ $item->title }}">
                                 @else
-                                    <img wire:live src="{{ asset('storage/' . $item->thesis_image) }}"
+                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
                                         alt="{{ $item->title }}">
                                 @endif
                                 <div class="details">

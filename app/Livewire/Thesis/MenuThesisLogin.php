@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\thesis;
+namespace App\Livewire\Thesis;
 
 use App\Models\Dissertation_article;
 use App\Models\Member;
@@ -10,7 +10,7 @@ use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
-class MenuthesisLogin extends Component
+class MenuThesisLogin extends Component
 {
     use WithPagination;
 
@@ -52,7 +52,7 @@ class MenuthesisLogin extends Component
                 $query->orderBy('dissertation_articles.created_at', 'desc');
             })
             ->paginate(8);
-        $types = Dissertation_article::select('type')->distinct()->get();
+        $types = Dissertation_article::select('type')->where('status', '1')->distinct()->get();
 
         return view('livewire.thesis.menu-thesis-login', ['articles' => $articles, 'projects' => $projects, 'types' => $types]);
     }

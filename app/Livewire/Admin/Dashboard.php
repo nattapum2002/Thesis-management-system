@@ -28,15 +28,64 @@ class Dashboard extends Component
         $advisers = Adviser::with(['project', 'teacher', 'position'])->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)->get();
         $directors = Director::with(['project', 'teacher', 'position'])->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)->get();
         $confirms = Confirm_teacher::with(['project', 'teacher', 'position'])->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)->get();
-        $documentSchedules = Document_submission_schedule::with('document')->get();
-        $examSchedules = Exam_schedule::with('project', 'teacher', 'document')->get();
+        $documentSchedules = Document_submission_schedule::with('document')
+            ->where('status', 1)
+            ->where(function ($query) {
+                $query->where('date_submission', '>', now())
+                    ->orWhere(function ($query) {
+                        $query->where('date_submission', now()->toDateString())
+                            ->where('time_submission', '>', now()->toTimeString());
+                    });
+            })
+            ->orderBy('date_submission', 'asc')
+            ->orderBy('time_submission', 'asc')
+            ->take(5)
+            ->get();
+
+        $examSchedules = Exam_schedule::with('project', 'teacher', 'document')
+            ->where(function ($query) {
+                $query->where('exam_day', '>', now())
+                    ->orWhere(function ($query) {
+                        $query->where('exam_day', now()->toDateString())
+                            ->where('exam_time', '>', now()->toTimeString());
+                    });
+            })
+            ->orderBy('exam_day', 'asc')
+            ->orderBy('exam_time', 'asc')
+            ->take(5)
+            ->get();
 
         $chartColors = [
-            "#4e73df", "#1cc88a", "#36b9cc", "#f6c23e", "#e74a3b", "#858796",
-            "#FF0000", "#FFC0CB", "#800080", "#87CEEB", "#98FF98", "#808080",
-            "#FFFFFF", "#000000", "#FFD700", "#FFA07A", "#F5F5DC", "#00FF00",
-            "#00CED1", "#FFD700", "#4F4F4F", "#DC143C", "#FF69B4", "#006400",
-            "#00008B", "#D8BFD8", "#FF8C00", "#FFFDD0", "#FFFF00", "#0000FF"
+            "#4e73df",
+            "#1cc88a",
+            "#36b9cc",
+            "#f6c23e",
+            "#e74a3b",
+            "#858796",
+            "#FF0000",
+            "#FFC0CB",
+            "#800080",
+            "#87CEEB",
+            "#98FF98",
+            "#808080",
+            "#FFFFFF",
+            "#000000",
+            "#FFD700",
+            "#FFA07A",
+            "#F5F5DC",
+            "#00FF00",
+            "#00CED1",
+            "#FFD700",
+            "#4F4F4F",
+            "#DC143C",
+            "#FF69B4",
+            "#006400",
+            "#00008B",
+            "#D8BFD8",
+            "#FF8C00",
+            "#FFFDD0",
+            "#FFFF00",
+            "#0000FF"
         ];
         $chartNewsLabels = News::pluck('type')->unique()->values()->toArray();
         $chartNewsData = News::select('type', DB::raw('count(*) as count'))

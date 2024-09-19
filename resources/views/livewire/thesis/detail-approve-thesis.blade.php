@@ -19,13 +19,14 @@
                         <tr>
                             <th>รูปภาพ</th>
                             <td>
-                                @if ($thesis->thesis_image == null)
-                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
-                                        alt=""
-                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                @else
+                                @if ($thesis->thesis_image)
+                                    {{-- Thesis-management-system/storage/app/public/ --}}
                                     <img wire:live src="{{ asset('storage/' . $thesis->thesis_image) }}"
                                         alt="{{ $thesis->title }}"
+                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                @else
+                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                        alt=""
                                         style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                 @endif
                             </td>
@@ -54,11 +55,7 @@
                         <tr>
                             <th>ไฟล์บทความ</th>
                             <td>
-                                @if ($thesis->file_dissertation == null)
-                                    <p class="text-danger">ไม่มีไฟล์</p>
-                                @else
-                                    {{ $thesis->file_dissertation }}
-                                @endif
+                                {{ $thesis->file_dissertation ?? '<p class="text-danger">ไม่มีไฟล์</p>' }}
                             </td>
                             <td></td>
                         </tr>
@@ -85,11 +82,9 @@
                                 </td>
                             @else
                                 <td>
-                                    @if ($thesis->status == 1)
-                                        <p class="text-success">แสดง</p>
-                                    @else
-                                        <p class="text-danger">ซ่อน</p>
-                                    @endif
+                                    <p class="{{ $thesis->status == 1 ? 'text-success' : 'text-danger' }}">
+                                        {{ $thesis->status == 1 ? 'แสดง' : 'ซ่อน' }}
+                                    </p>
                                 </td>
                                 <td>
                                     <button class="btn btn-orange" wire:click="edit('status')"><i

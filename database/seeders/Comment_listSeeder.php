@@ -97,5 +97,8 @@ class Comment_listSeeder extends Seeder
         DB::table('comment_lists')->insert([
             'comment_list' => '5.2.ขอบเขต'
         ]);
+        DB::table('comment_lists')->insert([
+            'comment_list' => '6.ความพร้อมและความตรงต่อเวลา'
+        ]);
     }
 }

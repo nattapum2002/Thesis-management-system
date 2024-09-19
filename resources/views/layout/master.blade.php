@@ -15,40 +15,6 @@
     <link rel="stylesheet" href="{{ asset('Asset/main/css/master2.css') }}">
 </head>
 
-{{-- <body class="sidebar-mini hold-transition layout-navbar-fixed layout-fixed">
-    <div class="wrapper">
-        <!-- Main Sidebar -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-no-expand">
-            @yield('mastersidebar')
-        </aside>
-
-        <!-- Navber -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            @yield('masternavbar')
-        </nav>
-
-        <!-- Content -->
-        <div class="content-wrapper">
-            @yield('mastercontent')
-            <a id="back-to-top" href="#" class="btn btn-orange back-to-top" role="button"
-                aria-label="Scroll to top">
-                <i class="fas fa-chevron-up"></i>
-            </a>
-        </div>
-
-        <!-- Footer -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                @yield('masterfooter')
-            </div>
-        </footer>
-    </div>
-
-    <!-- Script -->
-    @yield('masterscript')
-    @include('layout.script')
-</body> --}}
-
 <body>
     <div class="wrapper">
         <!-- Main Sidebar -->
@@ -71,12 +37,6 @@
                 </a>
             </div>
 
-            <!-- Footer -->
-            {{-- <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    @yield('masterfooter')
-                </div>
-            </footer> --}}
             <footer class="bg-cover">
                 <div class="footer-top">
                     <div class="container">

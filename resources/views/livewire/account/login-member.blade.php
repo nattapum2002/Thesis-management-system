@@ -59,8 +59,16 @@
     <section id="login-member">
         <div class="container">
             <div class="row justify-content-center">
-                @if (session('message'))
+                @if (session('messageInfo'))
+                    <div class="alert alert-info" role="alert">
+                        {{ session('messageInfo') }}
+                    </div>
+                @elseif (session('messageDanger'))
                     <div class="alert alert-danger" role="alert">
+                        {{ session('messageDanger') }}
+                    </div>
+                @elseif (session('message'))
+                    <div class="alert alert-success" role="alert">
                         {{ session('message') }}
                     </div>
                 @endif
@@ -89,10 +97,11 @@
                         <!-- button -->
                         <div class="group">
                             <button type="submit" class="btn btn-brand">เข้าสู่ระบบ</button>
-                            <button type="reset" class="btn" onclick="window.location.href='/'">ยกเลิก</button>
+                            <button type="reset" class="btn"
+                                onclick="window.location.href='{{ route('welcome') }}'">ยกเลิก</button>
                         </div>
 
-                        <p>ยังไม่มีบัญชี? <a href="/register">สมัครสมาชิก</a></p>
+                        <p>ยังไม่มีบัญชี? <a href="{{ route('register') }}">สมัครสมาชิก</a></p>
                     </form>
                 </div>
             </div>

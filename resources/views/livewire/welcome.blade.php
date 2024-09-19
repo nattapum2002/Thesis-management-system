@@ -35,8 +35,9 @@
                                 <div class="col-12">
                                     <h6 class="text-white text-uppercase">เทคโนโลยีคอมพิวเตอร์</h6>
                                     <h1 class="display-2 text-white my-3 text-uppercase">ยินดีต้อนรับ</h1>
-                                    <a class="btn btn-brand" href="/login_member">เข้าสู่ระบบ</a>
-                                    <a class="btn btn-outline-light ms-md-3" href="/register">สมัครสมาชิก</a>
+                                    <a class="btn btn-brand" href="{{ route('login.member') }}">เข้าสู่ระบบ</a>
+                                    <a class="btn btn-outline-light ms-md-3"
+                                        href="{{ route('register') }}">สมัครสมาชิก</a>
                                 </div>
                             </div>
                         </div>
@@ -49,8 +50,9 @@
                                 <div class="col-12 text-center">
                                     <h6 class="text-white text-uppercase">เทคโนโลยีคอมพิวเตอร์</h6>
                                     <h1 class="display-2 text-white my-3 text-uppercase">ยินดีต้อนรับ</h1>
-                                    <a class="btn btn-brand" href="/login_member">เข้าสู่ระบบ</a>
-                                    <a class="btn btn-outline-light ms-md-3" href="/register">สมัครสมาชิก</a>
+                                    <a class="btn btn-brand" href="{{ route('login.member') }}">เข้าสู่ระบบ</a>
+                                    <a class="btn btn-outline-light ms-md-3"
+                                        href="{{ route('register') }}">สมัครสมาชิก</a>
                                 </div>
                             </div>
                         </div>
@@ -63,8 +65,9 @@
                                 <div class="col-12">
                                     <h6 class="text-white text-uppercase">เทคโนโลยีคอมพิวเตอร์</h6>
                                     <h1 class="display-2 text-white my-3 text-uppercase">ยินดีต้อนรับ</h1>
-                                    <a class="btn btn-brand" href="/login_member">เข้าสู่ระบบ</a>
-                                    <a class="btn btn-outline-light ms-md-3" href="/register">สมัครสมาชิก</a>
+                                    <a class="btn btn-brand" href="{{ route('login.member') }}">เข้าสู่ระบบ</a>
+                                    <a class="btn btn-outline-light ms-md-3"
+                                        href="{{ route('register') }}">สมัครสมาชิก</a>
                                 </div>
                             </div>
                         </div>

@@ -34,14 +34,14 @@ class LoginMember extends Component
 
         if (Auth::guard('members')->attempt(['username' => $this->username, 'password' => $this->password])) {
             if (Auth::guard('members')->user()->account_status == true) {
-                return redirect()->route('member');
+                return redirect()->route('member.dashboard');
             } else {
                 Auth::guard('members')->logout();
-                session()->flash('message', 'รอการอนุมัติจากอาจารย์ประจำวิชา');
+                session()->flash('messageInfo', 'รอการอนุมัติจากอาจารย์ประจำวิชา');
             }
         } else {
             // Check if the username exists first to provide a specific error message
-            session()->flash('message', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+            session()->flash('messageDanger', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
         }
     }
 

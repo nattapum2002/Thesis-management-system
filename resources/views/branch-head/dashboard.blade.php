@@ -1,7 +1,7 @@
 @extends('layout.branch-head')
 @section('title')
-Dashboard
+    Dashboard
 @endsection
 @section('content')
-{{-- @livewire('admin-project') --}}
+    @livewire('branch-head.dashboard')
 @endsection

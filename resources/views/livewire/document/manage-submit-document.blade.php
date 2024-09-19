@@ -16,7 +16,7 @@
                     <div class="card-header">
                         <h3 class="card-title">เอกสาร คกท. 01</h3>
                         <div class="card-tools">
-                            <a class="btn btn-orange" href="{{ route('create_document_01') }}">สร้างเอกสาร</a>
+                            <a class="btn btn-orange" href="{{ route('member.create.document-01') }}">สร้างเอกสาร</a>
                         </div>
                     </div>
                 </div>
@@ -24,15 +24,7 @@
                     <div class="card-header">
                         <h3 class="card-title">เอกสาร คกท. 02</h3>
                         <div class="card-tools">
-                            <a class="btn btn-orange" href="{{ route('create_document_02') }}">สร้างเอกสาร</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">เอกสาร คกท. 03</h3>
-                        <div class="card-tools">
-                            <a class="btn btn-orange" href="">สร้างเอกสาร</a>
+                            <a class="btn btn-orange" href="{{ route('member.create.document-02') }}">สร้างเอกสาร</a>
                         </div>
                     </div>
                 </div>
@@ -40,7 +32,7 @@
                     <div class="card-header">
                         <h3 class="card-title">เอกสาร คกท. 04</h3>
                         <div class="card-tools">
-                            <a class="btn btn-orange" href="">สร้างเอกสาร</a>
+                            <a class="btn btn-primary" href="{{ route('member.create.document-04') }}">สร้างเอกสาร</a>
                         </div>
                     </div>
                 </div>
@@ -48,7 +40,7 @@
                     <div class="card-header">
                         <h3 class="card-title">เอกสาร คกท. 05</h3>
                         <div class="card-tools">
-                            <a class="btn btn-orange" href="">สร้างเอกสาร</a>
+                            <a class="btn btn-primary" href="{{ route('member.create.document-05') }}">สร้างเอกสาร</a>
                         </div>
                     </div>
                 </div>
@@ -56,7 +48,7 @@
                     <div class="card-header">
                         <h3 class="card-title">เอกสาร คกท. 06</h3>
                         <div class="card-tools">
-                            <a class="btn btn-orange" href="">สร้างเอกสาร</a>
+                            <a class="btn btn-orange" href="#">สร้างเอกสาร</a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +56,7 @@
                     <div class="card-header">
                         <h3 class="card-title">เอกสาร คกท. 07</h3>
                         <div class="card-tools">
-                            <a class="btn btn-orange" href="">สร้างเอกสาร</a>
+                            <a class="btn btn-orange" href="#">สร้างเอกสาร</a>
                         </div>
                     </div>
                 </div>
