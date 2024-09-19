@@ -426,7 +426,7 @@
                 ->where('id_comment_list', 2);
             $confirm = $projects->confirmTeachers
                 ->where('id_teacher', $branchHead->id_teacher)
-                ->where('id_position', 3)
+                ->where('id_position', 4)
                 ->where('id_document', $documentId)
                 ->where('confirm_status', 1)
                 ->first();
@@ -437,14 +437,22 @@
                 <td>
                     <div>
                         <input type="checkbox"
-                            {{ $branchHeadComments->where('comment', 'อนุมัติ')->isNotEmpty() ? 'checked' : '' }}>
+                            {{ $branchHeadComments->first()->comment == 'อนุมัติ' ? 'checked' : '' }}>
                         <label> อนุมัติ</label>
                     </div>
                     <div>
-                        <input type="checkbox" {{ $branchHeadOtherComment->isNotEmpty() ? 'checked' : '' }}>
-                        <label> ไม่อนุมัติ เนื่องจาก<span class="dotted">
-                                {{ $branchHeadOtherComment->first()->comment ?? ' ' }}
-                            </span></label>
+                        <input type="checkbox"
+                            {{ $branchHeadComments->first()->comment == 'ไม่อนุมัติ' ? 'checked' : '' }}>
+                        <label> ไม่อนุมัติ </label>
+                        @if ($branchHeadComments->first()->comment == 'ไม่อนุมัติ')
+                            เนื่องจาก<span class="dotted"> {{ $branchHeadOtherComment->first()->comment }}
+                            </span>
+                        @else
+                            เนื่องจาก
+                            .....................................................................................................................
+                            <br>............................................................................................................................................................
+                            <br>............................................................................................................................................................
+                        @endif
                     </div>
                 </td>
             </tr>

@@ -155,7 +155,7 @@ table {
     border: none;
 }
 
-.table{
+.table {
     border-collapse: collapse;
     width: 100%;
     margin: 0;
@@ -344,7 +344,7 @@ input[type="radio"] {
                 align-items: center;
                 text-align: center;
 
-                img{
+                img {
                     max-height: 55px;
                     border-radius: 16px;
                     object-fit: cover;
@@ -352,7 +352,7 @@ input[type="radio"] {
             }
         }
 
-        small{
+        small {
             display: flex;
             align-items: center;
             color: var(--orange-color);
@@ -390,7 +390,8 @@ input[type="radio"] {
             }
         }
 
-        .sidebar-link.active, .sidebar-link:hover {
+        .sidebar-link.active,
+        .sidebar-link:hover {
             border-left: var(--orange-color) 5px solid;
             color: var(--orange-color);
             transition: all 0.3s ease;
@@ -415,6 +416,7 @@ input[type="radio"] {
                 }
             }
         }
+
         .sidebar-link:not(.collapsed) {
             .arrow {
                 transform: rotate(180deg);
@@ -429,7 +431,9 @@ input[type="radio"] {
                 transition: all 0.3s ease;
                 color: var(--grey-1e-color);
             }
-            .sidebar-link.active, sidebar-link:hover {
+
+            .sidebar-link.active,
+            sidebar-link:hover {
                 border-left: var(--orange-color) 5px solid;
                 color: var(--orange-color);
                 transition: all 0.3s ease;
@@ -441,12 +445,16 @@ input[type="radio"] {
 #sidebar.collapsed {
     width: 70px;
     transition: all 0.3s ease;
+
     hr {
         width: 60px;
         transition: all 0.3s ease;
     }
 
-    span, small, .arrow, .sidebar-user .info {
+    span,
+    small,
+    .arrow,
+    .sidebar-user .info {
         display: none;
     }
 
@@ -486,7 +494,7 @@ input[type="radio"] {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         padding: 0 20px;
 
-        .navbar-toggle i{
+        .navbar-toggle i {
             height: 50px;
             min-width: 70px;
             text-align: center;
@@ -502,7 +510,8 @@ input[type="radio"] {
             .navbar-item {
                 margin-right: 20px;
 
-                .navbar-link.active, .navbar-link:hover {
+                .navbar-link.active,
+                .navbar-link:hover {
                     border-bottom: var(--orange-color) 2px solid;
                     color: var(--orange-color);
                 }
@@ -571,7 +580,7 @@ input[type="radio"] {
     padding: 0px 20px;
 }
 
-.main div.content #content-header div.col{
+.main div.content #content-header div.col {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -617,7 +626,8 @@ input[type="radio"] {
         .inner {
             color: var(--white-color);
 
-            h2, p {
+            h2,
+            p {
                 padding-left: 20px;
                 padding-top: 10px;
             }
@@ -658,6 +668,7 @@ input[type="radio"] {
         }
     }
 }
+
 /* end section-small-boxs */
 
 /* section-admin-chart */
@@ -723,7 +734,10 @@ input[type="radio"] {
     padding: 10px;
 }
 
-#thesisChart, #newsChart, #teacherChart, #confirmChart {
+#thesisChart,
+#newsChart,
+#teacherChart,
+#confirmChart {
     max-height: 300px;
     padding: 10px;
 }
@@ -903,35 +917,41 @@ footer {
 
 /* --------------------------------------- menu-thesis, menu-news page --------------------------------------- */
 
-#menu-thesis h2, #menu-news h2 {
+#menu-thesis h2,
+#menu-news h2 {
     margin-top: 20px;
 }
 
-#menu-thesis div.post, #menu-news div.post {
+#menu-thesis div.post,
+#menu-news div.post {
     position: relative;
     margin-top: 20px;
     border-radius: 10px;
 }
 
-#menu-thesis div.post:hover, #menu-news div.post:hover {
+#menu-thesis div.post:hover,
+#menu-news div.post:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
 
-#menu-thesis div.post a, #menu-news div.post a {
+#menu-thesis div.post a,
+#menu-news div.post a {
     text-decoration: none;
     color: var(--grey-1e-color);
 }
 
-#menu-thesis div.post img, #menu-news div.post img {
+#menu-thesis div.post img,
+#menu-news div.post img {
     border-radius: 10px;
     overflow: hidden;
     width: 100%;
 }
 
-#menu-thesis div.post p.tag, #menu-news div.post p.tag {
+#menu-thesis div.post p.tag,
+#menu-news div.post p.tag {
     padding: 4px 12px;
     background-color: var(--orange-color);
     color: var(--white-color);
@@ -941,22 +961,26 @@ footer {
     position: absolute;
 }
 
-#menu-thesis div.details, #menu-news div.details {
+#menu-thesis div.details,
+#menu-news div.details {
     padding: 10px 20px;
 }
 
-#menu-thesis div.post small, #menu-news div.post small {
+#menu-thesis div.post small,
+#menu-news div.post small {
     color: var(--orange-color);
     text-decoration: underline;
     text-transform: uppercase;
 }
 
-#menu-thesis div.post h4, #menu-news div.post h4 {
+#menu-thesis div.post h4,
+#menu-news div.post h4 {
     margin-top: 12px;
     margin-bottom: 12px;
 }
 
-#menu-thesis div.post p, #menu-news div.post p {
+#menu-thesis div.post p,
+#menu-news div.post p {
     margin-top: 0px;
     margin-bottom: 5px;
 }
@@ -990,7 +1014,8 @@ footer {
     position: absolute;
 }
 
-#detail-thesis h3, h5 {
+#detail-thesis h3,
+h5 {
     color: var(--orange-color);
 }
 
@@ -1007,13 +1032,15 @@ footer {
 
 /* --------------------------------------- edit-and-detail-thesis page --------------------------------------- */
 
-#edit-and-detail-thesis a:link, #edit-and-detail-thesis a:visited {
+#edit-and-detail-thesis a:link,
+#edit-and-detail-thesis a:visited {
     color: var(--orange-color);
     text-decoration: underline;
     cursor: pointer;
 }
 
-#edit-and-detail-thesis a:link:active, #edit-and-detail-thesis a:visited:active {
+#edit-and-detail-thesis a:link:active,
+#edit-and-detail-thesis a:visited:active {
     color: (internal value);
 }
 
@@ -1047,7 +1074,8 @@ footer {
     position: absolute;
 }
 
-#detail-news h3, h5 {
+#detail-news h3,
+h5 {
     color: var(--orange-color);
 }
 
@@ -1068,7 +1096,7 @@ footer {
 #project-status .member .card,
 #project-status .adviser .card,
 #project-status .document .card,
-#project-status .exam .card{
+#project-status .exam .card {
     margin-bottom: 10px;
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px; */
@@ -1192,7 +1220,7 @@ footer {
     padding: 10px;
     background-color: var(--green-color);
     color: var(--white-color);
-    border-radius: 100% ;
+    border-radius: 100%;
     margin-left: 5px;
 }
 
@@ -1206,11 +1234,12 @@ footer {
     padding: 10px;
     background-color: var(--grey-cc-color);
     color: var(--white-color);
-    border-radius: 100% ;
+    border-radius: 100%;
     margin-left: 5px;
 }
 
-#project-status .confirmed .tooltipText, #project-status .unconfirmed .tooltipText {
+#project-status .confirmed .tooltipText,
+#project-status .unconfirmed .tooltipText {
     visibility: hidden;
     min-width: 120px;
     background-color: #555;
@@ -1227,7 +1256,8 @@ footer {
     transition: opacity 0.3s;
 }
 
-#project-status .confirmed:hover .tooltipText, #project-status .unconfirmed:hover .tooltipText {
+#project-status .confirmed:hover .tooltipText,
+#project-status .unconfirmed:hover .tooltipText {
     visibility: visible;
     opacity: 1;
 }
@@ -1294,6 +1324,35 @@ footer {
 }
 
 #teacher-manage-document {
+    .tab {
+        overflow: hidden;
+    }
+
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border-top: none;
+    }
+
     .card {
         border: 1px solid var(--grey-cc-color);
         margin-bottom: 5px;
@@ -1400,7 +1459,9 @@ footer {
     }
 
     .modal {
-        h5.modal-title, legend {
+
+        h5.modal-title,
+        legend {
             color: var(--orange-color);
         }
 
@@ -1412,6 +1473,7 @@ footer {
         h5.modal-title {
             display: flex;
             align-items: center;
+
             i {
                 font-size: 35px;
                 padding-right: 5px;
@@ -1422,6 +1484,7 @@ footer {
             display: flex;
             margin-bottom: 5px;
             flex-wrap: nowrap;
+
             span.input-group-text {
                 width: 100%;
                 overflow-x: auto;
@@ -1507,9 +1570,11 @@ footer {
 
                 .row {
                     padding-left: 12px;
+
                     .input-group {
                         margin-bottom: 5px;
                     }
+
                     margin-bottom: 5px;
                 }
             }
@@ -1616,9 +1681,11 @@ footer {
 
                 .row {
                     padding-left: 12px;
+
                     .input-group {
                         margin-bottom: 5px;
                     }
+
                     margin-bottom: 5px;
                 }
             }
@@ -1680,7 +1747,7 @@ footer {
         display: none;
     }
 
-    #sidebar .sidebar-dropdown .sidebar-item .sidebar-link{
+    #sidebar .sidebar-dropdown .sidebar-item .sidebar-link {
         padding-left: 0px;
         transition: all 0.3s ease;
     }
@@ -1706,7 +1773,7 @@ footer {
     }
 
     #sidebar.collapsed span,
-    #sidebar.collapsed small{
+    #sidebar.collapsed small {
         display: flex;
     }
 
@@ -1753,21 +1820,22 @@ footer {
     .main .navbar {
         padding: 0 5px;
     }
+
     .main .navbar.collapsed ul {
         display: none;
     }
 }
 
 @container container-chart (max-width: 320px) {
-    #admin-chart .card .card-header .card-tools a.tools-link span{
+    #admin-chart .card .card-header .card-tools a.tools-link span {
         display: none;
     }
 
-    #teacher-chart .card .card-header .card-tools a.tools-link span{
+    #teacher-chart .card .card-header .card-tools a.tools-link span {
         display: none;
     }
 
-    #schedule .card .card-header .card-tools a.tools-link span{
+    #schedule .card .card-header .card-tools a.tools-link span {
         display: none;
     }
 }
