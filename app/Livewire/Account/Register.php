@@ -121,7 +121,7 @@ class Register extends Component
             'tel.numeric' => 'เบอร์โทรศัพท์ต้องเป็นตัวเลข',
             'tel.digits' => 'เบอร์โทรศัพท์ต้องเป็น 10 หลัก',
             'email.required' => 'กรุณากรอกอีเมล',
-            'email.email' => 'อีเมลต้องเป็นอีเมล',
+            'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง',
             'email.max' => 'อีเมลไม่เกิน 255 ตัวอักษร',
             'email.unique' => 'อีเมลซ้ํา',
             'username.required' => 'กรุณากรอกชื่อผู้ใช้งาน',
