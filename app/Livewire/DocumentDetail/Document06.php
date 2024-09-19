@@ -67,6 +67,7 @@ class Document06 extends Component
                     $current_comment_list_id++;
                 }
             }
+            return session()->flash('score success', 'กรอกคะแนนเสร็จสิ้น');
         });
 
         // dd($transformedData);
@@ -164,6 +165,8 @@ class Document06 extends Component
                     ]);
                 }
             }
+
+            return session()->flash('test success', 'บันทึกผลสอบผลสอบเสร็จสิ้น');
         });
     }
     public function admin_comment()
@@ -213,6 +216,7 @@ class Document06 extends Component
             }
             
            }
+           return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
        });
     }
     public function branch_head_comment()
@@ -262,6 +266,7 @@ class Document06 extends Component
             }
             
            }
+           return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
        });
     }
     public function mount($id_project, $id_document)

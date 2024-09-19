@@ -72,6 +72,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if (session()->has('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 <button class="btn btn-success" type="submit">ยืนยัน</button>
                             </fieldset>
                         </div>
@@ -109,6 +114,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if (session()->has('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 <button class="btn btn-success" type="submit">ยืนยัน</button>
                             </fieldset>
                         </div>

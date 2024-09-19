@@ -285,6 +285,7 @@
 </tbody> --}}
 
 <div>
+
     <section id="document-detail-03">
         <div class="card">
             <div class="card-body">
@@ -312,7 +313,7 @@
                                         <td>{!! $criterion['name'] !!}</td>
                                         <td>{{ $criterion['score'] }}</td>
 
-                                        @if (!in_array($key+1, [2, 6, 9]))
+                                        @if (!in_array($key + 1, [2, 6, 9]))
                                             <!-- Skip rows 2, 6, 9 -->
                                             @foreach ($projects as $ProjectItems)
                                                 @foreach ($ProjectItems->confirmStudents as $index => $Student)
@@ -359,10 +360,20 @@
                                 </tr>
                             </tbody>
                         </table>
+                        @if (session()->has('score success'))
+                            <div class="alert alert-success">
+                                {{ session('score success') }}
+                            </div>
+                        @endif
                         <button class="btn btn-success m-3" type="submit">บันทึกคะแนน</button>
                     </fieldset>
                 </form>
                 <form wire:submit="test_progress">
+                    @if (session()->has('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <fieldset>
                         <legend>สรุปผลการสอบ</legend>
                         <div x-data="{ approve_fix: false, not_approve: false, approve: false }">
