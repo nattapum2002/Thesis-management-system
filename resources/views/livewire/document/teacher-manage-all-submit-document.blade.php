@@ -1004,7 +1004,7 @@
                                                                 style="pointer-events: none;">อนุมัติแล้ว</a>
                                                         @else
                                                             <button class="btn btn-primary"
-                                                                wire:click="teacher_document({{ $confirm_teachers->first()->id_document }}, {{ $projectItems->id_project }})"
+                                                                wire:click="teacher_document({{ $documentId }}, {{ $projectItems->id_project }})"
                                                                 role="button">อนุมัติ
                                                             </button>
                                                         @endif
