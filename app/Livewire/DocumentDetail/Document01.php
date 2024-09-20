@@ -148,7 +148,7 @@ class Document01 extends Component
                     }
                 }
             }
-            return redirect()->route('admin.approve.documents');
+            return session()->flash('success', 'เสร็จสิ้น');
         } else {
             return session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
         }
@@ -297,7 +297,7 @@ class Document01 extends Component
                         }
                     }
                 }
-                return redirect()->route('branch-head.approve.documents');
+                return session()->flash('success', 'เสร็จสิ้น');
             } else {
                 return session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
             }

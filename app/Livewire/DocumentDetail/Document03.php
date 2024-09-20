@@ -92,6 +92,7 @@ class Document03 extends Component
                     $current_comment_list_id++;
                 }
             }
+            return session()->flash('score success', 'กรอกคะแนนเสร็จสิ้น');
         });
     }
 
@@ -180,6 +181,7 @@ class Document03 extends Component
                 ]);
                 }
             }
+            return session()->flash('success', 'บันทึกความเห็นเสร็จสิ้น');
         });
         
     }

@@ -68,7 +68,11 @@
                                 @endforeach
                             </tr>
                         </tbody>
-                    </table>
+                    </table>@if (session()->has('score success'))
+                    <div class="alert alert-success">
+                        {{ session('score success') }}
+                    </div>
+                @endif
                     <button class="btn btn-primary m-3" type="submit">บันทึกคะแนน</button>
                 </fieldset>
             </form>
@@ -99,6 +103,11 @@
                                 </ul>
                             </div>
                         </div>
+                        @if (session()->has('test success'))
+                        <div class="alert alert-success">
+                            {{ session('test success') }}
+                        </div>
+                    @endif
                         <button class="btn btn-primary m-3" type="submit">บันทึกผลการสอบ</button>
                     </div>
                 </form>
@@ -132,6 +141,11 @@
                                 </div>
                             </div>
                         </div>
+                        @if (session()->has('comment success'))
+                            <div class="alert alert-success">
+                                {{ session('comment success') }}
+                            </div>
+                        @endif
                         <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
                     </div>
                 </form>
@@ -165,6 +179,11 @@
                         </div>
                     </div>
                 </div>
+                @if (session()->has('comment success'))
+                            <div class="alert alert-success">
+                                {{ session('comment success') }}
+                            </div>
+                        @endif
                 <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
             </div>
         </form>

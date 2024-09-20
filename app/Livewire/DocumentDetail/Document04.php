@@ -65,6 +65,7 @@ class Document04 extends Component
                     'confirm_status' => true
                 ]);
             }
+            return session()->flash('success', 'บันทึกความเห็นเสร็จสิ้น');
         });
 
         $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Branch head')->pluck('id_teacher')->toArray())
@@ -169,7 +170,7 @@ class Document04 extends Component
             }
         }
 
-        return redirect()->route('branch-head.approve.documents');
+        return session()->flash('success', 'บันทึกความเห็นเสร็จสิ้น');
     }
     public function mount($id_project, $id_document)
     {

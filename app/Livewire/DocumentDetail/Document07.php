@@ -61,6 +61,7 @@ class Document07 extends Component
             }
             
            }
+           return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
        });
     }
 
@@ -111,6 +112,7 @@ class Document07 extends Component
             }
             
            }
+           return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
        });
     }
     public function mount($id_project, $id_document)
