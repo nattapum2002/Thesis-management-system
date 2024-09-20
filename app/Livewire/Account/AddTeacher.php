@@ -145,7 +145,7 @@ class AddTeacher extends Component
     protected function rules()
     {
         return [
-            'add_teacher_image' => 'required|image|max:2048',
+            'add_teacher_image' => 'nullable|image|max:2048',
             'add_prefix' => 'required',
             'add_other_prefix' => 'required_if:add_prefix,อื่นๆ',
             'add_name' => 'required',
@@ -167,8 +167,6 @@ class AddTeacher extends Component
     protected function messages()
     {
         return [
-            'add_teacher_image.required' => 'กรุณาเลือกไฟล์ภาพ',
-            'add_signature_image.required' => 'กรุณาเลือกไฟล์ภาพ',
             'add_teacher_image.image' => 'กรุณาเลือกไฟล์ภาพให้ถูกต้อง',
             'add_signature_image.image' => 'กรุณาเลือกไฟล์ภาพให้ถูกต้อง',
             'add_teacher_image.max' => 'ไฟล์ภาพต้องมีขนาดไม่เกิน 2 MB',
