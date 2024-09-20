@@ -33,6 +33,10 @@
                             <img src="{{ asset('Asset/dist/img/avatar' . rand('1', '5') . '.png') }}" alt="UserImage">
                         @endif
                     </div>
+                    <div class="info">
+                        <span>{{ Auth::guard('teachers')->user()->name . ' ' . Auth::guard('teachers')->user()->surname }}</span>
+                        <small>หัวหน้าสาขา</small>
+                    </div>
                 </a>
             </div>
             <hr>
