@@ -53,7 +53,6 @@
             </div>
         </div>
             <button class="btn btn-primary" wire:click="create_document">สร้าง</button>
-            <button class="btn btn-primary" wire:click="test">test</button>
         </div>
     </div>
 </div>
