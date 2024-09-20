@@ -150,53 +150,40 @@
                                             @endphp
 
                                             @if ($allTeachersConfirmed)
+                                                @if ($projectItems->confirmStudents->where('id_document', 5)->count() > 0)
+                                                    <div class="d-flex justify-content-end">
+                                                        <button class="btn btn-primary" disabled>สร้างเอกสาร 05 แล้ว</button>
+                                                    </div>
+                                                @else
+                                                    <div class="d-flex justify-content-end">
+                                                        <div>
+                                                            <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
+                                                                href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-05') : '#' }}">
+                                                                สร้างเอกสาร 05
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @else
                                                 <div class="d-flex justify-content-end">
                                                     <div>
-                                                        @switch($documentId)
-                                                            @case(1)
-                                                                <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                    href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-02') : '#' }}">
-                                                                    สร้างเอกสาร 02
-                                                                </a>
-                                                            @break
+                                                        <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
+                                                            href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-05') : '#' }}">
+                                                            สร้างเอกสาร 05(รอการอนุมัติ)
+                                                        </a>
+                                                        @if ($projectItems->confirmStudents->where('id_document', 4)->count() > 0)
+                                                            <button class="btn btn-primary"
+                                                                href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-04') : '#' }}"
+                                                                disabled>
+                                                                สร้างเอกสาร 04 แล้ว
+                                                            </button>
+                                                        @else
+                                                            <a class="btn btn-primary"
+                                                                href="{{route('member.create.document-04')}}">
+                                                                สร้างเอกสาร 04(สร้างกรณีสอบหัวข้อไม่ผ่าน)
+                                                            </a>
+                                                        @endif
 
-                                                            @case(3)
-                                                                @if (!3)
-                                                                    <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                        href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-04') : '#' }}">
-                                                                        สร้างเอกสาร 04
-                                                                    </a>
-                                                                @elseif (!3 && !4)
-                                                                    <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                        href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-01') : '#' }}">
-                                                                        สร้างเอกสาร 01
-                                                                    </a>
-                                                                @else
-                                                                    <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                        href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-05') : '#' }}">
-                                                                        สร้างเอกสาร 05
-                                                                    </a>
-                                                                @endif
-                                                            @break
-
-                                                            @case(4)
-                                                                <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                    href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-03') : '#' }}">
-                                                                    สร้างเอกสาร 03
-                                                                </a>
-                                                            @break
-
-                                                            @case(6)
-                                                                @if (!6)
-                                                                    <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                        href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-03') : '#' }}">
-                                                                        สร้างเอกสาร 05
-                                                                    </a>
-                                                                @endif
-                                                            @break
-
-                                                            @default
-                                                        @endswitch
                                                     </div>
                                                 </div>
                                             @endif
@@ -356,53 +343,6 @@
                                                         @unless ($currentConfirmStudent->confirm_status)
                                                             <a class="btn btn-danger" href="#">ปฏิเสธ</a>
                                                         @endunless
-                                                    </div>
-                                                    <div>
-                                                        @switch($documentId)
-                                                            @case(1)
-                                                                <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                    href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-02') : '#' }}">
-                                                                    สร้างเอกสาร 02
-                                                                </a>
-                                                            @break
-
-                                                            @case(3)
-                                                                @if (!3)
-                                                                    <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                        href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-04') : '#' }}">
-                                                                        สร้างเอกสาร 04
-                                                                    </a>
-                                                                @elseif (!3 && !4)
-                                                                    <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                        href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-01') : '#' }}">
-                                                                        สร้างเอกสาร 01
-                                                                    </a>
-                                                                @else
-                                                                    <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                        href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-05') : '#' }}">
-                                                                        สร้างเอกสาร 05
-                                                                    </a>
-                                                                @endif
-                                                            @break
-
-                                                            @case(4)
-                                                                <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                    href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-03') : '#' }}">
-                                                                    สร้างเอกสาร 03
-                                                                </a>
-                                                            @break
-
-                                                            @case(6)
-                                                                @if (!6)
-                                                                    <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                        href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-03') : '#' }}">
-                                                                        สร้างเอกสาร 05
-                                                                    </a>
-                                                                @endif
-                                                            @break
-
-                                                            @default
-                                                        @endswitch
                                                     </div>
                                                 </div>
                                             @endif
@@ -744,7 +684,7 @@
                                                                 </a>
                                                             @break
 
-                                                            @case(3)
+                                                            {{-- @case(3)
                                                                 @if (!3)
                                                                     <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
                                                                         href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-04') : '#' }}">
@@ -777,7 +717,7 @@
                                                                         สร้างเอกสาร 05
                                                                     </a>
                                                                 @endif
-                                                            @break
+                                                            @break --}}
 
                                                             @default
                                                         @endswitch
@@ -889,6 +829,7 @@
                                                     ->where('id_document', $documentId)
                                                     ->where('id_project', $projectItems->id_project)
                                                     ->every(fn($teacher) => $teacher->confirm_status == true);
+
                                             @endphp
 
                                             @if ($currentConfirmStudent)
@@ -906,10 +847,15 @@
                                                     <div>
                                                         @switch($documentId)
                                                             @case(1)
-                                                                <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                    href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-02') : '#' }}">
-                                                                    สร้างเอกสาร 02
-                                                                </a>
+                                                                @if ($projectItems->confirmStudents->where('id_document', 2)->count() > 0)
+                                                                    <button class="btn btn-primary" href=""
+                                                                        disabled>สร้างเอกสาร 02 แล้ว</button>
+                                                                @else
+                                                                    <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
+                                                                        href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-02') : '#' }}">
+                                                                        {{ $allStudentsConfirmed && $allTeachersConfirmed ? 'สร้างเอกสาร 02' : 'สร้างเอกสาร 2 (รอการอนุมัติ)' }}
+                                                                    </a>
+                                                                @endif
                                                             @break
 
                                                             @case(3)

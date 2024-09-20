@@ -351,7 +351,7 @@
                             </div>
                         </fieldset>
                     </div>
-                    <fieldset class="outAdvisor">
+                    {{-- <fieldset class="outAdvisor">
                         <legend class="title">อาจารย์ที่ปรึกษาร่วมจากภายนอก(ถ้ามี)</legend>
                         <div x-data="{ outTeacher: 0 }">
                             <template x-for=" out_teacher in outTeacher" :key="out_teacher">
@@ -406,7 +406,7 @@
                                     @click="if(outTeacher > 0)outTeacher--">ลบอาจารย์</button>
                             </div>
                         </div>
-                    </fieldset>
+                    </fieldset> --}}
 
                     <div>
                         <button type="submit" class="btn btn-success" data-bs-target="#confirmModal"

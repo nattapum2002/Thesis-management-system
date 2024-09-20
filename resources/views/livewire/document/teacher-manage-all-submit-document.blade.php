@@ -832,6 +832,10 @@
             <div class="alert alert-success" role="alert">
                 {{ session('message') }}
             </div>
+        @elseif (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
         @endif
         <div class="row">
             <div class="col-12 mb-2">
@@ -986,30 +990,25 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         @php
-                                                            $currentConfirmteacher = $projectItems->confirmTeachers->firstWhere(
-                                                                'id_teacher',
-                                                                Auth::guard('teachers')->user()->id_teacher,
-                                                            );
+                                                            $teacherId = Auth::guard('teachers')->user()->id_teacher;
                                                             $confirmTeacher = $projectItems->confirmTeachers
-                                                                ->where(
-                                                                    'id_teacher',
-                                                                    Auth::guard('teachers')->user()->id_teacher,
-                                                                )
+                                                                ->where('id_teacher', $teacherId)
                                                                 ->where('id_document', $documentId)
                                                                 ->first();
                                                         @endphp
-                                                        @if ($confirmTeacher?->confirm_status == 1)
-                                                            <a class="btn btn-primary disabled" href="#" role="button"
-                                                                aria-disabled="true"
-                                                                style="pointer-events: none;">อนุมัติแล้ว</a>
-                                                        @else
-                                                            <button class="btn btn-primary"
-                                                                wire:click="teacher_document({{ $documentId }}, {{ $projectItems->id_project }})"
-                                                                role="button">อนุมัติ
-                                                            </button>
+                                                        @if (!in_array($confirmTeacher?->teacher->user_type, ['Admin']))
+                                                            @if ($confirmTeacher?->confirm_status == 1)
+                                                                <a class="btn btn-primary disabled" href="#"
+                                                                    role="button" aria-disabled="true"
+                                                                    style="pointer-events: none;">อนุมัติแล้ว</a>
+                                                            @else
+                                                                <button class="btn btn-primary"
+                                                                    wire:click="teacher_document({{ $confirmTeacher?->id_document }}, {{ $projectItems->id_project }})"
+                                                                    role="button">อนุมัติ
+                                                                </button>
+                                                            @endif
                                                         @endif
-
-                                                        @if ($currentConfirmteacher->id_position == 3 || $currentConfirmteacher?->id_position == 4)
+                                                        @if (in_array($confirmTeacher?->teacher->user_type, ['Admin']))
                                                             <button class="btn btn-primary"
                                                                 wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
                                                                 ตรวจสอบ
@@ -1154,39 +1153,29 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         @php
-                                                            $currentConfirmteacher = $projectItems->confirmTeachers->firstWhere(
-                                                                'id_teacher',
-                                                                Auth::guard('teachers')->user()->id_teacher,
-                                                            );
-                                                            $confirmTeacherStatus = $projectItems->confirmTeachers
-                                                                ->where(
-                                                                    'id_teacher',
-                                                                    Auth::guard('teachers')->user()->id_teacher,
-                                                                )
+                                                            $teacherId = Auth::guard('teachers')->user()->id_teacher;
+                                                            $confirmTeacher = $projectItems->confirmTeachers
+                                                                ->where('id_teacher', $teacherId)
                                                                 ->where('id_document', $documentId)
-                                                                ->first()?->confirm_status;
+                                                                ->first();
                                                         @endphp
-
-                                                        @if ($currentConfirmteacher)
-                                                            @if ($confirmTeacherStatus)
+                                                        @if (!in_array($confirmTeacher?->teacher->user_type, ['Branch head', 'Admin']))
+                                                            @if ($confirmTeacher?->confirm_status == 1)
                                                                 <a class="btn btn-primary disabled" href="#"
                                                                     role="button" aria-disabled="true"
                                                                     style="pointer-events: none;">อนุมัติแล้ว</a>
                                                             @else
-                                                                <button class="btn btn-success"
-                                                                    wire:click="teacher_document({{ $documentId }}, {{ $projectItems->id_project }})"
-                                                                    role="button">อนุมัติ</button>
-                                                            @endif
-
-                                                            @if (in_array($currentConfirmteacher->id_position, [3, 4]))
                                                                 <button class="btn btn-primary"
-                                                                    wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
-                                                                    ตรวจสอบ
+                                                                    wire:click="teacher_document({{ $confirmTeacher?->id_document }}, {{ $projectItems->id_project }})"
+                                                                    role="button">อนุมัติ
                                                                 </button>
-                                                                <button class="btn btn-danger"
-                                                                    wire:click="not_approve({{ $documentId }}, {{ $projectItems->id_project }}, {{ $currentConfirmteacher->id_teacher }}, {{ $currentConfirmteacher->id_position }})"
-                                                                    role="button">ไม่อนุมัติ</button>
                                                             @endif
+                                                        @endif
+                                                        @if (in_array($confirmTeacher?->teacher->user_type, ['Branch head', 'Admin']))
+                                                            <button class="btn btn-primary"
+                                                                wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
+                                                                ตรวจสอบ
+                                                            </button>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -1318,28 +1307,188 @@
                                                                 ->where('id_document', $documentId)
                                                                 ->first();
                                                         @endphp
-
-                                                        @if ($confirmTeacher?->confirm_status == 1)
-                                                            <a class="btn btn-primary disabled" href="#" role="button"
-                                                                aria-disabled="true"
-                                                                style="pointer-events: none;">อนุมัติแล้ว</a>
-                                                        @else
-                                                            <button class="btn btn-primary"
-                                                                wire:click="teacher_document({{ $confirmTeacher?->id_document }}, {{ $projectItems->id_project }})"
-                                                                role="button">อนุมัติ
-                                                            </button>
+                                                        @if (!in_array($confirmTeacher?->teacher->user_type, ['Branch head', 'Admin']))
+                                                            @if ($confirmTeacher?->confirm_status == 1)
+                                                                <a class="btn btn-primary disabled" href="#"
+                                                                    role="button" aria-disabled="true"
+                                                                    style="pointer-events: none;">อนุมัติแล้ว</a>
+                                                            @else
+                                                                <button class="btn btn-primary"
+                                                                    wire:click="teacher_document({{ $confirmTeacher?->id_document }}, {{ $projectItems->id_project }})"
+                                                                    role="button">อนุมัติ
+                                                                </button>
+                                                            @endif
                                                         @endif
-
-                                                        @if (in_array($confirmTeacher?->id_position, [3, 4]))
+                                                        @if (in_array($confirmTeacher?->teacher->user_type, ['Branch head', 'Admin']))
                                                             <button class="btn btn-primary"
                                                                 wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
                                                                 ตรวจสอบ
                                                             </button>
                                                         @endif
-                                                        <button class="btn btn-primary"
-                                                            wire:click="create_document_07({{ $projectItems->id_project }})">
-                                                            สร้างเอกสาร 07
-                                                        </button>
+
+                                                        @if ($confirmTeacher?->teacher->user_type == 'Admin')
+                                                            @if ($projectItems->confirmteachers->where('id_document', 7)->count() > 0)
+                                                                <button class="btn btn-primary"
+                                                                    wire:click="create_document_07({{ $projectItems->id_project }})"
+                                                                    disabled>
+                                                                    สร้างเอกสาร 07 แล้ว
+                                                                </button>
+                                                            @else
+                                                                <button class="btn btn-primary"
+                                                                    wire:click="create_document_07({{ $projectItems->id_project }})">
+                                                                    สร้างเอกสาร 07
+                                                                </button>
+                                                            @endif
+                                                        @endif
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @break
+
+                                        @case(7)
+                                            <div class="card-header">
+                                                <h5>
+                                                    {{ 'คกท.-คง.-0' . $confirm_teachers->document->id_document . ' | ' . $confirm_teachers->document->document }}
+                                                </h5>
+                                                <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                                        <fieldset>
+                                                            <legend>สมาชิก</legend>
+                                                            <ul>
+                                                                @foreach ($projectItems->confirmStudents->where('id_document', $documentId) as $confirmStudent)
+                                                                    <li>
+                                                                        {{ $confirmStudent->student->name . ' ' . $confirmStudent->student->surname }}
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                                        <fieldset>
+                                                            <legend>ที่ปรึกษาหลัก</legend>
+                                                            <ul>
+                                                                @foreach ($projectItems->confirmTeachers->where('id_position', 1)->where('id_document', $documentId) as $confirmTeacher)
+                                                                    <li>
+                                                                        {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                        <i
+                                                                            class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                                        <fieldset>
+                                                            <legend>ประธานกรรมการ</legend>
+                                                            <ul>
+                                                                @foreach ($projectItems->confirmTeachers->where('id_position', 5)->where('id_document', $documentId) as $confirmTeacher)
+                                                                    <li>
+                                                                        {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                        <i
+                                                                            class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <legend>กรรมการ</legend>
+                                                            <ul>
+                                                                @foreach ($projectItems->confirmTeachers->where('id_position', 6)->where('id_document', $documentId) as $confirmTeacher)
+                                                                    <li>
+                                                                        {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                        <i
+                                                                            class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <legend>กรรมการและเลขานุการ</legend>
+                                                            <ul>
+                                                                @foreach ($projectItems->confirmTeachers->where('id_position', 7)->where('id_document', $documentId) as $confirmTeacher)
+                                                                    <li>
+                                                                        {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                        <i
+                                                                            class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                                        <fieldset>
+                                                            <legend>หัวหน้าสาขา</legend>
+                                                            <ul>
+                                                                @foreach ($projectItems->confirmTeachers->where('id_position', 4)->where('id_document', $documentId) as $confirmTeacher)
+                                                                    <li>
+                                                                        {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                        <i
+                                                                            class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <legend>อาจารย์ประจำวิชา</legend>
+                                                            <ul>
+                                                                @foreach ($projectItems->confirmTeachers->where('id_position', 3)->where('id_document', $documentId) as $confirmTeacher)
+                                                                    <li>
+                                                                        {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                                        <i
+                                                                            class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <fieldset>
+                                                            <legend>หมายเหตุ</legend>
+                                                            <ul>
+                                                                @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
+                                                                    @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
+                                                                        <li>
+                                                                            <span>
+                                                                                {{ $comment->comment . ' โดย ' . $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                                            </span>
+                                                                        </li>
+                                                                    @endforeach
+                                                                @endforeach
+                                                            </ul>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        @php
+                                                            $teacherId = Auth::guard('teachers')->user()->id_teacher;
+                                                            $confirmTeacher = $projectItems->confirmTeachers
+                                                                ->where('id_teacher', $teacherId)
+                                                                ->where('id_document', $documentId)
+                                                                ->first();
+                                                        @endphp
+                                                        @if (!in_array($confirmTeacher?->teacher->user_type, ['Branch head', 'Admin']))
+                                                            @if ($confirmTeacher?->confirm_status == 1)
+                                                                <a class="btn btn-primary disabled" href="#"
+                                                                    role="button" aria-disabled="true"
+                                                                    style="pointer-events: none;">อนุมัติแล้ว</a>
+                                                            @else
+                                                                <button class="btn btn-primary"
+                                                                    wire:click="teacher_document({{ $confirmTeacher?->id_document }}, {{ $projectItems->id_project }})"
+                                                                    role="button">อนุมัติ
+                                                                </button>
+                                                            @endif
+                                                        @endif
+                                                        @if (in_array($confirmTeacher?->teacher->user_type, ['Branch head', 'Admin']))
+                                                            <button class="btn btn-primary"
+                                                                wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
+                                                                ตรวจสอบ
+                                                            </button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -1452,19 +1601,19 @@
                                                                 ->where('id_document', $documentId)
                                                                 ->first();
                                                         @endphp
-
-                                                        @if ($confirmTeacher?->confirm_status == 1)
-                                                            <a class="btn btn-primary disabled" href="#" role="button"
-                                                                aria-disabled="true"
-                                                                style="pointer-events: none;">อนุมัติแล้ว</a>
-                                                        @else
-                                                            <button class="btn btn-success"
-                                                                wire:click="teacher_document({{ $confirmTeacher->id_document }}, {{ $projectItems->id_project }})"
-                                                                role="button">อนุมัติ
-                                                            </button>
+                                                        @if (!in_array($confirmTeacher?->teacher->user_type, ['Branch head', 'Admin']))
+                                                            @if ($confirmTeacher?->confirm_status == 1)
+                                                                <a class="btn btn-primary disabled" href="#"
+                                                                    role="button" aria-disabled="true"
+                                                                    style="pointer-events: none;">อนุมัติแล้ว</a>
+                                                            @else
+                                                                <button class="btn btn-primary"
+                                                                    wire:click="teacher_document({{ $confirmTeacher?->id_document }}, {{ $projectItems->id_project }})"
+                                                                    role="button">อนุมัติ
+                                                                </button>
+                                                            @endif
                                                         @endif
-
-                                                        @if (in_array($confirmTeacher?->id_position, [3, 4]))
+                                                        @if (in_array($confirmTeacher?->teacher->user_type, ['Branch head', 'Admin']))
                                                             <button class="btn btn-primary"
                                                                 wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
                                                                 ตรวจสอบ
