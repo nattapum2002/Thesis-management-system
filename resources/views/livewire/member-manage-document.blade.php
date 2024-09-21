@@ -179,7 +179,7 @@
                                                             </button>
                                                         @else
                                                             <a class="btn btn-primary"
-                                                                href="{{route('member.create.document-04')}}">
+                                                                href="{{ route('member.create.document-04') }}">
                                                                 สร้างเอกสาร 04(สร้างกรณีสอบหัวข้อไม่ผ่าน)
                                                             </a>
                                                         @endif
@@ -766,18 +766,20 @@
                                                 @endforeach
                                             </ul>
                                         </fieldset>
-                                        <fieldset>
-                                            <legend>ที่ปรึกษาร่วม</legend>
-                                            <ul>
-                                                @foreach ($projectItems->confirmTeachers->where('id_position', 2)->where('id_document', $documentId) as $confirmTeacher)
-                                                    <li>
-                                                        {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
-                                                        <i
-                                                            class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </fieldset>
+                                        @if ($documentId == 1)
+                                            <fieldset>
+                                                <legend>ที่ปรึกษาร่วม</legend>
+                                                <ul>
+                                                    @foreach ($projectItems->confirmTeachers->where('id_position', 2)->where('id_document', $documentId) as $confirmTeacher)
+                                                        <li>
+                                                            {{ $confirmTeacher->teacher->name . ' ' . $confirmTeacher->teacher->surname }}
+                                                            <i
+                                                                class="bx bxs-{{ $confirmTeacher->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </fieldset>
+                                        @endif
                                     </div>
                                     <div class="col-lg-4 col-md-12 col-sm-12">
                                         <div class="row">
