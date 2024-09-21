@@ -167,15 +167,15 @@ class Document05 extends Component
                 'confirm_status' => false,
             ]
         );
-        
         foreach ($this->students as $studentID) {
             Confirm_student::updateOrCreate(
                 [
                     'id_document' => 6,
                     'id_project' => $this->id_project,
+                    'id_student' => $studentID,
                 ],
                 [
-                    'id_student' => $studentID,
+                    
                     'confirm_status' => true,
                 ]
             );
