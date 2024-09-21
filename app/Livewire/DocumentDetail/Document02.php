@@ -75,68 +75,48 @@ class Document02 extends Component
             ->map(function ($id_teacher) {
                 return Teacher::firstOrCreate(['id_teacher' => $id_teacher])->id_teacher;
             })->toArray();
-
-        foreach ($teacherIDs as $index => $teacherID) {
-            if ($index == 0) {
-                $position = '5';  
-            } elseif (in_array($index, [1, 2])) {
-                $position = '6';
-            } elseif ($index == 3) {
-                $position = '7';
-            }
-            
+            // dd($teacherIDs);
             $existingDirector = Director::where([
-                'id_position' => $position,
                 'id_project' => $this->id_project,
                 'id_document' => 3,
-            ])->first();
-            $exitconfirmteacher = Confirm_teacher::where([
-                'id_position' => $position,
-                'id_project' => $this->id_project,
-                'id_document' => 3,
-            ]);
-            if ($existingDirector) {
-                // ถ้าพบ record ให้ทำการอัปเดต
-                $existingDirector->delete();
-                $exitconfirmteacher->delete();
-                Director::create([
-                    'id_position' => $position,
-                    'id_project' => $this->id_project,
-                    'id_document' => 3,
-                    'id_teacher' => $teacherID,
-                ]);
-                Confirm_teacher::updateOrCreate(
-                    [
-                        'id_project' => $this->id_project,
-                        'id_document' => 3,
-                        'id_teacher' => $teacherID,
-                        'id_position' => $position,
-                    ],
-                    [
-                        'confirm_status' => false,
-                    ]
-                );
-            } else {
-                // ถ้าไม่พบ record ให้สร้างใหม่
-                Director::create([
-                    'id_position' => $position,
-                    'id_project' => $this->id_project,
-                    'id_document' => 3,
-                    'id_teacher' => $teacherID,
-                ]);
+            ]); // ใช้ first() เพื่อดึงข้อมูลที่ตรงกัน
         
-            Confirm_teacher::updateOrCreate(
-                [
+            $existingConfirmTeacher = Confirm_teacher::where([
+                'id_project' => $this->id_project,
+                'id_document' => 3,
+            ]); // ใช้ first() เพื่อดึงข้อมูลที่ตรงกัน
+
+            if ($existingDirector) {
+                $existingDirector->delete();
+            }
+            if ($existingConfirmTeacher) {
+                $existingConfirmTeacher->delete();
+            }
+            foreach ($teacherIDs as $index => $teacherID) {
+                // กำหนดค่า position ตาม index
+                if ($index == 0) {
+                    $position = '5';
+                } elseif (in_array($index, [1, 2])) {
+                    $position = '6';
+                } elseif ($index == 3) {
+                    $position = '7';
+                }
+                Director::create([
+                    'id_position' => $position,
+                    'id_project' => $this->id_project,
+                    'id_document' => 3,
+                    'id_teacher' => $teacherID,
+                ]);
+            
+                // สร้าง Confirm_teacher ใหม่
+                Confirm_teacher::create([
                     'id_project' => $this->id_project,
                     'id_document' => 3,
                     'id_teacher' => $teacherID,
                     'id_position' => $position,
-                ],
-                [
                     'confirm_status' => false,
-                ]
-            );
-        }}
+                ]);
+            }
         
         $admin_teacher = Teacher::where('user_type', 'Admin')->get();
         foreach ($admin_teacher as $admin_teacher_items) {
