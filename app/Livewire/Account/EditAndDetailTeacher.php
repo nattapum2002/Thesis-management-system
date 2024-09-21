@@ -35,7 +35,7 @@ class EditAndDetailTeacher extends Component
     public $surname;
     public $signature_image;
     public $path_signature_image;
-    public $academic_position;
+    public $academic_position, $other_academic_position;
     public $educational_qualification;
     public $branch;
     public $email;
@@ -70,6 +70,7 @@ class EditAndDetailTeacher extends Component
 
         if ($this->toggle['academic_position']) {
             $rules['academic_position'] = 'required';
+            $rules['other_academic_position'] = 'required_if:academic_position,อื่นๆ';
         }
 
         if ($this->toggle['educational_qualification']) {
@@ -113,7 +114,8 @@ class EditAndDetailTeacher extends Component
             'name.required' => 'กรุณากรอกชื่อ',
             'surname.required' => 'กรุณากรอกนามสกุล',
 
-            'academic_position.required' => 'กรุณากรอกตําแหน่ง',
+            'academic_position.required' => 'กรุณาเลือกตําแหน่ง',
+            'other_academic_position.required_if' => 'กรุณากรอกตําแหน่ง',
             'educational_qualification.required' => 'กรุณากรอกวุฒิการศึกษา',
             'branch.required' => 'กรุณาเลือกสาขา',
 
@@ -160,6 +162,8 @@ class EditAndDetailTeacher extends Component
             Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->path_signature_image], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         } else if ($index == 'prefix' && $this->prefix == 'อื่นๆ') {
             Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->other_prefix], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
+        } else if ($index == 'academic_position' && $this->academic_position == 'อื่นๆ') {
+            Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->other_academic_position], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         } else {
             Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->$index], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         }
@@ -183,7 +187,7 @@ class EditAndDetailTeacher extends Component
         $this->other_prefix = $this->teacher->prefix;
         $this->name = $this->teacher->name;
         $this->surname = $this->teacher->surname;
-        $this->academic_position = $this->teacher->academic_position;
+        $this->other_academic_position = $this->teacher->academic_position;
         $this->educational_qualification = $this->teacher->educational_qualification;
         $this->branch = $this->teacher->branch;
         $this->email = $this->teacher->email;

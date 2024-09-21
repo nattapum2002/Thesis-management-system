@@ -94,11 +94,24 @@
                     <tr>
                         <th>ตำแหน่งทางวิชาการ</th>
                         <td>
-                            <div class="input-field">
-                                <input class="form-control" wire:model="add_academic_position" type="text"
-                                    placeholder="กรุณากรอกตำแหน่งทางวิชาการ">
+                            <div class="input-group">
+                                <select class="form-select" wire:model.live="add_academic_position">
+                                    <option selected>ตำแหน่งทางวิชาการ</option>
+                                    <option value="อาจารย์">อาจารย์</option>
+                                    <option value="ผู้ช่วยศาตราจารย์">ผู้ช่วยศาตราจารย์</option>
+                                    <option value="รองศาสตราจารย์">รองศาสตราจารย์</option>
+                                    <option value="ศาสตราจารย์">ศาสตราจารย์</option>
+                                    <option value="อื่นๆ">อื่นๆ</option>
+                                </select>
+                                @if ($this->add_academic_position == 'อื่นๆ')
+                                    <input class="form-control" wire:model="add_other_academic_position" type="text"
+                                        placeholder="กรุณากรอกตำแหน่งทางวิชาการ">
+                                @endif
                             </div>
                             @error('add_academic_position')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            @error('add_other_academic_position')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </td>

@@ -20,6 +20,7 @@ class TeacherManageAllSubmitDocument extends Component
     public $not_approve_document, $not_approve_project, $id_teacher, $id_position, $another_comment, $members, $teachers, $project;
     public function teacher_document($id_document, $id_project)
     {
+
         $id_teacher = Auth::guard('teachers')->user()->id_teacher;
 
         // อัปเดตสถานะการยืนยันของอาจารย์ทุกคนที่มี id_teacher และ id_document เหมือนกันในโครงการเดียวกัน
@@ -202,8 +203,8 @@ class TeacherManageAllSubmitDocument extends Component
             })
             ->get();
 
-        $this->members = $this->project->first()->members;
-        $this->teachers = $this->project->first()->teachers;
+        $this->members = optional($this->project->first())->members;
+        $this->teachers = optional($this->project->first())->teachers;
 
         //  dd($projects);
         return view('livewire.document.teacher-manage-all-submit-document', ['projects' => $this->project]);

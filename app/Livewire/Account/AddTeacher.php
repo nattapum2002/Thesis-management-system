@@ -140,7 +140,7 @@ class AddTeacher extends Component
 {
     use WithFileUploads;
 
-    public $add_teacher_image, $add_prefix, $add_other_prefix, $add_name, $add_surname, $add_signature_image, $add_academic_position, $add_educational_qualification, $add_branch, $add_email, $add_tel, $add_id_line, $add_username, $add_password, $add_password_confirmation, $add_user_type, $add_account_status;
+    public $add_teacher_image, $add_prefix, $add_other_prefix, $add_name, $add_surname, $add_signature_image, $add_academic_position, $add_other_academic_position, $add_educational_qualification, $add_branch, $add_email, $add_tel, $add_id_line, $add_username, $add_password, $add_password_confirmation, $add_user_type, $add_account_status;
 
     protected function rules()
     {
@@ -151,6 +151,7 @@ class AddTeacher extends Component
             'add_name' => 'required',
             'add_surname' => 'required',
             'add_academic_position' => 'required',
+            'add_other_academic_position' => 'required_if:add_academic_position,อื่นๆ',
             'add_educational_qualification' => 'required',
             'add_branch' => 'required',
             'add_email' => 'required|email|unique:teachers,email',
@@ -175,7 +176,8 @@ class AddTeacher extends Component
             'add_other_prefix.required_if' => 'กรุณากรอกคํานําหน้า',
             'add_name.required' => 'กรุณากรอกชื่อ',
             'add_surname.required' => 'กรุณากรอกนามสกุล',
-            'add_academic_position.required' => 'กรุณากรอกตําแหน่ง',
+            'add_academic_position.required' => 'กรุณาเลือกตําแหน่ง',
+            'add_other_academic_position.required_if' => 'กรุณากรอกตําแหน่ง',
             'add_educational_qualification.required' => 'กรุณากรอกวุฒิการศึกษา',
             'add_branch.required' => 'กรุณากรอกสาขา',
             'add_email.required' => 'กรุณากรอกอีเมล',
@@ -203,7 +205,7 @@ class AddTeacher extends Component
             'prefix' => $this->add_prefix == 'อื่นๆ' ? $this->add_other_prefix : $this->add_prefix,
             'name' => $this->add_name,
             'surname' => $this->add_surname,
-            'academic_position' => $this->add_academic_position,
+            'academic_position' => $this->add_academic_position == 'อื่นๆ' ? $this->add_other_academic_position : $this->add_academic_position,
             'educational_qualification' => $this->add_educational_qualification,
             'branch' => $this->add_branch,
             'email' => $this->add_email,

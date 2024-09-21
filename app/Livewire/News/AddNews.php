@@ -101,7 +101,7 @@ class AddNews extends Component
             'add_detail' => 'required',
             'add_type' => 'required',
             'add_status' => 'required',
-            'add_news_image' => 'required|image|max:2048',
+            'add_news_image' => 'nullable|image|max:2048',
         ];
     }
 
@@ -112,7 +112,6 @@ class AddNews extends Component
             'add_detail.required' => 'กรุณากรอกข้อมูลให้ครบ',
             'add_type.required' => 'กรุณาเลือกประเภท',
             'add_status.required' => 'กรุณาเลือกสถานะ',
-            'add_news_image.required' => 'กรุณาเลือกไฟล์ภาพ',
             'add_news_image.image' => 'กรุณาเลือกไฟล์รูปภาพ',
             'add_news_image.max' => 'ไฟล์รูปภาพต้องไม่เกิน 2 MB',
         ];
