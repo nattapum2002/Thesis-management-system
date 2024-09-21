@@ -116,7 +116,7 @@
             <fieldset>
                 <form wire:submit="admin_comment">
                     <legend>ความเห็นของอาจารย์ประจำวิชา</legend>
-                    <div x-data="{ admin_approve_fix: false, admin_approve: false }">
+                    <div x-data="{ admin_approve_fix_choice: false, admin_approve: false }">
                         @if (session()->has('error'))
                             <div class="alert alert-danger">
                                 {{ session('error') }}
@@ -125,18 +125,22 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <input wire:model="admin_approve" type="checkbox" id="admin_approve"
-                                    x-model="admin_approve" x-bind:disabled="admin_approve_fix">
+                                    x-model="admin_approve" x-bind:disabled="admin_approve_fix_choice">
                                 <label for="admin_approve">อนุมัติ</label>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <input wire:model="admin_approve_fix" type="checkbox" id="admin_approve_fix"
-                                    x-model="admin_approve_fix" x-bind:disabled="admin_approve">
-                                <label for="admin_approve_fix">ควรประผลประเมินเป็น</label>
+                                <input wire:model="admin_approve_fix_choice" type="checkbox"
+                                    id="admin_approve_fix_choice" x-model="admin_approve_fix_choice"
+                                    x-bind:disabled="admin_approve">
+                                <label for="admin_approve_fix_choice">ควรประผลประเมินเป็น..</label>
+                                <div x-show="admin_approve_fix_choice">
+                                    <textarea class="form-control" wire:model="admin_approve_fix_choice_comment" id="admin_approve_fix_choice_comment"></textarea>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <div x-show="admin_approve_fix">
+                                <div x-show="admin_approve_fix_choice">
                                     <label for="">เนื่องจาก</label>
                                     <textarea class="form-control" wire:model="admin_approve_fix_comment" id="admin_approve_fix_comment"></textarea>
                                 </div>
@@ -154,7 +158,7 @@
         @elseif (Auth::guard('teachers')->user()->user_type == 'Branch head')
             <form wire:submit="branch_head_comment">
                 <legend>ความเห็นของหัวหน้าสาขา</legend>
-                <div x-data="{ branch_head_approve_fix: false, branch_head_approve: false }">
+                <div x-data="{ branch_head_approve_fix_choice: false, branch_head_approve: false }">
                     @if (session()->has('error'))
                         <div class="alert alert-danger">
                             {{ session('error') }}
@@ -167,26 +171,37 @@
                             <label for="branch_head_approve">อนุมัติ</label>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12">
-                            <input wire:model="branch_head_approve_fix" type="checkbox" id="branch_head_approve_fix"
-                                x-model="branch_head_approve_fix" x-bind:disabled="branch_head_approve">
-                            <label for="branch_head_approve_fix">ควรประผลประเมินเป็น</label>
+                            <input wire:model="branch_head_approve_fix" type="checkbox"
+                                id="branch_head_approve_fix_choice" x-model="branch_head_approve_fix_choice"
+                                x-bind:disabled="branch_head_approve_choice">
+                            <label for="branch_head_approve_fix_choice">ควรประผลประเมินเป็น</label>
+                            <div x-show="branch_head_approve_fix_choice">
+                                <textarea class="form-control" wire:model="admin_approve_fix_choice_comment" id="admin_approve_fix_choice_comment"></textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <div x-show="branch_head_approve_fix">
+                            <div x-show="branch_head_approve_fix_choice">
                                 <label for="">เนื่องจาก</label>
-                                <textarea class="form-control" wire:model="branch_head_approve_fix_comment" id="branch-head_approve_fix_comment"></textarea>
+                                <textarea class="form-control" wire:model="$branch_head_approve_fix_comment" id="branch-head_approve_fix_comment"></textarea>
                             </div>
                         </div>
-                    </div>
-                    @if (session()->has('comment success'))
-                        <div class="alert alert-success">
-                            {{ session('comment success') }}
+                        <div class="row">
+                            <div class="col-12">
+                                <div x-show="branch_head_approve_fix">
+                                    <label for="">เนื่องจาก</label>
+                                    <textarea class="form-control" wire:model="branch_head_approve_fix_comment" id="branch-head_approve_fix_comment"></textarea>
+                                </div>
+                            </div>
                         </div>
-                    @endif
-                    <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
-                </div>
+                        @if (session()->has('comment success'))
+                            <div class="alert alert-success">
+                                {{ session('comment success') }}
+                            </div>
+                        @endif
+                        <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
+                    </div>
             </form>
     @endif
     </fieldset>

@@ -15,8 +15,8 @@ use Livewire\Component;
 class Document06 extends Component
 {
     public $id_project, $id_document, $students, $project, $advisers, $approve, $approve_fix, $not_approve, $approve_fix_comment, $not_approve_comment;
-    public $admin_approve , $admin_approve_fix  , $admin_approve_fix_comment ;
-    public $branch_head_approve , $branch_head_approve_fix  , $branch_head_approve_fix_comment ;
+    public $admin_approve , $admin_approve_fix_choice  , $admin_approve_fix_comment ,$admin_approve_fix_choice_comment ;
+    public $branch_head_approve , $branch_head_approve_fix_choice , $branch_head_approve_fix_comment , $branch_head_approve_fix_choice_comment ;
     public $score_student = [];
     public $criterias = [
         ['name' => '1. บุคลิก ท่าทาง การวางตัวและความเชื่อมั่นในตนเอง', 'score' => 5],
@@ -172,7 +172,7 @@ class Document06 extends Component
     public function admin_comment()
     {
        DB::transaction(function () {
-           if($this->admin_approve||$this->admin_approve_fix){
+           if($this->admin_approve||$this->admin_approve_fix_choice){
             if($this->admin_approve){
                 Comment::updateOrCreate(
                     [
@@ -190,7 +190,7 @@ class Document06 extends Component
                     ->where('id_project', $this->id_project)
                     ->where('id_document', 6)
                     ->update(['confirm_status' => true]);
-            }elseif($this->admin_approve_fix){
+            }elseif($this->admin_approve_fix_choice){
                 Comment::updateOrCreate(
                     [
                         'id_document' => $this->id_document,
@@ -199,9 +199,10 @@ class Document06 extends Component
                         'id_comment_list' => 1,
                         'id_position' => 3
                     ],[
-                        'comment' => 'ควรปรับผลการประเมิน เป็น'
+                        'comment' => $this->admin_approve_fix_choice_comment
                     ]
                     );
+                   
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,
@@ -222,7 +223,7 @@ class Document06 extends Component
     public function branch_head_comment()
     {
        DB::transaction(function () {
-           if($this->branch_head_approve||$this->branch_head_approve_fix){
+           if($this->branch_head_approve||$this->branch_head_approve_fix_choice){
             if($this->branch_head_approve){
                 Comment::updateOrCreate(
                     [
@@ -240,7 +241,7 @@ class Document06 extends Component
                     ->where('id_project', $this->id_project)
                     ->where('id_document', 6)
                     ->update(['confirm_status' => true]);
-            }elseif($this->branch_head_approve_fix){
+            }elseif($this->branch_head_approve_fix_choice){
                 Comment::updateOrCreate(
                     [
                         'id_document' => $this->id_document,
