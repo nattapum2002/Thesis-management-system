@@ -172,9 +172,9 @@ class Document02 extends Component
                 [
                     'id_document' => 3,
                     'id_project' => $this->id_project,
+                    'id_student' => $studentID,
                 ],
                 [
-                    'id_student' => $studentID,
                     'confirm_status' => true,
                 ]
             );
