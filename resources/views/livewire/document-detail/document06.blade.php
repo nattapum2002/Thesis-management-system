@@ -68,11 +68,12 @@
                                 @endforeach
                             </tr>
                         </tbody>
-                    </table>@if (session()->has('score success'))
-                    <div class="alert alert-success">
-                        {{ session('score success') }}
-                    </div>
-                @endif
+                    </table>
+                    @if (session()->has('score success'))
+                        <div class="alert alert-success">
+                            {{ session('score success') }}
+                        </div>
+                    @endif
                     <button class="btn btn-primary m-3" type="submit">บันทึกคะแนน</button>
                 </fieldset>
             </form>
@@ -104,10 +105,10 @@
                             </div>
                         </div>
                         @if (session()->has('test success'))
-                        <div class="alert alert-success">
-                            {{ session('test success') }}
-                        </div>
-                    @endif
+                            <div class="alert alert-success">
+                                {{ session('test success') }}
+                            </div>
+                        @endif
                         <button class="btn btn-primary m-3" type="submit">บันทึกผลการสอบ</button>
                     </div>
                 </form>
@@ -151,42 +152,42 @@
                 </form>
             </fieldset>
         @elseif (Auth::guard('teachers')->user()->user_type == 'Branch head')
-        <form wire:submit="branch_head_comment">
-            <legend>ความเห็นของหัวหน้าสาขา</legend>
-            <div x-data="{ branch_head_approve_fix: false, branch_head_approve: false }">
-                @if (session()->has('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-12">
-                        <input wire:model="branch_head_approve" type="checkbox" id="branch-head_approve"
-                            x-model="branch_head_approve" x-bind:disabled="branch_head_approve_fix">
-                        <label for="branch_head_approve">อนุมัติ</label>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <input wire:model="branch_head_approve_fix" type="checkbox" id="branch_head_approve_fix"
-                            x-model="branch_head_approve_fix" x-bind:disabled="branch_head_approve">
-                        <label for="branch_head_approve_fix">ควรประผลประเมินเป็น</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div x-show="branch_head_approve_fix">
-                            <label for="">เนื่องจาก</label>
-                            <textarea class="form-control" wire:model="branch_head_approve_fix_comment" id="branch-head_approve_fix_comment"></textarea>
+            <form wire:submit="branch_head_comment">
+                <legend>ความเห็นของหัวหน้าสาขา</legend>
+                <div x-data="{ branch_head_approve_fix: false, branch_head_approve: false }">
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <input wire:model="branch_head_approve" type="checkbox" id="branch-head_approve"
+                                x-model="branch_head_approve" x-bind:disabled="branch_head_approve_fix">
+                            <label for="branch_head_approve">อนุมัติ</label>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <input wire:model="branch_head_approve_fix" type="checkbox" id="branch_head_approve_fix"
+                                x-model="branch_head_approve_fix" x-bind:disabled="branch_head_approve">
+                            <label for="branch_head_approve_fix">ควรประผลประเมินเป็น</label>
                         </div>
                     </div>
-                </div>
-                @if (session()->has('comment success'))
-                            <div class="alert alert-success">
-                                {{ session('comment success') }}
+                    <div class="row">
+                        <div class="col-12">
+                            <div x-show="branch_head_approve_fix">
+                                <label for="">เนื่องจาก</label>
+                                <textarea class="form-control" wire:model="branch_head_approve_fix_comment" id="branch-head_approve_fix_comment"></textarea>
                             </div>
-                        @endif
-                <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
-            </div>
-        </form>
+                        </div>
+                    </div>
+                    @if (session()->has('comment success'))
+                        <div class="alert alert-success">
+                            {{ session('comment success') }}
+                        </div>
+                    @endif
+                    <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
+                </div>
+            </form>
     @endif
     </fieldset>
     {{-- <fieldset>

@@ -250,14 +250,15 @@
     </div>
     {{-- 2.อาจารย์ที่ปรึกษา --}}
     <div class="section">
-        @if ($projects->teachers->isNotEmpty())
-            <table>
-                <tr>
-                    <td colspan="2">
-                        <div>2. อาจารย์ที่ปรึกษาให้ความเห็นชอบแล้ว</div>
-                    </td>
-                </tr>
-                <tr>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <div>2. อาจารย์ที่ปรึกษาให้ความเห็นชอบแล้ว</div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 1.8em"></td>
+                @if ($projects->teachers->isNotEmpty())
                     @foreach ($projects->teachers as $teacher)
                         @php
                             $confirm = $projects->confirmTeachers
@@ -267,111 +268,97 @@
                                 ->where('confirm_status', 1)
                                 ->first();
                         @endphp
-
-                        @if ($confirm != null)
-                        @break
-                    @endif
-                @endforeach
-                <td style="width: 1.8em"></td>
-                <td class="signature">
-                    @if ($confirm != null)
-                        ลงชื่อ ......................................... อาจารย์ที่ปรึกษา
-                        <br>(<span class="dotted">
-                            {{ $teacher->prefix . ' ' . $teacher->name . ' ' . $teacher->surname }}
-                        </span>)
-                        <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }} </span>เดือน<span
-                            class="dotted">
-                            {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
-                            {{ $confirm->created_at->thaidate('Y') }} </span>
-                    @else
-                        ลงชื่อ ......................................... อาจารย์ที่ปรึกษา
-                        <br>(<span class="dotted">
-                            {{ $teacher->prefix . ' ' . $teacher->name . ' ' . $teacher->surname }}
-                        </span>)
+                        @if ($confirm)
+                            <td class="signature">
+                                @if ($confirm)
+                                    ลงชื่อ ......................................... อาจารย์ที่ปรึกษา
+                                    <br>(<span class="dotted">
+                                        {{ $teacher->prefix . ' ' . $teacher->name . ' ' . $teacher->surname }}
+                                    </span>)
+                                    <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
+                                    </span>เดือน<span class="dotted">
+                                        {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
+                                        {{ $confirm->created_at->thaidate('Y') }} </span>
+                                @else
+                                    ลงชื่อ ......................................... อาจารย์ที่ปรึกษา
+                                    <br>(<span class="dotted">
+                                        {{ $teacher->prefix . ' ' . $teacher->name . ' ' . $teacher->surname }}
+                                    </span>)
+                                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                @endif
+                            </td>
+                        @endif
+                    @endforeach
+                @else
+                    <td class="signature">
+                        ลงชื่อ .................................... อาจารย์ที่ปรึกษา
+                        <br>( ......................................................... )
                         <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                    @endif
-                </td>
+                    </td>
+                @endif
             </tr>
         </table>
-    @else
+    </div>
+    {{-- 3.เสนอรายชื่อคณะกรรมการสอบสิ้นสุดโครงงาน --}}
+    <div class="section">
+        <table>
+            <tr>
+                <td colspan="3">
+                    <div>3. เสนอรายชื่อคณะกรรมการสอบสิ้นสุดโครงงาน (3-4 คน) ดังนี้</div>
+                </td>
+            </tr>
+            @if ($directors->isNotEmpty())
+                @foreach ($directors as $director)
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td>
+                            <div>
+                                {{ $loop->iteration }}. <span class="dotted">
+                                    {{ $director->teacher->prefix . ' ' . $director->teacher->name . ' ' . $director->teacher->surname }}
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{ $director->id_position == 7
+                                    ? $director->position->position . ' (อาจารย์ที่ปรึกษา)'
+                                    : $director->position->position }}
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td style="width: 1.8em"></td>
+                    <td>1. ............................................................................ </td>
+                    <td>ประธานกรรมการ</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>2. ............................................................................ </td>
+                    <td>กรรมการ</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>3. ............................................................................ </td>
+                    <td>กรรมการ</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>4. ............................................................................ </td>
+                    <td>กรรมการและเลขานุการ (อาจารย์ที่ปรึกษา)</td>
+                </tr>
+            @endif
+        </table>
+    </div>
+    {{-- 4.กำหนดให้มีการสอบสิ้นสุดโครงงาน --}}
+    <div class="section">
         <table>
             <tr>
                 <td colspan="2">
-                    <div>2. อาจารย์ที่ปรึกษาให้ความเห็นชอบแล้ว</div>
+                    <div>4. กำหนดให้มีการสอบสิ้นสุดโครงงาน</div>
                 </td>
             </tr>
-            <tr>
-                <td></td>
-                <td class="signature">
-                    ลงชื่อ .................................... อาจารย์ที่ปรึกษา
-                    <br>( ......................................................... )
-                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                </td>
-            </tr>
-        </table>
-    @endif
-</div>
-{{-- 3.เสนอรายชื่อคณะกรรมการสอบสิ้นสุดโครงงาน --}}
-<div class="section">
-    <table>
-        <tr>
-            <td colspan="3">
-                <div>3. เสนอรายชื่อคณะกรรมการสอบสิ้นสุดโครงงาน (3-4 คน) ดังนี้</div>
-            </td>
-        </tr>
-        @if ($directors->isNotEmpty())
-            @foreach ($directors as $director)
-                <tr>
-                    <td style="width: 1.8em"></td>
-                    <td>
-                        <div>
-                            {{ $loop->iteration }}. <span class="dotted">
-                                {{ $director->teacher->prefix . ' ' . $director->teacher->name . ' ' . $director->teacher->surname }}
-                            </span>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            {{ $director->id_position == 7
-                                ? $director->position->position . ' (อาจารย์ที่ปรึกษา)'
-                                : $director->position->position }}
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        @else
-            <tr>
-                <td style="width: 1.8em"></td>
-                <td>1. ............................................................................ </td>
-                <td>ประธานกรรมการ</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>2. ............................................................................ </td>
-                <td>กรรมการ</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>3. ............................................................................ </td>
-                <td>กรรมการ</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>4. ............................................................................ </td>
-                <td>กรรมการและเลขานุการ (อาจารย์ที่ปรึกษา)</td>
-            </tr>
-        @endif
-    </table>
-</div>
-{{-- 4.กำหนดให้มีการสอบสิ้นสุดโครงงาน --}}
-<div class="section">
-    <table>
-        <tr>
-            <td colspan="2">
-                <div>4. กำหนดให้มีการสอบสิ้นสุดโครงงาน</div>
-            </td>
-        </tr>
-        @if ($examSchedules->isNotEmpty())
             @foreach ($admins as $admin)
                 @php
                     $examSchedule = $examSchedules->where('id_teacher', $admin->id_teacher)->first();
@@ -383,170 +370,169 @@
                         ->first();
                 @endphp
                 @if ($examSchedule || $confirm)
-                @break
-            @endif
-        @endforeach
-        <tr>
-            <td style="width: 1.8em"></td>
-            <td>
-                <div>
-                    ในวันที่<span class="dotted"> {{ thaidate('j', $examSchedule->exam_day) }} </span>
-                    เดือน<span class="dotted"> {{ thaidate('F', $examSchedule->exam_day) }} </span>
-                    พ.ศ.<span class="dotted"> {{ thaidate('Y', $examSchedule->exam_day) }} </span>
-                    เวลา<span class="dotted"> {{ $examSchedule->exam_time }} </span>น.
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <div>
-                    สถานที่<span class="dotted"> {{ $examSchedule->exam_room }} </span>
-                    อาคาร<span class="dotted"> {{ $examSchedule->exam_building }} </span>
-                    คณะ<span class="dotted"> {{ $examSchedule->exam_group }} </span>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="signature">
-                @if ($confirm)
-                    ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
-                    <br>(<span class="dotted">
-                        {{ $admins[$index]->prefix . ' ' . $admin->name . ' ' . $admin->surname }} </span>)
-                    <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }} </span>
-                    เดือน<span class="dotted"> {{ $confirm->created_at->thaidate('F') }} </span>
-                    พ.ศ.<span class="dotted"> {{ $confirm->created_at->thaidate('Y') }} </span>
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td>
+                            <div>
+                                ในวันที่<span class="dotted"> {{ thaidate('j', $examSchedule->exam_day) }} </span>
+                                เดือน<span class="dotted"> {{ thaidate('F', $examSchedule->exam_day) }} </span>
+                                พ.ศ.<span class="dotted"> {{ thaidate('Y', $examSchedule->exam_day) }} </span>
+                                เวลา<span class="dotted"> {{ $examSchedule->exam_time }} </span>น.
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div>
+                                สถานที่<span class="dotted"> {{ $examSchedule->exam_room }} </span>
+                                อาคาร<span class="dotted"> {{ $examSchedule->exam_building }} </span>
+                                คณะ<span class="dotted"> {{ $examSchedule->exam_group }} </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="signature">
+                            @if ($confirm)
+                                ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
+                                <br>(<span class="dotted">
+                                    {{ $admin->prefix . ' ' . $admin->name . ' ' . $admin->surname }} </span>)
+                                <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }} </span>
+                                เดือน<span class="dotted"> {{ $confirm->created_at->thaidate('F') }} </span>
+                                พ.ศ.<span class="dotted"> {{ $confirm->created_at->thaidate('Y') }} </span>
+                            @else
+                                ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
+                                <br>( ............................................................. )
+                                <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                            @endif
+                        </td>
+                    </tr>
                 @else
-                    ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
-                    <br>( ............................................................. )
-                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td>
+                            <div>
+                                ในวันที่ ............ เดือน ............................ พ.ศ. ......................
+                                เวลา
+                                ...................... น.
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div>
+                                สถานที่ ............................ อาคาร ............................ คณะ
+                                ...........................................
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="signature">
+                            ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
+                            <br>( ............................................................. )
+                            <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                        </td>
+                    </tr>
                 @endif
-            </td>
-        </tr>
-    @else
-        <tr>
-            <td style="width: 1.8em"></td>
-            <td>
-                <div>
-                    ในวันที่ ............ เดือน ............................ พ.ศ. ...................... เวลา
-                    ...................... น.
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <div>
-                    สถานที่ ............................ อาคาร ............................ คณะ
-                    ...........................................
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="signature">
-                ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
-                <br>( ............................................................. )
-                <br>วันที่ ....... เดือน ............... พ.ศ. ............
-            </td>
-        </tr>
-    @endif
-</table>
-</div>
-{{-- 5.ความเห็นหัวหน้าสาขาวิชา --}}
-<div class="section">
-<table>
-    <tr>
-        <td colspan="2">
-            <div>5. ความเห็นหัวหน้าสาขาวิชา</div>
-        </td>
-    </tr>
-    @foreach ($branchHeads as $branchHead)
-        @php
-            $branchHeadComments = $comments
-                ->where('id_teacher', $branchHead->id_teacher)
-                ->where('id_document', $documentId)
-                ->where('id_position', 4)
-                ->where('id_comment_list', 1);
-            $branchHeadOtherComment = $comments
-                ->where('id_teacher', $branchHead->id_teacher)
-                ->where('id_document', $documentId)
-                ->where('id_position', 4)
-                ->where('id_comment_list', 2);
-            $confirm = $projects->confirmTeachers
-                ->where('id_teacher', $branchHead->id_teacher)
-                ->where('id_position', 3)
-                ->where('id_document', $documentId)
-                ->where('confirm_status', 1)
-                ->first();
-        @endphp
-        @if ($branchHeadComments->isNotEmpty() || $branchHeadOtherComment->isNotEmpty() || $confirm)
+            @endforeach
+        </table>
+    </div>
+    {{-- 5.ความเห็นหัวหน้าสาขาวิชา --}}
+    <div class="section">
+        <table>
             <tr>
-                <td style="width: 1.8em"></td>
-                <td>
-                    <div>
-                        <input type="checkbox"
-                            {{ $branchHeadComments->where('comment', 'อนุมัติ')->isNotEmpty() ? 'checked' : '' }}>
-                        <label> อนุมัติ</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" {{ $branchHeadOtherComment->isNotEmpty() ? 'checked' : '' }}>
-                        <label> ไม่อนุมัติ เนื่องจาก<span class="dotted">
-                                {{ $branchHeadOtherComment->first()->comment ?? ' ' }}
-                            </span></label>
-                    </div>
+                <td colspan="2">
+                    <div>5. ความเห็นหัวหน้าสาขาวิชา</div>
                 </td>
             </tr>
-            <tr>
-                <td></td>
-                <td class="signature">
-                    @if ($confirm)
-                        ลงชื่อ ......................................... หัวหน้าสาขาวิชา
-                        <br>(<span class="dotted">
-                            {{ $branchHead->prefix . ' ' . $branchHead->name . ' ' . $branchHead->surname }}
-                        </span>)
-                        <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
-                        </span>เดือน<span class="dotted">
-                            {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
-                            {{ $confirm->created_at->thaidate('Y') }} </span>
-                    @else
-                        ลงชื่อ ......................................... หัวหน้าสาขาวิชา
-                        <br>( ............................................................. )
-                        <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                    @endif
-                </td>
-            </tr>
-        @else
-            <tr>
-                <td style="width: 1.8em"></td>
-                <td>
-                    <div>
-                        <input type="checkbox">
-                        <label> อนุมัติ</label>
-                    </div>
-                    <div>
-                        <input type="checkbox">
-                        <label> ไม่อนุมัติ เนื่องจาก
-                            ......................................................................................................................
-                            <br>............................................................................................................................................................
-                            <br>............................................................................................................................................................
-                        </label>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="signature">
-                    ลงชื่อ ......................................... หัวหน้าสาขาวิชา
-                    <br>( ............................................................. )
-                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                </td>
-            </tr>
-        @endif
-    @endforeach
-</table>
-</div>
+            @foreach ($branchHeads as $branchHead)
+                @php
+                    $branchHeadComments = $comments
+                        ->where('id_teacher', $branchHead->id_teacher)
+                        ->where('id_document', $documentId)
+                        ->where('id_position', 4)
+                        ->where('id_comment_list', 1);
+                    $branchHeadOtherComment = $comments
+                        ->where('id_teacher', $branchHead->id_teacher)
+                        ->where('id_document', $documentId)
+                        ->where('id_position', 4)
+                        ->where('id_comment_list', 2);
+                    $confirm = $projects->confirmTeachers
+                        ->where('id_teacher', $branchHead->id_teacher)
+                        ->where('id_position', 4)
+                        ->where('id_document', $documentId)
+                        ->where('confirm_status', 1)
+                        ->first();
+                @endphp
+                @if ($branchHeadComments->isNotEmpty() || $branchHeadOtherComment->isNotEmpty() || $confirm)
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td>
+                            <div>
+                                <input type="checkbox"
+                                    {{ $branchHeadComments->where('comment', 'อนุมัติ')->isNotEmpty() ? 'checked' : '' }}>
+                                <label> อนุมัติ</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" {{ $branchHeadOtherComment->isNotEmpty() ? 'checked' : '' }}>
+                                <label> ไม่อนุมัติ เนื่องจาก<span class="dotted">
+                                        {{ $branchHeadOtherComment->first()->comment ?? ' ' }}
+                                    </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="signature">
+                            @if ($confirm)
+                                ลงชื่อ ......................................... หัวหน้าสาขาวิชา
+                                <br>(<span class="dotted">
+                                    {{ $branchHead->prefix . ' ' . $branchHead->name . ' ' . $branchHead->surname }}
+                                </span>)
+                                <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
+                                </span>เดือน<span class="dotted">
+                                    {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
+                                    {{ $confirm->created_at->thaidate('Y') }} </span>
+                            @else
+                                ลงชื่อ ......................................... หัวหน้าสาขาวิชา
+                                <br>( ............................................................. )
+                                <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                            @endif
+                        </td>
+                    </tr>
+                @else
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td>
+                            <div>
+                                <input type="checkbox">
+                                <label> อนุมัติ</label>
+                            </div>
+                            <div>
+                                <input type="checkbox">
+                                <label> ไม่อนุมัติ เนื่องจาก
+                                    ......................................................................................................................
+                                    <br>............................................................................................................................................................
+                                    <br>............................................................................................................................................................
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="signature">
+                            ลงชื่อ ......................................... หัวหน้าสาขาวิชา
+                            <br>( ............................................................. )
+                            <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
+        </table>
+    </div>
 </body>
 
 </html>

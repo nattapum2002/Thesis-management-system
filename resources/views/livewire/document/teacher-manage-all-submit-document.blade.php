@@ -1362,6 +1362,8 @@
                                                                 @foreach ($projectItems->confirmStudents->where('id_document', $documentId) as $confirmStudent)
                                                                     <li>
                                                                         {{ $confirmStudent->student->name . ' ' . $confirmStudent->student->surname }}
+                                                                        <i
+                                                                            class="bx bxs-{{ $confirmStudent->confirm_status ? 'check-circle' : 'x-circle' }}"></i>
                                                                     </li>
                                                                 @endforeach
                                                             </ul>

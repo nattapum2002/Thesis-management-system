@@ -581,81 +581,88 @@
                 </td>
             </tr>
             @if ($comments->isNotEmpty())
-                {{-- @foreach ($teachers as $teacher)
-            @php
-            $result = $comments->where('id_teacher', $teacher->id_teacher)->where('id_document',
-            $documentId)->where('id_position', 3)->where('id_comment_list', 1)->first();
-            $resultDetail = $comments->where('id_teacher', $teacher->id_teacher)->where('id_document',
-            $documentId)->where('id_position', 3)->where('id_comment_list', 2)->first();
-            @endphp
-            @endforeach --}}
-                <tr>
-                    <td style="width: 1.8em"></td>
-                    <td colspan="9">
-                        <div>
-                            <input type="checkbox" {{ isset($result) && $result->comment == 'ผ่าน' ? 'checked' : '' }}>
-                            <label> ผ่าน</label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td colspan="9">
-                        <div>
-                            <input type="checkbox"
-                                {{ isset($result) && $result->comment == 'ผ่าน/ แก้ไขใหม่' ? 'checked' : '' }}>
-                            <label> ผ่าน/ แก้ไขใหม่</label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td style="width: 1.8em"></td>
-                    <td colspan="2">
-                        <div>แก้ไข ดังนี้</div>
-                    </td>
-                    <td colspan="6">
-                        <div>
-                            @if (isset($resultDetail) && $result->comment == 'ผ่าน/ แก้ไขใหม่')
-                                <span class="dotted"> {{ $resultDetail->comment }} </span>
-                            @else
-                                .........................................................................................................................
-                                <br>.........................................................................................................................
-                                <br>.........................................................................................................................
-                                <br>.........................................................................................................................
-                            @endif
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td colspan="9">
-                        <div>
-                            <input type="checkbox"
-                                {{ isset($result) && $result->comment == 'ไม่ผ่าน' ? 'checked' : '' }}>
-                            <label> ไม่ผ่าน</label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td style="width: 1.8em"></td>
-                    <td colspan="2">
-                        <div>เนื่องจาก</div>
-                    </td>
-                    <td colspan="6">
-                        <div>
-                            @if (isset($resultDetail) && $result->comment == 'ไม่ผ่าน')
-                                <span class="dotted"> {{ $resultDetail->comment }} </span>
-                            @else
-                                .........................................................................................................................
-                                <br>.........................................................................................................................
-                                <br>.........................................................................................................................
-                                <br>.........................................................................................................................
-                            @endif
-                        </div>
-                    </td>
-                </tr>
+                @foreach ($admins as $admin)
+                    @php
+                        $result = $comments
+                            ->where('id_teacher', $admin->id_teacher)
+                            ->where('id_document', $documentId)
+                            ->where('id_position', 3)
+                            ->where('id_comment_list', 1)
+                            ->first();
+                        $resultDetail = $comments
+                            ->where('id_teacher', $admin->id_teacher)
+                            ->where('id_document', $documentId)
+                            ->where('id_position', 3)
+                            ->where('id_comment_list', 2)
+                            ->first();
+                    @endphp
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td colspan="9">
+                            <div>
+                                <input type="checkbox" {{ $result->comment == 'ผ่าน' ? 'checked' : '' }}>
+                                <label> ผ่าน</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="9">
+                            <div>
+                                <input type="checkbox" {{ $result->comment == 'ผ่าน/ แก้ไขใหม่' ? 'checked' : '' }}>
+                                <label> ผ่าน/ แก้ไขใหม่</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="width: 1.8em"></td>
+                        <td colspan="2">
+                            <div>แก้ไข ดังนี้</div>
+                        </td>
+                        <td colspan="6">
+                            <div>
+                                @if (isset($resultDetail) && $result->comment == 'ผ่าน/ แก้ไขใหม่')
+                                    <span class="dotted"> {{ $resultDetail->comment }} </span>
+                                @else
+                                    .........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="9">
+                            <div>
+                                <input type="checkbox"
+                                    {{ isset($result) && $result->comment == 'ไม่ผ่าน' ? 'checked' : '' }}>
+                                <label> ไม่ผ่าน</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="width: 1.8em"></td>
+                        <td colspan="2">
+                            <div>เนื่องจาก</div>
+                        </td>
+                        <td colspan="6">
+                            <div>
+                                @if (isset($resultDetail) && $result->comment == 'ไม่ผ่าน')
+                                    <span class="dotted"> {{ $resultDetail->comment }} </span>
+                                @else
+                                    .........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             @else
                 <tr>
                     <td style="width: 1.8em"></td>
@@ -725,7 +732,7 @@
                     <div>4. ลงชื่อคณะกรรมการสอบ</div>
                 </td>
             </tr>
-            @if (!1)
+            @if ($projects->confirmTeachers)
                 @foreach ($directors as $director)
                     @php
                         $confirm = $projects->confirmTeachers
@@ -837,259 +844,257 @@
                 @endphp
 
                 @if ($adminComments->isNotEmpty() || $adminOtherComment->isNotEmpty() || $confirm)
-                @break
-            @endif
-        @endforeach
-
-        @if ($adminComments->isNotEmpty())
-            <tr>
-                <td style="width: 1.8em"></td>
-                <td>
-                    <div>
-                        <input type="checkbox"
-                            {{ $adminComments->first()->comment == 'อนุมัติ' ? 'checked' : '' }}>
-                        <label> อนุมัติ</label>
-                    </div>
-                </td>
-                <td colspan="3">
-                    <div>
-                        <input type="checkbox"
-                            {{ $adminComments->first()->comment != 'อนุมัติ' ? 'checked' : '' }}>
-                        <label> ควรปรับผลการประเมิน</label>
-                        @if ($adminComments->first()->comment != 'อนุมัติ')
-                            เป็น<span class="dotted"> {{ $adminComments->first()->comment }} </span>
-                        @else
-                            เป็น ............................................................
-                        @endif
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <div>เนืองจาก</div>
-                </td>
-                <td colspan="3">
-                    <div>
-                        @if ($adminOtherComment->first()->comment != 'อนุมัติ')
-                            <span class="dotted"> {{ $adminOtherComment->first()->comment }} </span>
-                        @else
-                            .........................................................................................................................
-                            <br>.........................................................................................................................
-                            <br>.........................................................................................................................
-                            <br>.........................................................................................................................
-                        @endif
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="signature" colspan="4">
-                    <div>
-                        @if ($confirm)
-                            ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
-                            <br>(<span class="dotted">
-                                {{ $confirm->teacher->prefix . ' ' . $confirm->teacher->name . ' ' . $confirm->teacher->surname }}
-                            </span>)
-                            <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
-                            </span>เดือน<span class="dotted">
-                                {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
-                                {{ $confirm->created_at->thaidate('Y') }} </span>
-                        @else
-                            ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
-                            <br>( ............................................................. )
-                            <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                        @endif
-                    </div>
-                </td>
-            </tr>
-        @else
-            <tr>
-                <td style="width: 1.8em"></td>
-                <td>
-                    <div>
-                        <input type="checkbox">
-                        <label> อนุมัติ</label>
-                    </div>
-                </td>
-                <td colspan="3">
-                    <div style="padding-left: 1em">
-                        <input type="checkbox">
-                        <label> ควรปรับผลการประเมิน</label>
-                        เป็น ............................................................
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <div>เนืองจาก</div>
-                </td>
-                <td colspan="3">
-                    <div>
-                        .........................................................................................................................
-                        <br>.........................................................................................................................
-                        <br>.........................................................................................................................
-                        <br>.........................................................................................................................
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="signature" colspan="4">
-                    ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
-                    <br>( ............................................................. )
-                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                </td>
-            </tr>
-        @endif
-    </table>
-</div>
-{{-- 6.ความเห็นหัวหน้าสาขาวิชา --}}
-<div class="section">
-    <table>
-        <tr>
-            <td colspan="5">
-                <div>6. ความเห็นหัวหน้าสาขาวิชา</div>
-            </td>
-        </tr>
-        @foreach ($branchHeads as $branchHead)
-            @php
-                $branchHeadComments = $comments
-                    ->where('id_teacher', $branchHead->id_teacher)
-                    ->where('id_document', $documentId)
-                    ->where('id_position', 4)
-                    ->where('id_comment_list', 1)
-                    ->sortBy('created_at');
-                $branchHeadOtherComment = $comments
-                    ->where('id_teacher', $branchHead->id_teacher)
-                    ->where('id_document', $documentId)
-                    ->where('id_position', 4)
-                    ->where('id_comment_list', 2);
-                $confirm = $projects->confirmTeachers
-                    ->where('id_teacher', $branchHead->id_teacher)
-                    ->where('id_position', 4)
-                    ->where('id_document', $documentId)
-                    ->where('confirm_status', 1)
-                    ->first();
-            @endphp
-
-            @if ($branchHeadComments->isNotEmpty() || $branchHeadOtherComment->isNotEmpty() || $confirm)
-                <tr>
-                    <td style="width: 1.8em"></td>
-                    <td>
-                        <div>
-                            <input type="checkbox"
-                                {{ $branchHeadComments->first()->comment == 'อนุมัติ' ? 'checked' : '' }}>
-                            <label> อนุมัติ</label>
-                        </div>
-                    </td>
-                    <td colspan="3">
-                        <div>
-                            <input type="checkbox"
-                                {{ $branchHeadComments->first()->comment != 'อนุมัติ' ? 'checked' : '' }}>
-                            <label> ควรปรับผลการประเมิน</label>
-                            @if ($branchHeadComments->first()->comment != 'อนุมัติ')
-                                เป็น<span class="dotted"> {{ $branchHeadComments->first()->comment }} </span>
-                            @else
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td>
+                            <div>
+                                <input type="checkbox"
+                                    {{ $adminComments->first()->comment == 'อนุมัติ' ? 'checked' : '' }}>
+                                <label> อนุมัติ</label>
+                            </div>
+                        </td>
+                        <td colspan="3">
+                            <div>
+                                <input type="checkbox"
+                                    {{ $adminComments->first()->comment != 'อนุมัติ' ? 'checked' : '' }}>
+                                <label> ควรปรับผลการประเมิน</label>
+                                @if ($adminComments->first()->comment != 'อนุมัติ')
+                                    เป็น<span class="dotted"> {{ $adminComments->first()->comment }} </span>
+                                @else
+                                    เป็น ............................................................
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div>เนืองจาก</div>
+                        </td>
+                        <td colspan="3">
+                            <div>
+                                @if ($adminComments->first()->comment != 'อนุมัติ')
+                                    <span class="dotted"> {{ $adminOtherComment->first()->comment }} </span>
+                                @else
+                                    .........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="signature" colspan="4">
+                            <div>
+                                @if ($confirm)
+                                    ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
+                                    <br>(<span class="dotted">
+                                        {{ $confirm->teacher->prefix . ' ' . $confirm->teacher->name . ' ' . $confirm->teacher->surname }}
+                                    </span>)
+                                    <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
+                                    </span>เดือน<span class="dotted">
+                                        {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
+                                        {{ $confirm->created_at->thaidate('Y') }} </span>
+                                @else
+                                    ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
+                                    <br>( ............................................................. )
+                                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                @else
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td>
+                            <div>
+                                <input type="checkbox">
+                                <label> อนุมัติ</label>
+                            </div>
+                        </td>
+                        <td colspan="3">
+                            <div style="padding-left: 1em">
+                                <input type="checkbox">
+                                <label> ควรปรับผลการประเมิน</label>
                                 เป็น ............................................................
-                            @endif
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <div>เนืองจาก</div>
-                    </td>
-                    <td colspan="3">
-                        <div>
-                            @if ($branchHeadOtherComment->first()->comment != 'อนุมัติ')
-                                <span class="dotted"> {{ $branchHeadOtherComment->first()->comment }} </span>
-                            @else
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div>เนืองจาก</div>
+                        </td>
+                        <td colspan="3">
+                            <div>
                                 .........................................................................................................................
                                 <br>.........................................................................................................................
                                 <br>.........................................................................................................................
                                 <br>.........................................................................................................................
-                            @endif
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td colspan="4">
-                        <div>
-                            และอนุมัติให้ทำการศึกษาได้ ตั้งแต่วันที่<span class="dotted">
-                                {{ $confirm->created_at->thaidate('j') }} </span>
-                            เดือน<span class="dotted">{{ $confirm->created_at->thaidate('F') }} </span>
-                            พ.ศ.<span class="dotted">{{ $confirm->created_at->thaidate('Y') }} </span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="signature" colspan="4">
-                        <div>
-                            @if ($confirm)
-                                ลงชื่อ ......................................... หัวหน้าสาขาวิชา
-                                <br>(<span class="dotted">
-                                    {{ $confirm->teacher->prefix . ' ' . $confirm->teacher->name . ' ' . $confirm->teacher->surname }}
-                                </span>)
-                                <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
-                                </span>เดือน<span class="dotted">
-                                    {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
-                                    {{ $confirm->created_at->thaidate('Y') }} </span>
-                            @else
-                                ลงชื่อ ......................................... หัวหน้าสาขาวิชา
-                                <br>( ............................................................. )
-                                <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                            @endif
-                        </div>
-                    </td>
-                </tr>
-            @else
-                <tr>
-                    <td style="width: 1.8em"></td>
-                    <td>
-                        <div>
-                            <input type="checkbox">
-                            <label> อนุมัติ</label>
-                        </div>
-                    </td>
-                    <td colspan="3">
-                        <div style="padding-left: 1em">
-                            <input type="checkbox">
-                            <label> ควรปรับผลการประเมิน</label>
-                            เป็น ............................................................
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <div>เนืองจาก</div>
-                    </td>
-                    <td colspan="3">
-                        <div>
-                            .........................................................................................................................
-                            <br>.........................................................................................................................
-                            <br>.........................................................................................................................
-                            <br>.........................................................................................................................
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="signature" colspan="4">
-                        ลงชื่อ ......................................... หัวหน้าสาขาวิชา
-                        <br>( ............................................................. )
-                        <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                    </td>
-                </tr>
-            @endif
-        @endforeach
-    </table>
-</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="signature" colspan="4">
+                            ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
+                            <br>( ............................................................. )
+                            <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
+
+
+        </table>
+    </div>
+    {{-- 6.ความเห็นหัวหน้าสาขาวิชา --}}
+    <div class="section">
+        <table>
+            <tr>
+                <td colspan="5">
+                    <div>6. ความเห็นหัวหน้าสาขาวิชา</div>
+                </td>
+            </tr>
+            @foreach ($branchHeads as $branchHead)
+                @php
+                    $branchHeadComments = $comments
+                        ->where('id_teacher', $branchHead->id_teacher)
+                        ->where('id_document', $documentId)
+                        ->where('id_position', 4)
+                        ->where('id_comment_list', 1)
+                        ->sortBy('created_at');
+                    $branchHeadOtherComment = $comments
+                        ->where('id_teacher', $branchHead->id_teacher)
+                        ->where('id_document', $documentId)
+                        ->where('id_position', 4)
+                        ->where('id_comment_list', 2);
+                    $confirm = $projects->confirmTeachers
+                        ->where('id_teacher', $branchHead->id_teacher)
+                        ->where('id_position', 4)
+                        ->where('id_document', $documentId)
+                        ->where('confirm_status', 1)
+                        ->first();
+                @endphp
+
+                @if ($branchHeadComments->isNotEmpty() || $branchHeadOtherComment->isNotEmpty() || $confirm)
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td>
+                            <div>
+                                <input type="checkbox"
+                                    {{ $branchHeadComments->first()->comment == 'อนุมัติ' ? 'checked' : '' }}>
+                                <label> อนุมัติ</label>
+                            </div>
+                        </td>
+                        <td colspan="3">
+                            <div>
+                                <input type="checkbox"
+                                    {{ $branchHeadComments->first()->comment != 'อนุมัติ' ? 'checked' : '' }}>
+                                <label> ควรปรับผลการประเมิน</label>
+                                @if ($branchHeadComments->first()->comment != 'อนุมัติ')
+                                    เป็น<span class="dotted"> {{ $branchHeadComments->first()->comment }} </span>
+                                @else
+                                    เป็น ............................................................
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div>เนืองจาก</div>
+                        </td>
+                        <td colspan="3">
+                            <div>
+                                @if ($branchHeadComments->first()->comment != 'อนุมัติ')
+                                    <span class="dotted"> {{ $branchHeadOtherComment->first()->comment }} </span>
+                                @else
+                                    .........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="4">
+                            <div>
+                                และอนุมัติให้ทำการศึกษาได้ ตั้งแต่วันที่<span class="dotted">
+                                    {{ $confirm->created_at->thaidate('j') }} </span>
+                                เดือน<span class="dotted">{{ $confirm->created_at->thaidate('F') }} </span>
+                                พ.ศ.<span class="dotted">{{ $confirm->created_at->thaidate('Y') }} </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="signature" colspan="4">
+                            <div>
+                                @if ($confirm)
+                                    ลงชื่อ ......................................... หัวหน้าสาขาวิชา
+                                    <br>(<span class="dotted">
+                                        {{ $confirm->teacher->prefix . ' ' . $confirm->teacher->name . ' ' . $confirm->teacher->surname }}
+                                    </span>)
+                                    <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
+                                    </span>เดือน<span class="dotted">
+                                        {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
+                                        {{ $confirm->created_at->thaidate('Y') }} </span>
+                                @else
+                                    ลงชื่อ ......................................... หัวหน้าสาขาวิชา
+                                    <br>( ............................................................. )
+                                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                @else
+                    <tr>
+                        <td style="width: 1.8em"></td>
+                        <td>
+                            <div>
+                                <input type="checkbox">
+                                <label> อนุมัติ</label>
+                            </div>
+                        </td>
+                        <td colspan="3">
+                            <div style="padding-left: 1em">
+                                <input type="checkbox">
+                                <label> ควรปรับผลการประเมิน</label>
+                                เป็น ............................................................
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div>เนืองจาก</div>
+                        </td>
+                        <td colspan="3">
+                            <div>
+                                .........................................................................................................................
+                                <br>.........................................................................................................................
+                                <br>.........................................................................................................................
+                                <br>.........................................................................................................................
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="signature" colspan="4">
+                            ลงชื่อ ......................................... หัวหน้าสาขาวิชา
+                            <br>( ............................................................. )
+                            <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
+        </table>
+    </div>
 </body>
 
 </html>
