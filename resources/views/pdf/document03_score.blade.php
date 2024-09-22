@@ -266,7 +266,7 @@
                                 <div style="padding-left: 1.8em; text-align: left;">5.1 วัตถุประสงค์ของโครงงาน</div>
                             </td>
                             <td>
-                                <div>20</div>
+                                <div>10</div>
                             </td>
                             @foreach ($projectscore->members as $member)
                                 @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 27) as $score)
@@ -348,7 +348,7 @@
                                 <div style="text-align: left;">1. บุคลิก ท่าทาง การวางตัวและความเชื่อมั่นในตนเอง</div>
                             </td>
                             <td>
-                                <div>5</div>
+                                <div>10</div>
                             </td>
                             <td>
                                 <div> </div>
@@ -376,7 +376,7 @@
                                 <div style="padding-left: 1.8em; text-align: left;">2.1 ไฟล์นำเสนอมีความสมบูรณ์</div>
                             </td>
                             <td>
-                                <div>5</div>
+                                <div>10</div>
                             </td>
                             <td>
                                 <div> </div>
@@ -408,7 +408,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div>5</div>
+                                <div>10</div>
                             </td>
                             <td>
                                 <div> </div>
@@ -493,7 +493,7 @@
                                 <div style="padding-left: 1.8em; text-align: left;">5.1 วัตถุประสงค์ของโครงงาน</div>
                             </td>
                             <td>
-                                <div>20</div>
+                                <div>10</div>
                             </td>
                             <td>
                                 <div> </div>
