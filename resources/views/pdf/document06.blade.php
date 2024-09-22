@@ -587,13 +587,13 @@
                             ->where('id_teacher', $admin->id_teacher)
                             ->where('id_document', $documentId)
                             ->where('id_position', 3)
-                            ->where('id_comment_list', 1)
+                            ->where('id_comment_list', 26)
                             ->first();
                         $resultDetail = $comments
                             ->where('id_teacher', $admin->id_teacher)
                             ->where('id_document', $documentId)
                             ->where('id_position', 3)
-                            ->where('id_comment_list', 2)
+                            ->where('id_comment_list', 27)
                             ->first();
                     @endphp
                     <tr>
