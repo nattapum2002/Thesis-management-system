@@ -84,8 +84,8 @@ class Document06 extends Component
                             'id_document' => $this->id_document,
                             'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                             'id_project' => $this->id_project,
-                            'id_comment_list' => 1,
-                            'id_position' => 6,
+                            'id_comment_list' => 30,
+                            'id_position' => 3,
                         ],
                         [
                             'comment' => 'ผ่าน'
@@ -104,8 +104,8 @@ class Document06 extends Component
                             'id_document' => $this->id_document,
                             'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                             'id_project' => $this->id_project,
-                            'id_comment_list' => 1,
-                            'id_position' => 6
+                            'id_comment_list' => 30,
+                            'id_position' => 3
                         ],
                         [
                             'comment' => 'ผ่าน/แก้ไขใหม่'
@@ -116,8 +116,8 @@ class Document06 extends Component
                             'id_document' => $this->id_document,
                             'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                             'id_project' => $this->id_project,
-                            'id_comment_list' => 2,
-                            'id_position' => 6
+                            'id_comment_list' => 31,
+                            'id_position' => 3
                         ],
                         [
                             'comment' => $this->approve_fix_comment
@@ -136,8 +136,8 @@ class Document06 extends Component
                             'id_document' => $this->id_document,
                             'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                             'id_project' => $this->id_project,
-                            'id_comment_list' => 1,
-                            'id_position' => 6
+                            'id_comment_list' => 30,
+                            'id_position' => 3
                         ],
                         [
                             'comment' => 'ไม่ผ่าน'
@@ -148,8 +148,8 @@ class Document06 extends Component
                             'id_document' => $this->id_document,
                             'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                             'id_project' => $this->id_project,
-                            'id_comment_list' => 2,
-                            'id_position' => 6
+                            'id_comment_list' => 31,
+                            'id_position' => 3
                         ],
                         [
                             'comment' => $this->not_approve_comment
