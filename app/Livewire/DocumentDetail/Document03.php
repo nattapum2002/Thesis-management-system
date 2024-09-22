@@ -63,7 +63,6 @@ class Document03 extends Component
             }, array_keys($this->score_student), $this->score_student);
             // dd($transformedData);
             $skip_value = 22; // ค่า ID ที่ต้องการข้าม
-
             foreach ($transformedData as $index => $value) {
                 // Reset comment list ID สำหรับนักเรียนแต่ละคน
                 $current_comment_list_id = 20;

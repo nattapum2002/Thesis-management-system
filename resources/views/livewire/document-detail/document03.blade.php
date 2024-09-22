@@ -322,7 +322,10 @@
                                                             wire:model.live="score_student.{{ $Student->student->id_student }}.{{ $key }}"
                                                             class="form-control" placeholder="" aria-label=""
                                                             aria-describedby="basic-addon1"
-                                                            value="{{ $score_student[$Student->student->id_student][$key] ?? 0 }}">
+                                                            value="{{ $score_student[$Student->student->id_student][$key] ?? 0 }}"
+                                                            min="0" max="{{ $criterion['score'] }}"
+                                                        >
+
                                                     </td>
                                                 @endforeach
                                             @endforeach
