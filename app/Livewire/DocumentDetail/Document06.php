@@ -250,7 +250,7 @@ class Document06 extends Component
                         'id_comment_list' => 1,
                         'id_position' => 4
                     ],[
-                        'comment' => 'ควรปรับผลการประเมิน เป็น'
+                        'comment' => $this->branch_head_approve_fix_choice_comment
                     ]
                     );
                     Comment::updateOrCreate(

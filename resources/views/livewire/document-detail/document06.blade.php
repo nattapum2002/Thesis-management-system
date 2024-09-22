@@ -169,11 +169,11 @@
                         <label for="branch_head_approve">อนุมัติ</label>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <input wire:model="branch_head_approve_fix" type="checkbox" id="branch_head_approve_fix_choice"
+                        <input wire:model="branch_head_approve_fix_choice" type="checkbox" id="branch_head_approve_fix_choice"
                             x-model="branch_head_approve_fix_choice" x-bind:disabled="branch_head_approve_choice">
                         <label for="branch_head_approve_fix_choice">ควรประผลประเมินเป็น</label>
                         <div x-show="branch_head_approve_fix_choice">
-                            <textarea class="form-control" wire:model="admin_approve_fix_choice_comment" id="admin_approve_fix_choice_comment"></textarea>
+                            <textarea class="form-control" wire:model="branch_head_approve_fix_choice_comment" id="branch_head_approve_fix_choice_comment"></textarea>
                         </div>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                     <div class="col-12">
                         <div x-show="branch_head_approve_fix_choice">
                             <label for="">เนื่องจาก</label>
-                            <textarea class="form-control" wire:model="$branch_head_approve_fix_comment" id="branch-head_approve_fix_comment"></textarea>
+                            <textarea class="form-control" wire:model="branch_head_approve_fix_comment" id="branch_head_approve_fix_comment"></textarea>
                         </div>
                     </div>
                 </div>
