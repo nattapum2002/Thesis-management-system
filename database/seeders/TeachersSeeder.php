@@ -16,14 +16,25 @@ class TeachersSeeder extends Seeder
      */
     public function run(): void
     {
-
-        $filename = ['sakchan.jpg', 'tonglun.jpg', 'wiphasith.jpg', 'thongmee.jpg', 'anyawee.jpg', 'wathakan.jpg', 'atipat.jpg', 'jeeranun.jpg', 'boonlueo.jpg', 'nipon.jpg', 'narasuk.jpg', 'attapol.jpg', 'anutchai.jpg'];
-        foreach ($filename as $value) {
+        $picture = ['sakchan.jpg', 'tonglun.jpg', 'wiphasith.jpg', 'thongmee.jpg', 'anyawee.jpg', 'wathakan.jpg', 'atipat.jpg', 'jeeranun.jpg', 'boonlueo.jpg', 'nipon.jpg', 'narasuk.jpg', 'attapol.jpg', 'anutchai.jpg'];
+        foreach ($picture as $value) {
             $source_path = public_path('Asset/main/img/teacher/' . $value);
             $destination_path = 'teacher_image/' . $value;
             if (File::exists($source_path)) {
                 Storage::disk('public')->put($destination_path, File::get($source_path));
                 $path_member_img[] = $destination_path;
+            } else {
+                echo "File not found: $source_path";
+            }
+        }
+
+        $signature = ['sakchan.png', 'tonglun.png', 'wiphasith.png', 'thongmee.png', 'anyawee.png', 'wathakan.png', 'atipat.png', 'jeeranun.png', 'boonlueo.png', 'nipon.png', 'narasuk.png', 'attapol.png', 'anutchai.png'];
+        foreach ($signature as $value) {
+            $source_path = public_path('Asset/main/img/signature/' . $value);
+            $destination_path = 'signature_image/' . $value;
+            if (File::exists($source_path)) {
+                Storage::disk('public')->put($destination_path, File::get($source_path));
+                $signature_img[] = $destination_path;
             } else {
                 echo "File not found: $source_path";
             }
@@ -42,7 +53,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[0] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[0] ?? null,
             'username' => 'sakchan',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -65,7 +76,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[1] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[1] ?? null,
             'username' => 'tongluan',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -88,7 +99,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[2] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[2] ?? null,
             'username' => 'wiphasith',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -111,7 +122,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[3] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[3] ?? null,
             'username' => 'tongme',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -134,7 +145,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[4] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[4] ?? null,
             'username' => 'anyawee',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -157,7 +168,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[5] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[5] ?? null,
             'username' => 'wathakan',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -180,7 +191,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[6] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[6] ?? null,
             'username' => 'atipat',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -203,7 +214,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[7] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[7] ?? null,
             'username' => 'jeeranun',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -226,7 +237,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[8] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[8] ?? null,
             'username' => 'boonlueo',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -249,7 +260,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[9] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[9] ?? null,
             'username' => 'nipon',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -272,7 +283,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[10] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[10] ?? null,
             'username' => 'narasuk',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -295,7 +306,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[11] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[11] ?? null,
             'username' => 'attapol',
             'password' => Hash::make('password'),
             'account_status' => true,
@@ -318,7 +329,7 @@ class TeachersSeeder extends Seeder
             'tel' => null,
             'id_line' => null,
             'teacher_image' => $path_member_img[12] ?? null,
-            'signature_image' => 'https://via.placeholder.com/50',
+            'signature_image' => $signature_img[12] ?? null,
             'username' => 'anutchai',
             'password' => Hash::make('password'),
             'account_status' => true,

@@ -1064,7 +1064,13 @@
                         <td colspan="8">
                             <div>
                                 @if ($confirm)
-                                    ลงชื่อ .........................................
+                                    ลงชื่อ @if ($director->teacher->signature_image)
+                                        {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $director->teacher->signature_image))) }}" alt="Signature Image"> --}}
+                                        <img class="signatureImage" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $director->teacher->signature_image))); ?>"
+                                            alt="Signature Image">
+                                    @else
+                                        .........................................
+                                    @endif
                                     {{ $director->id_position == 7
                                         ? $director->position->position . ' (อาจารย์ที่ปรึกษา)'
                                         : $director->position->position }}
@@ -1273,7 +1279,13 @@
                         <td class="signature" colspan="4">
                             <div>
                                 @if ($confirm)
-                                    ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
+                                    ลงชื่อ @if ($confirm->teacher->signature_image)
+                                        {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}" alt="Signature Image"> --}}
+                                        <img class="signatureImage" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))); ?>"
+                                            alt="Signature Image">
+                                    @else
+                                        .........................................
+                                    @endif อาจารย์ผู้รับผิดชอบรายวิชา
                                     <br>(<span class="dotted">
                                         {{ $confirm->teacher->prefix . ' ' . $confirm->teacher->name . ' ' . $confirm->teacher->surname }}
                                     </span>)
@@ -1400,7 +1412,13 @@
                         <td class="signature" colspan="4">
                             <div>
                                 @if ($confirm)
-                                    ลงชื่อ ......................................... หัวหน้าสาขาวิชา
+                                    ลงชื่อ @if ($confirm->teacher->signature_image)
+                                        {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}" alt="Signature Image"> --}}
+                                        <img class="signatureImage" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))); ?>"
+                                            alt="Signature Image">
+                                    @else
+                                        .........................................
+                                    @endif หัวหน้าสาขาวิชา
                                     <br>(<span class="dotted">
                                         {{ $confirm->teacher->prefix . ' ' . $confirm->teacher->name . ' ' . $confirm->teacher->surname }}
                                     </span>)
