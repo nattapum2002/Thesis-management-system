@@ -12,11 +12,12 @@
     <div style="font-family: 'THSarabunNew', sans-serif;">
         <header>
             <div class="documentId">คกท.-คง.-03</div>
+            {{-- <img class="documentLogo" src="data:image/png;base64,{{ base64_encode(file_get_contents('/home/vol4_2/infinityfree.com/if0_37229336/htdocs/Asset/main/img/logo/RMUTI.png')) }}" alt="University Logo"> --}}
             <img class="documentLogo" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public\Asset\main\img\logo\RMUTI.png'))); ?>" alt="University Logo">
             <div class="documentHead">
                 คณะเกษตรศาสตร์และเทคโนโลยี
                 <br>มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน วิทยาเขตสุรินทร์
-                <br>แบบรายงานผลการสอบสิ้นสุดโครงงาน
+                <br>แบบรายงานผลการสอบหัวข้อโครงงาน
                 <br>-----------------------------------
             </div>
         </header>
@@ -126,21 +127,21 @@
                         <td style="width: 10%;">คนที่ 3</td>
                     </tr>
                     @foreach ($criterias as $index => $criterion)
-                <tr>
-                    <td>{!! $criterion['name'] !!}</td>
-                    <td>{{ $criterion['score'] }}</td>
-                    <td>{{ $score_director_1[$index] ?? '' }}</td>
-                    <td>{{ $score_director_2[$index] ?? '' }}</td>
-                    <td>{{ $score_director_3[$index] ?? '' }}</td>
-                </tr>
-                @endforeach
+                        <tr>
+                            <td>{!! $criterion['name'] !!}</td>
+                            <td>{{ $criterion['score'] }}</td>
+                            <td>{{ $score_director_1[$index] ?? '' }}</td>
+                            <td>{{ $score_director_2[$index] ?? '' }}</td>
+                            <td>{{ $score_director_3[$index] ?? '' }}</td>
+                        </tr>
+                    @endforeach
                     <tr>
-                    <td style="text-align: right;">รวม</td>
-                    <td>100</td>
-                    <td>{{ $total_score_director_1 }}</td>
-                    <td>{{ $total_score_director_2 }}</td>
-                    <td>{{ $total_score_director_3 }}</td>
-                </tr>
+                        <td style="text-align: right;">รวม</td>
+                        <td>100</td>
+                        <td>{{ $total_score_director_1 }}</td>
+                        <td>{{ $total_score_director_2 }}</td>
+                        <td>{{ $total_score_director_3 }}</td>
+                    </tr>
                 </table>
             </div>
             <div>
@@ -154,7 +155,7 @@
                         <td style="width: 1.8em"></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox"{{ $approve == true ? 'checked' : ''}}>
+                                <input type="checkbox"{{ $approve == true ? 'checked' : '' }}>
                                 <label> ผ่าน</label>
                             </div>
                         </td>
@@ -163,7 +164,7 @@
                         <td></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox" {{ $approve_fix == true ? 'checked' : ''}}>
+                                <input type="checkbox" {{ $approve_fix == true ? 'checked' : '' }}>
                                 <label> ผ่าน/ แก้ไขใหม่</label>
                             </div>
                         </td>
@@ -176,18 +177,18 @@
                         </td>
                         <td colspan="6">
                             @if ($approve_fix == true)
-                            <div>
-                               <span class="dotted">
-                                    {{$approve_fix_comment}}
-                               </span>
-                            </div>
+                                <div>
+                                    <span class="dotted">
+                                        {{ $approve_fix_comment }}
+                                    </span>
+                                </div>
                             @else
-                            <div>
-                                .........................................................................................................................
-                                <br>.........................................................................................................................
-                                <br>.........................................................................................................................
-                                <br>.........................................................................................................................
-                            </div>
+                                <div>
+                                    .........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                </div>
                             @endif
                         </td>
                     </tr>
@@ -195,7 +196,7 @@
                         <td></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox" {{ $not_approve == true ? 'checked' : ''}}>
+                                <input type="checkbox" {{ $not_approve == true ? 'checked' : '' }}>
                                 <label> ไม่ผ่าน</label>
                             </div>
                         </td>
@@ -208,18 +209,18 @@
                         </td>
                         <td colspan="6">
                             @if ($not_approve == true)
-                            <div>
-                               <span class="dotted">
-                                    {{$not_approve_comment}}
-                               </span>
-                            </div>
+                                <div>
+                                    <span class="dotted">
+                                        {{ $not_approve_comment }}
+                                    </span>
+                                </div>
                             @else
-                            <div>
-                                .........................................................................................................................
-                                <br>.........................................................................................................................
-                                <br>.........................................................................................................................
-                                <br>.........................................................................................................................
-                            </div>
+                                <div>
+                                    .........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                    <br>.........................................................................................................................
+                                </div>
                             @endif
                         </td>
                     </tr>
@@ -228,7 +229,10 @@
             <div>
                 <table>
                     @php
-                        $teachers = $project->confirmTeachers->unique('id_teacher')->where('confirm_status', 1)->first();
+                        $teachers = $project->confirmTeachers
+                            ->unique('id_teacher')
+                            ->where('confirm_status', 1)
+                            ->first();
                     @endphp
                     @if ($teachers)
                         <tr>

@@ -84,4 +84,12 @@
         page-break-inside: avoid;
         /* ป้องกันการแบ่งฟุตเตอร์ในหน้าต่างๆ */
     }
+
+    .signatureImage {
+        width: auto;
+        height: 1cm;
+        vertical-align: bottom;
+        margin: 10px 0px 0px 0px;
+
+    }
 </style>

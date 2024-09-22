@@ -398,10 +398,10 @@ class pdfGenerateController extends Controller
     public function pdf03ScoreGenerate($projectID)
     {
         $documentId = 3;
+        $admins = Teacher::where('user_type', 'Admin')->get();
         $project = Project::with([
             'confirmStudents' => function ($query) {
-                $query->where('id_document', 3)
-                    ->where('id_project', 11);
+                $query->where('id_document', 3);
             },
             'confirmStudents.student',
             'confirmStudents.documents',
@@ -412,8 +412,17 @@ class pdfGenerateController extends Controller
             'confirmTeachers.teacher',
             'confirmTeachers.document'
         ])->whereHas('confirmTeachers', function ($query) use ($projectID) {
-            $query->where('id_document', 3)->where('id_project', $projectID);
+            $query->where('id_document', 3)
+                ->where('id_project', $projectID);
         })
+            ->get();
+        $directors = Director::with([
+            'project',
+            'document',
+            'teacher',
+            'position'
+        ])->where('id_project', $projectID)
+            ->where('id_document', $documentId)
             ->get();
 
         $scores = Score::with([
@@ -423,14 +432,20 @@ class pdfGenerateController extends Controller
             'teacher',
             'position'
         ])->where('id_document', $documentId)
-            ->where('id_position', 3)->get();
+            ->where('id_position', 3)
+            ->get();
+
         $comments = Comment::with([
             'project',
             'document',
             'commentList',
             'teacher',
             'position'
-        ])->where('id_project', $projectID)->where('id_document', $documentId)->orderBy('created_at', 'asc')->get();
+        ])->where('id_project', $projectID)
+            ->where('id_document', $documentId)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
         $projectscore = Project::with([
             'members.course',
             'members.level',
@@ -440,8 +455,16 @@ class pdfGenerateController extends Controller
             'confirmTeachers.teacher',
             'confirmTeachers.document'
         ])->find($projectID);
-        // dd($project);
-        $pdf = Pdf::loadView('pdf.document03_score', ['projects' => $project, 'scores' => $scores, 'comments' => $comments, 'projectscore' => $projectscore]);
+
+        $pdf = Pdf::loadView('pdf.document03_score', [
+            'documentId' => $documentId,
+            'admins' => $admins,
+            'projects' => $project,
+            'directors' => $directors,
+            'scores' => $scores,
+            'comments' => $comments,
+            'projectscore' => $projectscore
+        ]);
         return  $pdf->stream('test.pdf');
     }
 }

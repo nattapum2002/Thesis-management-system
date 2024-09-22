@@ -17,20 +17,23 @@
             <div class="documentHead">
                 คณะเกษตรศาสตร์และเทคโนโลยี
                 <br>มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน วิทยาเขตสุรินทร์
-                <br>แบบรายงานผลการสอบสิ้นสุดโครงงาน
+                <br>แบบรายงานผลการสอบหัวข้อโครงงาน
                 <br>-----------------------------------
             </div>
         </header>
         @foreach ($projects as $project)
-            <div>
+            {{-- ชื่อนักศึกษา --}}
+            <div class="section">
                 <table>
-                    <tr>
-                        <td>
-                            <div>ชื่อนักศึกษา</div>
-                        </td>
-                    </tr>
-                    @foreach ($project->confirmStudents->unique('id_student') as $confirmStudent)
+                    @foreach ($project->confirmStudents->unique('id_student') as $index => $confirmStudent)
                         <tr>
+                            @if ($loop->first)
+                                <td style="width: 3.6em">
+                                    <div>ชื่อนักศึกษา</div>
+                                </td>
+                            @else
+                                <td></td>
+                            @endif
                             <td>
                                 <div>
                                     คนที่ {{ $loop->iteration }}
@@ -43,38 +46,47 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <div>
-                                    เป็นนักศึกษา หลักสูตร<span class="dotted">
-                                        {{ $confirmStudent->student->course->course }}</span> สาขาวิชา <span
-                                        class="dotted">
-                                        เทคโนโลยีคอมพิวเตอร์ </span>
-                                </div>
-                                <div>
-                                    ระดับ
-                                    <input type="checkbox"
-                                        {{ $confirmStudent->student->id_level == 1 ? 'checked' : '' }}>
-                                    <label>ประกาศนียบัตรวิชาชีพขั้นสูง</label>
+                            @if (
+                                $loop->last ||
+                                    $confirmStudent->student->id_level != $project->confirmStudents->get($index + 1)->student->id_level ||
+                                    $confirmStudent->student->id_course != $project->confirmStudents->get($index + 1)->student->id_course)
+                                <td>
+                                    <div>เป็นนักศึกษา</div>
+                                </td>
+                                <td>
+                                    <div>
+                                        หลักสูตร<span class="dotted">
+                                            {{ $confirmStudent->student->course->course }}</span> สาขาวิชา <span
+                                            class="dotted">
+                                            เทคโนโลยีคอมพิวเตอร์ </span>
+                                    </div>
+                                    <div>
+                                        ระดับ
+                                        <input type="checkbox"
+                                            {{ $confirmStudent->student->id_level == 1 ? 'checked' : '' }}>
+                                        <label>ประกาศนียบัตรวิชาชีพขั้นสูง</label>
 
-                                    <input type="checkbox"
-                                        {{ $confirmStudent->student->id_level != 1 ? 'checked' : '' }}>
-                                    <label>ปริญญาตรี
-                                        @if ($confirmStudent->student->id_level == 2)
-                                            <span class="dotted"> 4 </span>ปี
-                                        @elseif ($confirmStudent->student->id_level == 3)
-                                            <span class="dotted"> 2 - 3 </span>ปี
-                                        @else
-                                            ..... ปี
-                                        @endif
-                                    </label>
-                                    ภาค<span class="dotted"> ปกติ </span>
-                                </div>
-                            </td>
+                                        <input type="checkbox"
+                                            {{ $confirmStudent->student->id_level != 1 ? 'checked' : '' }}>
+                                        <label>ปริญญาตรี
+                                            @if ($confirmStudent->student->id_level == 2)
+                                                <span class="dotted"> 4 </span>ปี
+                                            @elseif ($confirmStudent->student->id_level == 3)
+                                                <span class="dotted"> 2 - 3 </span>ปี
+                                            @else
+                                                ..... ปี
+                                            @endif
+                                        </label>
+                                        ภาค<span class="dotted"> ปกติ </span>
+                                    </div>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </table>
             </div>
-            <div>
+            {{-- ชื่อเรื่อง --}}
+            <div class="section">
                 <table>
                     <tr>
                         <td colspan="3">
@@ -113,7 +125,8 @@
                     </tr>
                 </table>
             </div>
-            <div>
+            {{-- ผลการสอบสิ้นสุดโครงงาน --}}
+            <div class="section">
                 <div>2. ผลการสอบสิ้นสุดโครงงาน</div>
                 <table class="solid">
                     @if ($scores->isNotEmpty())
@@ -548,6 +561,7 @@
                 </table>
 
             </div>
+            {{-- สรุปผล --}}
             <div class="section">
                 <table>
                     <tr>
@@ -556,82 +570,90 @@
                         </td>
                     </tr>
                     @if ($comments->isNotEmpty())
-                        {{-- @foreach ($teachers as $teacher)
-                    @php
-                    $result = $comments->where('id_teacher', $teacher->id_teacher)->where('id_document',
-                    $documentId)->where('id_position', 3)->where('id_comment_list', 1)->first();
-                    $resultDetail = $comments->where('id_teacher', $teacher->id_teacher)->where('id_document',
-                    $documentId)->where('id_position', 3)->where('id_comment_list', 2)->first();
-                    @endphp
-                    @endforeach --}}
-                        <tr>
-                            <td style="width: 1.8em"></td>
-                            <td colspan="9">
-                                <div>
-                                    <input type="checkbox"
-                                        {{ isset($result) && $result->comment == 'ผ่าน' ? 'checked' : '' }}>
-                                    <label> ผ่าน</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td colspan="9">
-                                <div>
-                                    <input type="checkbox"
-                                        {{ isset($result) && $result->comment == 'ผ่าน/ แก้ไขใหม่' ? 'checked' : '' }}>
-                                    <label> ผ่าน/ แก้ไขใหม่</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td style="width: 1.8em"></td>
-                            <td colspan="2">
-                                <div>แก้ไข ดังนี้</div>
-                            </td>
-                            <td colspan="6">
-                                <div>
-                                    @if (isset($resultDetail) && $result->comment == 'ผ่าน/ แก้ไขใหม่')
-                                        <span class="dotted"> {{ $resultDetail->comment }} </span>
-                                    @else
-                                        .........................................................................................................................
-                                        <br>.........................................................................................................................
-                                        <br>.........................................................................................................................
-                                        <br>.........................................................................................................................
-                                    @endif
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td colspan="9">
-                                <div>
-                                    <input type="checkbox"
-                                        {{ isset($result) && $result->comment == 'ไม่ผ่าน' ? 'checked' : '' }}>
-                                    <label> ไม่ผ่าน</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td style="width: 1.8em"></td>
-                            <td colspan="2">
-                                <div>เนื่องจาก</div>
-                            </td>
-                            <td colspan="6">
-                                <div>
-                                    @if (isset($resultDetail) && $result->comment == 'ไม่ผ่าน')
-                                        <span class="dotted"> {{ $resultDetail->comment }} </span>
-                                    @else
-                                        .........................................................................................................................
-                                        <br>.........................................................................................................................
-                                        <br>.........................................................................................................................
-                                        <br>.........................................................................................................................
-                                    @endif
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach ($admins as $admin)
+                            @php
+                                $result = $comments
+                                    ->where('id_teacher', $admin->id_teacher)
+                                    ->where('id_document', $documentId)
+                                    ->where('id_position', 3)
+                                    ->where('id_comment_list', 1)
+                                    ->first();
+                                $resultDetail = $comments
+                                    ->where('id_teacher', $admin->id_teacher)
+                                    ->where('id_document', $documentId)
+                                    ->where('id_position', 3)
+                                    ->where('id_comment_list', 2)
+                                    ->first();
+                            @endphp
+                            <tr>
+                                <td style="width: 1.8em"></td>
+                                <td colspan="9">
+                                    <div>
+                                        <input type="checkbox"
+                                            {{ isset($result) && $result->comment == 'ผ่าน' ? 'checked' : '' }}>
+                                        <label> ผ่าน</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="9">
+                                    <div>
+                                        <input type="checkbox"
+                                            {{ isset($result) && $result->comment == 'ผ่าน/แก้ไขใหม่' ? 'checked' : '' }}>
+                                        <label> ผ่าน/ แก้ไขใหม่</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="width: 1.8em"></td>
+                                <td colspan="2">
+                                    <div>แก้ไข ดังนี้</div>
+                                </td>
+                                <td colspan="6">
+                                    <div>
+                                        @if (isset($resultDetail) && $result->comment == 'ผ่าน/แก้ไขใหม่')
+                                            <span class="dotted"> {{ $resultDetail->comment }} </span>
+                                        @else
+                                            .........................................................................................................................
+                                            <br>.........................................................................................................................
+                                            <br>.........................................................................................................................
+                                            <br>.........................................................................................................................
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="9">
+                                    <div>
+                                        <input type="checkbox"
+                                            {{ isset($result) && $result->comment == 'ไม่ผ่าน' ? 'checked' : '' }}>
+                                        <label> ไม่ผ่าน</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="width: 1.8em"></td>
+                                <td colspan="2">
+                                    <div>เนื่องจาก</div>
+                                </td>
+                                <td colspan="6">
+                                    <div>
+                                        @if (isset($resultDetail) && $result->comment == 'ไม่ผ่าน')
+                                            <span class="dotted"> {{ $resultDetail->comment }} </span>
+                                        @else
+                                            .........................................................................................................................
+                                            <br>.........................................................................................................................
+                                            <br>.........................................................................................................................
+                                            <br>.........................................................................................................................
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     @else
                         <tr>
                             <td style="width: 1.8em"></td>
@@ -693,73 +715,150 @@
                     @endif
                 </table>
             </div>
-            <div>
+            {{-- 4. ลงชื่อคณะกรรมการสอบ --}}
+            <div class="section">
                 <table>
-                    @php
-                        $teachers = $project->confirmTeachers
-                            ->unique('id_teacher')
-                            ->where('confirm_status', 1)
-                            ->first();
-                    @endphp
-                    @if ($teachers)
-                        <tr>
-                            {{-- @dd($teachers) --}}
-                            <td colspan="2">
-                                <div>4. ลงชื่อคณะกรรมการสอบ</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="8">
-                                <div>
-                                    ลงชื่อ ......................................... ประธานกรรมการ
-                                    <br><span class="dotted">(
-                                        {{ $teachers->where('id_position', 5)->first()->teacher->prefix . ' ' . $teachers->where('id_position', 5)->first()->teacher->name . ' ' . $teachers->where('id_position', 5)->first()->teacher->surname }}
-                                        )</span>
-                                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
-                                </div>
-                            </td>
-                        </tr>
-                        @foreach ($project->confirmTeachers->where('id_position', 6)->where('confirm_status', 1) as $directors)
+                    <tr>
+                        <td colspan="2">
+                            <div>4. ลงชื่อคณะกรรมการสอบ</div>
+                        </td>
+                    </tr>
+                    @if ($project->confirmTeachers)
+                        @foreach ($directors as $director)
+                            @php
+                                $confirm = $project->confirmTeachers
+                                    ->where('id_teacher', $director->id_teacher)
+                                    ->where('id_position', $director->id_position)
+                                    ->where('id_document', $documentId)
+                                    ->where('confirm_status', 1)
+                                    ->first();
+                            @endphp
                             <tr>
-                                <td colspan="8">
-                                    <div>
-                                        ลงชื่อ ......................................... กรรมการ
-                                        <br>(<span
-                                            class="dotted">{{ $directors->teacher->prefix . ' ' . $directors->teacher->name . ' ' . $directors->teacher->surname }}</span>
-                                        )
-                                        <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                <td style="width: 1.8em"></td>
+                                <td>
+                                    <div class="signature">
+                                        @if ($confirm)
+                                            ลงชื่อ @if ($director->teacher->signature_image)
+                                                {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $director->teacher->signature_image))) }}" alt="Signature Image"> --}}
+                                                <img class="signatureImage"
+                                                    src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $director->teacher->signature_image))); ?>"
+                                                    alt="Signature Image">
+                                            @else
+                                                .........................................
+                                            @endif
+                                            {{ $director->id_position == 7
+                                                ? $director->position->position . ' (อาจารย์ที่ปรึกษา)'
+                                                : $director->position->position }}
+                                            <br>(<span class="dotted">
+                                                {{ $director->teacher->prefix . ' ' . $director->teacher->name . ' ' . $director->teacher->surname }}
+                                            </span>)
+                                            <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
+                                            </span>เดือน<span class="dotted">
+                                                {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span
+                                                class="dotted">
+                                                {{ $confirm->created_at->thaidate('Y') }} </span>
+                                        @else
+                                            ลงชื่อ .........................................
+                                            {{ $director->id_position == 7
+                                                ? $director->position->position . ' (อาจารย์ที่ปรึกษา)'
+                                                : $director->position->position }}
+                                            <br>( ............................................................. )
+                                            <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                        @endif
                                     </div>
                                 </td>
                             </tr>
                         @endforeach
+                    @else
                         <tr>
-                            <td colspan="8">
-                                <div>
-                                    ลงชื่อ ......................................... กรรมการและเลขานุการ
-                                    (อาจารย์ที่ปรึกษา)
-                                    <br><span class="dotted">(
-                                        {{ $teachers->where('id_position', 7)->first()->teacher->prefix . ' ' . $teachers->where('id_position', 7)->first()->teacher->name . ' ' . $teachers->where('id_position', 5)->first()->teacher->surname }}
-                                        )</span>
+                            <td style="width: 1.8em"></td>
+                            <td>
+                                <div class="signature">
+                                    ลงชื่อ ......................................... ประธานกรรมการ
+                                    <br>( ............................................................. )
                                     <br>วันที่ ....... เดือน ............... พ.ศ. ............
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td style="width: 2.8em"></td>
                             <td>
                                 <div class="signature">
-                                    ลงชื่อ ......................................... อาจารย์ประจำวิชา
-                                    <br>(<span
-                                        class="dotted">{{ $teachers->where('id_position', 3)->first()->teacher->name . ' ' . $teachers->where('id_position', 3)->first()->teacher->surname }}</span>
-                                    )
+                                    ลงชื่อ ......................................... กรรมการ
+                                    <br>( ............................................................. )
+                                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="signature">
+                                    ลงชื่อ ......................................... กรรมการ
+                                    <br>( ............................................................. )
+                                    <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="signature">
+                                    ลงชื่อ ......................................... กรรมการและเลขานุการ
+                                    (อาจารย์ที่ปรึกษา)
+                                    <br>( ............................................................. )
                                     <br>วันที่ ....... เดือน ............... พ.ศ. ............
                                 </div>
                             </td>
                         </tr>
                     @endif
+                </table>
+            </div>
+            {{-- 4. ลงชื่ออาจารย์ผู้รับผิดชอบรายวิชา --}}
+            <div class="section">
+                <table>
+                    <tr>
+                        <td colspan="5">
+                            <div>5. ลงชื่ออาจารย์ผู้รับผิดชอบรายวิชา</div>
+                        </td>
+                    </tr>
+                    @foreach ($admins as $admin)
+                        @php
+                            $confirm = $project->confirmTeachers
+                                ->where('id_teacher', $admin->id_teacher)
+                                ->where('id_position', 3)
+                                ->where('id_document', $documentId)
+                                ->where('confirm_status', 1)
+                                ->first();
+                        @endphp
+                        <tr>
+                            <td style="width: 1.8em"></td>
+                            <td class="signature" colspan="4">
+                                <div>
+                                    @if ($confirm)
+                                        ลงชื่อ @if ($confirm->teacher->signature_image)
+                                            {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}" alt="Signature Image"> --}}
+                                            <img class="signatureImage"
+                                                src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))); ?>" alt="Signature Image">
+                                        @else
+                                            .........................................
+                                        @endif อาจารย์ผู้รับผิดชอบรายวิชา
+                                        <br>(<span class="dotted">
+                                            {{ $confirm->teacher->prefix . ' ' . $confirm->teacher->name . ' ' . $confirm->teacher->surname }}
+                                        </span>)
+                                        <br>วันที่<span class="dotted"> {{ $confirm->created_at->thaidate('j') }}
+                                        </span>เดือน<span class="dotted">
+                                            {{ $confirm->created_at->thaidate('F') }} </span>พ.ศ.<span class="dotted">
+                                            {{ $confirm->created_at->thaidate('Y') }} </span>
+                                    @else
+                                        ลงชื่อ ......................................... อาจารย์ผู้รับผิดชอบรายวิชา
+                                        <br>( ............................................................. )
+                                        <br>วันที่ ....... เดือน ............... พ.ศ. ............
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
         @endforeach
