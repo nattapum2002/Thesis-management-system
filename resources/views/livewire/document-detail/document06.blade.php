@@ -68,11 +68,12 @@
                                 @endforeach
                             </tr>
                         </tbody>
-                    </table>@if (session()->has('score success'))
-                    <div class="alert alert-success">
-                        {{ session('score success') }}
-                    </div>
-                @endif
+                    </table>
+                    @if (session()->has('score success'))
+                        <div class="alert alert-success">
+                            {{ session('score success') }}
+                        </div>
+                    @endif
                     <button class="btn btn-primary m-3" type="submit">บันทึกคะแนน</button>
                 </fieldset>
             </form>
@@ -104,10 +105,10 @@
                             </div>
                         </div>
                         @if (session()->has('test success'))
-                        <div class="alert alert-success">
-                            {{ session('test success') }}
-                        </div>
-                    @endif
+                            <div class="alert alert-success">
+                                {{ session('test success') }}
+                            </div>
+                        @endif
                         <button class="btn btn-primary m-3" type="submit">บันทึกผลการสอบ</button>
                     </div>
                 </form>
@@ -128,8 +129,9 @@
                                 <label for="admin_approve">อนุมัติ</label>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <input wire:model="admin_approve_fix_choice" type="checkbox" id="admin_approve_fix_choice"
-                                    x-model="admin_approve_fix_choice" x-bind:disabled="admin_approve">
+                                <input wire:model="admin_approve_fix_choice" type="checkbox"
+                                    id="admin_approve_fix_choice" x-model="admin_approve_fix_choice"
+                                    x-bind:disabled="admin_approve">
                                 <label for="admin_approve_fix_choice">ควรประผลประเมินเป็น..</label>
                                 <div x-show="admin_approve_fix_choice">
                                     <textarea class="form-control" wire:model="admin_approve_fix_choice_comment" id="admin_approve_fix_choice_comment"></textarea>
@@ -184,15 +186,14 @@
                             <textarea class="form-control" wire:model="branch_head_approve_fix_comment" id="branch_head_approve_fix_comment"></textarea>
                         </div>
                     </div>
-                </div>
-                @if (session()->has('comment success'))
+                        @if (session()->has('comment success'))
                             <div class="alert alert-success">
                                 {{ session('comment success') }}
                             </div>
                         @endif
-                <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
-            </div>
-        </form>
+                        <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
+                </div>
+            </form>
     @endif
     </fieldset>
     {{-- <fieldset>

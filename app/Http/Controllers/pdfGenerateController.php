@@ -72,8 +72,9 @@ class pdfGenerateController extends Controller
             'teacher',
             'document'
         ])->where('id_project', $projectID)
-            ->where('id_document', $documentId)
-            ->orderBy('created_at', 'asc')->get();
+            ->where('id_document', 3)
+            ->orderBy('created_at', 'asc')
+            ->get();
 
         $directors = Director::with([
             'project',
@@ -81,7 +82,8 @@ class pdfGenerateController extends Controller
             'teacher',
             'position'
         ])->where('id_project', $projectID)
-            ->where('id_document', 3)->get();
+            ->where('id_document', 3)
+            ->get();
 
         $comments = Comment::with([
             'project',
@@ -234,7 +236,7 @@ class pdfGenerateController extends Controller
             'teacher',
             'document'
         ])->where('id_project', $projectID)
-            ->where('id_document', $documentId)
+            ->where('id_document', 6)
             ->orderBy('created_at', 'asc')->get();
 
         $directors = Director::with([
@@ -243,7 +245,7 @@ class pdfGenerateController extends Controller
             'teacher',
             'position'
         ])->where('id_project', $projectID)
-            ->where('id_document', $documentId)->get();
+            ->where('id_document', 6)->get();
 
         $comments = Comment::with([
             'project',
@@ -351,7 +353,7 @@ class pdfGenerateController extends Controller
             'teacher',
             'document'
         ])->where('id_project', $projectID)
-            ->where('id_document', $documentId)
+            ->where('id_document', 6)
             ->orderBy('created_at', 'asc')->get();
 
         $directors = Director::with([
@@ -409,7 +411,7 @@ class pdfGenerateController extends Controller
             },
             'confirmTeachers.teacher',
             'confirmTeachers.document'
-        ])->whereHas('confirmTeachers', function ($query) use ($projectID)  {
+        ])->whereHas('confirmTeachers', function ($query) use ($projectID) {
             $query->where('id_document', 3)->where('id_project', $projectID);
         })
             ->get();
