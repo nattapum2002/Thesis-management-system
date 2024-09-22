@@ -148,7 +148,7 @@
                                 <div style="text-align: left;">1. บุคลิก ท่าทาง การวางตัวและความเชื่อมั่นในตนเอง</div>
                             </td>
                             <td>
-                                <div>5</div>
+                                <div>10</div>
                             </td>
                             @foreach ($projectscore->members as $member)
                                 @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 20) as $score)
@@ -192,7 +192,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div>5</div>
+                                <div>10</div>
                             </td>
                             @foreach ($projectscore->members as $member)
                                 @foreach ($scores->where('id_student', $member->id_student)->where('id_comment_list', 23) as $score)
