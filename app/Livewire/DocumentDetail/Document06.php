@@ -160,6 +160,7 @@ class Document06 extends Component
                         'id_document' => $this->id_document,
                         'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                         'id_project' => $this->id_project,
+                        'id_position' => 3,
                     ], [
                         'confirm_status' => false
                     ]);
