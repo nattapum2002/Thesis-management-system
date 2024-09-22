@@ -74,7 +74,7 @@
                             {{ session('score success') }}
                         </div>
                     @endif
-                    <button class="btn btn-primary m-3" type="submit">บันทึกคะแนน</button>
+                    <button class="btn btn-success m-3" type="submit">บันทึกคะแนน</button>
                 </fieldset>
             </form>
             <fieldset>
@@ -109,7 +109,7 @@
                                 {{ session('test success') }}
                             </div>
                         @endif
-                        <button class="btn btn-primary m-3" type="submit">บันทึกผลการสอบ</button>
+                        <button class="btn btn-success m-3" type="submit">บันทึกผลการสอบ</button>
                     </div>
                 </form>
             </fieldset>
@@ -132,7 +132,7 @@
                                 <input wire:model="admin_approve_fix_choice" type="checkbox"
                                     id="admin_approve_fix_choice" x-model="admin_approve_fix_choice"
                                     x-bind:disabled="admin_approve">
-                                <label for="admin_approve_fix_choice">ควรประผลประเมินเป็น..</label>
+                                <label for="admin_approve_fix_choice">ควรปรับผลประเมินเป็น..</label>
                                 <div x-show="admin_approve_fix_choice">
                                     <textarea class="form-control" wire:model="admin_approve_fix_choice_comment" id="admin_approve_fix_choice_comment"></textarea>
                                 </div>
@@ -151,7 +151,7 @@
                                 {{ session('comment success') }}
                             </div>
                         @endif
-                        <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
+                        <button class="btn btn-success m-3" type="submit">บันทึกความเห็น</button>
                     </div>
                 </form>
             </fieldset>
@@ -174,7 +174,7 @@
                             <input wire:model="branch_head_approve_fix_choice" type="checkbox"
                                 id="branch_head_approve_fix_choice" x-model="branch_head_approve_fix_choice"
                                 x-bind:disabled="branch_head_approve_choice">
-                            <label for="branch_head_approve_fix_choice">ควรประผลประเมินเป็น</label>
+                            <label for="branch_head_approve_fix_choice">ควรปรับผลประเมินเป็น</label>
                             <div x-show="branch_head_approve_fix_choice">
                                 <textarea class="form-control" wire:model="branch_head_approve_fix_choice_comment"
                                     id="branch_head_approve_fix_choice_comment"></textarea>
@@ -194,13 +194,13 @@
                             {{ session('comment success') }}
                         </div>
                     @endif
-                    <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
+                    <button class="btn btn-success m-3" type="submit">บันทึกความเห็น</button>
                 </div>
             </form>
     @endif
     </fieldset>
     {{-- <fieldset>
-        <button class="btn btn-primary" type="submit">บันทึก</button>
+        <button class="btn btn-success" type="submit">บันทึก</button>
         <a href="{{ route('pdf.stream') }}" target="_blank">View PDF</a>
     </fieldset> --}}
     </section>

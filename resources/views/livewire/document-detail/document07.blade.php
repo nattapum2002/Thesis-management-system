@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
+                            <button class="btn btn-success m-3" type="submit">บันทึกความเห็น</button>
                         </div>
                     </form>
                 @elseif (Auth::guard('teachers')->user()->user_type == 'Branch head')
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary m-3" type="submit">บันทึกความเห็น</button>
+                            <button class="btn btn-success m-3" type="submit">บันทึกความเห็น</button>
                         </div>
                     </form>
                 @endif
