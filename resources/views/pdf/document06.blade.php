@@ -609,7 +609,7 @@
                         <td></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox" {{ $result->comment == 'ผ่าน/ แก้ไขใหม่' ? 'checked' : '' }}>
+                                <input type="checkbox" {{ $result->comment == 'ผ่าน/แก้ไขใหม่' ? 'checked' : '' }}>
                                 <label> ผ่าน/ แก้ไขใหม่</label>
                             </div>
                         </td>
@@ -622,7 +622,7 @@
                         </td>
                         <td colspan="6">
                             <div>
-                                @if (isset($resultDetail) && $result->comment == 'ผ่าน/ แก้ไขใหม่')
+                                @if ($result->comment == 'ผ่าน/แก้ไขใหม่')
                                     <span class="dotted"> {{ $resultDetail->comment }} </span>
                                 @else
                                     .........................................................................................................................
@@ -637,8 +637,7 @@
                         <td></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox"
-                                    {{ isset($result) && $result->comment == 'ไม่ผ่าน' ? 'checked' : '' }}>
+                                <input type="checkbox" {{ $result->comment == 'ไม่ผ่าน' ? 'checked' : '' }}>
                                 <label> ไม่ผ่าน</label>
                             </div>
                         </td>
@@ -651,7 +650,7 @@
                         </td>
                         <td colspan="6">
                             <div>
-                                @if (isset($resultDetail) && $result->comment == 'ไม่ผ่าน')
+                                @if ($result->comment == 'ไม่ผ่าน')
                                     <span class="dotted"> {{ $resultDetail->comment }} </span>
                                 @else
                                     .........................................................................................................................
