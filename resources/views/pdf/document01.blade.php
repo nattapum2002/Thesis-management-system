@@ -397,7 +397,6 @@
                         ->where('id_position', 3)
                         ->where('id_comment_list', 2);
                 @endphp
-
                 @if ($adminComments->isNotEmpty() || $adminOtherComment->isNotEmpty())
                     <tr>
                         <td style="width: 1.8em"></td>
@@ -428,7 +427,7 @@
                         <td>
                             <div>
                                 <input type="checkbox"
-                                    {{ $adminComments->where('comment', 'มีคุณวุฒิทางการศึกษาไม่เป็นไปตามเกณฑ์')->isNotEmpty() ? 'checked' : '' }}>
+                                    {{ $adminComments->where('comment', 'มีวุฒิการศึกษาไม่เป็นไปตามเกณฑ์')->isNotEmpty() ? 'checked' : '' }}>
                                 <label> มีคุณวุฒิทางการศึกษาไม่เป็นไปตามเกณฑ์</label>
                             </div>
                         </td>
@@ -439,7 +438,7 @@
                         <td>
                             <div>
                                 <input type="checkbox"
-                                    {{ $adminComments->where('comment', 'มีจำนวนนักศึกษาที่รับผิดชอบเกินเกณฑ์ที่กำหนดไว้')->isNotEmpty() ? 'checked' : '' }}>
+                                    {{ $adminComments->where('comment', 'มีจำนวนนักศึกษาที่รับผิดชอบเกินเกณฑ์')->isNotEmpty() ? 'checked' : '' }}>
                                 <label> มีจำนวนนักศึกษาที่รับผิดชอบเกินเกณฑ์ที่กำหนดไว้</label>
                             </div>
                         </td>
@@ -564,12 +563,14 @@
                         ->where('id_teacher', $branchHead->id_teacher)
                         ->where('id_document', $documentId)
                         ->where('id_position', 4)
-                        ->where('id_comment_list', 1);
+                        ->where('id_comment_list', 1)
+                        ->first();
                     $branchHeadOtherComment = $comments
                         ->where('id_teacher', $branchHead->id_teacher)
                         ->where('id_document', $documentId)
                         ->where('id_position', 4)
-                        ->where('id_comment_list', 2);
+                        ->where('id_comment_list', 2)
+                        ->first();
                     $confirm = $projects->confirmTeachers
                         ->where('id_teacher', $branchHead->id_teacher)
                         ->where('id_position', 4)
@@ -578,21 +579,21 @@
                         ->first();
                 @endphp
 
-                @if ($branchHeadComments->isNotEmpty() || $branchHeadOtherComment->isNotEmpty() || $confirm)
+                @if ($branchHeadComments || $branchHeadOtherComment || $confirm)
                     <tr>
                         <td style="width: 1.8em"></td>
                         <td>
                             <div>
                                 <input type="checkbox"
-                                    {{ $branchHeadComments->first()->comment == 'อนุมัติ' ? 'checked' : '' }}>
+                                    {{ $branchHeadComments->comment == 'อนุมัติ' ? 'checked' : '' }}>
                                 <label> อนุมัติ</label>
                             </div>
                             <div>
                                 <input type="checkbox"
-                                    {{ $branchHeadComments->first()->comment == 'ไม่อนุมัติ' ? 'checked' : '' }}>
+                                    {{ $branchHeadComments->comment == 'ไม่อนุมัติ' ? 'checked' : '' }}>
                                 <label> ไม่อนุมัติ</label>
-                                @if ($branchHeadComments->first()->comment == 'ไม่อนุมัติ')
-                                    เนื่องจาก<span class="dotted"> {{ $branchHeadOtherComment->first()->comment }}
+                                @if ($branchHeadComments->comment == 'ไม่อนุมัติ')
+                                    เนื่องจาก<span class="dotted"> {{ $branchHeadOtherComment->comment }}
                                     </span>
                                 @else
                                     เนื่องจาก

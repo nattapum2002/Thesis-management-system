@@ -100,5 +100,11 @@ class Comment_listSeeder extends Seeder
         DB::table('comment_lists')->insert([
             'comment_list' => '6.ความพร้อมและความตรงต่อเวลา'
         ]);
+        DB::table('comment_lists')->insert([
+            'comment_list' => 'สรุปผลการสอบ(ตัวเลือก)'
+        ]);
+        DB::table('comment_lists')->insert([
+            'comment_list' => 'สรุปผลการสอบ(ข้อเสนอ)'
+        ]);
     }
 }

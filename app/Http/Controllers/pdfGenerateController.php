@@ -182,7 +182,7 @@ class pdfGenerateController extends Controller
             'teacher',
             'document'
         ])->where('id_project', $projectID)
-            ->where('id_document', $documentId)
+            ->where('id_document', 3)
             ->orderBy('created_at', 'asc')->get();
 
         $directors = Director::with([

@@ -292,7 +292,7 @@
                                         ' ' .
                                         $confirm->teacher->name .
                                         '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
                                         $confirm->teacher->surname }}
                                 </span>)
                                 <br>วันที่<span class="dotted"> {{ thaidate('j', $confirm->created_at) }} </span>
@@ -444,7 +444,7 @@
                         <td>
                             <div>
                                 <input type="checkbox"
-                                    {{ $adminComments->first()->comment == 'ให้ปรับปรุงแก้ไขอีกครั้ง' ? 'checked' : '' }}>
+                                    {{ $adminComments->first()->comment != 'อนุมัติ' ? 'checked' : '' }}>
                                 <label> ให้ปรับปรุงแก้ไขอีกครั้ง</label>
                             </div>
                         </td>
@@ -457,7 +457,7 @@
                         </td>
                         <td colspan="3">
                             <div>
-                                @if ($adminComments->first()->comment == 'ให้ปรับปรุงแก้ไขอีกครั้ง')
+                                @if ($adminComments->first()->comment != 'อนุมัติ')
                                     <span class="dotted"> {{ $adminOtherComment->first()->comment }} </span>
                                 @else
                                     .........................................................................................................................
@@ -543,14 +543,12 @@
                         ->where('id_document', $documentId)
                         ->where('id_position', 4)
                         ->where('id_comment_list', 1)
-                        ->sortBy('created_at')
-                        ->first();
+                        ->sortBy('created_at');
                     $branchHeadOtherComment = $comments
                         ->where('id_teacher', $branchHead->id_teacher)
                         ->where('id_document', $documentId)
                         ->where('id_position', 4)
-                        ->where('id_comment_list', 2)
-                        ->first();
+                        ->where('id_comment_list', 2);
                     $confirm = $projects->confirmTeachers
                         ->where('id_teacher', $branchHead->id_teacher)
                         ->where('id_position', 4)
@@ -559,20 +557,20 @@
                         ->first();
                 @endphp
 
-                @if ($branchHeadComments || $branchHeadOtherComment || $confirm)
+                @if ($branchHeadComments->isNotEmpty() || $branchHeadOtherComment->isNotEmpty() || $confirm)
                     <tr>
                         <td style="width: 1.8em"></td>
                         <td colspan="2">
                             <div>
                                 <input type="checkbox"
-                                    {{ $branchHeadComments->comment == 'อนุมัติ' ? 'checked' : '' }}>
+                                    {{ $branchHeadComments->where('comment', 'อนุมัติ')->isNotEmpty() ? 'checked' : '' }}>
                                 <label> อนุมัติ</label>
                             </div>
                         </td>
                         <td>
                             <div>
                                 <input type="checkbox"
-                                    {{ $branchHeadComments->comment == 'ให้ปรับปรุงแก้ไขอีกครั้ง' ? 'checked' : '' }}>
+                                    {{ $branchHeadComments->where('comment', 'ให้แก้ไขอีกครั้ง')->isNotEmpty() ? 'checked' : '' }}>
                                 <label> ให้ปรับปรุงแก้ไขอีกครั้ง</label>
                             </div>
                         </td>
@@ -585,8 +583,8 @@
                         </td>
                         <td colspan="3">
                             <div>
-                                @if ($branchHeadComments->comment == 'ให้ปรับปรุงแก้ไขอีกครั้ง')
-                                    <span class="dotted"> {{ $branchOtherHeadComments->comment }} </span>
+                                @if ($branchHeadComments->where('comment', 'ให้แก้ไขอีกครั้ง')->isNotEmpty())
+                                    <span class="dotted"> {{ $branchHeadOtherComment->first()->comment }} </span>
                                 @else
                                     .........................................................................................................................
                                     <br>.........................................................................................................................

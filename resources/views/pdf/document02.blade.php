@@ -333,7 +333,7 @@
                             ในวันที่<span class="dotted"> {{ thaidate('j', $examSchedule->exam_day) }} </span>
                             เดือน<span class="dotted"> {{ thaidate('F', $examSchedule->exam_day) }} </span>
                             พ.ศ.<span class="dotted"> {{ thaidate('Y', $examSchedule->exam_day) }} </span>
-                            เวลา<span class="dotted"> {{ $examSchedule->exam_time }} </span>น.
+                            เวลา<span class="dotted"> {{ thaidate('H:i', $examSchedule->exam_time) }} </span>น.
                         </div>
                     </td>
                 </tr>
