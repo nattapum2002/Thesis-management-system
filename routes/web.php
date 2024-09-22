@@ -126,8 +126,9 @@ Route::prefix('Admin')->group(function () {
     Route::view('/Menu-thesis', 'admin.menu_thesis_login')->name('admin.menu.thesis');
     Route::view('/Menu-thesis/{thesisId}', 'admin.detail_thesis_login')->name('admin.detail.thesis');
 
-    Route::view('/Approve-thesis', 'admin.approve_thesis')->name('admin.approve.thesis');
-    Route::view('/Approve-thesis/{thesisId}', 'admin.detail_approve_thesis')->name('admin.detail.approve.thesis');
+    Route::view('/Manage-thesis', 'admin.approve_thesis')->name('admin.approve.thesis');
+    Route::view('/Manage-thesis/Add', 'admin.add_thesis')->name('admin.add.thesis');
+    Route::view('/Manage-thesis/Edit/{thesisId}', 'admin.detail_approve_thesis')->name('admin.detail.approve.thesis');
 
     Route::view('/Manage-project', 'admin.manage_project')->name('admin.manage.project');
     Route::view('/Manage-project/{projectId}', 'admin.detail_project')->name('admin.detail.project');

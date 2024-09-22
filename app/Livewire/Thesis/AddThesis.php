@@ -125,7 +125,7 @@ class AddThesis extends Component
             'add_other_type' => 'required_if:add_type,อื่นๆ',
             'add_status' => 'required',
             'add_thesis_image' => 'nullable|image|max:2048',
-            'add_thesis_file' => 'nullable|mimes:pdf',
+            'add_thesis_file' => 'required|mimes:pdf',
         ];
     }
 
@@ -140,7 +140,7 @@ class AddThesis extends Component
             'add_status.required' => 'กรุณาเลือกสถานะ',
             'add_thesis_image.image' => 'กรุณาเลือกไฟล์ภาพ',
             'add_thesis_image.max' => 'กรุณาเลือกไฟล์ภาพไม่เกิน 2MB',
-            // 'add_thesis_file.required' => 'กรุณาเลือกไฟล์',
+            'add_thesis_file.required' => 'กรุณาเลือกไฟล์',
             'add_thesis_file.mimes' => 'กรุณาเลือกไฟล์ pdf',
         ];
     }
@@ -157,15 +157,35 @@ class AddThesis extends Component
         $this->path_thesis_image = $this->uploadFile('add_thesis_image', 'thesis_image');
         $this->path_thesis_file = $this->uploadFile('add_thesis_file', 'thesis_file');
 
+        if (Auth::guard('teachers')->check()) {
+            Project::create([
+                'project_name_th' => $this->add_project,
+                'project_name_en' => $this->add_project,
+                'project_status' => 'Import',
+                'created_by' => null,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+            $id_project = Project::where('project_name_th', $this->add_project)
+                ->where('project_name_en', $this->add_project)
+                ->where('project_status', 'Import')
+                ->value('id_project');
+            $title = $this->add_project;
+        } else {
+            $id_project = $this->add_project;
+            $title = Project::where('id_project', $this->add_project)->value('project_name_th');
+        }
+
         Dissertation_article::create([
-            'title' => Project::where('id_project', $this->add_project)->value('project_name_th'),
+            'title' => $title,
             'details' => $this->add_detail,
             'thesis_image' => $this->path_thesis_image,
             'file_dissertation' => $this->path_thesis_file,
             'year_published' => $this->add_year,
             'type' => $this->add_type === 'อื่นๆ' ? $this->add_other_type : $this->add_type,
             'status' => $this->add_status,
-            'id_project' => $this->add_project,
+            'id_project' => $id_project,
             'created_by' => null, //Auth::guard('members')->user()->id_student,
             'created_at' => now(),
             'updated_at' => now()
@@ -178,16 +198,26 @@ class AddThesis extends Component
     public function cancel()
     {
         $this->reset();
-        return redirect()->route('member.manage.thesis');
+        if (Auth::guard('teachers')->check()) {
+            return redirect()->route('admin.approve.thesis');
+        } else {
+            return redirect()->route('member.manage.thesis');
+        }
     }
 
     public function render()
     {
-        $projects = Project::with('membersProject')
-            ->whereHas('membersProject', fn($query) => $query->where('id_student', Auth::guard('members')->user()->id_student))
-            ->get();
-        $types = Dissertation_article::select('type')->where('status', '1')->distinct()->get();
+        if (Auth::guard('teachers')->check()) {
+            $types = Dissertation_article::select('type')->where('status', '1')->distinct()->get();
 
-        return view('livewire.thesis.add-thesis', ['projects' => $projects, 'types' => $types]);
+            return view('livewire.thesis.add-thesis', ['types' => $types]);
+        } else {
+            $projects = Project::with('membersProject')
+                ->whereHas('membersProject', fn($query) => $query->where('id_student', Auth::guard('members')->user()->id_student))
+                ->get();
+            $types = Dissertation_article::select('type')->where('status', '1')->distinct()->get();
+
+            return view('livewire.thesis.add-thesis', ['projects' => $projects, 'types' => $types]);
+        }
     }
 }

@@ -29,6 +29,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header d-flex justify-content-end">
+                    <a href="{{ route('admin.add.thesis') }}" class="btn btn-success">เพิ่มบทความ</a>
+                </div>
                 <div class="card-body table-responsive p-0">
                     <table class="table text-nowrap table-striped">
                         <thead>

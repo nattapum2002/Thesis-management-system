@@ -18,45 +18,228 @@
                     <tbody>
                         <tr>
                             <th>รูปภาพ</th>
-                            <td>
-                                @if ($thesis->thesis_image)
-                                    {{-- Thesis-management-system/storage/app/public/ --}}
-                                    <img wire:live src="{{ asset('storage/' . $thesis->thesis_image) }}"
-                                        alt="{{ $thesis->title }}"
-                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                @else
-                                    <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
-                                        alt=""
-                                        style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                @endif
-                            </td>
-                            <td></td>
+                            @if ($toggle['thesis_image'])
+                                <td>
+                                    <div class="input-field">
+                                        <input class="form-control" wire:model="thesis_image" type="file"
+                                            placeholder="เลือกไฟล์" required>
+                                    </div>
+                                    @error('thesis_image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn btn-success"
+                                            wire:click="save('thesis_image')">บันทึก</button>
+                                        <button class="btn btn-danger"
+                                            wire:click="cancel('thesis_image')">ยกเลิก</button>
+                                    </div>
+                                </td>
+                            @else
+                                <td>
+                                    @if ($thesis->thesis_image)
+                                        {{-- thesis-management-system/storage/app/public/ --}}
+                                        <img wire:live src="{{ asset('storage/' . $thesis->thesis_image) }}"
+                                            alt="{{ $thesis->title }}"
+                                            style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                    @else
+                                        <img src="{{ 'https://picsum.photos/id/' . rand(1, 1084) . '/1000/1000' }}"
+                                            alt=""
+                                            style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn btn-orange" wire:click="edit('thesis_image')"><i
+                                                class='bx bx-edit'></i></button>
+                                    </div>
+                                </td>
+                            @endif
                         </tr>
                         <tr>
                             <th>ชื่อบทความ</th>
-                            <td>{{ $thesis->title }}</td>
-                            <td></td>
+                            @if ($toggle['title'])
+                                <td>
+                                    <div class="input-group">
+                                        <select class="form-select" wire:model.live="title">
+                                            <option selected>ชี่อบทความ</option>
+                                            @foreach ($projects as $project)
+                                                <option value="{{ $project->id_project }}">
+                                                    {{ $project->project_name_th }}
+                                                </option>
+                                            @endforeach
+                                            <option value="อื่นๆ">อื่นๆ</option>
+                                        </select>
+                                        @if ($this->title == 'อื่นๆ')
+                                            <input class="form-control" wire:model="other_title" type="text"
+                                                placeholder="กรุณากรอกชื่อบทความ" required>
+                                        @endif
+                                    </div>
+                                    @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    @error('other_title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn btn-success" wire:click="save('title')">บันทึก</button>
+                                        <button class="btn btn-danger" wire:click="cancel('title')">ยกเลิก</button>
+                                    </div>
+                                </td>
+                            @else
+                                <td>{{ $thesis->title }}</td>
+                                <td>
+                                    <button class="btn btn-orange" wire:click="edit('title')"><i
+                                            class='bx bx-edit'></i></button>
+                                </td>
+                            @endif
                         </tr>
                         <tr>
-                            <th>รายละเอียด</th>
-                            <td>{{ $thesis->details }}</td>
-                            <td></td>
+                            <th>บทคัดย่อ</th>
+                            @if ($toggle['details'])
+                                <td>
+                                    <div class="input-field">
+                                        <textarea class="form-control" wire:model="details" type="text" placeholder="บทคัดย่อ" required></textarea>
+                                    </div>
+                                    @error('details')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn btn-success" wire:click="save('details')">บันทึก</button>
+                                        <button class="btn btn-danger" wire:click="cancel('details')">ยกเลิก</button>
+                                    </div>
+                                </td>
+                            @else
+                                <td>{{ $thesis->details }}</td>
+                                <td>
+                                    <button class="btn btn-orange" wire:click="edit('details')"><i
+                                            class='bx bx-edit'></i></button>
+                                </td>
+                            @endif
                         </tr>
                         <tr>
                             <th>ปีการศึกษา</th>
-                            <td>{{ thaidate('Y', $thesis->year_published) }}</td>
-                            <td></td>
+                            @if ($toggle['year_published'])
+                                <td>
+                                    <div class="input-field">
+                                        <select class="form-select" wire:model='year_published' required>
+                                            <option selected>กรุณาเลือกปีการศึกษา</option>
+                                            @for ($year = 0; $year <= 20; $year++)
+                                                <option value="{{ now()->subYear($year)->format('Y') }}">
+                                                    {{ now()->subYear($year)->thaidate('Y') }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    @error('year_published')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn btn-success"
+                                            wire:click="save('year_published')">บันทึก</button>
+                                        <button class="btn btn-danger"
+                                            wire:click="cancel('year_published')">ยกเลิก</button>
+                                    </div>
+                                </td>
+                            @else
+                                <td>{{ thaidate('Y', $thesis->year_published) }}</td>
+                                <td>
+                                    <button class="btn btn-orange" wire:click="edit('year_published')"><i
+                                            class='bx bx-edit'></i></button>
+                                </td>
+                            @endif
                         </tr>
                         <tr>
                             <th>ประเภทบทความ</th>
-                            <td>{{ $thesis->type }}</td>
-                            <td></td>
+                            @if ($toggle['type'])
+                                <td>
+                                    <div class="input-group">
+                                        <select class="form-select" wire:model.live="type">
+                                            <option selected>ประเภทบทความ</option>
+                                            @foreach ($types as $type)
+                                                <option value="{{ $type->type }}">{{ $type->type }}</option>
+                                            @endforeach
+                                            <option value="อื่นๆ">อื่นๆ</option>
+                                        </select>
+                                        @if ($this->type == 'อื่นๆ')
+                                            <input class="form-control" wire:model="other_type" type="text"
+                                                placeholder="กรุณากรอกประเภทบทความ">
+                                        @endif
+                                    </div>
+                                    @error('type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    @error('other_type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn btn-success" wire:click="save('type')">บันทึก</button>
+                                        <button class="btn btn-danger" wire:click="cancel('type')">ยกเลิก</button>
+                                    </div>
+                                </td>
+                            @else
+                                <td>{{ $thesis->type }}</td>
+                                <td>
+                                    <button class="btn btn-orange" wire:click="edit('type')"><i
+                                            class='bx bx-edit'></i></button>
+                                </td>
+                            @endif
                         </tr>
                         <tr>
                             <th>ไฟล์บทความ</th>
-                            <td>
-                                {{ $thesis->file_dissertation ?? '<p class="text-danger">ไม่มีไฟล์</p>' }}
-                            </td>
+                            @if ($toggle['file_dissertation'])
+                                <td>
+                                    <div class="input-field">
+                                        <input class="form-control" wire:model="file_dissertation" type="file"
+                                            placeholder="เลือกไฟล์" required>
+                                    </div>
+                                    @error('file_dissertation')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn btn-success"
+                                            wire:click="save('file_dissertation')">บันทึก</button>
+                                        <button class="btn btn-danger"
+                                            wire:click="cancel('file_dissertation')">ยกเลิก</button>
+                                    </div>
+                                </td>
+                            @else
+                                <td>
+                                    @if ($thesis->file_dissertation)
+                                        {{-- Thesis-management-system/storage/app/public/ --}}
+                                        <a href="{{ url('storage/' . $thesis->file_dissertation) }}"
+                                            target="_blank">{{ basename($thesis->file_dissertation) }}</a>
+                                    @else
+                                        <p class="text-danger">ไม่มีไฟล์</p>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn btn-orange" wire:click="edit('file_dissertation')"><i
+                                                class='bx bx-edit'></i></button>
+                                    </div>
+                                </td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <th>สร้างเมื่อ</th>
+                            <td>{{ thaidate('H:i น. วันl ที่ j F พ.ศ.Y', $thesis->created_at) }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>แก่ไขล่าสุดเมื่อ</th>
+                            <td>{{ thaidate('H:i น. วันl ที่ j F พ.ศ.Y', $thesis->updated_at) }}</td>
                             <td></td>
                         </tr>
                         <tr>
@@ -64,15 +247,15 @@
                             @if ($toggle['status'])
                                 <td>
                                     <div class="input-field">
-                                        <select class="form-select" wire:model.live="status">
+                                        <select class="form-select" wire:model="status">
                                             <option selected>สถานะบทความ</option>
                                             <option value="1">แสดง</option>
                                             <option value="0">ซ่อน</option>
                                         </select>
-                                        @error('status')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('status')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </td>
                                 <td>
                                     <div class="button-container">
@@ -82,9 +265,11 @@
                                 </td>
                             @else
                                 <td>
-                                    <p class="{{ $thesis->status == 1 ? 'text-success' : 'text-danger' }}">
-                                        {{ $thesis->status == 1 ? 'แสดง' : 'ซ่อน' }}
-                                    </p>
+                                    @if ($thesis->status == 1)
+                                        <p class="text-success">แสดง</p>
+                                    @else
+                                        <p class="text-danger">ซ่อน</p>
+                                    @endif
                                 </td>
                                 <td>
                                     <button class="btn btn-orange" wire:click="edit('status')"><i

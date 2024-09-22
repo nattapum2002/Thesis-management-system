@@ -214,7 +214,7 @@
                                                 <small>{{ $exam_schedule->project->project_name_en }}</small>
                                             </td>
                                             <td>
-                                                @foreach ($directors->where('id_project', $exam_schedule->id_project)->sortBy('id_position') as $director)
+                                                @foreach ($directors->where('id_project', $exam_schedule->id_project)->where('id_document', $exam_schedule->id_document)->sortBy('id_position') as $director)
                                                     @php
                                                         $name =
                                                             $director->teacher->prefix .

@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('title')
-    ซ่อน-แสดง บทความของผู้ใช้
+    จัดการบทความปริญญานิพนธ์
 @endsection
 @section('navigation')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
