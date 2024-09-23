@@ -286,8 +286,8 @@
                         <td class="signature">
                             <div>
                                 ลงชื่อ @if ($confirm->teacher->signature_image)
-                                    {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}" alt="Signature Image"> --}}
-                                    <img class="signatureImage" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))); ?>"
+                                    <img class="signatureImage"
+                                        src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}"
                                         alt="Signature Image">
                                 @else
                                     .........................................
@@ -298,7 +298,7 @@
                                         ' ' .
                                         $confirm->teacher->name .
                                         '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
                                         $confirm->teacher->surname }}
                                 </span>)
                                 <br>วันที่<span class="dotted"> {{ thaidate('j', $confirm->created_at) }} </span>
@@ -349,8 +349,8 @@
                         <td class="signature">
                             <div>
                                 ลงชื่อ @if ($confirm->teacher->signature_image)
-                                    {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}" alt="Signature Image"> --}}
-                                    <img class="signatureImage" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))); ?>"
+                                    <img class="signatureImage"
+                                        src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}"
                                         alt="Signature Image">
                                 @else
                                     .........................................
@@ -484,8 +484,8 @@
                             <div>
                                 @if ($confirm)
                                     ลงชื่อ @if ($confirm->teacher->signature_image)
-                                        {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}" alt="Signature Image"> --}}
-                                        <img class="signatureImage" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))); ?>"
+                                        <img class="signatureImage"
+                                            src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}"
                                             alt="Signature Image">
                                     @else
                                         .........................................
@@ -616,8 +616,8 @@
                             <div>
                                 @if ($confirm)
                                     ลงชื่อ @if ($confirm->teacher->signature_image)
-                                        {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}" alt="Signature Image"> --}}
-                                        <img class="signatureImage" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))); ?>"
+                                        <img class="signatureImage"
+                                            src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}"
                                             alt="Signature Image">
                                     @else
                                         .........................................

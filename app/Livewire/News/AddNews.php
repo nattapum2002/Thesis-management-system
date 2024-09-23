@@ -122,7 +122,7 @@ class AddNews extends Component
         $this->validate();
 
         $this->path_news_image = $this->add_news_image
-            ? $this->add_news_image->store('news_image', 'public')
+            ? $this->add_news_image->storeAs('news_image', $this->add_news_image->getClientOriginalName(), 'public')
             : null;
 
         News::create([

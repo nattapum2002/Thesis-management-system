@@ -224,10 +224,10 @@ class EditAndDetailThesis extends Component
         $this->validate();
 
         if ($index == 'thesis_image') {
-            $this->path_thesis_image = $this->thesis_image->store('thesis_image', 'public');
+            $this->path_thesis_image = $this->thesis_image->storeAs('thesis_image', $this->thesis_image->getClientOriginalName(), 'public');
             Dissertation_article::where('id_dissertation_article', $this->thesisId)->update([$index => $this->path_thesis_image], ['updated_at' => now()]);
         } else if ($index == 'thesis_file') {
-            $this->path_thesis_file = $this->file_dissertation->store('thesis_file', 'public');
+            $this->path_thesis_file = $this->file_dissertation->storeAs('thesis_file', $this->file_dissertation->getClientOriginalName(), 'public');
             Dissertation_article::where('id_dissertation_article', $this->thesisId)->update([$index => $this->path_thesis_file], ['updated_at' => now()]);
         } else if ($index == 'title') {
             if ($this->title == 'อื่นๆ') {

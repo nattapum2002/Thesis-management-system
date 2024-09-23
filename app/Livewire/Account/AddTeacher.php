@@ -200,8 +200,8 @@ class AddTeacher extends Component
         $this->validate();
 
         Teacher::create([
-            'teacher_image' => $this->add_teacher_image ? $this->add_teacher_image->store('teacher_image', 'public') : null,
-            'signature_image' => $this->add_signature_image ? $this->add_signature_image->store('signature_image', 'public') : null,
+            'teacher_image' => $this->add_teacher_image ? $this->add_teacher_image->storeAs('teacher_image', $this->add_teacher_image->getClientOriginalName(), 'public') : null,
+            'signature_image' => $this->add_signature_image ? $this->add_signature_image->storeAs('signature_image', $this->add_signature_image->getClientOriginalName(), 'public') : null,
             'prefix' => $this->add_prefix == 'อื่นๆ' ? $this->add_other_prefix : $this->add_prefix,
             'name' => $this->add_name,
             'surname' => $this->add_surname,

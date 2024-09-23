@@ -155,10 +155,10 @@ class EditAndDetailTeacher extends Component
             $this->teacher->password = Hash::make($this->new_password);
             $this->teacher->save();
         } else if ($index == 'teacher_image') {
-            $this->path_teacher_image = $this->teacher_image->store('teacher_image', 'public');
+            $this->path_teacher_image = $this->teacher_image->storeAs('teacher_image', $this->teacher_image->getClientOriginalName(), 'public');
             Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->path_teacher_image], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         } else if ($index == 'signature_image') {
-            $this->path_signature_image = $this->signature_image->store('signature_image', 'public');
+            $this->path_signature_image = $this->signature_image->storeAs('signature_image', $this->signature_image->getClientOriginalName(), 'public');
             Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->path_signature_image], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         } else if ($index == 'prefix' && $this->prefix == 'อื่นๆ') {
             Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->other_prefix], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
