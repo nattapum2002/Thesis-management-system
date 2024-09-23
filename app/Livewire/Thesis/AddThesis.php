@@ -147,7 +147,7 @@ class AddThesis extends Component
 
     protected function uploadFile($field, $path)
     {
-        return $this->$field ? $this->$field->store($path, 'public') : null;
+        return $this->$field ? $this->$field->storeAs($path, $this->$field->getClientOriginalName(), 'public') : null;
     }
 
     public function add()

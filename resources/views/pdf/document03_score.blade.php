@@ -739,9 +739,8 @@
                                     <div class="signature">
                                         @if ($confirm)
                                             ลงชื่อ @if ($director->teacher->signature_image)
-                                                {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $director->teacher->signature_image))) }}" alt="Signature Image"> --}}
                                                 <img class="signatureImage"
-                                                    src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $director->teacher->signature_image))); ?>"
+                                                    src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $director->teacher->signature_image))) }}"
                                                     alt="Signature Image">
                                             @else
                                                 .........................................
@@ -837,9 +836,9 @@
                                 <div>
                                     @if ($confirm)
                                         ลงชื่อ @if ($confirm->teacher->signature_image)
-                                            {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}" alt="Signature Image"> --}}
                                             <img class="signatureImage"
-                                                src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))); ?>" alt="Signature Image">
+                                                src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $confirm->teacher->signature_image))) }}"
+                                                alt="Signature Image">
                                         @else
                                             .........................................
                                         @endif อาจารย์ผู้รับผิดชอบรายวิชา

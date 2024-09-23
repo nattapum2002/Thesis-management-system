@@ -272,8 +272,8 @@
                             <td class="signature">
                                 @if ($confirm)
                                     ลงชื่อ @if ($teacher->signature_image)
-                                        {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $teacher->signature_image))) }}" alt="Signature Image"> --}}
-                                        <img class="signatureImage" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $teacher->signature_image))); ?>"
+                                        <img class="signatureImage"
+                                            src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $teacher->signature_image))) }}"
                                             alt="Signature Image">
                                     @else
                                         .........................................
@@ -402,8 +402,8 @@
                         <td class="signature">
                             @if ($confirm)
                                 ลงชื่อ @if ($admin->signature_image)
-                                    {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $admin->signature_image))) }}" alt="Signature Image"> --}}
-                                    <img class="signatureImage" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $admin->signature_image))); ?>"
+                                    <img class="signatureImage"
+                                        src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $admin->signature_image))) }}"
                                         alt="Signature Image">
                                 @else
                                     .........................................
@@ -501,8 +501,8 @@
                         <td class="signature">
                             @if ($confirm)
                                 ลงชื่อ @if ($branchHead->signature_image)
-                                    {{-- <img class="signatureImage" src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $branchHead->signature_image))) }}" alt="Signature Image"> --}}
-                                    <img class="signatureImage" src="data:image/png;base64,<?php echo base64_encode(file_get_contents(storage_path('app/public/' . $branchHead->signature_image))); ?>"
+                                    <img class="signatureImage"
+                                        src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/' . $branchHead->signature_image))) }}"
                                         alt="Signature Image">
                                 @else
                                     .........................................

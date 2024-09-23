@@ -139,12 +139,13 @@
                         <th>รูปภาพลายเซ็น</th>
                         @if ($toggle['signature_image'])
                             <td>
-                                <div class="input-field"></div>
-                                <input class="form-control" wire:model="signature_image" type="file"
-                                    placeholder="เลือกไฟล์" required>
-                                @error('signature_image')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <div class="input-field">
+                                    <input class="form-control" wire:model="signature_image" type="file"
+                                        placeholder="เลือกไฟล์" required>
+                                    @error('signature_image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </td>
                             <td>
                                 <div class="button-container">
