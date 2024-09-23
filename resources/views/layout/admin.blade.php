@@ -45,9 +45,9 @@
             <li class="sidebar-item">
                 <div class="sidebar-collapse">
                     <a href="#"
-                        class="sidebar-link has-dropdown collapsed{{ Route::is('admin.manage.project') || Route::is('admin.detail.project') || Route::is('admin.approve.documents') ? 'off active' : '' }}"
+                        class="sidebar-link has-dropdown collapsed{{ Route::is('admin.manage.project') || Route::is('admin.detail.project') || Route::is('admin.approve.documents') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'off active' : '' }}"
                         data-bs-target="#project" data-bs-toggle="collapse"
-                        aria-expanded="{{ Route::is('admin.manage.project') || Route::is('admin.detail.project') || Route::is('admin.approve.documents') ? 'true' : 'false' }}">
+                        aria-expanded="{{ Route::is('admin.manage.project') || Route::is('admin.detail.project') || Route::is('admin.approve.documents') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'true' : 'false' }}">
                         <div>
                             <i class='nav-icon bx bx-book'></i>
                             <span class="link-name">โปรเจค</span>
@@ -56,7 +56,7 @@
                     </a>
                 </div>
                 <ul id="project"
-                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('admin.manage.project') || Route::is('admin.detail.project') || Route::is('admin.approve.documents') ? 'show' : '' }}"
+                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('admin.manage.project') || Route::is('admin.detail.project') || Route::is('admin.approve.documents') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'show' : '' }}"
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item">
                         <a class="sidebar-link {{ Route::is('admin.manage.project') || Route::is('admin.detail.project') ? 'active' : '' }}"
@@ -66,7 +66,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link {{ Route::is('admin.approve.documents') ? 'active' : '' }}"
+                        <a class="sidebar-link {{ Route::is('admin.approve.documents') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'active' : '' }}"
                             href="{{ route('admin.approve.documents') }}">
                             <i class='nav-icon bx bx-circle'></i>
                             <span class="link-name">อนุมัติเอกสาร</span>
@@ -77,9 +77,9 @@
             <li class="sidebar-item">
                 <div class="sidebar-collapse">
                     <a href="#"
-                        class="sidebar-link has-dropdown collapsed{{ Route::is('admin.manage.exam.schedule') || Route::is('admin.manage.document.schedule') || Route::is('admin.add.document.schedule') || Route::is('admin.edit.detail.document.schedule') ? 'off active' : '' }}"
+                        class="sidebar-link has-dropdown collapsed{{ Route::is('admin.manage.exam.schedule') || Route::is('admin.edit.detail.exam.schedule') || Route::is('admin.manage.document.schedule') || Route::is('admin.add.document.schedule') || Route::is('admin.edit.detail.document.schedule') ? 'off active' : '' }}"
                         data-bs-target="#manage_schedule" data-bs-toggle="collapse"
-                        aria-expanded="{{ Route::is('admin.manage.exam.schedule') || Route::is('admin.manage.document.schedule') || Route::is('admin.add.document.schedule') || Route::is('admin.edit.detail.document.schedule') ? 'true' : 'false' }}">
+                        aria-expanded="{{ Route::is('admin.manage.exam.schedule') || Route::is('admin.edit.detail.exam.schedule') || Route::is('admin.manage.document.schedule') || Route::is('admin.add.document.schedule') || Route::is('admin.edit.detail.document.schedule') ? 'true' : 'false' }}">
                         <div>
                             <i class='nav-icon bx bx-calendar-edit'></i>
                             <span class="link-name">จัดการกำหนดการ</span>
@@ -88,13 +88,13 @@
                     </a>
                 </div>
                 <ul id="manage_schedule"
-                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('admin.manage.exam.schedule') || Route::is('admin.manage.document.schedule') || Route::is('admin.add.document.schedule') || Route::is('admin.edit.detail.document.schedule') ? 'show' : '' }}"
+                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('admin.manage.exam.schedule') || Route::is('admin.edit.detail.exam.schedule') || Route::is('admin.manage.document.schedule') || Route::is('admin.add.document.schedule') || Route::is('admin.edit.detail.document.schedule') ? 'show' : '' }}"
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a class="sidebar-link {{ Route::is('admin.manage.exam.schedule') ? 'active' : '' }}"
+                        <a class="sidebar-link {{ Route::is('admin.manage.exam.schedule') || Route::is('admin.edit.detail.exam.schedule') ? 'active' : '' }}"
                             href="{{ route('admin.manage.exam.schedule') }}">
                             <i class='nav-icon bx bx-circle'></i>
-                            <span class="link-name">ตารางสอบ</span>
+                            <span class="link-name">จัดการตารางสอบ</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
@@ -178,10 +178,10 @@
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link {{ Route::is('admin.approve.thesis') || Route::is('admin.detail.approve.thesis') ? 'active' : '' }}"
+                <a class="sidebar-link {{ Route::is('admin.approve.thesis') || Route::is('admin.add.thesis') || Route::is('admin.detail.approve.thesis') ? 'active' : '' }}"
                     href="{{ route('admin.approve.thesis') }}">
                     <i class='nav-icon bx bx-bookmarks'></i>
-                    <span class="link-name">ซ่อน-แสดง บทความของผู้ใช้</span>
+                    <span class="link-name">จัดการบทความปริญญานิพนธ์</span>
                 </a>
             </li>
         </ul>

@@ -31,15 +31,20 @@
                     <tr>
                         <th>ชี่อบทความ</th>
                         <td>
-                            <div class="input-field">
-                                <select class="form-select" wire:model.live="add_project">
-                                    <option selected>ชี่อบทความ</option>
-                                    @foreach ($projects as $project)
-                                        <option value="{{ $project->id_project }}">
-                                            {{ $project->project_name_th }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <div class="input-group">
+                                @if (Auth::guard('teachers')->check())
+                                    <input type="text" class="form-control" wire:model="add_project"
+                                        placeholder="ชี่อบทความ">
+                                @else
+                                    <select class="form-select" wire:model.live="add_project">
+                                        <option selected>ชี่อบทความ</option>
+                                        @foreach ($projects as $project)
+                                            <option value="{{ $project->id_project }}">
+                                                {{ $project->project_name_th }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                @endif
                             </div>
                             @error('add_project')
                                 <span class="text-danger">{{ $message }}</span>
@@ -63,15 +68,26 @@
                         <th>ปีการศึกษา</th>
                         <td>
                             <div class="input-field">
-                                <select class="form-select" wire:model='add_year'>
-                                    <option selected>กรุณาเลือกปีการศึกษา</option>
-                                    <option value="{{ now()->format('Y') }}">
-                                        {{ now()->thaidate('Y') }}
-                                    </option>
-                                    <option value="{{ now()->subYear()->format('Y') }}">
-                                        {{ now()->subYear()->thaidate('Y') }}
-                                    </option>
-                                </select>
+                                @if (Auth::guard('teachers')->check())
+                                    <select class="form-select" wire:model="add_year">
+                                        <option selected>กรุณาเลือกปีการศึกษา</option>
+                                        @for ($year = 0; $year <= 20; $year++)
+                                            <option value="{{ now()->subYear($year)->format('Y') }}">
+                                                {{ now()->subYear($year)->thaidate('Y') }}
+                                            </option>
+                                        @endfor
+                                    </select>
+                                @else
+                                    <select class="form-select" wire:model='add_year'>
+                                        <option selected>กรุณาเลือกปีการศึกษา</option>
+                                        <option value="{{ now()->format('Y') }}">
+                                            {{ now()->thaidate('Y') }}
+                                        </option>
+                                        <option value="{{ now()->subYear()->format('Y') }}">
+                                            {{ now()->subYear()->thaidate('Y') }}
+                                        </option>
+                                    </select>
+                                @endif
                             </div>
                             @error('add_year')
                                 <span class="text-danger">{{ $message }}</span>

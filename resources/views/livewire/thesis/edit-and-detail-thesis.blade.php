@@ -61,17 +61,25 @@
                             <th>ชื่อบทความ</th>
                             @if ($toggle['title'])
                                 <td>
-                                    <div class="input-field">
-                                        <select class="form-select" wire:model="title">
+                                    <div class="input-group">
+                                        <select class="form-select" wire:model.live="title">
                                             <option selected>ชี่อบทความ</option>
                                             @foreach ($projects as $project)
                                                 <option value="{{ $project->id_project }}">
                                                     {{ $project->project_name_th }}
                                                 </option>
                                             @endforeach
+                                            <option value="อื่นๆ">อื่นๆ</option>
                                         </select>
+                                        @if ($this->title == 'อื่นๆ')
+                                            <input class="form-control" wire:model="other_title" type="text"
+                                                placeholder="กรุณากรอกชื่อบทความ" required>
+                                        @endif
                                     </div>
                                     @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    @error('other_title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </td>

@@ -45,9 +45,9 @@
             <li class="sidebar-item">
                 <div class="sidebar-collapse">
                     <a href="#"
-                        class="sidebar-link has-dropdown collapsed{{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Request::is('branch-head/approve_documents_branch_head') ? 'off active' : '' }}"
+                        class="sidebar-link has-dropdown collapsed{{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Route::is('branch-head.approve.documents') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'off active' : '' }}"
                         data-bs-target="#project" data-bs-toggle="collapse"
-                        aria-expanded="{{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Request::is('branch-head/approve_documents_branch_head') ? 'true' : 'false' }}">
+                        aria-expanded="{{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Route::is('branch-head.approve.documents') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'true' : 'false' }}">
                         <div>
                             <i class='nav-icon bx bx-book'></i>
                             <span class="link-name">โปรเจค</span>
@@ -56,7 +56,7 @@
                     </a>
                 </div>
                 <ul id="project"
-                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Route::is('branch-head.approve.documents') ? 'show' : '' }}"
+                    class="sidebar-dropdown list-unstyled collapse {{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') || Route::is('branch-head.approve.documents') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'show' : '' }}"
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item">
                         <a class="sidebar-link {{ Route::is('branch-head.manage.project') || Route::is('branch-head.detail.project') ? 'active' : '' }}"
@@ -66,7 +66,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link {{ Route::is('branch-head.approve.documents') ? 'active' : '' }}"
+                        <a class="sidebar-link {{ Route::is('branch-head.approve.documents') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'active' : '' }}"
                             href="{{ route('branch-head.approve.documents') }}">
                             <i class='nav-icon bx bx-circle'></i>
                             <span class="link-name">อนุมัติเอกสาร</span>

@@ -45,9 +45,9 @@
             <li class="sidebar-item">
                 <div class="sidebar-collapse">
                     <a href="#"
-                        class="sidebar-link has-dropdown collapsed{{ Route::is('teacher.manage.project') || Route::is('teacher.detail.project') || Route::is('teacher.approve.documents.teacher') ? 'off active' : '' }}"
+                        class="sidebar-link has-dropdown collapsed{{ Route::is('teacher.manage.project') || Route::is('teacher.detail.project') || Route::is('teacher.approve.documents.teacher') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'off active' : '' }}"
                         data-bs-target="#project" data-bs-toggle="collapse"
-                        aria-expanded="{{ Route::is('teacher.manage.project') || Route::is('teacher.detail.project') || Route::is('teacher.approve.documents.teacher') ? 'true' : 'false' }}">
+                        aria-expanded="{{ Route::is('teacher.manage.project') || Route::is('teacher.detail.project') || Route::is('teacher.approve.documents.teacher') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'true' : 'false' }}">
                         <div>
                             <i class='nav-icon bx bx-book'></i>
                             <span class="link-name">โปรเจค</span>
@@ -66,7 +66,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link {{ Route::is('teacher.approve.documents.teacher') ? 'active' : '' }}"
+                        <a class="sidebar-link {{ Route::is('teacher.approve.documents.teacher') || Route::is('detail_document_01') || Route::is('detail_document_02') || Route::is('detail_document_03') || Route::is('detail_document_04') || Route::is('detail_document_05') || Route::is('detail_document_06') || Route::is('detail_document_07') ? 'active' : '' }}"
                             href="{{ route('teacher.approve.documents.teacher') }}">
                             <i class='nav-icon bx bx-circle'></i>
                             <span class="link-name">อนุมัติเอกสาร</span>

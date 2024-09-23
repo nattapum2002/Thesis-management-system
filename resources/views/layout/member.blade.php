@@ -116,7 +116,7 @@
             <li class="sidebar-item">
                 <a class="sidebar-link {{ Route::is('member.manage.thesis') || Route::is('member.add.thesis') || Route::is('member.edit.detail.thesis') ? 'active' : '' }}"
                     href="{{ route('member.manage.thesis') }}">
-                    <i class='nav-icon bx bx-news'></i>
+                    <i class='nav-icon bx bx-bookmarks'></i>
                     <span class="link-name">จัดการบทความปริญญานิพนธ์</span>
                 </a>
             </li>
