@@ -115,16 +115,16 @@ class TeacherManageAllSubmitDocument extends Component
                     'confirm_status' => false,
                 ]);
 
-                $sub_adviser = Adviser::where('id_project', $id_project)->where('id_position', 2)->get();
-                foreach ($sub_adviser as $sub_adviser_items) {
-                    Confirm_teacher::create([
-                        'id_teacher' => $sub_adviser_items->id_teacher,
-                        'id_document' => 7,
-                        'id_project' => $id_project,
-                        'id_position' => 2,
-                        'confirm_status' => false,
-                    ]);
-                }
+                // $sub_adviser = Adviser::where('id_project', $id_project)->where('id_position', 2)->get();
+                // foreach ($sub_adviser as $sub_adviser_items) {
+                //     Confirm_teacher::create([
+                //         'id_teacher' => $sub_adviser_items->id_teacher,
+                //         'id_document' => 7,
+                //         'id_project' => $id_project,
+                //         'id_position' => 2,
+                //         'confirm_status' => false,
+                //     ]);
+                // }
 
                 $main_director = Confirm_teacher::where('id_project', $id_project)
                     ->where('id_document', 6)->where('id_position', 5)->get();
@@ -201,6 +201,12 @@ class TeacherManageAllSubmitDocument extends Component
             ->whereHas('confirmTeachers', function ($query) {
                 $query->where('id_teacher', Auth::guard('teachers')->user()->id_teacher);
             })
+            ->orderByRaw("(
+                SELECT CASE WHEN confirm_status = false THEN 0 ELSE 1 END
+                FROM confirm_teachers 
+                WHERE confirm_teachers.id_project = projects.id_project
+                LIMIT 1
+            )")
             ->get();
 
         $this->members = optional($this->project->first())->members;

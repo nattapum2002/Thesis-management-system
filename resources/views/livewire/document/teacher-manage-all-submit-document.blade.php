@@ -862,9 +862,11 @@
                                 ->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
                                 ->where('id_document', $docId)
                                 ->groupBy('id_document')
-                                ->sortBy(function ($teacher) {
-                                    return $teacher->confirm_status ? 1 : 0; // false จะเป็น 0 และ true จะเป็น 1
+                                ->map(function ($teachers) {
+                                    // Return the first teacher in each group
+                                    return $teachers->first();
                                 });
+                                
                         @endphp
                         @if ($filteredConfirmTeachers->isNotEmpty())
                             @foreach ($filteredConfirmTeachers as $documentId => $confirm_teachers)
