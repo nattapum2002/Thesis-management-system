@@ -246,7 +246,8 @@ class Document02 extends Component
                             'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                             'id_project' => $this->id_project,
                             'id_document' => 2,
-                            'id_comment_list' => 1
+                            'id_comment_list' => 1,
+                            'id_position' => 4,
                         ],[
                             'comment' => 'อนุมัติ',
                         ]
@@ -265,7 +266,8 @@ class Document02 extends Component
                              'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                              'id_project' => $this->id_project,
                              'id_document' => 2,
-                             'id_comment_list' => 1
+                             'id_comment_list' => 1,
+                             'id_position' => 4,
                          ],[
                              'comment' => 'ไม่อนุมัติ',
                          ]
@@ -275,7 +277,8 @@ class Document02 extends Component
                                 'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                                 'id_project' => $this->id_project,
                                 'id_document' => 2,
-                                'id_comment_list' => 2
+                                'id_comment_list' => 2,
+                                'id_position' => 4,
                             ],[
                                 'comment' => $this->branch_head_comment,
                             ]
