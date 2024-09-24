@@ -198,6 +198,7 @@
                                         <div x-show="approve">
                                             <label for="">หมายเหตุ:</label>
                                             <textarea class="form-control" wire:model="branch_head_comment" id="message-text"></textarea>
+                                            <div class="text-danger">@error('branch_head_comment') {{ $message }} @enderror</div>
                                         </div>
                                     </div>
                                 </div>

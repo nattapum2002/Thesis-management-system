@@ -157,6 +157,7 @@ class Document01 extends Component
     {
         DB::transaction(function () {
             if ($this->branch_head_approve || $this->branch_head_not_approve) {
+                
                 $existingConfirm = Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
                     ->where('id_project', $this->id_project)
                     ->where('id_document', 1)
@@ -198,6 +199,9 @@ class Document01 extends Component
                         ]);
                     }
                 } else if ($this->branch_head_not_approve) {
+                    $validatedData = $this->validate([
+                        'branch_head_comment' => 'required',
+                    ]);
                     if ($existingConfirm) {
                         // Update if exists
                         $existingConfirm->update([

@@ -160,6 +160,11 @@ class Document03 extends Component
                             'comment' => 'ไม่ผ่าน'
                         ]
                     );
+
+                    Project::where('id_project', $this->id_project)
+                    ->update([
+                        'project_status' => 'reject'
+                    ]);
                     Comment::updateOrCreate([
                         'id_document' => $this->id_document,
                         'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
