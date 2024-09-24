@@ -866,7 +866,7 @@
                                     // Return the first teacher in each group
                                     return $teachers->first();
                                 });
-                                
+
                         @endphp
                         @if ($filteredConfirmTeachers->isNotEmpty())
                             @foreach ($filteredConfirmTeachers as $documentId => $confirm_teachers)
@@ -874,10 +874,10 @@
                                     @switch($documentId)
                                         @case(3)
                                             <div class="card-header">
-                                                <h5>
+                                                <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</h5>
+                                                <span>
                                                     {{ 'คกท.-คง.-0' . $confirm_teachers->document->id_document . ' | ' . $confirm_teachers->document->document }}
-                                                </h5>
-                                                <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
+                                                </span>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -1023,10 +1023,10 @@
 
                                         @case(4)
                                             <div class="card-header">
-                                                <h5>
+                                                <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</h5>
+                                                <span>
                                                     {{ 'คกท.-คง.-0' . $confirm_teachers->document->id_document . ' | ' . $confirm_teachers->document->document }}
-                                                </h5>
-                                                <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
+                                                </span>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -1185,10 +1185,10 @@
 
                                         @case(6)
                                             <div class="card-header">
-                                                <h5>
+                                                <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</h5>
+                                                <span>
                                                     {{ 'คกท.-คง.-0' . $confirm_teachers->document->id_document . ' | ' . $confirm_teachers->document->document }}
-                                                </h5>
-                                                <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
+                                                </span>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -1349,10 +1349,10 @@
 
                                         @case(7)
                                             <div class="card-header">
-                                                <h5>
+                                                <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</h5>
+                                                <span>
                                                     {{ 'คกท.-คง.-0' . $confirm_teachers->document->id_document . ' | ' . $confirm_teachers->document->document }}
-                                                </h5>
-                                                <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
+                                                </span>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -1499,10 +1499,10 @@
 
                                         @default
                                             <div class="card-header">
-                                                <h5>
+                                                <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</h5>
+                                                <span>
                                                     {{ 'คกท.-คง.-0' . $confirm_teachers->document->id_document . ' | ' . $confirm_teachers->document->document }}
-                                                </h5>
-                                                <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
+                                                </span>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
