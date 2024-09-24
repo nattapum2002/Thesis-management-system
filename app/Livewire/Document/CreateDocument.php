@@ -75,7 +75,7 @@ class CreateDocument extends Component
             $this->project = Project::create([
                 'project_name_th' => $this->project_name_th,
                 'project_name_en' => $this->project_name_eng,
-                'project_status' => 'Pending',
+                'project_status' => 'pending',
             ]);
 
             $admin_teacher = Teacher::where('user_type', 'Admin')->get();
