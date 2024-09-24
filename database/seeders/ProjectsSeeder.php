@@ -14,7 +14,7 @@ class ProjectsSeeder extends Seeder
      */
     public function run(): void
     {
-        $projectStatuses = ['Pending', 'In Progress', 'Completed'];
+        $projectStatuses = ['pending', 'In Progress', 'Completed'];
 
         for ($i = 1; $i <= 10; $i++) {
             DB::table('projects')->insert([
