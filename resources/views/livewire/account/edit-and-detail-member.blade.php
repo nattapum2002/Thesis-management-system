@@ -312,6 +312,11 @@
                         @endif
                     </tr>
                     <tr>
+                        <th>ชื่อผู้ใช้</th>
+                        <td>{{ $student->username }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
                         <th>รหัสผ่าน</th>
                         @if ($toggle['password'])
                             <td>

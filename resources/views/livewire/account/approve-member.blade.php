@@ -77,13 +77,12 @@
                     </tr>
                     <tr>
                         <th>ไอดีไลน์</th>
-                        <td>{{ $student->id_line }}</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>รหัสผ่าน</th>
                         <td>
-                            {{ $student->password }}
+                            @if ($student->id_line == null)
+                                <p class="text-danger">ไมมีการลงบันทึกข้อมูล</p>
+                            @else
+                                {{ $student->id_line }}
+                            @endif
                         </td>
                         <td></td>
                     </tr>
