@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Language" content="th">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="{{ asset('Asset/main/img/logo/favicon.png') }}" type="image/png">
     <title>Document PDF</title>
     @include('pdf.css')
 </head>

@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Language" content="th">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="{{ asset('Asset/main/img/logo/favicon.png') }}" type="image/png">
     <title>Document PDF</title>
     @include('pdf.css')
 </head>
@@ -84,7 +85,8 @@
                                 </span>
                                 เดือน<span class="dotted"> {{ thaidate('F', $examSchedules->first()->exam_day) }}
                                 </span>
-                                พ.ศ.<span class="dotted"> {{ thaidate('Y', $examSchedules->first()->exam_day) }} </span>
+                                พ.ศ.<span class="dotted"> {{ thaidate('Y', $examSchedules->first()->exam_day) }}
+                                </span>
                                 ขณะนี้ข้าพเจ้าได้เขียน โครงงานฉบับร่างเสร็จแล้ว
                                 จึงมีความประสงค์จะขออนุมัติสอบสิ้นสุดโครงงาน
                             @else

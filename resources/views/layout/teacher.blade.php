@@ -35,7 +35,7 @@
                     </div>
                     <div class="info">
                         <span>{{ Auth::guard('teachers')->user()->name . ' ' . Auth::guard('teachers')->user()->surname }}</span>
-                        <small>หัวหน้าสาขา</small>
+                        <small>อาจารย์</small>
                     </div>
                 </a>
             </div>

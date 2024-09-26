@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Language" content="th">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="{{ asset('Asset/main/img/logo/favicon.png') }}" type="image/png">
     <title>Document PDF</title>
     @include('pdf.css')
 </head>
@@ -136,7 +137,8 @@
                                 </span>
                                 เดือน<span class="dotted"> {{ thaidate('F', $examSchedules->first()->exam_day) }}
                                 </span>
-                                พ.ศ.<span class="dotted"> {{ thaidate('Y', $examSchedules->first()->exam_day) }} </span>
+                                พ.ศ.<span class="dotted"> {{ thaidate('Y', $examSchedules->first()->exam_day) }}
+                                </span>
                                 บัดนี้ ข้าพเจ้าได้ดำเนินการแก้ไข
                                 <br>ตามมติที่ประชุมแล้ว จึงขอส่งเค้าโครงฉบับแก้ไข จำนวน<span class="dotted"> 1
                                 </span>ฉบับ
@@ -252,7 +254,7 @@
                                         ' ' .
                                         $confirm->teacher->name .
                                         '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
                                         $confirm->teacher->surname }}
                                 </span>)
                                 <br>วันที่<span class="dotted"> {{ thaidate('j', $confirm->created_at) }} </span>
@@ -330,7 +332,7 @@
                                         ' ' .
                                         $confirm->teacher->name .
                                         '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
                                         $confirm->teacher->surname }}
                                 </span>)
                                 <br>วันที่<span class="dotted"> {{ thaidate('j', $confirm->created_at) }} </span>

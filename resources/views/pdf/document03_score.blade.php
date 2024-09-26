@@ -4,7 +4,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="icon" href="{{ asset('Asset/main/img/logo/favicon.png') }}" type="image/png">
+    <title>Document PDF</title>
 </head>
 @include('pdf.css')
 

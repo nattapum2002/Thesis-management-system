@@ -352,7 +352,7 @@
                                     <img src="{{ asset('/Asset/main/img/TMS-Line-bot.png') }}" alt="TMS-Line-bot"
                                         style="width: 200px; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                 @else
-                                    <p class="text-danger">ยังไม่ลงทะเบียน</p>
+                                    <p class="text-danger">ไมมีการลงบันทึกข้อมูล</p>
                                 @endif
                             </td>
                             <td>
@@ -360,6 +360,11 @@
                                         class='bx bx-edit'></i></button>
                             </td>
                         @endif
+                    </tr>
+                    <tr>
+                        <th>ชื่อผู้ใช้</th>
+                        <td>{{ $teacher->username }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>รหัสผ่าน</th>
