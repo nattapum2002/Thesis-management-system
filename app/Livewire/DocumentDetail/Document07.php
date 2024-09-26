@@ -36,6 +36,11 @@ class Document07 extends Component
                         ->where('id_document', 7)
                         ->update(['confirm_status' => true]);
                 } elseif ($this->admin_approve_fix) {
+                    $this->validate([
+                       'admin_approve_fix_comment' => 'required',
+                    ],[
+                        'admin_approve_fix_comment.required' => 'กรุณากรอกความเห็น',
+                    ]);
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,
@@ -88,6 +93,10 @@ class Document07 extends Component
                         ->where('id_document', 7)
                         ->update(['confirm_status' => true]);
                 } elseif ($this->branch_head_approve_fix) {
+                    $validateComment = $this->validate([
+                        'branch_head_approve_fix_comment' => 'required',
+                    ],[
+                        'branch_head_approve_fix_comment.required' => 'กรุณากรอกความเห็น',]);
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,
@@ -113,8 +122,10 @@ class Document07 extends Component
                         ]
                     );
                 }
-            }
-            return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
+                return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
+            }else{
+            return session()->flash('comment error', 'กรุณากรอกความเห็น');}
+           
         });
     }
     public function mount($id_project, $id_document)

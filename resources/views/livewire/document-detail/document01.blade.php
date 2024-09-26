@@ -57,6 +57,7 @@
                                                 <input type="checkbox" wire:model="admin_other_comment"
                                                     x-model="showComment" x-bind:disabled="not_approve">
                                                 <label for="">อื่นๆ</label>
+                                               
                                             </li>
                                         </ul>
                                     </div>
@@ -65,6 +66,11 @@
                                     <div class="col-12">
                                         <label for="message-text" class="col-form-label">หมายเหตุ</label>
                                         <textarea class="form-control" wire:model="admin_comment" id="message-text"></textarea>
+                                        @error('admin_comment')
+                                        <div class="text-danger">
+                                            {{$message}}
+                                        </div>
+                                    @enderror
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-success">ยืนยัน</button>

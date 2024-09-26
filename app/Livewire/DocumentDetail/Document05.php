@@ -244,6 +244,11 @@ class Document05 extends Component
                         'comment' => 'อนุมัติ', 
                     ]);
             } else if ($this->branch_head_not_approve) {
+                $validateComment = $this->validate([
+                    'branch_head_comment' => 'required',
+                ],[
+                    'branch_head_comment.required' => 'กรุณากรอกความเห็น',
+                ]);
                 Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
                     ->where('id_project', $this->id_project)
                     ->where('id_document', 5)
@@ -298,8 +303,8 @@ class Document05 extends Component
             }
             return session()->flash('success', 'บันทึกความเห็นเสร็จสิ้น');
         } else {
-            session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
-            return;
+            return session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
+            
         }
     }
     public function mount($id_project, $id_document)

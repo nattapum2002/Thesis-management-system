@@ -117,6 +117,11 @@ class Document03 extends Component
                     ->where('id_document', 3)
                     ->update(['confirm_status' => true]);
                 } else if ($this->approve_fix) {
+                    $this->validate([
+                       'approve_fix_comment' => 'required'
+                    ],[
+                        'approve_fix_comment.required' => 'กรุณากรอกข้อความ'
+                    ]);
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,
@@ -148,6 +153,11 @@ class Document03 extends Component
                 ]);
                 
                 }else if ($this->not_approve) {
+                    $this->validate([
+                        'not_approve_comment' => 'required'
+                     ],[
+                        'not_approve_comment.required' => 'กรุณากรอกข้อความ'
+                     ]);
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,

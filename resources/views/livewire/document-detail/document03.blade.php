@@ -393,12 +393,18 @@
                                                 x-model="approve_fix" x-bind:disabled="approve || not_approve">
                                             <label for="approve_fix">ผ่าน/แก้ไขใหม่</label>
                                             <textarea x-show="approve_fix" class="form-control mt-2" wire:model="approve_fix_comment"></textarea>
+                                            @error('approve_fix_comment')
+                                                <div class="text-danger">{{$message}}</div>
+                                            @enderror
                                         </li>
                                         <li>
                                             <input wire:model="not_approve" type="checkbox" id="not_approve"
                                                 x-model="not_approve" x-bind:disabled="approve || approve_fix">
                                             <label for="not_approve">ไม่ผ่าน</label>
                                             <textarea x-show="not_approve" class="form-control mt-2" wire:model="not_approve_comment"></textarea>
+                                            @error('not_approve_comment')
+                                                <div class="text-danger">{{$message}}</div>
+                                            @enderror
                                         </li>
                                     </ul>
                                 </div>

@@ -69,6 +69,9 @@
                                         <div x-show="approve_fix">
                                             <textarea class="form-control" wire:model="admin_comment_fix" name="" id="" cols="30"
                                                 rows="5"></textarea>
+                                            <div class="text-danger">@error('admin_comment_fix')
+                                                {{ $message }}
+                                            @enderror</div>
                                         </div>
                                     </div>
                                 </div>
@@ -111,6 +114,9 @@
                                         <div x-show="approve_fix">
                                             <textarea class="form-control" wire:model="branch_head_comment_fix" name="" id="" cols="30"
                                                 rows="5"></textarea>
+                                            <div class="text-danger">@error('branch_head_comment_fix')
+                                                {{ $message }}
+                                            @enderror</div>
                                         </div>
                                     </div>
                                 </div>
@@ -118,6 +124,10 @@
                                     <div class="alert alert-success">
                                         {{ session('success') }}
                                     </div>
+                                @elseif (session()->has('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
                                 @endif
                                 <button class="btn btn-success" type="submit">ยืนยัน</button>
                             </fieldset>

@@ -99,6 +99,11 @@ class Document06 extends Component
                         'confirm_status' => true
                     ]);
                 } else if ($this->approve_fix) {
+                    $this->validate([
+                        'approve_fix_comment' => 'required',
+                    ],[
+                        'approve_fix_comment.required' => 'กรุณากรอกความเห็น',
+                    ]);
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,
@@ -131,6 +136,11 @@ class Document06 extends Component
                         'confirm_status' => true
                     ]);
                 } else if ($this->not_approve) {
+                    $this->validate([
+                        'not_approve_comment' => 'required',
+                    ],[
+                        'not_approve_comment.required' => 'กรุณากรอกความเห็น',
+                    ]);
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,
@@ -192,6 +202,13 @@ class Document06 extends Component
                     ->where('id_document', 6)
                     ->update(['confirm_status' => true]);
             }elseif($this->admin_approve_fix_choice){
+                $this->validate([
+                    'admin_approve_fix_choice_comment' => 'required',
+                    'admin_approve_fix_comment' => 'required',
+                ],[
+                    'admin_approve_fix_choice_comment.required' => 'กรุณากรอกความเห็น',
+                    'admin_approve_fix_comment.required' => 'กรุณากรอกความเห็น',
+                ]);
                 Comment::updateOrCreate(
                     [
                         'id_document' => $this->id_document,
@@ -243,6 +260,13 @@ class Document06 extends Component
                     ->where('id_document', 6)
                     ->update(['confirm_status' => true]);
             }elseif($this->branch_head_approve_fix_choice){
+                $validateComment = $this->validate([
+                    'branch_head_approve_fix_choice_comment' => 'required',
+                    'branch_head_approve_fix_comment' => 'required',
+                ],[
+                    'branch_head_approve_fix_choice_comment.required' => 'กรุณากรอกความเห็น',
+                    'branch_head_approve_fix_comment.required' => 'กรุณากรอกความเห็น',
+                ]);
                 Comment::updateOrCreate(
                     [
                         'id_document' => $this->id_document,
@@ -266,9 +290,11 @@ class Document06 extends Component
                         ]
                         );
             }
-            
+            return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
+           }else{
+            return session()->flash('error', 'กรุณาเลือกความเห็น');
            }
-           return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
+           
        });
     }
     public function mount($id_project, $id_document)

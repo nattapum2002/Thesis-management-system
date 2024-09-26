@@ -32,6 +32,9 @@
                                     <div x-show="admin_approve_fix">
                                         <label for="">เนื่องจาก</label>
                                         <textarea class="form-control" wire:model="admin_approve_fix_comment" id="admin_approve_fix_comment"></textarea>
+                                        <div class="text-danger">@error('admin_approve_fix_comment')
+                                            {{ $message }}
+                                        @enderror</div>
                                     </div>
                                 </div>
                             </div>
@@ -42,9 +45,9 @@
                     <form wire:submit="branch_head_comment">
                         <legend>ความเห็นของหัวหน้าสาขา</legend>
                         <div x-data="{ branch_head_approve_fix: false, branch_head_approve: false }">
-                            @if (session()->has('error'))
+                            @if (session()->has('comment error'))
                                 <div class="alert alert-danger">
-                                    {{ session('error') }}
+                                    {{ session('comment error') }}
                                 </div>
                             @elseif (session()->has('comment success'))
                                 <div class="alert alert-success">
@@ -69,6 +72,9 @@
                                     <div x-show="branch_head_approve_fix">
                                         <label for="">เนื่องจาก</label>
                                         <textarea class="form-control" wire:model="branch_head_approve_fix_comment" id="branch-head_approve_fix_comment"></textarea>
+                                        <div class="text-danger">@error('branch_head_approve_fix_comment')
+                                            {{ $message }}
+                                        @enderror</div>
                                     </div>
                                 </div>
                             </div>

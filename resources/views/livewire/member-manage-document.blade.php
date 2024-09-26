@@ -11,13 +11,43 @@
                     wire:model.live.debounce.150ms="search">
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 mb-2">
-                <div class="d-flex justify-content-end">
-                    <a href="{{ route('member.create.document-01') }}" class="btn btn-primary">สร้างเอกสาร 01</a>
+        @php
+            $submission = $document_time->where('id_document', 1)->first();
+        @endphp
+        @if (
+            $submission &&
+                Carbon\Carbon::parse($submission->date_submission . ' ' . $submission->time_submission) > Carbon\Carbon::now())
+            @if ($projects->first()->project_status == 'pending')
+                <div class="row">
+                    <div class="col-12 mb-2">
+                        <div class="d-flex justify-content-end">
+                            <button href="" class="btn btn-primary" disabled>สร้างเอกสาร
+                                01(โปรเจคกำลังดำเนินงาน)</button>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div class="row">
+                    <div class="col-12 mb-2">
+                        <div class="d-flex justify-content-end">
+                            <a href="{{ route('member.create.document-01') }}" class="btn btn-primary">สร้างเอกสาร
+                                01</a>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @else
+            <div class="row">
+                <div class="col-12 mb-2">
+                    <div class="d-flex justify-content-end">
+                        <button href="" class="btn btn-primary" disabled>สร้างเอกสาร
+                            01(หมดเวลาส่งเอกสาร 01)</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
+
+
         @foreach ($projects as $projectItems)
             @foreach ($projectItems->confirmStudents->groupBy('id_document') as $documentId => $confirmStudents)
                 <div class="card">
@@ -26,6 +56,7 @@
                             <div class="card-header">
                                 <h5>
                                     {{ 'คกท.-คง.-0' . $confirmStudents->first()->documents->id_document . ' | ' . $confirmStudents->first()->documents->document }}
+                                    ({{ $projectItems->project_status }})
                                 </h5>
                                 <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
                             </div>
@@ -132,24 +163,81 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <form
-                                            wire:submit="confirmDocument({{ $confirmStudents->first()->id_document }}, {{ $projectItems->id_project }})">
+                                        <fieldset>
+                                            <legend>หมายเหตุ</legend>
+                                            <ul>
+                                                @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
+                                                    @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
+                                                        <li>
+                                                            <span>
+                                                                {{ $comment->comment . ' โดย ' . $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                            </span>
+                                                        </li>
+                                                    @endforeach
+                                                @endforeach
+                                            </ul>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-12">
+                                        {{-- <form
+                                            wire:submit="confirmDocument({{ $confirmStudents->first()->id_document }}, {{ $projectItems->id_project }})"> --}}
 
-                                            @php
-                                                $currentConfirmStudent = $confirmStudents->firstWhere(
-                                                    'id_student',
-                                                    Auth::guard('members')->user()->id_student,
-                                                );
-                                                $allStudentsConfirmed = $confirmStudents->every(
-                                                    fn($student) => $student->confirm_status == true,
-                                                );
-                                                $allTeachersConfirmed = $projectItems->confirmTeachers
-                                                    ->where('id_document', $documentId)
-                                                    ->where('id_project', $projectItems->id_project)
-                                                    ->every(fn($teacher) => $teacher->confirm_status == true);
-                                            @endphp
+                                        @php
+                                            $currentConfirmStudent = $confirmStudents->firstWhere(
+                                                'id_student',
+                                                Auth::guard('members')->user()->id_student,
+                                            );
+                                            $allStudentsConfirmed = $confirmStudents->every(
+                                                fn($student) => $student->confirm_status == true,
+                                            );
+                                            $allTeachersConfirmed = $projectItems->confirmTeachers
+                                                ->where('id_document', $documentId)
+                                                ->where('id_project', $projectItems->id_project)
+                                                ->every(fn($teacher) => $teacher->confirm_status == true);
+                                            $submissionDoc5 = $document_time->where('id_document', 5)->first();
+                                            $submissionDoc4 = $document_time->where('id_document', 4)->first();
+                                            $currentDateTime = Carbon\Carbon::now();
 
-                                            @if ($allTeachersConfirmed)
+                                            // Check if time has expired for both document 4 and 5
+                                            $isDoc5Expired =
+                                                $submissionDoc5 &&
+                                                Carbon\Carbon::parse(
+                                                    $submissionDoc5->date_submission .
+                                                        ' ' .
+                                                        $submissionDoc5->time_submission,
+                                                ) < $currentDateTime;
+                                            $isDoc4Expired =
+                                                $submissionDoc4 &&
+                                                Carbon\Carbon::parse(
+                                                    $submissionDoc4->date_submission .
+                                                        ' ' .
+                                                        $submissionDoc4->time_submission,
+                                                ) < $currentDateTime;
+                                        @endphp
+                                        {{-- Check if time has passed for document 4 --}}
+                                        <div class="mb-3">
+                                            @if ($submissionDoc4 && $isDoc4Expired)
+                                                <div class="d-flex justify-content-end">
+                                                    <button class="btn btn-primary" disabled>สร้างเอกสาร 04 (หมดเวลา)</button>
+                                                </div>
+                                            @elseif($projectItems->confirmStudents->where('id_document', 4)->count() > 0)
+                                                <div class="d-flex justify-content-end">
+                                                    <button class="btn btn-primary" disabled>สร้างเอกสาร 04 แล้ว</button>
+                                                </div>
+                                            @else
+                                                <div class="d-flex justify-content-end">
+                                                    <a class="btn btn-primary" href="{{ route('member.create.document-04') }}">
+                                                        สร้างเอกสาร 04(สร้างกรณีสอบหัวข้อไม่ผ่าน)
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div>
+                                            @if ($submissionDoc5 && $isDoc5Expired)
+                                                <div class="d-flex justify-content-end">
+                                                    <button class="btn btn-primary" disabled>สร้างเอกสาร 05 (หมดเวลา)</button>
+                                                </div>
+                                            @elseif ($allTeachersConfirmed)
                                                 @if ($projectItems->confirmStudents->where('id_document', 5)->count() > 0)
                                                     <div class="d-flex justify-content-end">
                                                         <button class="btn btn-primary" disabled>สร้างเอกสาร 05 แล้ว</button>
@@ -171,23 +259,15 @@
                                                             href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-05') : '#' }}">
                                                             สร้างเอกสาร 05(รอการอนุมัติ)
                                                         </a>
-                                                        @if ($projectItems->confirmStudents->where('id_document', 4)->count() > 0)
-                                                            <button class="btn btn-primary"
-                                                                href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-04') : '#' }}"
-                                                                disabled>
-                                                                สร้างเอกสาร 04 แล้ว
-                                                            </button>
-                                                        @else
-                                                            <a class="btn btn-primary"
-                                                                href="{{ route('member.create.document-04') }}">
-                                                                สร้างเอกสาร 04(สร้างกรณีสอบหัวข้อไม่ผ่าน)
-                                                            </a>
-                                                        @endif
-
                                                     </div>
                                                 </div>
                                             @endif
-                                        </form>
+                                        </div>
+
+
+                                        {{-- Check if time has passed for document 5 --}}
+
+                                        {{-- </form> --}}
                                     </div>
                                 </div>
                             </div>
@@ -197,6 +277,7 @@
                             <div class="card-header">
                                 <h5>
                                     {{ 'คกท.-คง.-0' . $confirmStudents->first()->documents->id_document . ' | ' . $confirmStudents->first()->documents->document }}
+                                    ({{ $projectItems->project_status }})
                                 </h5>
                                 <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
                             </div>
@@ -315,6 +396,22 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
+                                        <fieldset>
+                                            <legend>หมายเหตุ</legend>
+                                            <ul>
+                                                @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
+                                                    @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
+                                                        <li>
+                                                            <span>
+                                                                {{ $comment->comment . ' โดย ' . $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                            </span>
+                                                        </li>
+                                                    @endforeach
+                                                @endforeach
+                                            </ul>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-12">
                                         <form
                                             wire:submit="confirmDocument({{ $confirmStudents->first()->id_document }}, {{ $projectItems->id_project }})">
 
@@ -340,9 +437,6 @@
                                                             type="submit">
                                                             {{ $currentConfirmStudent->confirm_status ? 'ยืนยันแล้ว' : 'ยืนยัน' }}
                                                         </button>
-                                                        @unless ($currentConfirmStudent->confirm_status)
-                                                            <a class="btn btn-danger" href="#">ปฏิเสธ</a>
-                                                        @endunless
                                                     </div>
                                                 </div>
                                             @endif
@@ -356,6 +450,7 @@
                             <div class="card-header">
                                 <h5>
                                     {{ 'คกท.-คง.-0' . $confirmStudents->first()->documents->id_document . ' | ' . $confirmStudents->first()->documents->document }}
+                                    ({{ $projectItems->project_status }})
                                 </h5>
                                 <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
                             </div>
@@ -461,6 +556,22 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-12">
+                                        <fieldset>
+                                            <legend>หมายเหตุ</legend>
+                                            <ul>
+                                                @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
+                                                    @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
+                                                        <li>
+                                                            <span>
+                                                                {{ $comment->comment . ' โดย ' . $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                            </span>
+                                                        </li>
+                                                    @endforeach
+                                                @endforeach
+                                            </ul>
+                                        </fieldset>
+                                    </div>
                                     <div class="col-12">
                                         <form
                                             wire:submit="confirmDocument({{ $confirmStudents->first()->id_document }}, {{ $projectItems->id_project }})">
@@ -540,6 +651,7 @@
                             <div class="card-header">
                                 <h5>
                                     {{ 'คกท.-คง.-0' . $confirmStudents->first()->documents->id_document . ' | ' . $confirmStudents->first()->documents->document }}
+                                    ({{ $projectItems->project_status }})
                                 </h5>
                                 <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
                             </div>
@@ -646,6 +758,22 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
+                                        <fieldset>
+                                            <legend>หมายเหตุ</legend>
+                                            <ul>
+                                                @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
+                                                    @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
+                                                        <li>
+                                                            <span>
+                                                                {{ $comment->comment . ' โดย ' . $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                            </span>
+                                                        </li>
+                                                    @endforeach
+                                                @endforeach
+                                            </ul>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-12">
                                         <form
                                             wire:submit="confirmDocument({{ $confirmStudents->first()->id_document }}, {{ $projectItems->id_project }})">
 
@@ -671,9 +799,6 @@
                                                             type="submit">
                                                             {{ $currentConfirmStudent->confirm_status ? 'ยืนยันแล้ว' : 'ยืนยัน' }}
                                                         </button>
-                                                        @unless ($currentConfirmStudent->confirm_status)
-                                                            <a class="btn btn-danger" href="#">ปฏิเสธ</a>
-                                                        @endunless
                                                     </div>
                                                     <div>
                                                         @switch($documentId)
@@ -734,6 +859,7 @@
                             <div class="card-header">
                                 <h5>
                                     {{ 'คกท.-คง.-0' . $confirmStudents->first()->documents->id_document . ' | ' . $confirmStudents->first()->documents->document }}
+                                    ({{ $projectItems->project_status }})
                                 </h5>
                                 <span>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}</span>
                             </div>
@@ -816,6 +942,22 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
+                                        <fieldset>
+                                            <legend>หมายเหตุ</legend>
+                                            <ul>
+                                                @foreach ($projectItems->comments->groupBy('id_document') as $commentId => $commentsGroup)
+                                                    @foreach ($commentsGroup->where('id_document', $documentId) as $comment)
+                                                        <li>
+                                                            <span>
+                                                                {{ $comment->comment . ' โดย ' . $comment->teacher->name . ' ' . $comment->teacher->surname }}
+                                                            </span>
+                                                        </li>
+                                                    @endforeach
+                                                @endforeach
+                                            </ul>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-12">
                                         <form
                                             wire:submit="confirmDocument({{ $confirmStudents->first()->id_document }}, {{ $projectItems->id_project }})">
 
@@ -831,7 +973,6 @@
                                                     ->where('id_document', $documentId)
                                                     ->where('id_project', $projectItems->id_project)
                                                     ->every(fn($teacher) => $teacher->confirm_status == true);
-
                                             @endphp
 
                                             @if ($currentConfirmStudent)
@@ -842,9 +983,6 @@
                                                             type="submit">
                                                             {{ $currentConfirmStudent->confirm_status ? 'ยืนยันแล้ว' : 'ยืนยัน' }}
                                                         </button>
-                                                        @unless ($currentConfirmStudent->confirm_status)
-                                                            <a class="btn btn-danger" href="#">ปฏิเสธ</a>
-                                                        @endunless
                                                     </div>
                                                     <div>
                                                         @switch($documentId)

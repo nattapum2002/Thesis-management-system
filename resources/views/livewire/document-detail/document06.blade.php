@@ -95,12 +95,18 @@
                                             x-model="approve_fix" x-bind:disabled="approve || not_approve">
                                         <label for="approve_fix">ผ่าน/แก้ไขใหม่</label>
                                         <textarea x-show="approve_fix" class="form-control mt-2" wire:model="approve_fix_comment"></textarea>
+                                        <div class="text-danger">@error('approve_fix_comment')
+                                            {{ $message }}
+                                        @enderror</div>
                                     </li>
                                     <li>
                                         <input wire:model="not_approve" type="checkbox" id="not_approve"
                                             x-model="not_approve" x-bind:disabled="approve || approve_fix">
                                         <label for="not_approve">ไม่ผ่าน</label>
                                         <textarea x-show="not_approve" class="form-control mt-2" wire:model="not_approve_comment"></textarea>
+                                        <div class="text-danger">@error('not_approve_comment')
+                                            {{ $message }}
+                                        @enderror</div>
                                     </li>
                                 </ul>
                             </div>
@@ -136,6 +142,9 @@
                                 <label for="admin_approve_fix_choice">ควรปรับผลประเมินเป็น..</label>
                                 <div x-show="admin_approve_fix_choice">
                                     <textarea class="form-control" wire:model="admin_approve_fix_choice_comment" id="admin_approve_fix_choice_comment"></textarea>
+                                    <div class="text-danger">@error('admin_approve_fix_choice_comment')
+                                        {{ $message }}
+                                    @enderror</div>
                                 </div>
                             </div>
                         </div>
@@ -144,6 +153,9 @@
                                 <div x-show="admin_approve_fix_choice">
                                     <label for="">เนื่องจาก</label>
                                     <textarea class="form-control" wire:model="admin_approve_fix_comment" id="admin_approve_fix_comment"></textarea>
+                                    <div class="text-danger">@error('admin_approve_fix_comment')
+                                        {{ $message }}
+                                    @enderror</div>
                                 </div>
                             </div>
                         </div>
@@ -151,6 +163,11 @@
                             <div class="alert alert-success">
                                 {{ session('comment success') }}
                             </div>
+                        @elseif (session()->has('error')){
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        }
                         @endif
                         <button class="btn btn-success m-3" type="submit">บันทึกความเห็น</button>
                     </div>
@@ -179,6 +196,9 @@
                             <div x-show="branch_head_approve_fix_choice">
                                 <textarea class="form-control" wire:model="branch_head_approve_fix_choice_comment"
                                     id="branch_head_approve_fix_choice_comment"></textarea>
+                                    <div class="text-danger">@error('branch_head_approve_fix_choice_comment')
+                                        {{ $message }}
+                                    @enderror</div>
                             </div>
                         </div>
                     </div>
@@ -187,6 +207,9 @@
                             <div x-show="branch_head_approve_fix_choice">
                                 <label for="">เนื่องจาก</label>
                                 <textarea class="form-control" wire:model="branch_head_approve_fix_comment" id="branch_head_approve_fix_comment"></textarea>
+                                <div class="text-danger">@error('branch_head_approve_fix_comment')
+                                    {{ $message }}
+                                @enderror</div>
                             </div>
                         </div>
                     </div>

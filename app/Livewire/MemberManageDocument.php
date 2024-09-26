@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Confirm_student;
+use App\Models\Document_submission_schedule;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -31,7 +32,8 @@ class MemberManageDocument extends Component
                 $query->where('id_student', Auth::guard('members')->user()->id_student);
             })
             ->get();
+        $document_time = Document_submission_schedule::where('status', true)->get();
         // dd($projects);
-        return view('livewire.member-manage-document', ['projects' => $projects]);
+        return view('livewire.member-manage-document', ['projects' => $projects , 'document_time' => $document_time]);
     }
 }

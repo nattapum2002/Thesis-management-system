@@ -46,7 +46,7 @@ class LoginMember extends Component
     }
 
     public function render()
-    {
+    {   
         return view('livewire.account.login-member');
     }
 }
