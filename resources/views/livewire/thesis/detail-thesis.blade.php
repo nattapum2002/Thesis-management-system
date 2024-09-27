@@ -35,8 +35,12 @@
                     <a href="{{ url('storage/' . $articles->file_dissertation) }}" target="_blank">PDF</a>
                 </div>
                 <div class="col-lg-6">
-                    <h3>{{ $projects->project_name_th }}</h3>
-                    <h4>{{ $projects->project_name_en }}</h4>
+                    @if ($articles->title != $projects->project_name_th)
+                        <h3>{{ $articles->title }}</h3>
+                    @else
+                        <h3>{{ $projects->project_name_th }}</h3>
+                        <h4>{{ $projects->project_name_en }}</h4>
+                    @endif
                     <div>
                         {!! nl2br(e($articles->details)) !!}
                     </div>

@@ -42,7 +42,7 @@ class DetailApproveThesis extends Component
         $rules = [];
 
         if ($this->toggle['thesis_image']) {
-            $rules['thesis_image'] = 'required|image|max:2048';
+            $rules['thesis_image'] = 'required|mimes:jpg,jpeg,png|max:2048';
         }
 
         if ($this->toggle['title']) {
@@ -68,7 +68,7 @@ class DetailApproveThesis extends Component
         }
 
         if ($this->toggle['file_dissertation']) {
-            $rules['file_dissertation'] = 'required|mimes:pdf';
+            $rules['file_dissertation'] = 'required|mimes:pdf|max:12288';
         }
 
         return $rules;
@@ -78,7 +78,7 @@ class DetailApproveThesis extends Component
     {
         return [
             'thesis_image.required' => 'กรุณาเลือกรูปภาพ',
-            'thesis_image.image' => 'กรุณาเลือกรูปภาพ',
+            'thesis_image.mimes' => 'กรุณาเลือกรูปภาพ jpg, jpeg, png',
             'thesis_image.max' => 'กรุณาเลือกรูปภาพไม่เกิน 2MB',
             'title.required' => 'กรุณาเลือกโครงงาน',
             'other_title.required_if' => 'กรุณากรอกโครงงาน',
@@ -89,6 +89,7 @@ class DetailApproveThesis extends Component
             'status.required' => 'กรุณาเลือกสถานะ',
             'file_dissertation.required' => 'กรุณาเลือกไฟล์',
             'file_dissertation.mimes' => 'กรุณาเลือกไฟล์ pdf',
+            'file_dissertation.max' => 'กรุณาเลือกไฟล์ไม่เกิน 12MB',
         ];
     }
 
@@ -101,11 +102,12 @@ class DetailApproveThesis extends Component
     {
         $this->validate();
 
+        $this->path_thesis_image = $this->thesis_image->storeAs('thesis_image', $this->thesis_image->getClientOriginalName(), 'public');
+        $this->path_thesis_file = $this->file_dissertation->storeAs('thesis_file', $this->file_dissertation->getClientOriginalName(), 'public');
+
         if ($index == 'thesis_image') {
-            $this->path_thesis_image = $this->thesis_image->storeAs('thesis_image', $this->thesis_image->getClientOriginalName(), 'public');
             Dissertation_article::where('id_dissertation_article', $this->thesisId)->update([$index => $this->path_thesis_image], ['updated_at' => now()]);
         } else if ($index == 'thesis_file') {
-            $this->path_thesis_file = $this->file_dissertation->storeAs('thesis_file', $this->file_dissertation->getClientOriginalName(), 'public');
             Dissertation_article::where('id_dissertation_article', $this->thesisId)->update([$index => $this->path_thesis_file], ['updated_at' => now()]);
         } else if ($index == 'title') {
             if ($this->title == 'อื่นๆ') {
@@ -137,8 +139,8 @@ class DetailApproveThesis extends Component
         $this->other_title = $this->thesis->title;
         $this->details = $this->thesis->details;
         $this->year_published = $this->thesis->year_published;
-        $this->path_thesis_image = $this->thesis->thesis_image;
-        $this->path_thesis_file = $this->thesis->file_dissertation;
+        $this->thesis_image = $this->thesis->thesis_image;
+        $this->file_dissertation = $this->thesis->file_dissertation;
         $this->type = $this->thesis->type;
         $this->other_type = $this->thesis->type;
         $this->status = $this->thesis->status;

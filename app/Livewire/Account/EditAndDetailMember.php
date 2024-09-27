@@ -7,7 +7,6 @@ use App\Models\Course;
 use App\Models\Level;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
 
@@ -49,7 +48,7 @@ class EditAndDetailMember extends Component
         $rules = [];
 
         if ($this->toggle['student_image']) {
-            $rules['student_image'] = 'required|image|max:2048';
+            $rules['student_image'] = 'required|mimes:jpg,jpeg,png|max:2048';
         }
 
         if ($this->toggle['prefix']) {
@@ -94,7 +93,7 @@ class EditAndDetailMember extends Component
     {
         return [
             'student_image.required' => 'กรุณาอัปโหลดรูปภาพนักเรียน',
-            'student_image.image' => 'ไฟล์ที่อัปโหลดต้องเป็นรูปภาพ',
+            'student_image.mimes' => 'กรุณาเลือกไฟล์รูปภาพ jpg, jpeg, png',
             'student_image.max' => 'ไฟล์รูปภาพต้องไม่เกิน 2MB',
 
             'prefix.required' => 'กรุณาเลือกคํานําหน้า',
@@ -132,6 +131,8 @@ class EditAndDetailMember extends Component
     {
         $this->validate();
 
+        $this->path_student_image = $this->student_image->storeAs('student_image', $this->student_image->getClientOriginalName(), 'public');
+
         if ($index == 'password') {
 
             if (!Hash::check($this->old_password, $this->student->password)) {
@@ -142,7 +143,6 @@ class EditAndDetailMember extends Component
             $this->student->password = Hash::make($this->new_password);
             $this->student->save();
         } else if ($index == 'student_image') {
-            $this->path_student_image = $this->student_image->storeAs('student_image', $this->student_image->getClientOriginalName(), 'public');
             Member::where('id_student', $this->studentId)->update([$index => $this->path_student_image], ['updated_at' => now()]);
         } else if ($index == 'prefix' && $this->prefix == 'อื่นๆ') {
             Member::where('id_student', $this->studentId)->update([$index => $this->other_prefix], ['updated_at' => now()]);
@@ -166,7 +166,7 @@ class EditAndDetailMember extends Component
         $this->levels = Level::all();
         $this->student = Member::with('level', 'course')->find(Auth::guard('members')->user()->id_student);
         $this->studentId = $this->student->id_student;
-        $this->path_student_image = $this->student->student_image;
+        $this->student_image = $this->student->student_image;
         $this->other_prefix = $this->student->prefix;
         $this->name = $this->student->name;
         $this->surname = $this->student->surname;
