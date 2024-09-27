@@ -162,7 +162,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-3">
                                         <fieldset>
                                             <legend>หมายเหตุ</legend>
                                             <ul>
@@ -181,7 +181,7 @@
                                     <div class="col-12">
                                         {{-- <form
                                             wire:submit="confirmDocument({{ $confirmStudents->first()->id_document }}, {{ $projectItems->id_project }})"> --}}
-
+                                            
                                         @php
                                             $currentConfirmStudent = $confirmStudents->firstWhere(
                                                 'id_student',
@@ -232,7 +232,7 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <div>
+                                        <div class="mb-3">
                                             @if ($submissionDoc5 && $isDoc5Expired)
                                                 <div class="d-flex justify-content-end">
                                                     <button class="btn btn-primary" disabled>สร้างเอกสาร 05 (หมดเวลา)</button>
@@ -262,8 +262,12 @@
                                                     </div>
                                                 </div>
                                             @endif
+                                            
                                         </div>
-
+                                        <div class="d-flex justify-content-end">
+                                            <a href="/pdf/03/{{ $projectItems->id_project }}" class="btn btn-primary">ดูเอกสาร 03</a>
+                                        </div>
+                                            
 
                                         {{-- Check if time has passed for document 5 --}}
 
@@ -438,6 +442,9 @@
                                                             {{ $currentConfirmStudent->confirm_status ? 'ยืนยันแล้ว' : 'ยืนยัน' }}
                                                         </button>
                                                     </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <a href="/pdf/04/{{ $projectItems->id_project }}" class="btn btn-primary">ดูเอกสาร 04</a>
+                                                    </div>
                                                 </div>
                                             @endif
                                         </form>
@@ -589,8 +596,14 @@
                                                     ->where('id_project', $projectItems->id_project)
                                                     ->every(fn($teacher) => $teacher->confirm_status == true);
                                             @endphp
+                                             @if ($currentConfirmStudent)
 
-                                            @if ($allTeachersConfirmed)
+                                                 <div class="d-flex justify-content-end">
+                                                     <a href="/pdf/06/{{ $projectItems->id_project }}" class="btn btn-primary">ดูเอกสาร 06</a>
+                                                 </div>
+                                            
+                                            @endif
+                                            {{-- @if ($allTeachersConfirmed)
                                                 <div class="d-flex justify-content-end">
                                                     <div>
                                                         @switch($documentId)
@@ -640,7 +653,7 @@
                                                         @endswitch
                                                     </div>
                                                 </div>
-                                            @endif
+                                            @endif --}}
                                         </form>
                                     </div>
                                 </div>
@@ -800,14 +813,19 @@
                                                             {{ $currentConfirmStudent->confirm_status ? 'ยืนยันแล้ว' : 'ยืนยัน' }}
                                                         </button>
                                                     </div>
+                                            
+
+                                                 
+                                            
+                                           
                                                     <div>
-                                                        @switch($documentId)
-                                                            @case(1)
+                                                        {{-- @switch($documentId) --}}
+                                                            {{-- @case(1)
                                                                 <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
                                                                     href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-02') : '#' }}">
                                                                     สร้างเอกสาร 02
                                                                 </a>
-                                                            @break
+                                                            @break --}}
 
                                                             {{-- @case(3)
                                                                 @if (!3)
@@ -844,9 +862,12 @@
                                                                 @endif
                                                             @break --}}
 
-                                                            @default
-                                                        @endswitch
+                                                            {{-- @default
+                                                        @endswitch --}}
                                                     </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end">
+                                                    <a href="/pdf/07/{{ $projectItems->id_project }}" class="btn btn-primary">ดูเอกสาร 07</a>
                                                 </div>
                                             @endif
                                         </form>
@@ -990,14 +1011,18 @@
                                                                 @if ($projectItems->confirmStudents->where('id_document', 2)->count() > 0)
                                                                     <button class="btn btn-primary" href=""
                                                                         disabled>สร้างเอกสาร 02 แล้ว</button>
+                                                                        <a href="pdf/01/{{ $projectItems->id_project }}" class="btn btn-primary">ดูเอกสาร 01</a>
                                                                 @else
                                                                     <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
                                                                         href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-02') : '#' }}">
                                                                         {{ $allStudentsConfirmed && $allTeachersConfirmed ? 'สร้างเอกสาร 02' : 'สร้างเอกสาร 2 (รอการอนุมัติ)' }}
                                                                     </a>
+                                                                    <a href="/pdf/01/{{ $projectItems->id_project }}" class="btn btn-primary">ดูเอกสาร 01</a>
                                                                 @endif
                                                             @break
-
+                                                            @case(2)
+                                                                <a href="/pdf/02/{{ $projectItems->id_project }}" class="btn btn-primary">ดูเอกสาร 02</a>
+                                                            @break
                                                             @case(3)
                                                                 @if (!3)
                                                                     <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
