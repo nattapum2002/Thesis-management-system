@@ -14,10 +14,13 @@ use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class TeacherManageAllSubmitDocument extends Component
 {
-    public $not_approve_document, $not_approve_project, $id_teacher, $id_position, $another_comment, $members, $teachers, $project;
+    use WithPagination;
+    
+    public $not_approve_document, $not_approve_project, $id_teacher, $id_position, $another_comment, $members, $teachers, $project, $search;
     public function teacher_document($id_document, $id_project)
     {
 
@@ -188,9 +191,14 @@ class TeacherManageAllSubmitDocument extends Component
         $this->not_approve_document = new Document(); // กำหนดค่าเริ่มต้น
         $this->not_approve_project = new Project();  // กำหนดค่าเริ่มต้น
     }
+    public function find()
+    {
+        $this->resetPage();
+    }
     public function render()
     {
-        $this->project = Project::with([
+        // Make sure to apply the active tab for your pagination query
+        $projects = Project::with([
             'confirmStudents.student',
             'confirmStudents.documents',
             'confirmTeachers.teacher',
@@ -198,21 +206,26 @@ class TeacherManageAllSubmitDocument extends Component
             'comments.project',
             'comments.teacher'
         ])
-            ->whereHas('confirmTeachers', function ($query) {
-                $query->where('id_teacher', Auth::guard('teachers')->user()->id_teacher);
-            })
-            ->orderByRaw("(
-                SELECT CASE WHEN confirm_status = false THEN 0 ELSE 1 END
-                FROM confirm_teachers 
-                WHERE confirm_teachers.id_project = projects.id_project
-                LIMIT 1
-            )")
-            ->get();
+        ->whereHas('confirmTeachers', function ($query) {
+            $query->where('id_teacher', Auth::guard('teachers')->user()->id_teacher);
+        })
+        ->where(function ($query) {
+            $query->where('project_name_th', 'like', '%' . $this->search . '%')
+                  ->orWhere('project_name_en', 'like', '%' . $this->search . '%');
+        })
+        ->orderByRaw("(
+            SELECT CASE WHEN confirm_status = false THEN 0 ELSE 1 END
+            FROM confirm_teachers 
+            WHERE confirm_teachers.id_project = projects.id_project
+            LIMIT 1
+        )")
+        ->get();
 
-        $this->members = optional($this->project->first())->members;
-        $this->teachers = optional($this->project->first())->teachers;
+        // Fetching members and teachers for the first project
+        $this->members = optional($projects->first())->members;
+        $this->teachers = optional($projects->first())->teachers;
 
-        //  dd($projects);
-        return view('livewire.document.teacher-manage-all-submit-document', ['projects' => $this->project]);
+        return view('livewire.document.teacher-manage-all-submit-document', ['projects' => $projects]);
     }
+
 }

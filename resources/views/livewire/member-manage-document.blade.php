@@ -1088,13 +1088,9 @@
                                                                         </a>
                                                                     @break
 
-                                                                    @case(6)
-                                                                        @if (!6)
-                                                                            <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                                href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-06') : '#' }}">
-                                                                                สร้างเอกสาร 05
-                                                                            </a>
-                                                                        @endif
+                                                                    @case(5)
+                                                                        <a href="/pdf/05/{{ $projectItems->id_project }}"
+                                                                            class="btn btn-primary">ดูเอกสาร 05</a>
                                                                     @break
 
                                                                     @default
@@ -1106,11 +1102,44 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endswitch
-                        </div>
+                                @endswitch
+                            </div>
                     @endforeach
             @endforeach
-    </div>
-    </section>
+            <div class="d-flex justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <!-- Customize Previous Link -->
+                        <li class="page-item {{ $projects->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $projects->previousPageUrl() }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+
+                        <!-- Pagination Links -->
+                        @foreach ($projects->links()->elements as $element)
+                            @if (is_string($element))
+                                <!-- Dots -->
+                                <li class="page-item disabled"><span class="page-link">{{ $element }}</span></li>
+                            @endif
+
+                            @if (is_array($element))
+                                @foreach ($element as $page => $url)
+                                    <li class="page-item {{ $page == $projects->currentPage() ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+                            @endif
+                        @endforeach
+
+                        <!-- Customize Next Link -->
+                        <li class="page-item {{ !$projects->hasMorePages() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $projects->nextPageUrl() }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
     </div>
