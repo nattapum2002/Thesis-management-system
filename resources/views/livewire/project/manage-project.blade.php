@@ -84,10 +84,11 @@
                                                 };
                                             @endphp
 
-                                            <a class="btn btn-orange btn-sm" style="float: right;"
-                                                href="{{ route($route, $project->id_project) }}">รายละเอียด</a>
+                                            <a class="btn btn-orange btn-sm"
+                                                href="{{ route($route, $project->id_project) }}"><i
+                                                    class='bx bx-detail'></i></a>
 
-                                            <div class="dropdown" style="float: right;">
+                                            {{-- <div class="dropdown" style="float: right;">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class='bx bx-printer'></i>
@@ -101,7 +102,7 @@
                                                         </li>
                                                     @endforeach
                                                 </ul>
-                                            </div>
+                                            </div> --}}
 
                                         </td>
                                     </tr>
