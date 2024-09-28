@@ -7,7 +7,7 @@
         @endif
         <div class="row">
             <div class="col-12 mb-2">
-                <input type="text" class="form-control" placeholder="ค้นหาบทความ..."
+                <input type="text" class="form-control" placeholder="ค้นหาชื่อโปรเจค..."
                     wire:model.live.debounce.150ms="search">
             </div>
         </div>
@@ -1104,7 +1104,9 @@
                                     </div>
                                 </div>
                             @endswitch
+                        </div>
                     @endforeach
+                </div>
             @endforeach
             <div class="d-flex justify-content-center">
                 <nav aria-label="Page navigation example">
