@@ -50,6 +50,9 @@ class ApproveNews extends Component
     public function render()
     {
         $news = News::with('teacher')
+            ->whereHas('teacher', function ($query) {
+                $query->where('user_type', '!=', 'Admin');
+            })
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%');
             })

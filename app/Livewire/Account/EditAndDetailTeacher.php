@@ -48,11 +48,11 @@ class EditAndDetailTeacher extends Component
         $rules = [];
 
         if ($this->toggle['teacher_image']) {
-            $rules['teacher_image'] = 'required|image|max:2048';
+            $rules['teacher_image'] = 'required|mimes:jpg,jpeg,png|max:2048';
         }
 
         if ($this->toggle['signature_image']) {
-            $rules['signature_image'] = 'required|image|max:2048';
+            $rules['signature_image'] = 'required|mines:png|max:2048';
         }
 
         if ($this->toggle['prefix']) {
@@ -101,11 +101,11 @@ class EditAndDetailTeacher extends Component
     {
         return [
             'teacher_image.required' => 'กรุณาอัปโหลดรูปภาพอาจารย์',
-            'teacher_image.image' => 'ไฟล์ที่อัปโหลดต้องเป็นรูปภาพ',
+            'teacher_image.mimes' => 'ไฟล์ที่อัปโหลดต้องเป็นรูปภาพ jpg, jpeg, png',
             'teacher_image.max' => 'ไฟล์รูปภาพต้องไม่เกิน 2MB',
 
             'signature_image.required' => 'กรุณาอัปโหลดรูปภาพลายเซ็น',
-            'signature_image.image' => 'ไฟล์ที่อัปโหลดต้องเป็นรูปภาพ',
+            'signature_image.mimes' => 'ไฟล์ที่อัปโหลดต้องเป็นรูปภาพ png',
             'signature_image.max' => 'ไฟล์รูปภาพต้องไม่เกิน 2MB',
 
             'prefix.required' => 'กรุณาเลือกคํานําหน้า',
@@ -145,6 +145,9 @@ class EditAndDetailTeacher extends Component
     {
         $this->validate();
 
+        $this->path_teacher_image = $this->teacher_image->storeAs('teacher_image', $this->teacher_image->getClientOriginalName(), 'public');
+        $this->path_signature_image = $this->signature_image->storeAs('signature_image', $this->signature_image->getClientOriginalName(), 'public');
+
         if ($index == 'password') {
 
             if (!Hash::check($this->old_password, $this->teacher->password)) {
@@ -155,10 +158,8 @@ class EditAndDetailTeacher extends Component
             $this->teacher->password = Hash::make($this->new_password);
             $this->teacher->save();
         } else if ($index == 'teacher_image') {
-            $this->path_teacher_image = $this->teacher_image->storeAs('teacher_image', $this->teacher_image->getClientOriginalName(), 'public');
             Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->path_teacher_image], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         } else if ($index == 'signature_image') {
-            $this->path_signature_image = $this->signature_image->storeAs('signature_image', $this->signature_image->getClientOriginalName(), 'public');
             Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->path_signature_image], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
         } else if ($index == 'prefix' && $this->prefix == 'อื่นๆ') {
             Teacher::where('id_teacher', $this->teacherId)->update([$index => $this->other_prefix], ['updated_at' => Auth::guard('teachers')->user()->id_teacher]);
@@ -182,8 +183,8 @@ class EditAndDetailTeacher extends Component
     {
         $this->teacher = Teacher::find(Auth::guard('teachers')->user()->id_teacher);
         $this->teacherId = $this->teacher->id_teacher;
-        $this->path_teacher_image = $this->teacher->teacher_image;
-        $this->path_signature_image = $this->teacher->signature_image;
+        $this->teacher_image = $this->teacher->teacher_image;
+        $this->signature_image = $this->teacher->signature_image;
         $this->other_prefix = $this->teacher->prefix;
         $this->name = $this->teacher->name;
         $this->surname = $this->teacher->surname;

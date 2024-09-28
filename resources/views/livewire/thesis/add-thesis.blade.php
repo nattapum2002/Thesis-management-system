@@ -33,8 +33,10 @@
                         <td>
                             <div class="input-group">
                                 @if (Auth::guard('teachers')->check())
-                                    <input type="text" class="form-control" wire:model="add_project"
-                                        placeholder="ชี่อบทความ">
+                                    <input type="text" class="form-control" wire:model="add_project_th"
+                                        placeholder="ชี่อบทความภาษาไทย">
+                                    <input type="text" class="form-control" wire:model="add_project_en"
+                                        placeholder="ชี่อบทความภาษาอังกฤษ">
                                 @else
                                     <select class="form-select" wire:model.live="add_project">
                                         <option selected>ชี่อบทความ</option>

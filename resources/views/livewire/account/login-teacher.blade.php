@@ -57,14 +57,22 @@
 </div> --}}
 
 <div>
-    @if (session('message'))
-        <div class="alert alert-danger" role="alert">
-            {{ session('message') }}
-        </div>
-    @endif
     <section id="login-teacher">
         <div class="container">
             <div class="row justify-content-center">
+                @if (session('messageInfo'))
+                    <div class="alert alert-info" role="alert">
+                        {{ session('messageInfo') }}
+                    </div>
+                @elseif (session('messageDanger'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('messageDanger') }}
+                    </div>
+                @elseif (session('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('message') }}
+                    </div>
+                @endif
                 <div class="col-lg-6">
                     <form wire:submit.prevent="login">
                         <h3>เข้าสู่ระบบสำหรับอาจารย์</h3>

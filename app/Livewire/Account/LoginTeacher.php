@@ -44,14 +44,12 @@ class LoginTeacher extends Component
                 }
             } else {
                 Auth::guard('teachers')->logout();
-                session()->flash('message', 'บัญชีของคุณถูกระงับการใช้งาน กรุณาติดต่ออาจารย์ประจำวิชา');
+                session()->flash('messageInfo', 'บัญชีของคุณถูกระงับการใช้งาน กรุณาติดต่ออาจารย์ประจำวิชา');
             }
         } else {
             // Check if the username exists first to provide a specific error message
-            session()->flash('message', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+            session()->flash('messageDanger', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
         }
-
-        $this->addError('username', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
     }
 
     public function render()
