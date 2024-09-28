@@ -837,11 +837,15 @@
                 {{ session('success') }}
             </div>
         @endif
-        <div class="row">
-            <div class="col-12 mb-2">
-                <input type="text" class="form-control" placeholder="ค้นหาโปรเจค..."
-                    wire:model.live.debounce.150ms="search">
-            </div>
+        <div class="row mb-3">
+            <form wire:submit.prevent="find" class="d-flex">
+                <div class="col-10">
+                    <input type="text" class="form-control" placeholder="ค้นหาโปรเจค..." wire:model="search">
+                </div>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-primary w-100">ค้นหา</button>
+                </div>
+            </form>
         </div>
         <div class="tab">
             <button class="tablinks" onclick="openTabs(event, 'doc01')">เอกสาร 01</button>
