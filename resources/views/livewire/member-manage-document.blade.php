@@ -1102,8 +1102,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endswitch
-                            </div>
+                                </div>
+                            @endswitch
                     @endforeach
             @endforeach
             <div class="d-flex justify-content-center">
