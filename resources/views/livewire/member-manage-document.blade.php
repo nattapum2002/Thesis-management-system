@@ -459,7 +459,7 @@
                                                             </div>
                                                             <div class="d-flex justify-content-end">
                                                                 <a href="/pdf/04/{{ $projectItems->id_project }}"
-                                                                    class="btn btn-primary" target="_blank">ดูเอกสาร 04</a>
+                                                                    class="btn btn-primary" target="_blank">PDF</a>
                                                             </div>
                                                         </div>
                                                     @endif
@@ -892,7 +892,7 @@
                                                         </div>
                                                         <div class="d-flex justify-content-end">
                                                             <a href="/pdf/07/{{ $projectItems->id_project }}"
-                                                                class="btn btn-primary" target="_blank">ดูเอกสาร 07</a>
+                                                                class="btn btn-primary" target="_blank">PDF</a>
                                                         </div>
                                                     @endif
                                                 </form>
@@ -1043,23 +1043,19 @@
                                                                         @if ($projectItems->confirmStudents->where('id_document', 2)->count() > 0)
                                                                             <button class="btn btn-primary" href=""
                                                                                 disabled>สร้างเอกสาร 02 แล้ว</button>
-                                                                            <a href="/pdf/01/{{ $projectItems->id_project }}"
-                                                                                class="btn btn-primary" target="_blank">ดูเอกสาร
-                                                                                01</a>
                                                                         @else
                                                                             <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
                                                                                 href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-02') : '#' }}">
                                                                                 {{ $allStudentsConfirmed && $allTeachersConfirmed ? 'สร้างเอกสาร 02' : 'สร้างเอกสาร 2 (รอการอนุมัติ)' }}
                                                                             </a>
-                                                                            <a href="/pdf/01/{{ $projectItems->id_project }}"
-                                                                                class="btn btn-primary" target="_blank">ดูเอกสาร
-                                                                                01</a>
                                                                         @endif
+                                                                        <a href="/pdf/01/{{ $projectItems->id_project }}"
+                                                                            class="btn btn-primary" target="_blank">PDF</a>
                                                                     @break
 
                                                                     @case(2)
                                                                         <a href="/pdf/02/{{ $projectItems->id_project }}"
-                                                                            class="btn btn-primary" target="_blank">ดูเอกสาร 02</a>
+                                                                            class="btn btn-primary" target="_blank">PDF</a>
                                                                     @break
 
                                                                     @case(3)
@@ -1090,7 +1086,7 @@
 
                                                                     @case(5)
                                                                         <a href="/pdf/05/{{ $projectItems->id_project }}"
-                                                                            class="btn btn-primary">ดูเอกสาร 05</a>
+                                                                            class="btn btn-primary" target="_blank">PDF</a>
                                                                     @break
 
                                                                     @default
