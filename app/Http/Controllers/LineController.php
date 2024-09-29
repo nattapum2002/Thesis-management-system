@@ -79,10 +79,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\Confirm_teacher;
 use App\Models\Member;
 use App\Models\Teacher;
+use App\Services\LineMessageService;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
+use Carbon\Carbon;
 
 class LineController extends Controller
 {
@@ -167,6 +170,32 @@ class LineController extends Controller
                 return redirect()->route('branch-head.edit.branch-head');
             default:
                 return redirect()->route('welcome');
+        }
+    }
+
+    public function sendLineMessages()
+    {
+        foreach (Teacher::all() as $teacher) {
+            $projects = Confirm_teacher::where('id_teacher', $teacher->id_teacher)
+                ->distinct()
+                ->pluck('id_project');
+
+            $confirmCount = Confirm_teacher::where('id_teacher', $teacher->id_teacher)
+                ->whereIn('id_project', $projects)
+                ->where('confirm_status', false)
+                ->count();
+
+            if (now()->isMonday() && now()->format('H:i') == '08:00' && $confirmCount > 0) {
+                $message = $teacher->prefix . ' ' . $teacher->name . ' ' . $teacher->surname . ' มีโปรเจครอการอนุมัติ จํานวน ' . $confirmCount . ' โปรเจค';
+
+                if (!empty($teacher->id_line)) {
+                    $userId = $teacher->id_line;
+
+                    if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
+                        LineMessageService::sendMessage($userId, $message);
+                    }
+                }
+            }
         }
     }
 }

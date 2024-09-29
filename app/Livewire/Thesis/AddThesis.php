@@ -81,7 +81,7 @@ class AddThesis extends Component
                 ->where('project_name_en', $this->add_project_en)
                 ->where('project_status', 'Import')
                 ->value('id_project');
-            $title = $this->add_project;
+            $title = $this->add_project_th;
         } else {
             $id_project = $this->add_project;
             $title = Project::where('id_project', $this->add_project)->value('project_name_th');

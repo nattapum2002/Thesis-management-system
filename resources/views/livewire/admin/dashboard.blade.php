@@ -406,17 +406,16 @@
         new Chart(document.getElementById('thesisChart').getContext('2d'), {
             type: "doughnut",
             data: {
-                labels: ["Software", "Hardware"],
+                labels: @json($chartThesisLabels),
                 datasets: [{
-                    backgroundColor: ["#008080", "#708090"],
-                    data: [{{ $thesis->where('type', 'Software')->count() }},
-                        {{ $thesis->where('type', 'Hardware')->count() }}
-                    ]
+                    backgroundColor: @json($chartColors),
+                    data: @json($chartThesisData)
                 }]
             },
         });
     </script>
 @endscript
+
 @script
     <script>
         new Chart(document.getElementById('newsChart').getContext('2d'), {

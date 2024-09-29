@@ -92,7 +92,12 @@ class Dashboard extends Component
             ->groupBy('type')
             ->pluck('count')
             ->toArray();
-        // dd($chartNewsLabels);
+
+        $chartThesisLabels = Dissertation_article::pluck('type')->unique()->values()->toArray();
+        $chartThesisData = Dissertation_article::select('type', DB::raw('count(*) as count'))
+            ->groupBy('type')
+            ->pluck('count')
+            ->toArray();
 
 
         return view('livewire.admin.dashboard', [
@@ -108,7 +113,9 @@ class Dashboard extends Component
             'examSchedules' => $examSchedules,
             'chartColors' => $chartColors,
             'chartNewsLabels' => $chartNewsLabels,
-            'chartNewsData' => $chartNewsData
+            'chartNewsData' => $chartNewsData,
+            'chartThesisLabels' => $chartThesisLabels,
+            'chartThesisData' => $chartThesisData
         ]);
     }
 }
