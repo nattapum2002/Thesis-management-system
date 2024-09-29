@@ -193,6 +193,10 @@
                                                                         </button>
                                                                     @endif
                                                                 @endif
+                                                                @if (in_array($confirmTeacher?->id_position, [5, 6 , 7]))
+                                                                <a href="/pdf/03-score/{{ $projectItems->id_project }}"
+                                                                    class="btn btn-warning" target="_blank">ดูผลการสอบ</a>
+                                                                @endif
                                                                 @if (in_array($confirmTeacher?->teacher->user_type, ['Admin', 'Branch head']))
                                                                     <button class="btn btn-primary"
                                                                         wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
@@ -523,6 +527,10 @@
                                                                             role="button">อนุมัติ
                                                                         </button>
                                                                     @endif
+                                                                @endif
+                                                                @if (in_array($confirmTeacher?->id_position, [5, 6 , 7]))
+                                                                <a href="/pdf/06/{{ $projectItems->id_project }}"
+                                                                    class="btn btn-warning" target="_blank">ดูผลการสอบ</a>
                                                                 @endif
                                                                 @if (in_array($confirmTeacher?->teacher->user_type, ['Branch head', 'Admin']))
                                                                     <button class="btn btn-primary"
