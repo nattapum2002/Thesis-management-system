@@ -601,7 +601,7 @@
                         <td style="width: 1.8em"></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox" {{ $result->comment == 'ผ่าน' ? 'checked' : '' }}>
+                                <input type="checkbox" {{ optional($result)->comment == 'ผ่าน' ? 'checked' : '' }}>
                                 <label> ผ่าน</label>
                             </div>
                         </td>
@@ -610,7 +610,8 @@
                         <td></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox" {{ $result->comment == 'ผ่าน/แก้ไขใหม่' ? 'checked' : '' }}>
+                                <input type="checkbox"
+                                    {{ optional($result)->comment == 'ผ่าน/แก้ไขใหม่' ? 'checked' : '' }}>
                                 <label> ผ่าน/ แก้ไขใหม่</label>
                             </div>
                         </td>
@@ -623,8 +624,8 @@
                         </td>
                         <td colspan="6">
                             <div>
-                                @if ($result->comment == 'ผ่าน/แก้ไขใหม่')
-                                    <span class="dotted"> {{ $resultDetail->comment }} </span>
+                                @if (optional($result)->comment == 'ผ่าน/แก้ไขใหม่')
+                                    <span class="dotted"> {{ optional($resultDetail)->comment }} </span>
                                 @else
                                     .........................................................................................................................
                                     <br>.........................................................................................................................
@@ -638,7 +639,7 @@
                         <td></td>
                         <td colspan="9">
                             <div>
-                                <input type="checkbox" {{ $result->comment == 'ไม่ผ่าน' ? 'checked' : '' }}>
+                                <input type="checkbox" {{ optional($result)->comment == 'ไม่ผ่าน' ? 'checked' : '' }}>
                                 <label> ไม่ผ่าน</label>
                             </div>
                         </td>
@@ -651,8 +652,8 @@
                         </td>
                         <td colspan="6">
                             <div>
-                                @if ($result->comment == 'ไม่ผ่าน')
-                                    <span class="dotted"> {{ $resultDetail->comment }} </span>
+                                @if (optional($result)->comment == 'ไม่ผ่าน')
+                                    <span class="dotted"> {{ optional($resultDetail)->comment }} </span>
                                 @else
                                     .........................................................................................................................
                                     <br>.........................................................................................................................

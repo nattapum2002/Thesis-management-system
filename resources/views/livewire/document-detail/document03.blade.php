@@ -419,41 +419,46 @@
                     </form>
                 </div>
             @elseif (Auth::guard('teachers')->user()->user_type == 'Branch head')
-                <legend>ความเห็นของหัวหน้าสาขา</legend>
-                <form wire:submit.prevent="branch_head_approve_comment">
-                    <div x-data="{ branch_head_approve_fix: false, branch_head_approve: false }">
-                        <div class="row">
-                            <div class="col-12">
-                                <ul>
-                                    <li>
-                                        <input wire:model="branch_head_approve" type="checkbox" id="approve"
-                                            x-model="branch_head_approve" x-bind:disabled="branch_head_approve_fix">
-                                        <label for="approve">เห็นชอบ</label>
-                                    </li>
-                                    <li>
-                                        <input wire:model="branch_head_approve_fix" type="checkbox"
-                                            id="branch_head_approve_fix" x-model="branch_head_approve_fix"
-                                            x-bind:disabled="branch_head_approve">
-                                        <label for="branch_head_approve_fix">เห็นชอบให้มีการแก้ไข</label>
+                <div class="card-body">
+                    <fieldset>
+                        <legend>ความเห็นของหัวหน้าสาขา</legend>
+                        <form wire:submit.prevent="branch_head_approve_comment">
+                            <div x-data="{ branch_head_approve_fix: false, branch_head_approve: false }">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul>
+                                            <li>
+                                                <input wire:model="branch_head_approve" type="checkbox" id="approve"
+                                                    x-model="branch_head_approve"
+                                                    x-bind:disabled="branch_head_approve_fix">
+                                                <label for="approve">เห็นชอบ</label>
+                                            </li>
+                                            <li>
+                                                <input wire:model="branch_head_approve_fix" type="checkbox"
+                                                    id="branch_head_approve_fix" x-model="branch_head_approve_fix"
+                                                    x-bind:disabled="branch_head_approve">
+                                                <label for="branch_head_approve_fix">เห็นชอบให้มีการแก้ไข</label>
 
-                                    </li>
-                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    @if (session()->has('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                    @error('branch_head_approve_fix')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                    {{-- @error('branch_head_approve')
+                            @if (session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            @error('branch_head_approve_fix')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                            {{-- @error('branch_head_approve')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror --}}
-                    <button class="btn btn-success m-3" type="submit">บันทึกความเห็น</button>
-                </form>
+                            <button class="btn btn-success m-3" type="submit">บันทึกความเห็น</button>
+                        </form>
+                    </fieldset>
+                </div>
             @endif
         </div>
     </section>

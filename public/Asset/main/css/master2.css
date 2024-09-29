@@ -1634,6 +1634,76 @@ h5 {
     }
 }
 
+#document-detail-06 {
+    .card {
+        .card-body {
+            padding: 0px 15px;
+
+            fieldset {
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+
+                .row {
+                    margin-bottom: 10px;
+                }
+            }
+
+            legend {
+                font-size: large;
+                font-weight: 500;
+                color: var(--orange-color);
+                display: block;
+                padding-left: 2px;
+                padding-right: 2px;
+                margin-bottom: 2px;
+                border: none;
+            }
+
+            ul {
+                padding-left: 12px;
+                margin: 0;
+
+            }
+        }
+    }
+}
+
+#document-detail-07 {
+    .card {
+        .card-body {
+            padding: 0px 15px;
+
+            fieldset {
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+
+                .row {
+                    margin-bottom: 10px;
+                }
+            }
+
+            legend {
+                font-size: large;
+                font-weight: 500;
+                color: var(--orange-color);
+                display: block;
+                padding-left: 2px;
+                padding-right: 2px;
+                margin-bottom: 2px;
+                border: none;
+            }
+
+            ul {
+                padding-left: 12px;
+                margin: 0;
+
+            }
+        }
+    }
+}
+
 /* end create document */
 
 @media (max-width: 970px) {
