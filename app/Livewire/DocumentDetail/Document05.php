@@ -72,16 +72,16 @@ class Document05 extends Component
         $this->validate();
         DB::transaction(function () {
             $teacherIDs = collect($this->id_teacher)
-            ->filter()
-            ->map(function ($id_teacher) {
-                return Teacher::firstOrCreate(['id_teacher' => $id_teacher])->id_teacher;
-            })->toArray();
+                ->filter()
+                ->map(function ($id_teacher) {
+                    return Teacher::firstOrCreate(['id_teacher' => $id_teacher])->id_teacher;
+                })->toArray();
             // dd($teacherIDs);
             $existingDirector = Director::where([
                 'id_project' => $this->id_project,
                 'id_document' => 6,
             ]); // ใช้ first() เพื่อดึงข้อมูลที่ตรงกัน
-        
+
             $existingConfirmTeacher = Confirm_teacher::where([
                 'id_project' => $this->id_project,
                 'id_document' => 6,
@@ -108,7 +108,7 @@ class Document05 extends Component
                     'id_document' => 6,
                     'id_teacher' => $teacherID,
                 ]);
-            
+
                 // สร้าง Confirm_teacher ใหม่
                 Confirm_teacher::create([
                     'id_project' => $this->id_project,
@@ -118,58 +118,58 @@ class Document05 extends Component
                     'confirm_status' => false,
                 ]);
             }
-        
-        $admin_teacher = Teacher::where('user_type', 'Admin')->get();
-        foreach ($admin_teacher as $admin_teacher_items) {
-            Confirm_teacher::updateOrCreate(
-                [
-                    'id_teacher' => $admin_teacher_items->id_teacher,
-                    'id_document' => 6,
-                    'id_project' => $this->id_project,
-                    'id_position' => 3,
-                ],
-                [
-                    'confirm_status' => false,
-                ]
-            );
-        }
-        
-        foreach ($this->students as $studentID) {
-            Confirm_student::updateOrCreate(
-                [
-                    'id_document' => 6,
-                    'id_project' => $this->id_project,
-                    'id_student' => $studentID,
-                ],
-                [
-                    
-                    'confirm_status' => true,
-                ]
-            );
-        }
-        
-        $main_teacher = Adviser::where('id_project', $this->id_project)
-            ->where('id_position', 1)
-            ->first();
-        
-        if ($main_teacher) {
-            Confirm_teacher::updateOrCreate(
-                [
-                    'id_teacher' => $main_teacher->id_teacher,
-                    'id_document' => 6,
-                    'id_project' => $this->id_project,
-                    'id_position' => 1,
-                ],
-                [
-                    'confirm_status' => false,
-                ]
-            );
-        }
+
+            $admin_teacher = Teacher::where('user_type', 'Admin')->get();
+            foreach ($admin_teacher as $admin_teacher_items) {
+                Confirm_teacher::updateOrCreate(
+                    [
+                        'id_teacher' => $admin_teacher_items->id_teacher,
+                        'id_document' => 6,
+                        'id_project' => $this->id_project,
+                        'id_position' => 3,
+                    ],
+                    [
+                        'confirm_status' => false,
+                    ]
+                );
+            }
+
+            foreach ($this->students as $studentID) {
+                Confirm_student::updateOrCreate(
+                    [
+                        'id_document' => 6,
+                        'id_project' => $this->id_project,
+                        'id_student' => $studentID,
+                    ],
+                    [
+
+                        'confirm_status' => true,
+                    ]
+                );
+            }
+
+            $main_teacher = Adviser::where('id_project', $this->id_project)
+                ->where('id_position', 1)
+                ->first();
+
+            if ($main_teacher) {
+                Confirm_teacher::updateOrCreate(
+                    [
+                        'id_teacher' => $main_teacher->id_teacher,
+                        'id_document' => 6,
+                        'id_project' => $this->id_project,
+                        'id_position' => 1,
+                    ],
+                    [
+                        'confirm_status' => false,
+                    ]
+                );
+            }
             Exam_schedule::updateOrCreate([
                 'id_project' => $this->id_project,
                 'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                 'id_document' => 6,
-            ],[
+            ], [
                 'exam_day' => $this->date,
                 'exam_time' => $this->time,
                 'year_published' => $this->year,
@@ -180,11 +180,11 @@ class Document05 extends Component
             ]);
 
             Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
-                    ->where('id_project', $this->id_project)
-                    ->where('id_document', 5)
-                    ->update(['confirm_status' => true]);
-                    return session()->flash('success', 'บันทึกวันสอบเสร็จสิ้น');
-    });
+                ->where('id_project', $this->id_project)
+                ->where('id_document', 5)
+                ->update(['confirm_status' => true]);
+            return session()->flash('success', 'บันทึกวันสอบเสร็จสิ้น');
+        });
 
         $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Branch head')->pluck('id_teacher')->toArray())
             ->where('id_project', $this->id_project)
@@ -221,19 +221,19 @@ class Document05 extends Component
                     ->update([
                         'confirm_status' => true
                     ]);
-                    Comment::updateOrCreate([
-                        'id_project' => $this->id_project,
-                        'id_document' => 5,
-                        'id_comment_list' => 1,
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_position' => 4,
-                    ],[
-                        'comment' => 'อนุมัติ', 
-                    ]);
+                Comment::updateOrCreate([
+                    'id_project' => $this->id_project,
+                    'id_document' => 5,
+                    'id_comment_list' => 1,
+                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                    'id_position' => 4,
+                ], [
+                    'comment' => 'อนุมัติ',
+                ]);
             } else if ($this->branch_head_not_approve) {
                 $validateComment = $this->validate([
                     'branch_head_comment' => 'required',
-                ],[
+                ], [
                     'branch_head_comment.required' => 'กรุณากรอกความเห็น',
                 ]);
                 Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
@@ -242,15 +242,15 @@ class Document05 extends Component
                     ->update([
                         'confirm_status' => false
                     ]);
-                    Comment::updateOrCreate([
-                        'id_project' => $this->id_project,
-                        'id_document' => 5,
-                        'id_comment_list' => 1 ,
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_position' => 4,
-                    ],[
-                        'comment' => 'ไม่อนุมัติ เนื่องจาก', 
-                    ]);
+                Comment::updateOrCreate([
+                    'id_project' => $this->id_project,
+                    'id_document' => 5,
+                    'id_comment_list' => 1,
+                    'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                    'id_position' => 4,
+                ], [
+                    'comment' => 'ไม่อนุมัติ เนื่องจาก',
+                ]);
                 if ($this->branch_head_comment) {
                     Comment::updateOrCreate([
                         'id_project' => $this->id_project,
@@ -258,7 +258,7 @@ class Document05 extends Component
                         'id_comment_list' => 2,
                         'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
                         'id_position' => 4,
-                    ],[
+                    ], [
                         'comment' => $this->branch_head_comment,
                     ]);
                 }
@@ -291,7 +291,6 @@ class Document05 extends Component
             return session()->flash('success', 'บันทึกความเห็นเสร็จสิ้น');
         } else {
             return session()->flash('error', 'กรุณาเลือกอนุมัติ หรือ ไม่อนุมัติ');
-            
         }
     }
     public function mount($id_project, $id_document)

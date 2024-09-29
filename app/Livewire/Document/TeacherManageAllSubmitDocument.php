@@ -19,7 +19,7 @@ use Livewire\WithPagination;
 class TeacherManageAllSubmitDocument extends Component
 {
     use WithPagination;
-    
+
     public $not_approve_document, $not_approve_project, $id_teacher, $id_position, $another_comment, $members, $teachers, $project, $search;
     public function teacher_document($id_document, $id_project)
     {
@@ -206,20 +206,20 @@ class TeacherManageAllSubmitDocument extends Component
             'comments.project',
             'comments.teacher'
         ])
-        ->whereHas('confirmTeachers', function ($query) {
-            $query->where('id_teacher', Auth::guard('teachers')->user()->id_teacher);
-        })
-        ->where(function ($query) {
-            $query->where('project_name_th', 'like', '%' . $this->search . '%')
-                  ->orWhere('project_name_en', 'like', '%' . $this->search . '%');
-        })
-        ->orderByRaw("(
+            ->whereHas('confirmTeachers', function ($query) {
+                $query->where('id_teacher', Auth::guard('teachers')->user()->id_teacher);
+            })
+            ->where(function ($query) {
+                $query->where('project_name_th', 'like', '%' . $this->search . '%')
+                    ->orWhere('project_name_en', 'like', '%' . $this->search . '%');
+            })
+            ->orderByRaw("(
             SELECT CASE WHEN confirm_status = false THEN 0 ELSE 1 END
-            FROM confirm_teachers 
+            FROM confirm_teachers
             WHERE confirm_teachers.id_project = projects.id_project
             LIMIT 1
         )")
-        ->get();
+            ->get();
 
         // Fetching members and teachers for the first project
         $this->members = optional($projects->first())->members;
@@ -227,5 +227,4 @@ class TeacherManageAllSubmitDocument extends Component
 
         return view('livewire.document.teacher-manage-all-submit-document', ['projects' => $projects]);
     }
-
 }

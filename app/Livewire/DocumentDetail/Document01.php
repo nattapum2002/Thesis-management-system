@@ -92,7 +92,7 @@ class Document01 extends Component
             }
 
             if ($this->not_enough_Qualifications) {
-               
+
                 Comment::create([
                     'comment' => $this->not_enough_Qualifications[0],
                     'id_project' => $this->id_project,
@@ -117,7 +117,7 @@ class Document01 extends Component
             if ($this->admin_other_comment) {
                 $validateComment = $this->validate([
                     'admin_comment' => 'required'
-                ],[
+                ], [
                     'admin_comment.required' => 'กรุณากรอกเหตุผล'
                 ]);
                 Comment::create([
@@ -163,7 +163,7 @@ class Document01 extends Component
     {
         DB::transaction(function () {
             if ($this->branch_head_approve || $this->branch_head_not_approve) {
-                
+
                 $existingConfirm = Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
                     ->where('id_project', $this->id_project)
                     ->where('id_document', 1)
