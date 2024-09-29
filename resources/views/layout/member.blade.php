@@ -42,7 +42,7 @@
             <hr>
         </div>
         <ul class="sidebar-nav" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="sidebar-item">
+            {{-- <li class="sidebar-item">
                 <div class="sidebar-collapse">
                     <a href="#"
                         class="sidebar-link has-dropdown collapsed{{ Route::is('member.manage.submit.document') || Route::is('member.manage.document') ? 'off active' : '' }}"
@@ -73,6 +73,13 @@
                         </a>
                     </li>
                 </ul>
+            </li> --}}
+            <li class="sidebar-item">
+                <a class="sidebar-link {{ Route::is('member.manage.document') ? 'active' : '' }}"
+                    href="{{ route('member.manage.document') }}">
+                    <i class='nav-icon bx bx-book'></i>
+                    <span class="link-name">จัดการเอกสาร</span>
+                </a>
             </li>
             <li class="sidebar-item">
                 <div class="sidebar-collapse">
