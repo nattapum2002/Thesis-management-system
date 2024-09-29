@@ -249,7 +249,7 @@ class Document02 extends Component
                     ->where('id_document', 2)
                     ->
                     update([
-                            'confirm_status' => false,
+                            'confirm_status' => true,
                         ]
                     );
                      Comment::updateOrCreate(

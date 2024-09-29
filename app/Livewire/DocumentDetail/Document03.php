@@ -173,13 +173,10 @@ class Document03 extends Component
                             'comment' => $this->approve_fix_comment
                         ]
                     );
-                    Confirm_teacher::updateOrCreate([
-                        'id_document' => $this->id_document,
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_project' => $this->id_project,
-                    ], [
-                        'confirm_status' => true
-                    ]);
+                    Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                        ->where('id_project', $this->id_project)
+                        ->where('id_document', 3)
+                        ->update(['confirm_status' => true]);
                 } else if ($this->not_approve) {
                     $this->validate([
                         'not_approve_comment' => 'required'
@@ -229,13 +226,10 @@ class Document03 extends Component
                         ]
                     );
 
-                    Confirm_teacher::updateOrCreate([
-                        'id_document' => $this->id_document,
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_project' => $this->id_project,
-                    ], [
-                        'confirm_status' => true
-                    ]);
+                    Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                        ->where('id_project', $this->id_project)
+                        ->where('id_document', 3)
+                        ->update(['confirm_status' => true]);
                 }
             }
             return session()->flash('success', 'บันทึกความเห็นเสร็จสิ้น');

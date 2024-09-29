@@ -274,6 +274,10 @@ class Document06 extends Component
                             'comment' => $this->admin_approve_fix_comment
                         ]
                     );
+                    Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                    ->where('id_project', $this->id_project)
+                    ->where('id_document', 6)
+                    ->update(['confirm_status' => true]);
                 }
             }
             return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
@@ -308,6 +312,10 @@ class Document06 extends Component
                         'branch_head_approve_fix_choice_comment.required' => 'กรุณากรอกความเห็น',
                         'branch_head_approve_fix_comment.required' => 'กรุณากรอกความเห็น',
                     ]);
+                    Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                        ->where('id_project', $this->id_project)
+                        ->where('id_document', 6)
+                        ->update(['confirm_status' => true]);
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,

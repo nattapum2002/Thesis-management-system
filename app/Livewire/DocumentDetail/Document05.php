@@ -240,7 +240,7 @@ class Document05 extends Component
                     ->where('id_project', $this->id_project)
                     ->where('id_document', 5)
                     ->update([
-                        'confirm_status' => false
+                        'confirm_status' => true
                     ]);
                     Comment::updateOrCreate([
                         'id_project' => $this->id_project,

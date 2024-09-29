@@ -65,6 +65,10 @@ class Document07 extends Component
                             'comment' => $this->admin_approve_fix_comment
                         ]
                     );
+                    Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                        ->where('id_project', $this->id_project)
+                        ->where('id_document', 7)
+                        ->update(['confirm_status' => true]);
                 }
             }
             return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
@@ -121,6 +125,10 @@ class Document07 extends Component
                             'comment' => $this->branch_head_approve_fix_comment
                         ]
                     );
+                    Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                        ->where('id_project', $this->id_project)
+                        ->where('id_document', 7)
+                        ->update(['confirm_status' => true]);
                 }
                 return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
             }else{
