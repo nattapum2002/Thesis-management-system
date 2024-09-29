@@ -287,134 +287,174 @@
 <div>
 
     <section id="document-detail-03">
+
+
+
         <div class="card">
-            <div class="card-body">
-                <form wire:submit="score_calculate">
-                    <fieldset>
-                        <legend>ผลการสอบโครงการ</legend>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">หัวข้อพิจารณา</th>
-                                    <th scope="col">คะแนน</th>
-                                    @foreach ($projects as $ProjectItems)
-                                        @foreach ($ProjectItems->confirmStudents as $index => $Student)
-                                            <th scope="col">คนที่ {{ $index + 1 }}</th>
-                                        @endforeach
-                                    @endforeach
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($criterias as $key => $criterion)
+            @if (Auth::guard('teachers')->user()->user_type == 'Admin')
+                <div class="card-body">
+                    <form wire:submit="score_calculate">
+                        <fieldset>
+                            <legend>ผลการสอบโครงการ</legend>
+                            <table class="table table-striped">
+                                <thead>
                                     <tr>
-                                        <th scope="row"></th>
-                                        <td>{!! $criterion['name'] !!}</td>
-                                        <td>{{ $criterion['score'] }}</td>
-
-                                        @if (!in_array($key + 1, [2, 6, 9]))
-                                            <!-- Skip rows 2, 6, 9 -->
-                                            @foreach ($projects as $ProjectItems)
-                                                @foreach ($ProjectItems->confirmStudents as $index => $Student)
-                                                    <td>
-                                                        <input type="number"
-                                                            wire:model.live="score_student.{{ $Student->student->id_student }}.{{ $key }}"
-                                                            class="form-control" placeholder="" aria-label=""
-                                                            aria-describedby="basic-addon1"
-                                                            value="{{ $score_student[$Student->student->id_student][$key] ?? 0 }}"
-                                                            min="0" max="{{ $criterion['score'] }}"
-                                                        >
-
-                                                    </td>
-                                                @endforeach
+                                        <th scope="col"></th>
+                                        <th scope="col">หัวข้อพิจารณา</th>
+                                        <th scope="col">คะแนน</th>
+                                        @foreach ($projects as $ProjectItems)
+                                            @foreach ($ProjectItems->confirmStudents as $index => $Student)
+                                                <th scope="col">คนที่ {{ $index + 1 }}</th>
                                             @endforeach
-                                        @else
-                                            @foreach ($projects as $ProjectItems)
-                                                @foreach ($ProjectItems->confirmStudents as $index => $Student)
-                                                    <td></td> <!-- Empty cell for skipped rows -->
+                                        @endforeach
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($criterias as $key => $criterion)
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td>{!! $criterion['name'] !!}</td>
+                                            <td>{{ $criterion['score'] }}</td>
+
+                                            @if (!in_array($key + 1, [2, 6, 9]))
+                                                <!-- Skip rows 2, 6, 9 -->
+                                                @foreach ($projects as $ProjectItems)
+                                                    @foreach ($ProjectItems->confirmStudents as $index => $Student)
+                                                        <td>
+                                                            <input type="number"
+                                                                wire:model.live="score_student.{{ $Student->student->id_student }}.{{ $key }}"
+                                                                class="form-control" placeholder="" aria-label=""
+                                                                aria-describedby="basic-addon1"
+                                                                value="{{ $score_student[$Student->student->id_student][$key] ?? 0 }}"
+                                                                min="0" max="{{ $criterion['score'] }}">
+
+                                                        </td>
+                                                    @endforeach
                                                 @endforeach
-                                            @endforeach
-                                        @endif
+                                            @else
+                                                @foreach ($projects as $ProjectItems)
+                                                    @foreach ($ProjectItems->confirmStudents as $index => $Student)
+                                                        <td></td> <!-- Empty cell for skipped rows -->
+                                                    @endforeach
+                                                @endforeach
+                                            @endif
+                                            <td></td>
+                                        </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td colspan="2">รวม</td>
+                                        <td></td>
+                                        @foreach ($this->score_student as $id_student => $scores)
+                                            @php
+                                                // กรองเอาคีย์ที่ต้องการข้ามออก
+                                                $filteredScores = array_filter(
+                                                    $scores,
+                                                    function ($value, $key) {
+                                                        return !in_array($key + 1, [2, 6, 9]); // ข้ามแถวที่ไม่ต้องการ
+                                                    },
+                                                    ARRAY_FILTER_USE_BOTH,
+                                                );
+                                                $numericScores = array_map('intval', $filteredScores);
+
+                                                // รวมคะแนนที่เหลือหลังจากการแปลงเป็นตัวเลข
+                                                $total = array_sum($numericScores);
+                                            @endphp
+                                            <td>{{ $total }}</td>
+                                        @endforeach
                                         <td></td>
                                     </tr>
-                                @endforeach
-                                <tr>
-                                    <td colspan="2">รวม</td>
-                                    <td></td>
-                                    @foreach ($this->score_student as $id_student => $scores)
-                                        @php
-                                            // กรองเอาคีย์ที่ต้องการข้ามออก
-                                            $filteredScores = array_filter(
-                                                $scores,
-                                                function ($value, $key) {
-                                                    return !in_array($key + 1, [2, 6, 9]); // ข้ามแถวที่ไม่ต้องการ
-                                                },
-                                                ARRAY_FILTER_USE_BOTH,
-                                            );
-                                            $numericScores = array_map('intval', $filteredScores);
-
-                                            // รวมคะแนนที่เหลือหลังจากการแปลงเป็นตัวเลข
-                                            $total = array_sum($numericScores);
-                                        @endphp
-                                        <td>{{ $total }}</td>
-                                    @endforeach
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        @if (session()->has('score success'))
+                                </tbody>
+                            </table>
+                            @if (session()->has('score success'))
+                                <div class="alert alert-success">
+                                    {{ session('score success') }}
+                                </div>
+                            @endif
+                            <button class="btn btn-success m-3" type="submit">บันทึกคะแนน</button>
+                        </fieldset>
+                    </form>
+                    <form wire:submit="test_progress">
+                        @if (session()->has('success'))
                             <div class="alert alert-success">
-                                {{ session('score success') }}
+                                {{ session('success') }}
                             </div>
                         @endif
-                        <button class="btn btn-success m-3" type="submit">บันทึกคะแนน</button>
-                    </fieldset>
-                </form>
-                <form wire:submit="test_progress">
+                        <fieldset>
+                            <legend>สรุปผลการสอบ</legend>
+                            <div x-data="{ approve_fix: false, not_approve: false, approve: false }">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul>
+                                            <li>
+                                                <input wire:model="approve" type="checkbox" id="approve"
+                                                    x-model="approve" x-bind:disabled="approve_fix || not_approve">
+                                                <label for="approve">ผ่าน</label>
+                                            </li>
+                                            <li>
+                                                <input wire:model="approve_fix" type="checkbox" id="approve_fix"
+                                                    x-model="approve_fix" x-bind:disabled="approve || not_approve">
+                                                <label for="approve_fix">ผ่าน/แก้ไขใหม่</label>
+                                                <textarea x-show="approve_fix" class="form-control mt-2" wire:model="approve_fix_comment"></textarea>
+                                                @error('approve_fix_comment')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </li>
+                                            <li>
+                                                <input wire:model="not_approve" type="checkbox" id="not_approve"
+                                                    x-model="not_approve" x-bind:disabled="approve || approve_fix">
+                                                <label for="not_approve">ไม่ผ่าน</label>
+                                                <textarea x-show="not_approve" class="form-control mt-2" wire:model="not_approve_comment"></textarea>
+                                                @error('not_approve_comment')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-success m-3" type="submit">บันทึกผลการสอบ</button>
+                            {{-- <a href="{{ route('pdf.stream') }}" target="_blank">View PDF</a> --}}
+                        </fieldset>
+                    </form>
+                </div>
+            @elseif (Auth::guard('teachers')->user()->user_type == 'Branch head')
+                <legend>ความเห็นของหัวหน้าสาขา</legend>
+                <form wire:submit.prevent="branch_head_approve_comment">
+                    <div x-data="{ branch_head_approve_fix: false, branch_head_approve: false }">
+                        <div class="row">
+                            <div class="col-12">
+                                <ul>
+                                    <li>
+                                        <input wire:model="branch_head_approve" type="checkbox" id="approve"
+                                            x-model="branch_head_approve" x-bind:disabled="branch_head_approve_fix">
+                                        <label for="approve">เห็นชอบ</label>
+                                    </li>
+                                    <li>
+                                        <input wire:model="branch_head_approve_fix" type="checkbox"
+                                            id="branch_head_approve_fix" x-model="branch_head_approve_fix"
+                                            x-bind:disabled="branch_head_approve">
+                                        <label for="branch_head_approve_fix">เห็นชอบให้มีการแก้ไข</label>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
                     @endif
-                    <fieldset>
-                        <legend>สรุปผลการสอบ</legend>
-                        <div x-data="{ approve_fix: false, not_approve: false, approve: false }">
-                            <div class="row">
-                                <div class="col-12">
-                                    <ul>
-                                        <li>
-                                            <input wire:model="approve" type="checkbox" id="approve" x-model="approve"
-                                                x-bind:disabled="approve_fix || not_approve">
-                                            <label for="approve">ผ่าน</label>
-                                        </li>
-                                        <li>
-                                            <input wire:model="approve_fix" type="checkbox" id="approve_fix"
-                                                x-model="approve_fix" x-bind:disabled="approve || not_approve">
-                                            <label for="approve_fix">ผ่าน/แก้ไขใหม่</label>
-                                            <textarea x-show="approve_fix" class="form-control mt-2" wire:model="approve_fix_comment"></textarea>
-                                            @error('approve_fix_comment')
-                                                <div class="text-danger">{{$message}}</div>
-                                            @enderror
-                                        </li>
-                                        <li>
-                                            <input wire:model="not_approve" type="checkbox" id="not_approve"
-                                                x-model="not_approve" x-bind:disabled="approve || approve_fix">
-                                            <label for="not_approve">ไม่ผ่าน</label>
-                                            <textarea x-show="not_approve" class="form-control mt-2" wire:model="not_approve_comment"></textarea>
-                                            @error('not_approve_comment')
-                                                <div class="text-danger">{{$message}}</div>
-                                            @enderror
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-success m-3" type="submit">บันทึกผลการสอบ</button>
-                        {{-- <a href="{{ route('pdf.stream') }}" target="_blank">View PDF</a> --}}
-                    </fieldset>
+                    @error('branch_head_approve_fix')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    {{-- @error('branch_head_approve')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror --}}
+                    <button class="btn btn-success m-3" type="submit">บันทึกความเห็น</button>
                 </form>
-            </div>
+            @endif
         </div>
     </section>
 </div>

@@ -219,6 +219,8 @@
                                                                 ' ' .
                                                                 $submissionDoc4->time_submission,
                                                         ) < $currentDateTime;
+                                                        $commentAdmin = $projectItems->comments->where('id_document', 3)->where('id_position', 3 );
+                                                        $commentBrancHead = $projectItems->comments->where('id_document', 3)->where('id_position', 4 );
                                                 @endphp
                                                 {{-- Check if time has passed for document 4 --}}
                                                 <div class="mb-2">
@@ -232,7 +234,7 @@
                                                             <button class="btn btn-primary" disabled>สร้างเอกสาร 04
                                                                 แล้ว</button>
                                                         </div>
-                                                    @else
+                                                    @elseif($commentAdmin->pluck('comment')->contains('ไม่ผ่าน'))
                                                         <div class="d-flex justify-content-end">
                                                             <a class="btn btn-primary"
                                                                 href="{{ route('member.create.document-04') }}">
@@ -247,7 +249,8 @@
                                                             <button class="btn btn-primary" disabled>สร้างเอกสาร 05
                                                                 (หมดเวลา)</button>
                                                         </div>
-                                                    @elseif ($allTeachersConfirmed)
+                                                    @elseif (($commentAdmin->pluck('comment')->contains('ผ่าน')||$commentAdmin->pluck('comment')->contains('ผ่าน/แก้ไขใหม่')) 
+                                                            && ($commentBrancHead->pluck('comment')->contains('เห็นชอบ') || $commentBrancHead->pluck('comment')->contains('เห็นชอบให้มีการแก้ไข')))
                                                         @if ($projectItems->confirmStudents->where('id_document', 5)->count() > 0)
                                                             <div class="d-flex justify-content-end">
                                                                 <button class="btn btn-primary" disabled>สร้างเอกสาร 05
@@ -256,8 +259,8 @@
                                                         @else
                                                             <div class="d-flex justify-content-end">
                                                                 <div>
-                                                                    <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                        href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-05') : '#' }}">
+                                                                    <a class="btn btn-primary "
+                                                                        href="{{ route('member.create.document-05') }}">
                                                                         สร้างเอกสาร 05
                                                                     </a>
                                                                 </div>
@@ -266,10 +269,9 @@
                                                     @else
                                                         <div class="d-flex justify-content-end">
                                                             <div>
-                                                                <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                    href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-05') : '#' }}">
+                                                                <button class="btn btn-primary" disabled>
                                                                     สร้างเอกสาร 05(รอการอนุมัติ)
-                                                                </a>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     @endif
@@ -1026,6 +1028,8 @@
                                                             ->where('id_document', $documentId)
                                                             ->where('id_project', $projectItems->id_project)
                                                             ->every(fn($teacher) => $teacher->confirm_status == true);
+                                                        $commentAdmin = $projectItems->comments->where('id_document', $documentId)->where('id_position', 3 );
+                                                        $commentBrancHead = $projectItems->comments->where('id_document', $documentId)->where('id_position', 4 );
                                                     @endphp
 
                                                     @if ($currentConfirmStudent)
@@ -1044,9 +1048,9 @@
                                                                             <button class="btn btn-primary" href=""
                                                                                 disabled>สร้างเอกสาร 02 แล้ว</button>
                                                                         @else
-                                                                            <a class="btn btn-primary {{ $allStudentsConfirmed && $allTeachersConfirmed ? '' : 'disabled' }}"
-                                                                                href="{{ $allStudentsConfirmed && $allTeachersConfirmed ? route('member.create.document-02') : '#' }}">
-                                                                                {{ $allStudentsConfirmed && $allTeachersConfirmed ? 'สร้างเอกสาร 02' : 'สร้างเอกสาร 2 (รอการอนุมัติ)' }}
+                                                                            <a class="btn btn-primary {{ ($commentAdmin->pluck('comment')->contains('อนุมัติชื่อเรื่อง') && $commentAdmin->pluck('comment')->contains('อนุมัติอาจารย์ที่ปรึกษา'))&&($commentBrancHead->pluck('comment')->contains('อนุมัติ')) ? '' : 'disabled' }}"
+                                                                                href="{{ ($commentAdmin->pluck('comment')->contains('อนุมัติชื่อเรื่อง') && $commentAdmin->pluck('comment')->contains('อนุมัติอาจารย์ที่ปรึกษา'))&&($commentBrancHead->pluck('comment')->contains('อนุมัติ')) ? route('member.create.document-02') : '#' }}">
+                                                                                {{ ($commentAdmin->pluck('comment')->contains('อนุมัติชื่อเรื่อง') && $commentAdmin->pluck('comment')->contains('อนุมัติอาจารย์ที่ปรึกษา'))&&($commentBrancHead->pluck('comment')->contains('อนุมัติ')) ? 'สร้างเอกสาร 02' : 'สร้างเอกสาร 2 (รอการอนุมัติ)' }}
                                                                             </a>
                                                                         @endif
                                                                         <a href="/pdf/01/{{ $projectItems->id_project }}"

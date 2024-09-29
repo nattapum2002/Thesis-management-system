@@ -8,6 +8,7 @@ use App\Models\Confirm_teacher;
 use App\Models\Project;
 use App\Models\Score;
 use App\Models\Student_project;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -15,8 +16,8 @@ use Livewire\Component;
 class Document06 extends Component
 {
     public $id_project, $id_document, $students, $project, $advisers, $approve, $approve_fix, $not_approve, $approve_fix_comment, $not_approve_comment;
-    public $admin_approve , $admin_approve_fix_choice  , $admin_approve_fix_comment ,$admin_approve_fix_choice_comment ;
-    public $branch_head_approve , $branch_head_approve_fix_choice , $branch_head_approve_fix_comment , $branch_head_approve_fix_choice_comment ;
+    public $admin_approve, $admin_approve_fix_choice, $admin_approve_fix_comment, $admin_approve_fix_choice_comment;
+    public $branch_head_approve, $branch_head_approve_fix_choice, $branch_head_approve_fix_comment, $branch_head_approve_fix_choice_comment;
     public $score_student = [];
     public $criterias = [
         ['name' => '1. บุคลิก ท่าทาง การวางตัวและความเชื่อมั่นในตนเอง', 'score' => 5],
@@ -79,6 +80,19 @@ class Document06 extends Component
         DB::transaction(function () {
             if ($this->approve || $this->approve_fix || $this->not_approve) {
                 if ($this->approve) {
+                    $header_teacher = Teacher::where('user_type', 'Branch head')->first();
+
+                    Confirm_teacher::updateOrCreate(
+                        [
+                            'id_teacher' => $header_teacher->id_teacher,
+                            'id_document' => 6,
+                            'id_project' => $this->id_project,
+                            'id_position' => 4,
+                        ],
+                        [
+                            'confirm_status' => false,
+                        ]
+                    );
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,
@@ -101,9 +115,22 @@ class Document06 extends Component
                 } else if ($this->approve_fix) {
                     $this->validate([
                         'approve_fix_comment' => 'required',
-                    ],[
+                    ], [
                         'approve_fix_comment.required' => 'กรุณากรอกความเห็น',
                     ]);
+                    $header_teacher = Teacher::where('user_type', 'Branch head')->first();
+
+                    Confirm_teacher::updateOrCreate(
+                        [
+                            'id_teacher' => $header_teacher->id_teacher,
+                            'id_document' => 6,
+                            'id_project' => $this->id_project,
+                            'id_position' => 4,
+                        ],
+                        [
+                            'confirm_status' => false,
+                        ]
+                    );
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,
@@ -138,9 +165,22 @@ class Document06 extends Component
                 } else if ($this->not_approve) {
                     $this->validate([
                         'not_approve_comment' => 'required',
-                    ],[
+                    ], [
                         'not_approve_comment.required' => 'กรุณากรอกความเห็น',
                     ]);
+                    $header_teacher = Teacher::where('user_type', 'Branch head')->first();
+
+                    Confirm_teacher::updateOrCreate(
+                        [
+                            'id_teacher' => $header_teacher->id_teacher,
+                            'id_document' => 6,
+                            'id_project' => $this->id_project,
+                            'id_position' => 4,
+                        ],
+                        [
+                            'confirm_status' => false,
+                        ]
+                    );
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,
@@ -182,45 +222,46 @@ class Document06 extends Component
     }
     public function admin_comment()
     {
-       DB::transaction(function () {
-           if($this->admin_approve||$this->admin_approve_fix_choice){
-            if($this->admin_approve){
-                Comment::updateOrCreate(
-                    [
-                        'id_document' => $this->id_document,
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_project' => $this->id_project,
-                        'id_comment_list' => 1,
-                        'id_position' => 3
-                    ],
-                    [
-                        'comment' => 'อนุมัติ'
-                    ]
-                );
-                Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
-                    ->where('id_project', $this->id_project)
-                    ->where('id_document', 6)
-                    ->update(['confirm_status' => true]);
-            }elseif($this->admin_approve_fix_choice){
-                $this->validate([
-                    'admin_approve_fix_choice_comment' => 'required',
-                    'admin_approve_fix_comment' => 'required',
-                ],[
-                    'admin_approve_fix_choice_comment.required' => 'กรุณากรอกความเห็น',
-                    'admin_approve_fix_comment.required' => 'กรุณากรอกความเห็น',
-                ]);
-                Comment::updateOrCreate(
-                    [
-                        'id_document' => $this->id_document,
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_project' => $this->id_project,
-                        'id_comment_list' => 1,
-                        'id_position' => 3
-                    ],[
-                        'comment' => $this->admin_approve_fix_choice_comment
-                    ]
+        DB::transaction(function () {
+            if ($this->admin_approve || $this->admin_approve_fix_choice) {
+                if ($this->admin_approve) {
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 1,
+                            'id_position' => 3
+                        ],
+                        [
+                            'comment' => 'อนุมัติ'
+                        ]
                     );
-                   
+                    Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                        ->where('id_project', $this->id_project)
+                        ->where('id_document', 6)
+                        ->update(['confirm_status' => true]);
+                } elseif ($this->admin_approve_fix_choice) {
+                    $this->validate([
+                        'admin_approve_fix_choice_comment' => 'required',
+                        'admin_approve_fix_comment' => 'required',
+                    ], [
+                        'admin_approve_fix_choice_comment.required' => 'กรุณากรอกความเห็น',
+                        'admin_approve_fix_comment.required' => 'กรุณากรอกความเห็น',
+                    ]);
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 1,
+                            'id_position' => 3
+                        ],
+                        [
+                            'comment' => $this->admin_approve_fix_choice_comment
+                        ]
+                    );
+
                     Comment::updateOrCreate(
                         [
                             'id_document' => $this->id_document,
@@ -228,55 +269,56 @@ class Document06 extends Component
                             'id_project' => $this->id_project,
                             'id_comment_list' => 2,
                             'id_position' => 3
-                        ],[
+                        ],
+                        [
                             'comment' => $this->admin_approve_fix_comment
                         ]
-                        );
+                    );
+                }
             }
-            
-           }
-           return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
-       });
+            return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
+        });
     }
     public function branch_head_comment()
     {
-       DB::transaction(function () {
-           if($this->branch_head_approve||$this->branch_head_approve_fix_choice){
-            if($this->branch_head_approve){
-                Comment::updateOrCreate(
-                    [
-                        'id_document' => $this->id_document,
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_project' => $this->id_project,
-                        'id_comment_list' => 1,
-                        'id_position' => 4
-                    ],
-                    [
-                        'comment' => 'อนุมัติ'
-                    ]
-                );
-                Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
-                    ->where('id_project', $this->id_project)
-                    ->where('id_document', 6)
-                    ->update(['confirm_status' => true]);
-            }elseif($this->branch_head_approve_fix_choice){
-                $validateComment = $this->validate([
-                    'branch_head_approve_fix_choice_comment' => 'required',
-                    'branch_head_approve_fix_comment' => 'required',
-                ],[
-                    'branch_head_approve_fix_choice_comment.required' => 'กรุณากรอกความเห็น',
-                    'branch_head_approve_fix_comment.required' => 'กรุณากรอกความเห็น',
-                ]);
-                Comment::updateOrCreate(
-                    [
-                        'id_document' => $this->id_document,
-                        'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
-                        'id_project' => $this->id_project,
-                        'id_comment_list' => 1,
-                        'id_position' => 4
-                    ],[
-                        'comment' => $this->branch_head_approve_fix_choice_comment
-                    ]
+        DB::transaction(function () {
+            if ($this->branch_head_approve || $this->branch_head_approve_fix_choice) {
+                if ($this->branch_head_approve) {
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 1,
+                            'id_position' => 4
+                        ],
+                        [
+                            'comment' => 'อนุมัติ'
+                        ]
+                    );
+                    Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
+                        ->where('id_project', $this->id_project)
+                        ->where('id_document', 6)
+                        ->update(['confirm_status' => true]);
+                } elseif ($this->branch_head_approve_fix_choice) {
+                    $validateComment = $this->validate([
+                        'branch_head_approve_fix_choice_comment' => 'required',
+                        'branch_head_approve_fix_comment' => 'required',
+                    ], [
+                        'branch_head_approve_fix_choice_comment.required' => 'กรุณากรอกความเห็น',
+                        'branch_head_approve_fix_comment.required' => 'กรุณากรอกความเห็น',
+                    ]);
+                    Comment::updateOrCreate(
+                        [
+                            'id_document' => $this->id_document,
+                            'id_teacher' => Auth::guard('teachers')->user()->id_teacher,
+                            'id_project' => $this->id_project,
+                            'id_comment_list' => 1,
+                            'id_position' => 4
+                        ],
+                        [
+                            'comment' => $this->branch_head_approve_fix_choice_comment
+                        ]
                     );
                     Comment::updateOrCreate(
                         [
@@ -285,17 +327,17 @@ class Document06 extends Component
                             'id_project' => $this->id_project,
                             'id_comment_list' => 2,
                             'id_position' => 4
-                        ],[
+                        ],
+                        [
                             'comment' => $this->branch_head_approve_fix_comment
                         ]
-                        );
+                    );
+                }
+                return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
+            } else {
+                return session()->flash('error', 'กรุณาเลือกความเห็น');
             }
-            return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
-           }else{
-            return session()->flash('error', 'กรุณาเลือกความเห็น');
-           }
-           
-       });
+        });
     }
     public function mount($id_project, $id_document)
     {

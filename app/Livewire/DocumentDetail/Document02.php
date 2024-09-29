@@ -135,19 +135,7 @@ class Document02 extends Component
             );
         }
         
-        $header_teacher = Teacher::where('user_type', 'Branch head')->first();
-     
-        Confirm_teacher::updateOrCreate(
-            [
-                'id_teacher' => $header_teacher->id_teacher,
-                'id_document' => 3,
-                'id_project' => $this->id_project,
-                'id_position' => 4,
-            ],
-            [
-                'confirm_status' => false,
-            ]
-        );
+        
         
         foreach ($this->students as $studentID) {
             Confirm_student::updateOrCreate(

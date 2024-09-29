@@ -181,7 +181,7 @@
                                                                         ->where('id_document', $documentId)
                                                                         ->first();
                                                                 @endphp
-                                                                @if (!in_array($confirmTeacher?->teacher->user_type, ['Admin']))
+                                                                @if (!in_array($confirmTeacher?->teacher->user_type, ['Admin','Branch head']))
                                                                     @if ($confirmTeacher?->confirm_status == 1)
                                                                         <a class="btn btn-primary disabled" href="#"
                                                                             role="button" aria-disabled="true"
@@ -193,7 +193,7 @@
                                                                         </button>
                                                                     @endif
                                                                 @endif
-                                                                @if (in_array($confirmTeacher?->teacher->user_type, ['Admin']))
+                                                                @if (in_array($confirmTeacher?->teacher->user_type, ['Admin', 'Branch head']))
                                                                     <button class="btn btn-primary"
                                                                         wire:click="document({{ $documentId }}, {{ $projectItems->id_project }})">
                                                                         ตรวจสอบ
@@ -862,57 +862,5 @@
                 @endforeach
             </div>
         @endforeach
-        {{-- <form wire:submit.prevent="not_approve_confirmed">
-            <div class="modal fade" id="not_approveModal" tabindex="-1" aria-labelledby="not_approveModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">ไม่อนุมัติ</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row text-center mb-3">
-                                <div class="col-md-2">
-                                    <label for="documentInput" class="col-form-label">เอกสาร:</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" id="documentInput"
-                                        value="{{ $not_approve_document->document }}" disabled>
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="documentInput" class="col-form-label text-center">กลุ่ม:
-                                    </label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" id="documentInput"
-                                        value="{{ $not_approve_project->project_name_th }}" disabled>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <input type="checkbox" name="" wire:model="not_approve_comment1"
-                                        id=""><span>มีวุฒิทางการศึกษาไม่เป็นไปตามเกณฑ์</span><br>
-                                    <input type="checkbox" name="" wire:model="not_approve_comment2"
-                                        id=""><span>มีจำนวนนักศึกษาที่รับผิดชอบเกินเกณฑ์ที่กำหนดไว้</span><br>
-                                    <input type="checkbox" name="" id="other_comment"
-                                        wire:model="not_approve_comment3"
-                                        wire:click="$dispatch('toggleComment')"><span>อื่นๆ</span>
-                                </div>
-                            </div>
-                            <div class="mb-3" id="">
-                                <label for="message-text" class="col-form-label">หมายเหตุ:</label>
-                                <textarea class="form-control" wire:model="another_comment" id="message-text"></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-orange">Send message</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form> --}}
     </section>
 </div>
