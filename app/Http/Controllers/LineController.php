@@ -185,7 +185,7 @@ class LineController extends Controller
                 ->where('confirm_status', false)
                 ->count();
 
-            if (now()->isMonday() && now()->format('H:i') == '08:00' && $confirmCount > 0) {
+            if ($confirmCount > 0) {
                 $message = $teacher->prefix . ' ' . $teacher->name . ' ' . $teacher->surname . ' มีโปรเจครอการอนุมัติ จํานวน ' . $confirmCount . ' โปรเจค';
 
                 if (!empty($teacher->id_line)) {

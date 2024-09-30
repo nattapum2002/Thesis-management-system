@@ -141,8 +141,6 @@ class Dashboard extends Component
             ->orderBy('created_at', 'desc')
             ->get();
 
-
-
         $examCountDates = $examSchedules->filter(function ($schedule) {
             return \Carbon\Carbon::parse($schedule->exam_day . ' ' . $schedule->exam_time) >= now();
         })->first();

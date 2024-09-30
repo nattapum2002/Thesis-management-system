@@ -11,7 +11,6 @@
                                     <div>
                                         <p>{{ $projectActive->project_name_th ?? 'ไม่พบโปรเจค' }}</p>
                                         <small>{{ $projectActive->project_name_en ?? '' }}</small>
-
                                         @if (!$projectActive)
                                             <a href="{{ route('member.create.document-01') }}"
                                                 class="btn btn-orange mt-2">เพิ่มโปรเจค</a>
