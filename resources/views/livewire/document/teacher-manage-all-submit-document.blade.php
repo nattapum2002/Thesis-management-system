@@ -48,9 +48,9 @@
                                     <div class="card">
                                         @switch($documentId)
                                             @case(3)
-                                                <div class="card-header" id="heading{{ $loop->index }}"
+                                                <div class="card-header" id="heading{{ $projectItems->id_project }}">
                                                     style="cursor: pointer;" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapse{{ $loop->index }}">
+                                                    data-bs-target="#collapse{{ $projectItems->id_project }}">
                                                     <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}
                                                     </h5>
                                                     <span>
@@ -60,8 +60,8 @@
                                                         <i class="bx bx-chevron-down" style="font-size: 20px;"></i>
                                                     </span>
                                                 </div>
-                                                <div id="collapse{{ $loop->index }}" class="collapse"
-                                                    aria-labelledby="heading{{ $loop->index }}" data-bs-parent="#accordion">
+                                                <div id="collapse{{ $projectItems->id_project }}" class="collapse"
+                                                    aria-labelledby="heading{{ $projectItems->id_project }}" data-bs-parent="#accordion">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-lg-3 col-md-6 col-sm-12">
@@ -210,9 +210,9 @@
                                             @break
 
                                             @case(4)
-                                                <div class="card-header" id="heading{{ $loop->index }}"
+                                                <div class="card-header" id="heading{{ $projectItems->id_project }}"
                                                     style="cursor: pointer;" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapse{{ $loop->index }}">
+                                                    data-bs-target="#collapse{{ $projectItems->id_project }}">
                                                     <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}
                                                     </h5>
                                                     <span>
@@ -222,8 +222,8 @@
                                                         <i class="bx bx-chevron-down" style="font-size: 20px;"></i>
                                                     </span>
                                                 </div>
-                                                <div id="collapse{{ $loop->index }}" class="collapse"
-                                                    aria-labelledby="heading{{ $loop->index }}" data-bs-parent="#accordion">
+                                                <div id="collapse{{ $projectItems->id_project }}" class="collapse"
+                                                    aria-labelledby="heading{{ $projectItems->id_project }}" data-bs-parent="#accordion">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-lg-3 col-md-6 col-sm-12">
@@ -382,9 +382,9 @@
                                             @break
 
                                             @case(6)
-                                                <div class="card-header" id="heading{{ $loop->index }}"
+                                                <div class="card-header" id="heading{{ $projectItems->id_project }}"
                                                     style="cursor: pointer;" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapse{{ $loop->index }}">
+                                                    data-bs-target="#collapse{{ $projectItems->id_project }}">
                                                     <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}
                                                     </h5>
                                                     <span>
@@ -394,8 +394,8 @@
                                                         <i class="bx bx-chevron-down" style="font-size: 20px;"></i>
                                                     </span>
                                                 </div>
-                                                <div id="collapse{{ $loop->index }}" class="collapse"
-                                                    aria-labelledby="heading{{ $loop->index }}" data-bs-parent="#accordion">
+                                                <div id="collapse{{ $projectItems->id_project }}" class="collapse"
+                                                    aria-labelledby="heading{{ $projectItems->id_project }}" data-bs-parent="#accordion">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-lg-3 col-md-6 col-sm-12">
@@ -565,9 +565,9 @@
                                             @break
 
                                             @case(7)
-                                                <div class="card-header" id="heading{{ $loop->index }}"
+                                                <div class="card-header" id="heading{{ $projectItems->id_project }}"
                                                     style="cursor: pointer;" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapse{{ $loop->index }}">
+                                                    data-bs-target="#collapse{{ $projectItems->id_project }}">
                                                     <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}
                                                     </h5>
                                                     <span>
@@ -577,8 +577,8 @@
                                                         <i class="bx bx-chevron-down" style="font-size: 20px;"></i>
                                                     </span>
                                                 </div>
-                                                <div id="collapse{{ $loop->index }}" class="collapse"
-                                                    aria-labelledby="heading{{ $loop->index }}" data-bs-parent="#accordion">
+                                                <div id="collapse{{ $projectItems->id_project }}" class="collapse"
+                                                    aria-labelledby="heading{{ $projectItems->id_project }}" data-bs-parent="#accordion">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-lg-3 col-md-6 col-sm-12">
@@ -725,9 +725,9 @@
                                             @break
 
                                             @default
-                                                <div class="card-header" id="heading{{ $loop->index }}"
+                                                <div class="card-header" id="heading{{ $projectItems->id_project }}"
                                                     style="cursor: pointer;" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapse{{ $loop->index }}">
+                                                    data-bs-target="#collapse{{ $projectItems->id_project }}">
                                                     <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}
                                                     </h5>
                                                     <span>
@@ -737,8 +737,8 @@
                                                         <i class="bx bx-chevron-down" style="font-size: 20px;"></i>
                                                     </span>
                                                 </div>
-                                                <div id="collapse{{ $loop->index }}" class="collapse"
-                                                    aria-labelledby="heading{{ $loop->index }}"
+                                                <div id="collapse{{ $projectItems->id_project }}" class="collapse"
+                                                    aria-labelledby="heading{{ $projectItems->id_project }}"
                                                     data-bs-parent="#accordion">
                                                     <div class="card-body">
                                                         <div class="row">

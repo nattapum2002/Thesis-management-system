@@ -165,25 +165,25 @@
                     label: "ที่ปรึกษาหลัก",
                     backgroundColor: "#4B0082",
                     data: [
-                        {{ $advisers->where('project.project_status', 'In Progress')->where('id_position', 1)->count() }},
-                        {{ $advisers->where('project.project_status', 'Completed')->where('id_position', 1)->count() }},
-                        {{ $advisers->where('project.project_status', 'Cancelled')->where('id_position', 1)->count() }},
+                        {{ $advisers->where('project.project_status', 'pending')->where('id_position', 1)->count() }},
+                        {{ $advisers->where('project.project_status', 'completed')->where('id_position', 1)->count() }},
+                        {{ $advisers->where('project.project_status', 'reject')->where('id_position', 1)->count() }},
                     ]
                 }, {
                     label: "ที่ปรึกษาร่วม",
                     backgroundColor: "#98FF98",
                     data: [
-                        {{ $advisers->where('project.project_status', 'In Progress')->where('id_position', 2)->count() }},
-                        {{ $advisers->where('project.project_status', 'Completed')->where('id_position', 2)->count() }},
-                        {{ $advisers->where('project.project_status', 'Cancelled')->where('id_position', 2)->count() }},
+                        {{ $advisers->where('project.project_status', 'pending')->where('id_position', 2)->count() }},
+                        {{ $advisers->where('project.project_status', 'completed')->where('id_position', 2)->count() }},
+                        {{ $advisers->where('project.project_status', 'reject')->where('id_position', 2)->count() }},
                     ]
                 }, {
                     label: "รวม",
                     backgroundColor: "#A9A9A9",
                     data: [
-                        {{ $advisers->where('project.project_status', 'In Progress')->whereIn('id_position', [1, 2])->count() }},
-                        {{ $advisers->where('project.project_status', 'Completed')->whereIn('id_position', [1, 2])->count() }},
-                        {{ $advisers->where('project.project_status', 'Cancelled')->whereIn('id_position', [1, 2])->count() }},
+                        {{ $advisers->where('project.project_status', 'pending')->whereIn('id_position', [1, 2])->count() }},
+                        {{ $advisers->where('project.project_status', 'completed')->whereIn('id_position', [1, 2])->count() }},
+                        {{ $advisers->where('project.project_status', 'reject')->whereIn('id_position', [1, 2])->count() }},
                     ]
                 }]
             },

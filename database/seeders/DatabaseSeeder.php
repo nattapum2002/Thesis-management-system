@@ -16,25 +16,25 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LevelSeeder::class,
             CourseSeeder::class,
-            // MembersSeeder::class,
+            MembersSeeder::class, //
             TeachersSeeder::class,
-            // ProjectsSeeder::class,
+            // ProjectsSeeder::class, //
             PositionSeeder::class,
-            // StudentProjectsSeeder::class,
-            // StudentsSeeder::class,
-            // NewsSeeder::class,
-            // LayoutsSeeder::class,
+            // StudentProjectsSeeder::class, //
+            StudentsSeeder::class, //
+            NewsSeeder::class, //
+            // LayoutsSeeder::class, //
             DocumentSeeder::class,
-            // DissertationArticlesSeeder::class,
+            DissertationArticlesSeeder::class, //
             Comment_listSeeder::class,
-            // AdvisersSeeder::class,
-            // CommentsSeeder::class,
-            // ConfirmStudentsSeeder::class,
-            // ConfirmTeachersSeeder::class,
-            // DirectorsSeeder::class,
-            // DocumentSubmissionSchedulesSeeder::class,
-            // ExamSchedulesSeeder::class,
-            // ScoresSeeder::class
+            // AdvisersSeeder::class, //
+            // CommentsSeeder::class, //
+            // ConfirmStudentsSeeder::class, //
+            // ConfirmTeachersSeeder::class, //
+            // DirectorsSeeder::class, //
+            DocumentSubmissionSchedulesSeeder::class, //
+            // ExamSchedulesSeeder::class, //
+            // ScoresSeeder::class //
         ]);
     }
 }

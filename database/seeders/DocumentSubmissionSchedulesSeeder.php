@@ -18,7 +18,7 @@ class DocumentSubmissionSchedulesSeeder extends Seeder
         foreach ($documents as $document) {
             DB::table('document_submission_schedules')->insert([
                 'time_submission' => now()->format('H:i:s'),
-                'date_submission' => now()->format('Y-m-d'),
+                'date_submission' => now()->addDay(10)->format('Y-m-d'),
                 'year_submission' => now()->format('Y'),
                 'status' => true,
                 'id_document' => $document->id_document,
