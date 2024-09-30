@@ -71,9 +71,8 @@ class EditAndDetailNews extends Component
     {
         $this->validate();
 
-        $this->path_news_image = $this->news_image->storeAs('news_image', $this->news_image->getClientOriginalName(), 'public');
-
         if ($index == 'news_image') {
+            $this->path_news_image = $this->news_image->storeAs('news_image', $this->news_image->getClientOriginalName(), 'public');
             DB::table('news')->where('id_news', $this->newsId)->update([$index => $this->path_news_image], ['updated_by' => Auth::guard('teachers')->user()->id_teacher], ['updated_at' => now()]);
         } else {
             DB::table('news')->where('id_news', $this->newsId)->update([$index => $this->$index], ['updated_by' => Auth::guard('teachers')->user()->id_teacher], ['updated_at' => now()]);

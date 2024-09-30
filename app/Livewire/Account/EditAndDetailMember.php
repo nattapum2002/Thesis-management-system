@@ -131,8 +131,6 @@ class EditAndDetailMember extends Component
     {
         $this->validate();
 
-        $this->path_student_image = $this->student_image->storeAs('student_image', $this->student_image->getClientOriginalName(), 'public');
-
         if ($index == 'password') {
 
             if (!Hash::check($this->old_password, $this->student->password)) {
@@ -143,6 +141,7 @@ class EditAndDetailMember extends Component
             $this->student->password = Hash::make($this->new_password);
             $this->student->save();
         } else if ($index == 'student_image') {
+            $this->path_student_image = $this->student_image->storeAs('student_image', $this->student_image->getClientOriginalName(), 'public');
             Member::where('id_student', $this->studentId)->update([$index => $this->path_student_image], ['updated_at' => now()]);
         } else if ($index == 'prefix' && $this->prefix == 'อื่นๆ') {
             Member::where('id_student', $this->studentId)->update([$index => $this->other_prefix], ['updated_at' => now()]);
