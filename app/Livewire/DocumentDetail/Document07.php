@@ -38,6 +38,11 @@ class Document07 extends Component
                         ->where('id_project', $this->id_project)
                         ->where('id_document', 7)
                         ->update(['confirm_status' => true]);
+
+                    Project::where('id_project', $this->id_project)
+                        ->update([
+                            'project_status' => 'completed'
+                        ]);
                 } elseif ($this->admin_approve_fix) {
                     $this->validate([
                         'admin_approve_fix_comment' => 'required',
@@ -72,6 +77,11 @@ class Document07 extends Component
                         ->where('id_project', $this->id_project)
                         ->where('id_document', 7)
                         ->update(['confirm_status' => true]);
+
+                    Project::where('id_project', $this->id_project)
+                        ->update([
+                            'project_status' => 'completed'
+                        ]);
                 }
             }
 
