@@ -1395,6 +1395,12 @@ footer div.footer-bottom {
         border: 1px solid var(--grey-cc-color);
         margin-bottom: 5px;
 
+        .card-header {
+            h5 {
+                color: var(--orange-color);
+            }
+        }
+
         .card-body {
             padding: 15px;
 

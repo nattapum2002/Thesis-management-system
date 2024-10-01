@@ -1,7 +1,7 @@
 <div>
     <section id="teacher-chart">
         <div class="row gy-2">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
@@ -16,6 +16,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <section id="teacher-chart">
+        <div class="row gy-2">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
@@ -28,6 +32,56 @@
                         <div class="chart text-center">
                             <canvas id="directorChart"></canvas>
                             <p>คณะกรรมการ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class='bx bx-file-find'></i>
+                            พิจารณาเอกสาร
+                        </div>
+                        <div class="card-tools">
+                            <a class="tools-link" href="{{ route('admin.approve.documents') }}">
+                                <span>อนุมัติเอกสาร</span>
+                                <i class='bx bxs-right-arrow'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if ($confirms->isNotEmpty())
+                            <div class="chart text-center">
+                                <canvas id="confirmChart"></canvas>
+                                <p>พิจารณาเอกสาร</p>
+                            </div>
+                        @else
+                            <div class="chart text-center">
+                                <p class="text-center">ไม่มีเอกสารให้พิจารณา</p>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="nav-icon bx bx-news"></i>
+                            ข่าวประชาสัมพันธ์
+                        </div>
+                        <div class="card-tools">
+                            <a class="tools-link" href="{{ route('admin.approve.news') }}">
+                                <span>จัดการ...</span>
+                                <i class='bx bxs-right-arrow'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart text-center">
+                            <canvas id="newsChart"></canvas>
+                            <p>ข่าวประชาสัมพันธ์</p>
                         </div>
                     </div>
                 </div>
@@ -209,6 +263,39 @@
                         {{ $directors->where('id_position', 6)->count() }},
                         {{ $directors->where('id_position', 7)->count() }}
                     ]
+                }]
+            }
+        });
+    </script>
+@endscript
+
+@script
+    <script>
+        new Chart(document.getElementById('confirmChart').getContext('2d'), {
+            type: "doughnut",
+            data: {
+                labels: ["พิจารณาแล้ว", "ยังไม่พิจารณา"],
+                datasets: [{
+                    backgroundColor: ["#006400", "#FF0000"],
+                    data: [
+                        {{ $confirms->where('confirm_status', 1)->count() }},
+                        {{ $confirms->where('confirm_status', 0)->count() }}
+                    ]
+                }]
+            }
+        });
+    </script>
+@endscript
+
+@script
+    <script>
+        new Chart(document.getElementById('newsChart').getContext('2d'), {
+            type: "doughnut",
+            data: {
+                labels: @json($chartNewsLabels),
+                datasets: [{
+                    backgroundColor: @json($chartColors),
+                    data: @json($chartNewsData)
                 }]
             }
         });

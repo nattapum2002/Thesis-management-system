@@ -10,12 +10,23 @@
             </div>
         @endif
         <div class="row mb-3">
-            <form wire:submit.prevent="find" class="d-flex">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="ค้นหาโปรเจค..." wire:model="search">
-                    <button type="submit" class="btn btn-orange"><i class='bx bx-search'></i></button>
+            <div class="col-lg-9 col-md-7 col-sm-12">
+                <form wire:submit.prevent="find" class="d-flex">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="ค้นหาโปรเจค..." wire:model="search">
+                        <button type="submit" class="btn btn-orange"><i class='bx bx-search'></i></button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-md-5 col-sm-12">
+                <div class="mb-2">
+                    <select class="form-select" wire:model.live.debounce.100ms="filterType">
+                        <option value="all">ทุกประเภท</option>
+                        <option value="1">พิจารณาแล้ว</option>
+                        <option value="0">ยังไม่ได้พิจารณา</option>
+                    </select>
                 </div>
-            </form>
+            </div>
         </div>
         <div class="tab">
             <button class="tablinks" onclick="openTabs(event, 'doc01')">เอกสาร 01</button>
@@ -61,7 +72,8 @@
                                                     </span>
                                                 </div>
                                                 <div id="collapse{{ $projectItems->id_project }}" class="collapse"
-                                                    aria-labelledby="heading{{ $projectItems->id_project }}" data-bs-parent="#accordion">
+                                                    aria-labelledby="heading{{ $projectItems->id_project }}"
+                                                    data-bs-parent="#accordion">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-lg-3 col-md-6 col-sm-12">
@@ -223,7 +235,8 @@
                                                     </span>
                                                 </div>
                                                 <div id="collapse{{ $projectItems->id_project }}" class="collapse"
-                                                    aria-labelledby="heading{{ $projectItems->id_project }}" data-bs-parent="#accordion">
+                                                    aria-labelledby="heading{{ $projectItems->id_project }}"
+                                                    data-bs-parent="#accordion">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-lg-3 col-md-6 col-sm-12">
@@ -395,7 +408,8 @@
                                                     </span>
                                                 </div>
                                                 <div id="collapse{{ $projectItems->id_project }}" class="collapse"
-                                                    aria-labelledby="heading{{ $projectItems->id_project }}" data-bs-parent="#accordion">
+                                                    aria-labelledby="heading{{ $projectItems->id_project }}"
+                                                    data-bs-parent="#accordion">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-lg-3 col-md-6 col-sm-12">
@@ -519,8 +533,9 @@
                                                                     <div>
                                                                         @if (!in_array($confirmTeacher?->teacher->user_type, ['Branch head', 'Admin']))
                                                                             @if ($confirmTeacher?->confirm_status == 1)
-                                                                                <a class="btn btn-primary disabled" href="#"
-                                                                                    role="button" aria-disabled="true"
+                                                                                <a class="btn btn-primary disabled"
+                                                                                    href="#" role="button"
+                                                                                    aria-disabled="true"
                                                                                     style="pointer-events: none;">อนุมัติแล้ว</a>
                                                                             @else
                                                                                 <button class="btn btn-primary"
@@ -578,7 +593,8 @@
                                                     </span>
                                                 </div>
                                                 <div id="collapse{{ $projectItems->id_project }}" class="collapse"
-                                                    aria-labelledby="heading{{ $projectItems->id_project }}" data-bs-parent="#accordion">
+                                                    aria-labelledby="heading{{ $projectItems->id_project }}"
+                                                    data-bs-parent="#accordion">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-lg-3 col-md-6 col-sm-12">

@@ -2,7 +2,8 @@
 
 :root {
     /* general */
-    --orange-color: #ff5c00; /* hover, active, button */
+    --orange-color: #ff5c00;
+    /* hover, active, button */
     --grey-f0-color: #F0F0F0;
     --grey-cc-color: #CCCCCC;
     --grey-44-color: #444444;
@@ -30,7 +31,12 @@ html {
     background-color: var(--white-color);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
     font-weight: 500;
 }
@@ -89,15 +95,18 @@ a.navbar-brand {
     font-size: 26px;
 }
 
-a.navbar-brand:hover, a.navbar-brand:focus {
+a.navbar-brand:hover,
+a.navbar-brand:focus {
     color: var(--orange-color);
 }
 
-a.navbar-link, a.dropdown-item {
+a.navbar-link,
+a.dropdown-item {
     color: var(--grey-44-color);
 }
 
-a.navbar-link:hover, a.active {
+a.navbar-link:hover,
+a.active {
     color: var(--orange-color);
     border-bottom: var(--orange-color) 2px solid;
 }
@@ -118,7 +127,8 @@ a.btn-brand {
     border-color: var(--orange-color);
 }
 
-a.btn-brand:hover, a.btn-brand:focus {
+a.btn-brand:hover,
+a.btn-brand:focus {
     color: var(--orange-color);
     background-color: var(--white-color);
     border-color: var(--orange-color);
@@ -168,7 +178,7 @@ p.page-number {
 /* slider */
 
 #slider div.slide1 {
-    background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/2/5000/3333.jpg?hmac=_KDkqQVttXw_nM-RyJfLImIbafFrqLsuGO5YuHqD-qQ");
+    background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/1073/5000/3333.jpg?hmac=BpeZjzMXphQe-PgQ9bEtEC65Xac82d2p4d-urC-RFmI");
 }
 
 #slider div.slide2 {
@@ -176,7 +186,7 @@ p.page-number {
 }
 
 #slider div.slide3 {
-    background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/250/4928/3264.jpg?hmac=4oIwzXlpK4KU3wySTnATICCa4H6xwbSGifrxv7GafWU");
+    background-image: linear-gradient(rgba(9, 32, 50, 0.3), rgba(9, 32, 50, 0.5)), url("https://fastly.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I");
 }
 
 #sliders {
@@ -227,7 +237,7 @@ p.page-number {
 /* milestones */
 
 #milestone {
-    background-image: linear-gradient(rgba(255, 94, 0, 0.3),rgba(255, 94, 0, 0.5)), url("https://fastly.picsum.photos/id/2/5000/3333.jpg?hmac=_KDkqQVttXw_nM-RyJfLImIbafFrqLsuGO5YuHqD-qQ");
+    background-image: linear-gradient(rgba(255, 94, 0, 0.3), rgba(255, 94, 0, 0.5)), url("https://fastly.picsum.photos/id/2/5000/3333.jpg?hmac=_KDkqQVttXw_nM-RyJfLImIbafFrqLsuGO5YuHqD-qQ");
 }
 
 #milestone div.item:hover {
@@ -239,7 +249,8 @@ p.page-number {
     font-weight: 700;
 }
 
-#milestone p, #milestone div.display-4 {
+#milestone p,
+#milestone div.display-4 {
     color: var(--white-color);
 }
 
@@ -425,7 +436,8 @@ div.post p {
     position: absolute;
 }
 
-#detail-thesis h3, h5 {
+#detail-thesis h3,
+h5 {
     color: var(--orange-color);
 }
 
@@ -467,7 +479,8 @@ div.post p {
     position: absolute;
 }
 
-#detail-news h3, h5 {
+#detail-news h3,
+h5 {
     color: var(--orange-color);
 }
 

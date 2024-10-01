@@ -170,11 +170,12 @@
                     </div>
                     <div class="card-body">
                         @if ($confirms->isNotEmpty())
-                            <div class="chart">
+                            <div class="chart text-center">
                                 <canvas id="confirmChart"></canvas>
+                                <p>พิจารณาเอกสาร</p>
                             </div>
                         @else
-                            <div class="chart">
+                            <div class="chart text-center">
                                 <p class="text-center">ไม่มีเอกสารให้พิจารณา</p>
                             </div>
                         @endif
