@@ -10,6 +10,7 @@ use App\Models\Project;
 use App\Models\Score;
 use App\Models\Student_project;
 use App\Models\Teacher;
+use App\Services\LineMessageService;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Barryvdh\DomPDF\Facade\PDF;
@@ -94,6 +95,27 @@ class Document03 extends Component
             }
             return session()->flash('score success', 'กรอกคะแนนเสร็จสิ้น');
         });
+
+        $teacherIds = Confirm_teacher::where('id_document', $this->id_document)
+            ->where('id_project', $this->id_project)
+            ->whereIn('id_position', [5, 6, 7])
+            ->where('id_teacher', '!=', Auth::guard('teachers')->user()->id_teacher)
+            ->pluck('id_teacher');
+
+        $teachers = Teacher::whereIn('id_teacher', $teacherIds)->get();
+
+        $message = 'อาจารย์ประจำวิชาได้สรุปคะแนนของสอบหัวข้อแล้ว กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+
+        foreach ($teachers as $teacher) {
+            if (!empty($teacher->id_line)) { // ตรวจสอบว่ามีค่า id_line
+                $userId = $teacher->id_line;
+
+                // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
+                if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
+                    LineMessageService::sendMessage($userId, $message);
+                }
+            }
+        }
     }
 
     public function test_progress()
@@ -231,6 +253,31 @@ class Document03 extends Component
                         ->where('id_document', 3)
                         ->update(['confirm_status' => true]);
                 }
+
+                $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Branch head')->pluck('id_teacher')->toArray())
+                    ->where('id_project', $this->id_project)
+                    ->where('id_document', 3)
+                    ->where('confirm_status', true)
+                    ->exists();
+
+                if ($confirmed) {
+                    $project = Project::with(['members', 'teachers', 'advisers'])
+                        ->where('id_project', $this->id_project)
+                        ->first();
+
+                    $message = 'เอกสาร คกท.-คง.-03 ได้รับการอนุมัติ กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+
+                    foreach ($project->members as $member) {
+                        if (!empty($member->id_line)) { // ตรวจสอบว่ามีค่า id_line
+                            $userId = $member->id_line;
+
+                            // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
+                            if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
+                                LineMessageService::sendMessage($userId, $message);
+                            }
+                        }
+                    }
+                }
             }
             return session()->flash('success', 'บันทึกความเห็นเสร็จสิ้น');
         });
@@ -287,6 +334,31 @@ class Document03 extends Component
                 'confirm_status' => true
             ]);
             return session()->flash('success', 'บันทึกความเห็นเสร็จสิ้น');
+        }
+
+        $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Admin')->pluck('id_teacher')->toArray())
+            ->where('id_project', $this->id_project)
+            ->where('id_document', 3)
+            ->where('confirm_status', true)
+            ->exists();
+
+        if ($confirmed) {
+            $project = Project::with(['members', 'teachers', 'advisers'])
+                ->where('id_project', $this->id_project)
+                ->first();
+
+            $message = 'เอกสาร คกท.-คง.-03 ได้รับการอนุมัติ กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+
+            foreach ($project->members as $member) {
+                if (!empty($member->id_line)) { // ตรวจสอบว่ามีค่า id_line
+                    $userId = $member->id_line;
+
+                    // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
+                    if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
+                        LineMessageService::sendMessage($userId, $message);
+                    }
+                }
+            }
         }
     }
     public function mount($id_project, $id_document)

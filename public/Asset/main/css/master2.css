@@ -913,43 +913,100 @@ footer div.footer-bottom {
 
 /* --------------------------------------- detail-thesis page --------------------------------------- */
 
-#detail-thesis :where(div.img, h3, h5) {
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
+#detail-thesis {
 
-#detail-thesis div.img {
-    position: relative;
-}
+    h3,
+    h5 {
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
 
-#detail-thesis img {
-    border-radius: 10px;
-    overflow: hidden;
-    width: 100%;
-}
+    div.img {
+        position: relative;
+    }
 
-#detail-thesis p.tag {
-    padding: 4px 12px;
-    background-color: var(--orange-color);
-    color: var(--white-color);
-    border-radius: 5px;
-    top: 20px;
-    left: 20px;
-    position: absolute;
-}
+    img {
+        border-radius: 10px;
+        overflow: hidden;
+        width: 100%;
+    }
 
-#detail-thesis h3,
-h5 {
-    color: var(--orange-color);
-}
+    p.tag {
+        padding: 4px 12px;
+        background-color: var(--orange-color);
+        color: var(--white-color);
+        border-radius: 5px;
+        top: 20px;
+        left: 20px;
+        position: absolute;
+    }
 
-#detail-thesis h4 {
-    margin-bottom: 5px;
-}
+    h3,
+    h5 {
+        color: var(--orange-color);
+    }
 
-#detail-thesis p {
-    margin-top: 0px;
-    margin-bottom: 5px;
+    h4 {
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+
+    div.post {
+        position: relative;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+
+    div.post:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    div.post a {
+        text-decoration: none;
+        color: var(--grey-1e-color);
+    }
+
+    div.post img {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    div.post p.tag {
+        padding: 4px 12px;
+        background-color: var(--orange-color);
+        color: var(--white-color);
+        border-radius: 5px;
+        top: 20px;
+        left: 20px;
+        position: absolute;
+    }
+
+    div.details {
+        padding: 10px 20px;
+    }
+
+    div.post small {
+        color: var(--orange-color);
+        text-decoration: underline;
+        text-transform: uppercase;
+    }
+
+    div.post h4 {
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    div.post p {
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
 }
 
 /* --------------------------------------- end detail-thesis page --------------------------------------- */
@@ -972,44 +1029,101 @@ h5 {
 
 /* --------------------------------------- detail-news page --------------------------------------- */
 
-#detail-news :where(div.img, h3, h5) {
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
+#detail-news {
 
-#detail-news div.img {
-    position: relative;
-}
+    h3,
+    h5 {
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
 
-#detail-news img {
-    border-radius: 10px;
-    overflow: hidden;
-    max-height: 500px;
-    width: 100%;
-}
+    div.img {
+        position: relative;
+    }
 
-#detail-news p.tag {
-    padding: 4px 12px;
-    background-color: var(--orange-color);
-    color: var(--white-color);
-    border-radius: 5px;
-    top: 20px;
-    left: 20px;
-    position: absolute;
-}
+    img {
+        border-radius: 10px;
+        overflow: hidden;
+        max-height: 500px;
+        width: 100%;
+    }
 
-#detail-news h3,
-h5 {
-    color: var(--orange-color);
-}
+    p.tag {
+        padding: 4px 12px;
+        background-color: var(--orange-color);
+        color: var(--white-color);
+        border-radius: 5px;
+        top: 20px;
+        left: 20px;
+        position: absolute;
+    }
 
-#detail-news h4 {
-    margin-bottom: 5px;
-}
+    h3,
+    h5 {
+        color: var(--orange-color);
+    }
 
-#detail-news p {
-    margin-top: 0px;
-    margin-bottom: 5px;
+    h4 {
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+
+    div.post {
+        position: relative;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+
+    div.post:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    div.post a {
+        text-decoration: none;
+        color: var(--grey-1e-color);
+    }
+
+    div.post img {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    div.post p.tag {
+        padding: 4px 12px;
+        background-color: var(--orange-color);
+        color: var(--white-color);
+        border-radius: 5px;
+        top: 20px;
+        left: 20px;
+        position: absolute;
+    }
+
+    div.details {
+        padding: 10px 20px;
+    }
+
+    div.post small {
+        color: var(--orange-color);
+        text-decoration: underline;
+        text-transform: uppercase;
+    }
+
+    div.post h4 {
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    div.post p {
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
 }
 
 /* --------------------------------------- end detail-news page --------------------------------------- */

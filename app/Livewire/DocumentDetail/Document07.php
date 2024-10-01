@@ -84,33 +84,33 @@ class Document07 extends Component
                         ]);
                 }
             }
+            return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
+        });
 
-            $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Branch head')->pluck('id_teacher')->toArray())
+        $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Branch head')->pluck('id_teacher')->toArray())
+            ->where('id_project', $this->id_project)
+            ->where('id_document', 7)
+            ->where('confirm_status', true)
+            ->exists();
+
+        if ($confirmed) {
+            $project = Project::with(['members', 'teachers', 'advisers'])
                 ->where('id_project', $this->id_project)
-                ->where('id_document', 1)
-                ->where('confirm_status', true)
-                ->exists();
+                ->first();
 
-            if ($confirmed) {
-                $project = Project::with(['members', 'teachers', 'advisers'])
-                    ->where('id_project', $this->id_project)
-                    ->first();
+            $message = 'เอกสาร คกท.-คง.-07 ได้รับการอนุมัติ กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
 
-                $message = 'เอกสาร คกท.-คง.-01 ได้รับการอนุมัติ กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+            foreach ($project->members as $member) {
+                if (!empty($member->id_line)) { // ตรวจสอบว่ามีค่า id_line
+                    $userId = $member->id_line;
 
-                foreach ($project->members as $member) {
-                    if (!empty($member->id_line)) { // ตรวจสอบว่ามีค่า id_line
-                        $userId = $member->id_line;
-
-                        // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
-                        if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
-                            LineMessageService::sendMessage($userId, $message);
-                        }
+                    // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
+                    if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
+                        LineMessageService::sendMessage($userId, $message);
                     }
                 }
             }
-            return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
-        });
+        }
     }
 
     public function branch_head_comment()
@@ -170,35 +170,36 @@ class Document07 extends Component
                         ->update(['confirm_status' => true]);
                 }
 
-                $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Admin')->pluck('id_teacher')->toArray())
-                    ->where('id_project', $this->id_project)
-                    ->where('id_document', 1)
-                    ->where('confirm_status', true)
-                    ->exists();
-
-                if ($confirmed) {
-                    $project = Project::with(['members', 'teachers', 'advisers'])
-                        ->where('id_project', $this->id_project)
-                        ->first();
-
-                    $message = 'เอกสาร คกท.-คง.-01 ได้รับการอนุมัติ กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
-
-                    foreach ($project->members as $member) {
-                        if (!empty($member->id_line)) { // ตรวจสอบว่ามีค่า id_line
-                            $userId = $member->id_line;
-
-                            // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
-                            if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
-                                LineMessageService::sendMessage($userId, $message);
-                            }
-                        }
-                    }
-                }
                 return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');
             } else {
                 return session()->flash('comment error', 'กรุณากรอกความเห็น');
             }
         });
+
+        $confirmed = Confirm_teacher::whereIn('id_teacher', Teacher::where('user_type', 'Admin')->pluck('id_teacher')->toArray())
+            ->where('id_project', $this->id_project)
+            ->where('id_document', 7)
+            ->where('confirm_status', true)
+            ->exists();
+
+        if ($confirmed) {
+            $project = Project::with(['members', 'teachers', 'advisers'])
+                ->where('id_project', $this->id_project)
+                ->first();
+
+            $message = 'เอกสาร คกท.-คง.-07 ได้รับการอนุมัติ กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+
+            foreach ($project->members as $member) {
+                if (!empty($member->id_line)) { // ตรวจสอบว่ามีค่า id_line
+                    $userId = $member->id_line;
+
+                    // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
+                    if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
+                        LineMessageService::sendMessage($userId, $message);
+                    }
+                }
+            }
+        }
     }
     public function mount($id_project, $id_document)
     {

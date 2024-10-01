@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Score;
 use App\Models\Student_project;
 use App\Models\Teacher;
+use App\Services\LineMessageService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -70,6 +71,27 @@ class Document06 extends Component
             }
             return session()->flash('score success', 'กรอกคะแนนเสร็จสิ้น');
         });
+
+        $teacherIds = Confirm_teacher::where('id_document', $this->id_document)
+            ->where('id_project', $this->id_project)
+            ->whereIn('id_position', [5, 6, 7])
+            ->where('id_teacher', '!=', Auth::guard('teachers')->user()->id_teacher)
+            ->pluck('id_teacher');
+
+        $teachers = Teacher::whereIn('id_teacher', $teacherIds)->get();
+
+        $message = 'อาจารย์ประจำวิชาได้สรุปคะแนนของสอบจบแล้ว กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+
+        foreach ($teachers as $teacher) {
+            if (!empty($teacher->id_line)) { // ตรวจสอบว่ามีค่า id_line
+                $userId = $teacher->id_line;
+
+                // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
+                if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
+                    LineMessageService::sendMessage($userId, $message);
+                }
+            }
+        }
 
         // dd($transformedData);
 
@@ -275,9 +297,9 @@ class Document06 extends Component
                         ]
                     );
                     Confirm_teacher::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
-                    ->where('id_project', $this->id_project)
-                    ->where('id_document', 6)
-                    ->update(['confirm_status' => true]);
+                        ->where('id_project', $this->id_project)
+                        ->where('id_document', 6)
+                        ->update(['confirm_status' => true]);
                 }
             }
             return session()->flash('comment success', 'บันทึกความเห็นเสร็จสิ้น');

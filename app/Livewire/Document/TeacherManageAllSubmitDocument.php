@@ -11,6 +11,7 @@ use App\Models\Member;
 use App\Models\Project;
 use App\Models\Student_project;
 use App\Models\Teacher;
+use App\Services\LineMessageService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -23,7 +24,7 @@ class TeacherManageAllSubmitDocument extends Component
     public $not_approve_document, $not_approve_project, $id_teacher, $id_position, $another_comment, $members, $teachers, $project, $search;
     public function teacher_document($id_document, $id_project)
     {
-
+        $adviserConfirm = false;
         $id_teacher = Auth::guard('teachers')->user()->id_teacher;
 
         // อัปเดตสถานะการยืนยันของอาจารย์ทุกคนที่มี id_teacher และ id_document เหมือนกันในโครงการเดียวกัน
@@ -38,6 +39,83 @@ class TeacherManageAllSubmitDocument extends Component
             ->update([
                 'adviser_status' => 'active'
             ]);
+
+        if ($id_document == 1 || $id_document == 2 || $id_document == 5) {
+            $teacherIds = Confirm_teacher::where('id_document', $id_document)
+                ->where('id_project', $id_project)
+                ->whereIn('id_position', [3, 4])
+                ->where('id_teacher', '!=', Auth::guard('teachers')->user()->id_teacher)
+                ->pluck('id_teacher');
+
+            $allConfirmed = !Confirm_teacher::where('id_document', $id_document)
+                ->where('id_project', $id_project)
+                ->whereIn('id_position', [1, 2])
+                ->where('confirm_status', 0)
+                ->exists();
+
+            $message = 'อาจารย์ที่ปรึกษาได้พิจารณาเอกสาร คกท.-คง.-0' . $id_document . ' แล้ว กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+        } elseif ($id_document == 3 || $id_document == 6) {
+            $teacherIds = Confirm_teacher::where('id_document', $id_document)
+                ->where('id_project', $id_project)
+                ->whereIn('id_position', [3, 4])
+                ->where('id_teacher', '!=', Auth::guard('teachers')->user()->id_teacher)
+                ->pluck('id_teacher');
+
+            $allConfirmed = !Confirm_teacher::where('id_document', $id_document)
+                ->where('id_project', $id_project)
+                ->whereIn('id_position', [5, 6, 7])
+                ->where('confirm_status', 0)
+                ->exists();
+
+            $message = 'กรรมการได้พิจารณาเอกสาร คกท.-คง.-0' . $id_document . ' แล้ว กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+        } elseif ($id_document == 4 || $id_document == 7) {
+            $teacherIds = Confirm_teacher::where('id_document', $id_document)
+                ->where('id_project', $id_project)
+                ->whereIn('id_position', [5, 6])
+                ->where('id_teacher', '!=', Auth::guard('teachers')->user()->id_teacher)
+                ->pluck('id_teacher');
+
+            $allConfirmed = !Confirm_teacher::where('id_document', $id_document)
+                ->where('id_project', $id_project)
+                ->whereIn('id_position', [1, 2])
+                ->where('confirm_status', 0)
+                ->exists();
+
+            $message = 'อาจารย์ที่ปรึกษาได้พิจารณาเอกสาร คกท.-คง.-0' . $id_document . ' แล้ว กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+
+            $adviserConfirm = true;
+        } elseif (($id_document == 4 || $id_document == 7) && $adviserConfirm) {
+            $teacherIds = Confirm_teacher::where('id_document', $id_document)
+                ->where('id_project', $id_project)
+                ->whereIn('id_position', [3, 4])
+                ->where('id_teacher', '!=', Auth::guard('teachers')->user()->id_teacher)
+                ->pluck('id_teacher');
+
+            $allConfirmed = !Confirm_teacher::where('id_document', $id_document)
+                ->where('id_project', $id_project)
+                ->whereIn('id_position', [5, 6, 7])
+                ->where('confirm_status', 0)
+                ->exists();
+
+            $message = 'กรรมการได้พิจารณาเอกสาร คกท.-คง.-0' . $id_document . ' แล้ว กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+
+            $adviserConfirm = false;
+        }
+
+        $teachers = Teacher::whereIn('id_teacher', $teacherIds)->get();
+
+        if ($allConfirmed) {
+            foreach ($teachers as $teacher) {
+                if (!empty($teacher->id_line)) { // ตรวจสอบว่ามีค่า id_line
+                    $userId = $teacher->id_line;
+
+                    // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
+                    if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
+                        LineMessageService::sendMessage($userId, $message);
+                    }
+                }
+            }
+        }
     }
     public function not_approve($id_document, $id_project, $id_teacher, $id_position)
     {
@@ -68,7 +146,6 @@ class TeacherManageAllSubmitDocument extends Component
 
     public function create_document_07($id_project)
     {
-
         if ($id_project !== 'none') {
             DB::transaction(function () use ($id_project) {
                 $memberIds = Student_project::where('id_project', $id_project)
@@ -161,6 +238,24 @@ class TeacherManageAllSubmitDocument extends Component
                     'confirm_status' => false,
                 ]);
             });
+
+            $project = Project::with(['members', 'teachers', 'advisers'])
+                ->where('id_project', $this->id_project)
+                ->first();
+
+            $message = 'สร้างเอกสาร คกท.-คง.-07 เรียบร้อย กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+
+            foreach ($project->members as $member) {
+                if (!empty($member->id_line)) { // ตรวจสอบว่ามีค่า id_line
+                    $userId = $member->id_line;
+
+                    // ตรวจสอบรูปแบบของ userId ถ้าจำเป็น (อาจใช้ regular expression หรือวิธีอื่น)
+                    if (preg_match('/^U[a-fA-F0-9]{32}$/', $userId)) {
+                        LineMessageService::sendMessage($userId, $message);
+                    }
+                }
+            }
+
             session()->flash('success', 'สร้างเอกสารเรียบร้อย');
         }
     }
