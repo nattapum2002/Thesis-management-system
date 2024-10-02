@@ -309,12 +309,6 @@ class TeacherManageAllSubmitDocument extends Component
                 $query->where('project_name_th', 'like', '%' . $this->search . '%')
                     ->orWhere('project_name_en', 'like', '%' . $this->search . '%');
             })
-            ->when($this->filterType != 'all', function ($query) {
-                $query->whereHas('confirmTeachers', function ($q) {
-                    $q->where('confirm_status', $this->filterType)
-                        ->where('id_teacher', Auth::guard('teachers')->user()->id_teacher);
-                });
-            })
             ->orderByRaw("(
             SELECT CASE WHEN confirm_status = false THEN 0 ELSE 1 END
             FROM confirm_teachers
@@ -327,6 +321,8 @@ class TeacherManageAllSubmitDocument extends Component
         $this->members = optional($projects->first())->members;
         $this->teachers = optional($projects->first())->teachers;
 
-        return view('livewire.document.teacher-manage-all-submit-document', ['projects' => $projects]);
+        $filterType = $this->filterType;
+
+        return view('livewire.document.teacher-manage-all-submit-document', ['projects' => $projects, 'filterType' => $filterType]);
     }
 }

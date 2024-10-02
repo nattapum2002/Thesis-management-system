@@ -21,9 +21,8 @@
             <div class="col-lg-3 col-md-5 col-sm-12">
                 <div class="mb-2">
                     <select class="form-select" wire:model.live.debounce.100ms="filterType">
-                        <option value="all">ทุกประเภท</option>
-                        <option value="1">พิจารณาแล้ว</option>
                         <option value="0">ยังไม่ได้พิจารณา</option>
+                        <option value="1">พิจารณาแล้ว</option>
                     </select>
                 </div>
             </div>
@@ -46,6 +45,7 @@
                             $filteredConfirmTeachers = $confirm_teacher
                                 ->where('id_teacher', Auth::guard('teachers')->user()->id_teacher)
                                 ->where('id_document', $docId)
+                                ->where('confirm_status', $filterType)
                                 ->groupBy('id_document')
                                 ->map(function ($teachers) {
                                     // Return the first teacher in each group
@@ -59,7 +59,7 @@
                                     <div class="card">
                                         @switch($documentId)
                                             @case(3)
-                                                <div class="card-header" id="heading{{ $projectItems->id_project }}">
+                                                <div class="card-header" id="heading{{ $projectItems->id_project }}"
                                                     style="cursor: pointer;" data-bs-toggle="collapse"
                                                     data-bs-target="#collapse{{ $projectItems->id_project }}">
                                                     <h5>{{ $projectItems->project_name_th . ' | ' . $projectItems->project_name_en }}
