@@ -22,7 +22,7 @@ class TeacherManageAllSubmitDocument extends Component
     use WithPagination;
 
     public $not_approve_document, $not_approve_project, $id_teacher, $id_position, $another_comment, $members, $teachers, $project, $search;
-    public $filterType = 'all';
+    public $filterType = '0';
     public function teacher_document($id_document, $id_project)
     {
         $adviserConfirm = false;
