@@ -13,6 +13,7 @@ class ManageMember extends Component
     public $search = '';
     public $editingId;
     public $editingVar;
+    public $filterApprove = 'all';
     public $sortField = 'id_student';
     public $sortDirection = 'asc';
 
@@ -43,16 +44,18 @@ class ManageMember extends Component
 
     public function render()
     {
-
         $members = Member::with('course', 'level')
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('surname', 'like', '%' . $this->search . '%')
                     ->orWhere('id_student', 'like', '%' . $this->search . '%')
                     ->orWhere('prefix', 'like', '%' . $this->search . '%');
-            })->orderBy($this->sortField, $this->sortDirection)
-            ->paginate(10);
-        // dd($members);
+            })
+            ->when($this->filterApprove != 'all', function ($query) {
+                $query->where('account_status', $this->filterApprove);
+            })
+            ->orderBy($this->sortField, $this->sortDirection)
+            ->paginate(15);
         return view('livewire.account.manage-member', ['members' => $members]);
     }
 }

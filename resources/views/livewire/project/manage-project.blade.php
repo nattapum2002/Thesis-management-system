@@ -37,14 +37,30 @@
                         <table class="table text-nowrap table-striped">
                             <thead>
                                 <tr>
-                                    @foreach (['id_project' => 'ID', 'project_name_th' => 'ชื่อโปรเจค', 'member.name' => 'ชื่อนักศึกษา', 'teacher.name' => 'ชื่ออาจารย์ที่ปรึกษา', 'project_status' => 'สถานะการดำเนินงาน'] as $field => $label)
-                                        <th>
-                                            <a wire:click="sortBy('{{ $field }}')">
-                                                <span>{{ $label }}</span>
-                                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                            </a>
-                                        </th>
-                                    @endforeach
+                                    <th>
+                                        <a wire:click="sortBy('id_project')">
+                                            <span>ID</span>
+                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a wire:click="sortBy('project_name_th')">
+                                            <span>ชื่อโปรเจค</span>
+                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <span>ชื่อนักศึกษา</span>
+                                    </th>
+                                    <th>
+                                        <span>ชื่ออาจารย์ที่ปรึกษา</span>
+                                    </th>
+                                    <th>
+                                        <a wire:click="sortBy('project_status')">
+                                            <span>สถานะการดำเนินงาน</span>
+                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
+                                        </a>
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>

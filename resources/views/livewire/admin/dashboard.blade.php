@@ -258,7 +258,7 @@
                                             <p>{{ $examSchedule->project->project_name_th }}</p>
                                             <small>{{ $examSchedule->project->project_name_en }}</small>
                                         </td>
-                                        <td>{{ $examSchedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}</td>
+                                        <td>{{ $examSchedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบสิ้นสุด' }}</td>
                                         <td></td>
                                     </tr>
                                 @endforeach

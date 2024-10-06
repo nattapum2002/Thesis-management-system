@@ -11,6 +11,7 @@ class ManageDocumentSchedule extends Component
     use WithPagination;
 
     public $search = '';
+    public $filterApprove = 'all';
     public $sortField = 'id_submission';
     public $sortDirection = 'asc';
 
@@ -49,7 +50,11 @@ class ManageDocumentSchedule extends Component
                     ->orWhere('date_submission', 'like', '%' . $this->search . '%')
                     ->orWhere('year_submission', 'like', '%' . $this->search . '%')
                     ->orWhere('id_document', 'like', '%' . $this->search . '%');
-            })->orderBy($this->sortField, $this->sortDirection)
+            })
+            ->when($this->filterApprove != 'all', function ($query) {
+                $query->where('status', $this->filterApprove);
+            })
+            ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(10);
         return view('livewire.schedule.manage-document-schedule', ['documents_schedule' => $documents_schedule]);
     }

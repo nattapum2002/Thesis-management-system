@@ -14,8 +14,8 @@ class ManageNews extends Component
 
     public $users;
     public $search = '';
-    public $filterDate = 'ข่าวล่าสุด';
-    public $filterType = 'ทุกประเภท';
+    public $filterType = 'all';
+    public $filterApprove = 'all';
     public $sortField = 'id_news';
     public $sortDirection = 'asc';
 
@@ -31,8 +31,7 @@ class ManageNews extends Component
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'filterDate' => ['except' => 'ข่าวล่าสุด'],
-        'filterType' => ['except' => 'ทุกประเภท']
+        'filterType' => ['except' => 'all'],
     ];
 
     public function show($index)
@@ -63,17 +62,15 @@ class ManageNews extends Component
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%');
             })
-            ->when($this->filterType != 'ทุกประเภท', function ($query) {
+            ->when($this->filterType != 'all', function ($query) {
                 $query->where('type', $this->filterType);
             })
-            ->when($this->filterDate == 'ข่าวเก่าสุด', function ($query) {
-                $query->orderBy('created_at', 'asc');
+            ->when($this->filterApprove != 'all', function ($query) {
+                $query->where('status', $this->filterApprove);
             })
-            ->when($this->filterDate == 'ข่าวล่าสุด', function ($query) {
-                $query->orderBy('created_at', 'desc');
-            })->orderBy($this->sortField, $this->sortDirection)
+            ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(10);
-        $types = News::select('type')->distinct()->get();
+        $types = News::where('id_teacher', Auth::guard('teachers')->user()->id_teacher)->select('type')->distinct()->get();
 
         return view('livewire.news.manage-news', ['news' => $news, 'types' => $types]);
     }

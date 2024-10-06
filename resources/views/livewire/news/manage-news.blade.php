@@ -18,19 +18,20 @@
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="mb-2">
-                    <select class="form-select" wire:model.debounce.100ms="filterDate">
-                        <option value="ข่าวล่าสุด">ข่าวล่าสุด</option>
-                        <option value="ข่าวเก่าสุด">ข่าวเก่าสุด</option>
+                    <select class="form-select" wire:model.debounce.100ms="filterType">
+                        <option value="all">ทุกประเภท</option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->type }}">{{ $type->type }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="mb-2">
-                    <select class="form-select" wire:model.debounce.100ms="filterType">
-                        <option value="ทุกประเภท">ทุกประเภท</option>
-                        @foreach ($types as $type)
-                            <option value="{{ $type->type }}">{{ $type->type }}</option>
-                        @endforeach
+                    <select class="form-select" wire:model.live.debounce.100ms="filterApprove">
+                        <option value="all">ทุกสถานะ</option>
+                        <option value="0">ไม่อนุมัติ</option>
+                        <option value="1">อนุมัติ</option>
                     </select>
                 </div>
             </div>
@@ -83,12 +84,7 @@
                                             <i class='bx bx-transfer-alt bx-rotate-90'></i>
                                         </a>
                                     </th>
-                                    <th>
-                                        <a wire:click="sortBy('status')">
-                                            <span>สถานะ</span>
-                                            <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                        </a>
-                                    </th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>

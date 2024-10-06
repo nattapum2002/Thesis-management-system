@@ -14,6 +14,9 @@
 
     <!-- master.css -->
     <link rel="stylesheet" href="{{ asset('Asset/main/css/master2.css') }}">
+
+    @livewireStyles
+
 </head>
 
 <body>
@@ -64,6 +67,8 @@
     </div>
 
     <!-- Script -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    @livewireScripts
     @yield('masterscript')
     @include('layout.script')
 </body>

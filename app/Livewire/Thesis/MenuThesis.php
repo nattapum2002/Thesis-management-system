@@ -11,7 +11,7 @@ class MenuThesis extends Component
     use WithPagination;
 
     public $search = '';
-    public $filterDate = 'latest';
+    public $filterDate = 'desc';
     public $filterType = 'all';
 
     protected $queryString = [
@@ -29,12 +29,7 @@ class MenuThesis extends Component
             ->when($this->filterType != 'all', function ($query) {
                 $query->where('type', $this->filterType);
             })
-            ->when($this->filterDate == 'oldest', function ($query) {
-                $query->orderBy('created_at', 'asc');
-            })
-            ->when($this->filterDate == 'latest', function ($query) {
-                $query->orderBy('created_at', 'desc');
-            })
+            ->orderBy('created_at', $this->filterDate)
             ->paginate(8);
         $types = Dissertation_article::select('type')->where('status', '1')->distinct()->get();
 

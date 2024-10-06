@@ -61,11 +61,11 @@ class EditAndDetailTeacher extends Component
         }
 
         if ($this->toggle['name']) {
-            $rules['name'] = 'required';
+            $rules['name'] = 'required|string|max:255|regex:/^[^\d]*$/';
         }
 
         if ($this->toggle['surname']) {
-            $rules['surname'] = 'required';
+            $rules['surname'] = 'required|string|max:255|regex:/^[^\d]*$/';
         }
 
         if ($this->toggle['academic_position']) {
@@ -112,7 +112,14 @@ class EditAndDetailTeacher extends Component
             'other_prefix.required_if' => 'กรุณากรอกคํานําหน้า',
 
             'name.required' => 'กรุณากรอกชื่อ',
+            'name.string' => 'กรุณากรอกชื่อให้ถูกต้อง',
+            'name.max' => 'ชื่อต้องไม่เกิน 255 ตัวอักษร',
+            'name.regex' => 'ชื่อต้องไม่มีอักขระพิเศษ',
+
             'surname.required' => 'กรุณากรอกนามสกุล',
+            'surname.string' => 'กรุณากรอกนามสกุลให้ถูกต้อง',
+            'surname.max' => 'นามสกุลต้องไม่เกิน 255 ตัวอักษร',
+            'surname.regex' => 'นามสกุลต้องไม่มีอักขระพิเศษ',
 
             'academic_position.required' => 'กรุณาเลือกตําแหน่ง',
             'other_academic_position.required_if' => 'กรุณากรอกตําแหน่ง',

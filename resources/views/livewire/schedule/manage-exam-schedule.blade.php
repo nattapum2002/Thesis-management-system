@@ -12,7 +12,7 @@
                     <div class="mb-2">
                         <select class="form-select" wire:model.live.debounce.100ms="filterDirector">
                             @if (Auth::guard('teachers')->user()->user_type == 'Admin')
-                                <option value="ทั้งหมด">ทั้งหมด</option>
+                                <option value="all">ทั้งหมด</option>
                             @endif
                             <option value="กรรมการ">เป็นกรรมการ</option>
                             <option value="1">เป็นที่ปรึกษา</option>
@@ -22,10 +22,10 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="mb-2">
                         <select class="form-select" wire:model.live.debounce.100ms="filterType">
-                            <option value="ทุกประเภท">ทุกประเภท</option>
+                            <option value="all">ทุกประเภท</option>
                             @foreach ($types as $type)
                                 <option value="{{ $type->id_document }}">
-                                    {{ $type->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}
+                                    {{ $type->id_document == 3 ? 'สอบหัวข้อ' : 'สอบสิ้นสุด' }}
                                 </option>
                             @endforeach
                         </select>
@@ -52,10 +52,7 @@
                                             </a>
                                         </th>
                                         <th>
-                                            <a wire:click="sortBy('teachers.name')">
-                                                <span>รายชื่อกรรมการ</span>
-                                                <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                            </a>
+                                            <span>รายชื่อกรรมการ</span>
                                         </th>
                                         <th>
                                             <a wire:click="sortBy('id_document')">
@@ -100,7 +97,8 @@
                                                 @endforeach
                                             </td>
                                             <td>
-                                                <p>{{ $exam_schedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}</p>
+                                                <p>{{ $exam_schedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบสิ้นสุด' }}
+                                                </p>
                                             </td>
                                             <td>
                                                 <p>{{ thaidate('H:i น.', $exam_schedule->exam_time) }}</p>
@@ -149,10 +147,10 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="mb-2">
                         <select class="form-select" wire:model.live.debounce.100ms="filterType">
-                            <option value="ทุกประเภท">ทุกประเภท</option>
+                            <option value="all">ทุกประเภท</option>
                             @foreach ($types as $type)
                                 <option value="{{ $type->id_document }}">
-                                    {{ $type->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}
+                                    {{ $type->id_document == 3 ? 'สอบหัวข้อ' : 'สอบสิ้นสุด' }}
                                 </option>
                             @endforeach
                         </select>
@@ -227,7 +225,8 @@
                                                 @endforeach
                                             </td>
                                             <td>
-                                                <p>{{ $exam_schedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}</p>
+                                                <p>{{ $exam_schedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบสิ้นสุด' }}
+                                                </p>
                                             </td>
                                             <td>
                                                 <p>{{ thaidate('H:i น.', $exam_schedule->exam_time) }}</p>

@@ -10,15 +10,15 @@
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="mb-2">
                     <select class="form-select" wire:model.live.debounce.100ms="filterDate">
-                        <option value="ข่าวล่าสุด">ข่าวล่าสุด</option>
-                        <option value="ข่าวเก่าสุด">ข่าวเก่าสุด</option>
+                        <option value="desc">ข่าวล่าสุด</option>
+                        <option value="asc">ข่าวเก่าสุด</option>
                     </select>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="mb-2">
                     <select class="form-select" wire:model.live.debounce.100ms="filterType">
-                        <option value="ทุกประเภท">ทุกประเภท</option>
+                        <option value="all">ทุกประเภท</option>
                         @foreach ($types as $type)
                             <option value="{{ $type->type }}">{{ $type->type }}</option>
                         @endforeach

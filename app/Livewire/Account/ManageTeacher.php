@@ -13,6 +13,7 @@ class ManageTeacher extends Component
     public $search = '';
     public $editingId;
     public $editingVar;
+    public $filterApprove = 'all';
     public $sortField = 'id_teacher';
     public $sortDirection = 'asc';
 
@@ -49,7 +50,11 @@ class ManageTeacher extends Component
                     ->orWhere('surname', 'like', '%' . $this->search . '%')
                     ->orWhere('prefix', 'like', '%' . $this->search . '%')
                     ->orWhere('user_type', 'like', '%' . $this->search . '%');
-            })->orderBy($this->sortField, $this->sortDirection)
+            })
+            ->when($this->filterApprove != 'all', function ($query) {
+                $query->where('account_status', $this->filterApprove);
+            })
+            ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(15);
 
         return view('livewire.account.manage-teacher', ['teachers' => $teachers]);

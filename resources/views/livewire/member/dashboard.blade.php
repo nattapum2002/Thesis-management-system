@@ -177,7 +177,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <th>ประเภท</th>
-                                                                    <td>{{ $examCountDates->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}
+                                                                    <td>{{ $examCountDates->id_document == 3 ? 'สอบหัวข้อ' : 'สอบสิ้นสุด' }}
                                                                     </td>
                                                                     <th>ห้องสอบ</th>
                                                                     <td>{{ $examCountDates->exam_room }}</td>

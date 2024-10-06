@@ -80,7 +80,7 @@ class Document06 extends Component
 
         $teachers = Teacher::whereIn('id_teacher', $teacherIds)->get();
 
-        $message = 'อาจารย์ประจำวิชาได้สรุปคะแนนของสอบจบแล้ว กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
+        $message = 'อาจารย์ประจำวิชาได้สรุปคะแนนของสอบสิ้นสุดแล้ว กรุณาตรวจสอบข้อมูลและดำเนินการในขั้นตอนต่อไป';
 
         foreach ($teachers as $teacher) {
             if (!empty($teacher->id_line)) { // ตรวจสอบว่ามีค่า id_line

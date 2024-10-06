@@ -18,7 +18,7 @@
         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="mb-2">
                 <select class="form-select" wire:model.live.debounce.100ms="filterType">
-                    <option value="ทุกประเภท">ทุกประเภท</option>
+                    <option value="all">ทุกประเภท</option>
                     @foreach ($types as $type)
                         <option value="{{ $type->type }}">{{ $type->type }}</option>
                     @endforeach

@@ -11,8 +11,8 @@ class ApproveNews extends Component
     use WithPagination;
 
     public $search = '';
-    public $filterDate = 'ข่าวล่าสุด';
-    public $filterType = 'ทุกประเภท';
+    public $filterType = 'all';
+    public $filterApprove = 'all';
     public $sortField = 'id_news';
     public $sortDirection = 'asc';
 
@@ -28,8 +28,7 @@ class ApproveNews extends Component
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'filterDate' => ['except' => 'ข่าวล่าสุด'],
-        'filterType' => ['except' => 'ทุกประเภท']
+        'filterType' => ['except' => 'all'],
     ];
 
     public function show($index)
@@ -56,9 +55,13 @@ class ApproveNews extends Component
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%');
             })
-            ->when($this->filterType != 'ทุกประเภท', function ($query) {
+            ->when($this->filterType != 'all', function ($query) {
                 $query->where('type', $this->filterType);
-            })->orderBy($this->sortField, $this->sortDirection)
+            })
+            ->when($this->filterApprove != 'all', function ($query) {
+                $query->where('status', $this->filterApprove);
+            })
+            ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(15);
         $types = News::select('type')->distinct()->get();
 

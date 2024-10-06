@@ -11,13 +11,13 @@ class MenuNews extends Component
     use WithPagination;
 
     public $search = '';
-    public $filterDate = 'ข่าวล่าสุด';
-    public $filterType = 'ทุกประเภท';
+    public $filterDate = 'desc';
+    public $filterType = 'all';
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'filterDate' => ['except' => 'ข่าวล่าสุด'],
-        'filterType' => ['except' => 'ทุกประเภท']
+        'filterDate' => ['except' => 'desc'],
+        'filterType' => ['except' => 'all'],
     ];
 
     public function render()
@@ -26,16 +26,12 @@ class MenuNews extends Component
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%');
             })
-            ->when($this->filterType != 'ทุกประเภท', function ($query) {
+            ->when($this->filterType != 'all', function ($query) {
                 $query->where('type', $this->filterType);
             })
-            ->when($this->filterDate == 'ข่าวเก่าสุด', function ($query) {
-                $query->orderBy('created_at', 'asc');
-            })
-            ->when($this->filterDate == 'ข่าวล่าสุด', function ($query) {
-                $query->orderBy('created_at', 'desc');
-            })
-            ->paginate(8);
+            ->orderBy('created_at', $this->filterDate)
+            ->paginate(8)->appends(request()->query());
+
         $types = News::select('type')->distinct()->get();
 
         return view('livewire.news.menu-news', ['news' => $news, 'types' => $types]);

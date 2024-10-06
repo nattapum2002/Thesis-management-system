@@ -11,8 +11,7 @@ class ApproveThesis extends Component
     use WithPagination;
 
     public $search = '';
-    public $filterDate = 'ข่าวล่าสุด';
-    public $filterType = 'ทุกประเภท';
+    public $filterType = 'all';
     public $sortField = 'id_dissertation_article';
     public $sortDirection = 'asc';
 
@@ -28,8 +27,7 @@ class ApproveThesis extends Component
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'filterDate' => ['except' => 'ข่าวล่าสุด'],
-        'filterType' => ['except' => 'ทุกประเภท']
+        'filterType' => ['except' => 'all'],
     ];
 
     public function show($index)
@@ -53,9 +51,10 @@ class ApproveThesis extends Component
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%');
             })
-            ->when($this->filterType != 'ทุกประเภท', function ($query) {
+            ->when($this->filterType != 'all', function ($query) {
                 $query->where('type', $this->filterType);
-            })->orderBy($this->sortField, $this->sortDirection)
+            })
+            ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(15);
         $types = Dissertation_article::select('type')->distinct()->get();
 

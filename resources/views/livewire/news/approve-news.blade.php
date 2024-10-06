@@ -5,7 +5,7 @@
         </div>
     @endif
     <div class="row">
-        <div class="col-lg-9 col-md-12">
+        <div class="col-lg-6 col-md-12">
             <div class="mb-2">
                 <input type="text" class="form-control" placeholder="ค้นหาข่าว..."
                     wire:model.live.debounce.150ms="search">
@@ -14,10 +14,19 @@
         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="mb-2">
                 <select class="form-select" wire:model.live.debounce.100ms="filterType">
-                    <option value="ทุกประเภท">ทุกประเภท</option>
+                    <option value="all">ทุกประเภท</option>
                     @foreach ($types as $type)
                         <option value="{{ $type->type }}">{{ $type->type }}</option>
                     @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="mb-2">
+                <select class="form-select" wire:model.live.debounce.100ms="filterApprove">
+                    <option value="all">ทุกสถานะ</option>
+                    <option value="0">ไม่อนุมัติ</option>
+                    <option value="1">อนุมัติ</option>
                 </select>
             </div>
         </div>
@@ -29,7 +38,7 @@
                     <table class="table text-nowrap table-striped">
                         <thead>
                             <tr>
-                                @foreach (['id_news' => 'ID', 'title' => 'หัวข้อ', 'details' => 'รายละเอียด', 'type' => 'ประเภท', 'updated_at' => 'อัพเดทล่าสุด', 'status' => 'สถานะ'] as $field => $label)
+                                @foreach (['id_news' => 'ID', 'title' => 'หัวข้อ', 'details' => 'รายละเอียด', 'type' => 'ประเภท', 'updated_at' => 'อัพเดทล่าสุด'] as $field => $label)
                                     <th>
                                         <a wire:click="sortBy('{{ $field }}')">
                                             <span>{{ $label }}</span>
@@ -37,6 +46,7 @@
                                         </a>
                                     </th>
                                 @endforeach
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>

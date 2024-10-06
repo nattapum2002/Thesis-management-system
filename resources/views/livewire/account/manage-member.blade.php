@@ -9,10 +9,19 @@
         </div>
     @endif
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-9 col-md-7 col-sm-12">
             <div class="mb-2">
                 <input type="text" class="form-control" placeholder="ค้นหาบัญชีนักศึกษา..."
                     wire:model.live.debounce.150ms="search">
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-5 col-sm-12">
+            <div class="mb-2">
+                <select class="form-select" wire:model.live.debounce.100ms="filterApprove">
+                    <option value="all">ทุกสถานะ</option>
+                    <option value="0">ไม่อนุมัติ</option>
+                    <option value="1">อนุมัติ</option>
+                </select>
             </div>
         </div>
     </div>
@@ -53,12 +62,7 @@
                                         <i class='bx bx-transfer-alt bx-rotate-90'></i>
                                     </a>
                                 </th>
-                                <th>
-                                    <a wire:click="sortBy('account_status')">
-                                        <span>สถานะ</span>
-                                        <i class='bx bx-transfer-alt bx-rotate-90'></i>
-                                    </a>
-                                </th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>

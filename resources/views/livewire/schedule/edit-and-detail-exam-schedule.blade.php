@@ -46,7 +46,7 @@
                                 <tr>
                                     <th>ประเภทการสอบ</th>
                                     <td>
-                                        <p>{{ $exam_schedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบจบ' }}</p>
+                                        <p>{{ $exam_schedule->id_document == 3 ? 'สอบหัวข้อ' : 'สอบสิ้นสุด' }}</p>
                                     </td>
                                     <td></td>
                                 </tr>

@@ -13,12 +13,12 @@ class ManageThesis extends Component
 {
     use WithPagination;
 
-    public $users, $search = '', $filterDate = 'บทความล่าสุด', $filterType = 'ทุกประเภท', $sortField = 'id_dissertation_article', $sortDirection = 'asc';
+    public $users, $search = '', $filterType = 'all', $sortField = 'id_dissertation_article', $sortDirection = 'asc';
+    public $filterApprove = 'all';
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'filterDate' => ['except' => 'ข่าวล่าสุด'],
-        'filterType' => ['except' => 'ทุกประเภท']
+        'filterType' => ['except' => 'all'],
     ];
 
     public function mount()
@@ -50,8 +50,8 @@ class ManageThesis extends Component
 
         $thesis = Dissertation_article::whereIn('id_project', $projectIds)
             ->when($this->search, fn($query) => $query->where('title', 'like', "%{$this->search}%"))
-            ->when($this->filterType != 'ทุกประเภท', fn($query) => $query->where('type', $this->filterType))
-            ->when($this->filterDate, fn($query) => $query->orderBy('created_at', $this->filterDate == 'บทความเก่าสุด' ? 'asc' : 'desc'))
+            ->when($this->filterType != 'all', fn($query) => $query->where('type', $this->filterType))
+            ->when($this->filterApprove != 'all', fn($query) => $query->where('status', $this->filterApprove))
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(10);
 

@@ -16,13 +16,13 @@ class MenuThesisLogin extends Component
 
     public $users;
     public $search = '';
-    public $filterDate = 'บทความล่าสุด';
-    public $filterType = 'ทุกประเภท';
+    public $filterDate = 'desc';
+    public $filterType = 'all';
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'filterDate' => ['except' => 'บทความล่าสุด'],
-        'filterType' => ['except' => 'ทุกประเภท']
+        'filterDate' => ['except' => 'desc'],
+        'filterType' => ['except' => 'all'],
     ];
 
     public function mount()
@@ -42,15 +42,10 @@ class MenuThesisLogin extends Component
             ->when($this->search, function ($query) {
                 $query->where('dissertation_articles.title', 'like', '%' . $this->search . '%');
             })
-            ->when($this->filterType != 'ทุกประเภท', function ($query) {
+            ->when($this->filterType != 'all', function ($query) {
                 $query->where('dissertation_articles.type', $this->filterType);
             })
-            ->when($this->filterDate == 'บทความเก่าสุด', function ($query) {
-                $query->orderBy('dissertation_articles.created_at', 'asc');
-            })
-            ->when($this->filterDate == 'บทความล่าสุด', function ($query) {
-                $query->orderBy('dissertation_articles.created_at', 'desc');
-            })
+            ->orderBy('dissertation_articles.created_at', $this->filterDate)
             ->paginate(8);
         $types = Dissertation_article::select('type')->where('status', '1')->distinct()->get();
 
