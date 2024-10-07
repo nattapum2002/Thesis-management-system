@@ -72,7 +72,6 @@ class MemberManageDocument extends Component
             ->paginate(1);
 
         $document_time = Document_submission_schedule::where('status', true)->get();
-        // dd($projects);
         return view('livewire.member-manage-document', ['projects' => $projects, 'document_time' => $document_time]);
     }
 }
