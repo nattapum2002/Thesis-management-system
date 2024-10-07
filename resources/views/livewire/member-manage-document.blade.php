@@ -17,7 +17,7 @@
         @if (
             $submission &&
                 Carbon\Carbon::parse($submission->date_submission . ' ' . $submission->time_submission) > Carbon\Carbon::now())
-            @if ($projects->first()->project_status == 'pending')
+            @if ($projects->first() && $projects->first()->project_status == 'pending')
                 <div class="row">
                     <div class="col-12 mb-2">
                         <div class="d-flex justify-content-end">
